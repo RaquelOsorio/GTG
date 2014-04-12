@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+  <meta charset='utf-8'>
+  <title>GTG {% block titulo %}{% endblock %}</title>
+  <link rel='stylesheet' href='{{STATIC_URL}}css/base.css'>
+  <link rel='shortcut icon' href='{{STATIC_URL}}img/icono.png'>
+  {% block style_css %}{% endblock %}
+  <script src='{{STATIC_URL}}js/jquery-1.7.2.min.js'></script>
+  <script src='{{STATIC_URL}}js/demo.js'></script>
+</head>
+
+{% block encabezado %}
+	<h1><FONT COLOR="#adff2f">Iniciar Sesion</FONT></h1>
+{% endblock %}
+{% block contenido %}
+    <p><link rel='stylesheet' href='{{STATIC_URL}}css/base.css'>
+  </p>
+
+	<form id='formulario' method='post' action=''>{% csrf_token %}
+		<table>{{formulario}}</table>
+		<p><input type='submit' value='Ingresar'/></p>
+	</form>
+{% endblock %}
+</html>

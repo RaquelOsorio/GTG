@@ -1,0 +1,29 @@
+<VirtualHost *:80>
+	ServerName django
+
+    WSGIScriptAlias / /home/viviana/code/gestograma/gestograma/gestograma/wsgi.py
+
+    Alias /static/ /home/viviana/code/gestograma/gestograma/gestograma/static/
+
+    <Directory /home/viviana/code/gestograma/gestograma>
+    <Files wsgi.py>
+    Order deny,allow
+    Allow from all
+    </Files>
+    </Directory>
+
+    <Directory /home/viviana/code/gestograma/gestograma/gestograma/static/>
+    Order deny,allow
+    Allow from all
+    </Directory>
+
+
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+
+	# Possible values include: debug, info, notice, warn, error, crit,
+	# alert, emerg.
+	LogLevel warn
+
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+</VirtualHost>
