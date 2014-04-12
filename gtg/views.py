@@ -1,5 +1,4 @@
-#from principal.models import Receta, Comentario
-#from principal.forms import RecetaForm, ComentarioForm, ContactoForm
+
 from gtg.forms import InicioForm
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
@@ -10,15 +9,17 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
-
-# Create your views here.
-
 from gtg.models import inicio_sesion
 from django.shortcuts import render_to_response
 
 
 def ingresar(request):
-    """@ param """
+    """controla si el usuario se encuentra registrado, permite iniciar sesion
+    :param request:
+    :return retorna a la siguiente intefaz
+    C{import} Importa variables.
+    C{variables} todas las variables.
+     """
     if not request.user.is_anonymous():
         return HttpResponseRedirect('/privado')
     if request.method == 'POST':
@@ -39,6 +40,7 @@ def ingresar(request):
 
 @login_required(login_url='/ingresar')
 def privado(request):
+    """permite acceder a la siguiente interfaz de modulos del proyecto"""
     usuario = request.user
     return render_to_response('base.html', {'usuario':usuario}, context_instance=RequestContext(request))
 
@@ -47,7 +49,7 @@ def cerrar(request):
     logout(request)
     return HttpResponseRedirect('/')
 
-
+@login_required(login_url='/ingresar')
 def administrar(request):
-   # html = render_to_response('prueba.html')
+    """permite acceder a la siguiente interfaz de modulo de administracion"""
     return render_to_response('prueba.html',context_instance=RequestContext(request))
