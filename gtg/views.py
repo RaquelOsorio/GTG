@@ -47,7 +47,30 @@ def cerrar(request):
     logout(request)
     return HttpResponseRedirect('/')
 
-
 def administrar(request):
    # html = render_to_response('prueba.html')
     return render_to_response('prueba.html',context_instance=RequestContext(request))
+
+def configuracion(request):
+    """permite acceder a la siguiente interfaz de modulo de administracion"""
+    return render_to_response('configuracion.html',context_instance=RequestContext(request))
+
+def tipoAtributo(request):
+    """permite acceder a la siguiente interfaz de modulo de administracion"""
+    return render_to_response('gestionAtributo.html',context_instance=RequestContext(request))
+
+def proyecto(request):
+    """permite acceder a la siguiente interfaz de modulo de administracion"""
+    return render_to_response('gestionProyecto.html',context_instance=RequestContext(request))
+
+def rolesPermisos(request):
+    """permite acceder a la siguiente interfaz de modulo de administracion"""
+    return render_to_response('gestionRolesPermisos.html',context_instance=RequestContext(request))
+
+def tipoItem(request):
+    """permite acceder a la siguiente interfaz de modulo de administracion"""
+    return render_to_response('gestionTipoItem.html',context_instance=RequestContext(request))
+
+def solicitudCambio(request):
+    """permite acceder a la siguiente interfaz de modulo de administracion"""
+    return render_to_response('gestionSolicitud.html',context_instance=RequestContext(request))

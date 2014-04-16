@@ -11,6 +11,15 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^administrar/$','gtg.views.administrar'),
     url(r'^privado/$','gtg.views.privado'),
+    url(r'^tipoAtributo/$','gtg.views.tipoAtributo'),
+    url(r'^cerrar/$','gtg.views.cerrar'),
+    url(r'^configuracion/$','gtg.views.configuracion'),
+    url(r'^proyecto/$','gtg.views.proyecto'),
+    url(r'^rolesPermisos/$','gtg.views.rolesPermisos'),
+    url(r'^tipoItem/$','gtg.views.tipoItem'),
+    url(r'^solicitudCambio/$','gtg.views.solicitudCambio'),
+
+
 
 )
 #url(r'^ingresar/$','gtg.views.ingresar'),

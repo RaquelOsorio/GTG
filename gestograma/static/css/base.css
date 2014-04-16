@@ -1,40 +1,42 @@
 /* algunos ejemplos con CSS */
-/*body, header, footer, div, h1, h2, ul, li, a {
-	margin:0; padding:0;
-}*/
+footer, div, h1, h2, ul, li, a {
+	margin:5; padding:0;
+}
 body {
-    margin: 0;
-    padding: 0;
-    font-size: 16px;
-    font-family: "Lucida Grande";
-    color: greenyellow;
-    background: green;
+    margin: 10;
+    padding: 10;
+    font-size: 18px;
+    font-family: "Courier";
+    color: white;
+    background: cadetblue;
 }
 a:link, a:visited {
-    color: greenyellow;
+    color: white;
     text-decoration: none;
+    margin:10px;
 }
 header {
-	background-color:#001501;
-	color:greenyellow;
+	background-color:deepskyblue;
+	color:white;
 }
 nav ul li a{
 	text-decoration:none;
-	color:greenyellow;
-	margin:10px;
+	color:white;
+	margin:0px;
 }
 .activo { 
   font-weight: bold; 
 
 }
 .impar { 
-	background-color:#90EE90; 
+	background-color:cornflowerblue;
 }
 .par { 
-	background-color:#5ACC5A; 
+	background-color:cornflowerblue;
 }
 #content-related h3 {
     font-size: 12px;
-    color: greenyellow;
-    margin-bottom: 3px;
+    color: white;
+    margin:5px;
+    margin-bottom: 10px;
 }
