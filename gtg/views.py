@@ -51,6 +51,7 @@ def cerrar(request):
     logout(request)
     return HttpResponseRedirect('/')
 
+<<<<<<< HEAD
 @login_required(login_url='/ingresar')
 def administrar(request):
     """permite acceder a la siguiente interfaz de modulo de administracion"""
@@ -63,11 +64,18 @@ def desarrollo(request):
     return render_to_response('desarrollo.html',context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar')
+=======
+def administrar(request):
+   # html = render_to_response('prueba.html')
+    return render_to_response('prueba.html',context_instance=RequestContext(request))
+
+>>>>>>> fa2bf0c2a0e993123d861066e5fe54ae01ad4e38
 def configuracion(request):
     """permite acceder a la siguiente interfaz de modulo de administracion"""
     return render_to_response('configuracion.html',context_instance=RequestContext(request))
 
 def tipoAtributo(request):
+<<<<<<< HEAD
     """permite acceder a la interfaz de opciones de administracion para los tipos de atributos"""
     return render_to_response('gestionAtributo.html',context_instance=RequestContext(request))
 
@@ -102,3 +110,23 @@ def lb(request):
 def cambio(request):
     """permite acceder a la interfaz de opciones de administracion para Solicitudes de cambio"""
     return render_to_response('gestionCambio.html',context_instance=RequestContext(request))
+=======
+    """permite acceder a la siguiente interfaz de modulo de administracion"""
+    return render_to_response('gestionAtributo.html',context_instance=RequestContext(request))
+
+def proyecto(request):
+    """permite acceder a la siguiente interfaz de modulo de administracion"""
+    return render_to_response('gestionProyecto.html',context_instance=RequestContext(request))
+
+def rolesPermisos(request):
+    """permite acceder a la siguiente interfaz de modulo de administracion"""
+    return render_to_response('gestionRolesPermisos.html',context_instance=RequestContext(request))
+
+def tipoItem(request):
+    """permite acceder a la siguiente interfaz de modulo de administracion"""
+    return render_to_response('gestionTipoItem.html',context_instance=RequestContext(request))
+
+def solicitudCambio(request):
+    """permite acceder a la siguiente interfaz de modulo de administracion"""
+    return render_to_response('gestionSolicitud.html',context_instance=RequestContext(request))
+>>>>>>> fa2bf0c2a0e993123d861066e5fe54ae01ad4e38
