@@ -1,6 +1,4 @@
-#from principal.models import Receta, Comentario
-#from principal.forms import RecetaForm, ComentarioForm, ContactoForm
-from gtg.forms import InicioForm
+from django import forms
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
@@ -13,7 +11,6 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-from gtg.models import inicio_sesion
 from django.shortcuts import render_to_response
 
 
@@ -74,3 +71,14 @@ def tipoItem(request):
 def solicitudCambio(request):
     """permite acceder a la siguiente interfaz de modulo de administracion"""
     return render_to_response('gestionSolicitud.html',context_instance=RequestContext(request))
+
+def altaUsuario(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid:
+            form.save()
+            return HttpResponseRedirect('/administrar')
+    else:
+        form= UserCreationForm()
+    return render_to_response('altaUsuario.html', {'form':form}, context_instance=RequestContext(request))
+

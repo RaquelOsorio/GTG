@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     url(r'^rolesPermisos/$','gtg.views.rolesPermisos'),
     url(r'^tipoItem/$','gtg.views.tipoItem'),
     url(r'^solicitudCambio/$','gtg.views.solicitudCambio'),
+    url(r'^usuario/nuevo/$','gtg.views.altaUsuario'),
 
 
 
