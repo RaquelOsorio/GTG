@@ -9,13 +9,13 @@ __author__ = 'sonia'
 class TestInicio_sesion(TestCase):
     def setUp(self):
         """Test para las pruebas unitarias.
-         Innicio sesion
+         Inicio sesion
          import: importa los modulos necesarios
         """
         self.client = Client()
-        self.username = 'testusr'
-        self.email = 'test@test.com'
-        self.password = 'testpw'
+        self.username = 'trtr'
+        self.email = 'test@tesm'
+        self.password = 'stpw'
         self.test_user = User.objects.create_user(self.username, self.email, self.password)
 
     def test_inicio_sesion_exitoso(self):

@@ -1,5 +1,0 @@
-gtg.forms	gtg.forms-module.html
-gtg.forms.confirmar	gtg.forms-module.html#confirmar
-gtg.forms.contrasena	gtg.forms-module.html#contrasena
-gtg.forms.InicioForm	gtg.forms.InicioForm-class.html
-gtg.forms.InicioForm.nombre	gtg.forms.InicioForm-class.html#nombre
