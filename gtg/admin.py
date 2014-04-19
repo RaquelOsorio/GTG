@@ -4,10 +4,3 @@ from django.contrib import admin
 
 #from gtg.models import AltaUser
 from django.contrib import admin
-
-
-#admin.site.register(AltaUser)
-
-from django.contrib import admin
-
-

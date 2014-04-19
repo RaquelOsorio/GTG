@@ -3,7 +3,6 @@ footer, div, h1, h2, ul, li, a {
 	margin:5; padding:0;
 }
 body {
-<<<<<<< HEAD
     margin: 0;
     padding: 0;
     font-size: 16px;
@@ -16,7 +15,6 @@ body {
 }
 a:link, a:visited {
     color: black;
-=======
     margin: 10;
     padding: 10;
     font-size: 18px;
@@ -26,12 +24,10 @@ a:link, a:visited {
 }
 a:link, a:visited {
     color: white;
->>>>>>> fa2bf0c2a0e993123d861066e5fe54ae01ad4e38
     text-decoration: none;
     margin:10px;
 }
 header {
-<<<<<<< HEAD
 	background-color:WHITE;
 	color:WHITE;
 	margin:10px;
@@ -40,7 +36,6 @@ nav ul li a{
 	text-decoration:none;
 	color: black;
 	margin:10px;
-=======
 	background-color:deepskyblue;
 	color:white;
 }
@@ -48,14 +43,12 @@ nav ul li a{
 	text-decoration:none;
 	color:white;
 	margin:0px;
->>>>>>> fa2bf0c2a0e993123d861066e5fe54ae01ad4e38
 }
 .activo { 
   font-weight: bold; 
 
 }
 .impar { 
-<<<<<<< HEAD
 	background-color:grey;
 }
 .par { 
@@ -65,7 +58,6 @@ nav ul li a{
     font-size: 12px;
     color: black;
     margin-bottom: 3px;
-=======
 	background-color:cornflowerblue;
 }
 .par { 
@@ -76,5 +68,4 @@ nav ul li a{
     color: white;
     margin:5px;
     margin-bottom: 10px;
->>>>>>> fa2bf0c2a0e993123d861066e5fe54ae01ad4e38
 }
