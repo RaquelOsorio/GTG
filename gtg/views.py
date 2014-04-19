@@ -1,4 +1,6 @@
 from django import forms
+
+
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
@@ -8,14 +10,19 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
+from django.views.generic import ListView
 
-# Create your views here.
 
 from django.shortcuts import render_to_response
 
 
 def ingresar(request):
-    """@ param """
+    """controla si el usuario se encuentra registrado, permite iniciar sesion
+    :param request:
+    :return retorna a la siguiente intefaz
+    C{import} Importa variables.
+    C{variables} todas las variables.
+     """
     if not request.user.is_anonymous():
         return HttpResponseRedirect('/privado')
     if request.method == 'POST':
@@ -36,6 +43,7 @@ def ingresar(request):
 
 @login_required(login_url='/ingresar')
 def privado(request):
+    """permite acceder a la siguiente interfaz de modulos del proyecto"""
     usuario = request.user
     return render_to_response('base.html', {'usuario':usuario}, context_instance=RequestContext(request))
 
@@ -44,6 +52,18 @@ def cerrar(request):
     logout(request)
     return HttpResponseRedirect('/')
 
+@login_required(login_url='/ingresar')
+def administrar(request):
+    """permite acceder a la siguiente interfaz de modulo de administracion"""
+    return render_to_response('prueba.html',context_instance=RequestContext(request))
+
+
+@login_required(login_url='/ingresar')
+def desarrollo(request):
+    """permite acceder a la siguiente interfaz de modulo de administracion"""
+    return render_to_response('desarrollo.html',context_instance=RequestContext(request))
+
+@login_required(login_url='/ingresar')
 def administrar(request):
    # html = render_to_response('prueba.html')
     return render_to_response('prueba.html',context_instance=RequestContext(request))
@@ -51,6 +71,42 @@ def administrar(request):
 def configuracion(request):
     """permite acceder a la siguiente interfaz de modulo de administracion"""
     return render_to_response('configuracion.html',context_instance=RequestContext(request))
+
+def tipoAtributo(request):
+    """permite acceder a la interfaz de opciones de administracion para los tipos de atributos"""
+    return render_to_response('gestionAtributo.html',context_instance=RequestContext(request))
+
+def usuario(request):
+    """permite acceder a la interfaz de opciones de administracion para usuarios"""
+    return render_to_response('gestionUsuario.html',context_instance=RequestContext(request))
+
+def proyecto(request):
+    """permite acceder a la interfaz de opciones de administracion para proyectos"""
+    return render_to_response('gestionProyecto.html',context_instance=RequestContext(request))
+
+def fase(request):
+    """permite acceder a la interfaz de opciones de administracion para fases"""
+    return render_to_response('gestionFase.html',context_instance=RequestContext(request))
+
+def rolPermiso(request):
+    """permite acceder a la interfaz de opciones de roles y permisos"""
+    return render_to_response('gestionRolesPermisos.html',context_instance=RequestContext(request))
+
+def tipoItem(request):
+    """permite acceder a la interfaz de opciones de tipo de Item"""
+    return render_to_response('gestionTipoItem.html',context_instance=RequestContext(request))
+
+def item(request):
+    """permite acceder a la interfaz de opciones de administracion para items"""
+    return render_to_response('gestionItem.html',context_instance=RequestContext(request))
+
+def lb(request):
+    """permite acceder a la interfaz de opciones de linea base"""
+    return render_to_response('gestionLB.html',context_instance=RequestContext(request))
+
+def cambio(request):
+    """permite acceder a la interfaz de opciones de administracion para Solicitudes de cambio"""
+    return render_to_response('gestionCambio.html',context_instance=RequestContext(request))
 
 def tipoAtributo(request):
     """permite acceder a la siguiente interfaz de modulo de administracion"""
@@ -81,4 +137,3 @@ def altaUsuario(request):
     else:
         form= UserCreationForm()
     return render_to_response('altaUsuario.html', {'form':form}, context_instance=RequestContext(request))
-

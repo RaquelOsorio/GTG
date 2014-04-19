@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block style_css %}{% endblock %}
+{% block contenido %}
+
+    <p>
+	<h1>
+        <FONT COLOR="black">Gestionar Usuarios</FONT>
+    </h1>
+
+    <li><a href='/altaUsuario'>Crear Usuario</a></li>
+    <li><a href='/'>Definir rol a usuario</a></li>
+    <li><a href="/">Modificar Usuario</a></li>
+    <li><a href="/">Incluir Integrante al comite de cambio</a></li>
+    <li><a href="/">Quitar integrante del comite de cambio</a></li>
+    <li><a href="/">Consultar Usuario</a></li>
+
+    <p><a href="/administrar"><input type='submit' value='Cancelar'/></a></p>
+
+  </p>
+{% endblock %}

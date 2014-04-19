@@ -7,3 +7,7 @@ from django.contrib import admin
 
 
 #admin.site.register(AltaUser)
+
+from django.contrib import admin
+
+
