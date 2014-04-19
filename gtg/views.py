@@ -1,16 +1,19 @@
 
-
-from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from django.core.mail import EmailMessage
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-
-from django.views.generic import ListView
-
+from gtg.models import Rol
+from gtg.forms import rolForm
+from gtg.models import Proyecto
+from gtg.forms import proyectoForm
+from django.shortcuts import render, render_to_response, redirect
+from django.template import RequestContext
+from django.http import HttpResponseRedirect, HttpResponse
+import os
+from os.path import join,realpath
+from django.conf import settings
 
 from django.shortcuts import render_to_response
 
@@ -51,7 +54,6 @@ def cerrar(request):
     logout(request)
     return HttpResponseRedirect('/')
 
-<<<<<<< HEAD
 @login_required(login_url='/ingresar')
 def administrar(request):
     """permite acceder a la siguiente interfaz de modulo de administracion"""
@@ -64,18 +66,11 @@ def desarrollo(request):
     return render_to_response('desarrollo.html',context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar')
-=======
-def administrar(request):
-   # html = render_to_response('prueba.html')
-    return render_to_response('prueba.html',context_instance=RequestContext(request))
-
->>>>>>> fa2bf0c2a0e993123d861066e5fe54ae01ad4e38
 def configuracion(request):
     """permite acceder a la siguiente interfaz de modulo de administracion"""
     return render_to_response('configuracion.html',context_instance=RequestContext(request))
 
 def tipoAtributo(request):
-<<<<<<< HEAD
     """permite acceder a la interfaz de opciones de administracion para los tipos de atributos"""
     return render_to_response('gestionAtributo.html',context_instance=RequestContext(request))
 
@@ -110,23 +105,51 @@ def lb(request):
 def cambio(request):
     """permite acceder a la interfaz de opciones de administracion para Solicitudes de cambio"""
     return render_to_response('gestionCambio.html',context_instance=RequestContext(request))
-=======
-    """permite acceder a la siguiente interfaz de modulo de administracion"""
-    return render_to_response('gestionAtributo.html',context_instance=RequestContext(request))
 
-def proyecto(request):
-    """permite acceder a la siguiente interfaz de modulo de administracion"""
-    return render_to_response('gestionProyecto.html',context_instance=RequestContext(request))
 
-def rolesPermisos(request):
-    """permite acceder a la siguiente interfaz de modulo de administracion"""
-    return render_to_response('gestionRolesPermisos.html',context_instance=RequestContext(request))
+def registrarRol(request):
+        """Permite registrar un nuevo rol en el sistema"""
+	if request.method == "POST":
+		formulario = rolForm(request.POST, request.FILES)
 
-def tipoItem(request):
-    """permite acceder a la siguiente interfaz de modulo de administracion"""
-    return render_to_response('gestionTipoItem.html',context_instance=RequestContext(request))
+		if formulario.is_valid():
+			#forma para poder ingresar a los datos del formulario, tal vez para hacer nuestras propias validaciones
+			print "==============================================="
+			print formulario.cleaned_data['nombre']
+			print "==============================================="
+			formulario.save()
+			return HttpResponseRedirect('/rolPermiso')
 
-def solicitudCambio(request):
-    """permite acceder a la siguiente interfaz de modulo de administracion"""
-    return render_to_response('gestionSolicitud.html',context_instance=RequestContext(request))
->>>>>>> fa2bf0c2a0e993123d861066e5fe54ae01ad4e38
+	else:
+		formulario=rolForm()
+
+	return render(request, 'rol_form.html', {'formulario': formulario,})
+
+def lista_roles(request):
+	roles=Rol.objects.all()
+	# return render(request, 'index.html', {'usuarios': usuarios,})
+	return render_to_response('roles.html', {'roles': roles}, context_instance=RequestContext(request))
+
+def eliminar_rol(request):
+    rol=Rol.objects.get(pk="4")
+    rol.delete()
+    return HttpResponseRedirect('/rolPermiso')
+
+
+def registrarProyecto(request):
+        """Permite registrar un nuevo proyecto en el sistema"""
+	if request.method == "POST":
+		formulario = proyectoForm(request.POST, request.FILES)
+
+		if formulario.is_valid():
+			#forma para poder ingresar a los datos del formulario, tal vez para hacer nuestras propias validaciones
+			print "==============================================="
+			print formulario.cleaned_data['nombre']
+			print "==============================================="
+			formulario.save()
+			return HttpResponseRedirect('/proyecto')
+
+	else:
+		formulario=proyectoForm()
+
+	return render(request, 'proyecto_form.html', {'formulario': formulario,})
