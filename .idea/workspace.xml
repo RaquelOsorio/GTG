@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1cc01d94-5543-4230-974a-5d3ba5a8f715" name="Default" comment="crear rol, proyecto, eliminar rol">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gestograma/urls.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtg/forms.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtg/models.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtg/test_inicio_sesion.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtg/views.py" afterPath="" />
+    <list default="true" id="1cc01d94-5543-4230-974a-5d3ba5a8f715" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="gestograma.iws" />
@@ -509,7 +504,11 @@
       <created>1397928693338</created>
       <updated>1397928693338</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="crear rol, proyecto, eliminar rol">
+      <created>1397930175276</created>
+      <updated>1397930175276</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
