@@ -1,0 +1,33 @@
+<HEAD><TITLE>Roles</TITLE>
+     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link rel='stylesheet' href='{{STATIC_URL}}css/base.css'>
+</HEAD>
+{% block encabezado %}
+	<h1><FONT COLOR="#191970">Roles registrados</FONT></h1>
+
+{% endblock %}
+
+{% block contenido %}
+<ul>
+	 		{% for roles in roles %}
+			<tr><br>
+                <td>{{ roles.codigo }}</td>
+				<td>{{ roles.nombre }}</td>
+				<td>{{ roles.descripcion }}</td>
+                <p style='margin-left: 2em'>
+                <td><a href='eliminar_rol' class="btn btn-small btn-danger"><input type='submit' value='Eliminar'/></a></td>
+                </p>
+                </br>
+			</tr>
+			{% empty %}
+				<tr>
+					<td>No hay roles registrados</td>
+				</tr>
+			{% endfor %}
+
+</ul>
+{% endblock %}
+
+
+
+

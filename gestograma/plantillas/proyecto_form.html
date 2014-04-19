@@ -1,0 +1,13 @@
+
+<HEAD><TITLE>Crear un Nuevo Proyecto</TITLE>
+  <meta charset='utf-8'>
+  <link rel='stylesheet' href='{{STATIC_URL}}css/base.css'>
+</HEAD>
+{% block encabezado %}
+	<h1><FONT COLOR="#191970">Creación de un nuevo Proyecto</FONT></h1>
+        <form id='formulario' method='post' action=''>{% csrf_token %}
+		{{formulario.as_p}}
+		<p><input type='submit' value='Confirmar'/></p>
+
+	</form>
+{% endblock %}
