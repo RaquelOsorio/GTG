@@ -1,0 +1,11 @@
+<link rel='stylesheet' href='{{STATIC_URL}}css/base.css'>
+{% block encabezado %}
+	<h1>Registra un nuevo usuario</h1>
+{% endblock %}
+{% block contenido %}
+	<form id='form' method='post' action=''>{% csrf_token %}
+		<table>{{form}}</table>
+        <div><label><b> Correo Electronico :</b></label> <input type='email' name=correo></div>
+        <p><input type='submit' value='Cancelar'/> <input type='submit' value='Guardar'/></p>
+	</form>
+{% endblock %}

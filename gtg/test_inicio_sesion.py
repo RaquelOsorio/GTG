@@ -8,7 +8,10 @@ __author__ = 'sonia'
 
 class TestInicio_sesion(TestCase):
     def setUp(self):
+<<<<<<< HEAD
 
+=======
+>>>>>>> 422ad2cad28d48cc948a7890ed3910fb77c281e1
         """Test para las pruebas unitarias.
          Inicio sesion
          import: importa los modulos necesarios
@@ -19,6 +22,7 @@ class TestInicio_sesion(TestCase):
         self.password = 'stpw'
         self.test_user = User.objects.create_user(self.username, self.email, self.password)
 
+<<<<<<< HEAD
     def test_inicio_sesion_exitoso(self):
         login = self.client.login(username=self.username, password=self.password)
         self.assertEqual(login, True)
@@ -30,8 +34,13 @@ class TestInicio_sesion(TestCase):
         self.password = 'pw'
         self.test_user = User.objects.create_user(self.username, self.email, self.password)
 
+=======
+>>>>>>> 422ad2cad28d48cc948a7890ed3910fb77c281e1
     def test_inicio_sesion_exitoso(self, password='pw'):
         login = self.Client.login(username=self.username, password=password)
         self.assertEqual(login, True)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 422ad2cad28d48cc948a7890ed3910fb77c281e1

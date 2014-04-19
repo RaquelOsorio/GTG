@@ -1,9 +1,15 @@
+<<<<<<< HEAD
 
+=======
+from django import forms
+from django.contrib.auth.models import User
+>>>>>>> 422ad2cad28d48cc948a7890ed3910fb77c281e1
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+<<<<<<< HEAD
 from gtg.models import Rol
 from gtg.forms import rolForm
 from gtg.models import Proyecto
@@ -15,8 +21,10 @@ import os
 from os.path import join,realpath
 from django.conf import settings
 
+=======
+from django.views.generic import ListView
+>>>>>>> 422ad2cad28d48cc948a7890ed3910fb77c281e1
 from django.shortcuts import render_to_response
-
 
 def ingresar(request):
     """controla si el usuario se encuentra registrado, permite iniciar sesion
@@ -66,6 +74,13 @@ def desarrollo(request):
     return render_to_response('desarrollo.html',context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar')
+<<<<<<< HEAD
+=======
+def administrar(request):
+   # html = render_to_response('prueba.html')
+    return render_to_response('prueba.html',context_instance=RequestContext(request))
+
+>>>>>>> 422ad2cad28d48cc948a7890ed3910fb77c281e1
 def configuracion(request):
     """permite acceder a la siguiente interfaz de modulo de administracion"""
     return render_to_response('configuracion.html',context_instance=RequestContext(request))
@@ -105,6 +120,13 @@ def lb(request):
 def cambio(request):
     """permite acceder a la interfaz de opciones de administracion para Solicitudes de cambio"""
     return render_to_response('gestionCambio.html',context_instance=RequestContext(request))
+<<<<<<< HEAD
+=======
+
+def tipoAtributo(request):
+    """permite acceder a la siguiente interfaz de modulo de administracion"""
+    return render_to_response('gestionAtributo.html',context_instance=RequestContext(request))
+>>>>>>> 422ad2cad28d48cc948a7890ed3910fb77c281e1
 
 
 def registrarRol(request):
@@ -155,3 +177,20 @@ def registrarProyecto(request):
 	return render(request, 'proyecto_form.html', {'formulario': formulario,})
 
 
+<<<<<<< HEAD
+=======
+def solicitudCambio(request):
+    """permite acceder a la siguiente interfaz de modulo de administracion"""
+    return render_to_response('gestionSolicitud.html',context_instance=RequestContext(request))
+
+def altaUsuario(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid:
+            form.save()
+            return HttpResponseRedirect('/administrar')
+    else:
+        form= UserCreationForm()
+    return render_to_response('altaUsuario.html', {'form':form}, context_instance=RequestContext(request))
+
+>>>>>>> 422ad2cad28d48cc948a7890ed3910fb77c281e1

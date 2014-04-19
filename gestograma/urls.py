@@ -22,6 +22,7 @@ urlpatterns = patterns('',
     url(r'^item/$','gtg.views.item'),
     url(r'^lb/$','gtg.views.lb'),
     url(r'^cambio/$','gtg.views.cambio'),
+<<<<<<< HEAD
     url(r'^rolPermiso/registrarRol/$','gtg.views.registrarRol'),
     url(r'^rolPermiso/lista_roles/$','gtg.views.lista_roles'),
     url(r'^rolPermiso/lista_roles/eliminar_rol/$', 'gtg.views.eliminar_rol'),
@@ -36,3 +37,17 @@ urlpatterns = patterns('',
 
     )
 #url(r'^ingresar/$','gtg.views.ingresar'),z
+=======
+
+    url(r'^cerrar/$','gtg.views.cerrar'),
+    url(r'^proyecto/$','gtg.views.proyecto'),
+    url(r'^rolesPermisos/$','gtg.views.rolesPermisos'),
+    url(r'^tipoItem/$','gtg.views.tipoItem'),
+    url(r'^solicitudCambio/$','gtg.views.solicitudCambio'),
+    url(r'^usuario/nuevo/$','gtg.views.altaUsuario'),
+
+
+
+)
+#url(r'^ingresar/$','gtg.views.ingresar'),
+>>>>>>> 422ad2cad28d48cc948a7890ed3910fb77c281e1
