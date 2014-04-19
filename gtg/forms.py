@@ -16,3 +16,4 @@ class proyectoForm(forms.ModelForm):
     class Meta:
         model=Proyecto
 
+

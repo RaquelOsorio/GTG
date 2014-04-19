@@ -153,3 +153,5 @@ def registrarProyecto(request):
 		formulario=proyectoForm()
 
 	return render(request, 'proyecto_form.html', {'formulario': formulario,})
+
+
