@@ -1,4 +1,6 @@
+<<<<<<< HEAD
 
+<<<<<<< HEAD
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.contrib.auth.forms import User, UserCreationForm, AuthenticationForm
@@ -9,12 +11,29 @@ from gtg.models import RolesUsuario
 from gtg.models import Usuario
 from gtg.forms import usuarioForm
 from gtg.forms import RolForm
+=======
+=======
+from django import forms
+from django.contrib.auth.models import User
+>>>>>>> 422ad2cad28d48cc948a7890ed3910fb77c281e1
+from django.http import HttpResponse, HttpResponseRedirect
+from django.template import RequestContext
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
+<<<<<<< HEAD
+from gtg.models import Rol
+from gtg.forms import rolForm
+from gtg.models import Proyecto
+from gtg.forms import proyectoForm
+>>>>>>> 64570d5fc03175bcdd7814fba88c89225e9a231d
 from django.shortcuts import render, render_to_response, redirect
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 import os
 from os.path import join,realpath
 from django.conf import settings
+<<<<<<< HEAD
 from gtg.forms import RolusuarioForm
 from django.shortcuts import render_to_response
 from gtg.models import ModificarRol
@@ -31,6 +50,13 @@ from gtg.models import TipoItem
 from gtg.forms import TipoItemForm
 from gtg.models import Item
 from gtg.forms import ItemForm
+=======
+
+=======
+from django.views.generic import ListView
+>>>>>>> 422ad2cad28d48cc948a7890ed3910fb77c281e1
+from django.shortcuts import render_to_response
+>>>>>>> 64570d5fc03175bcdd7814fba88c89225e9a231d
 
 def ingresar(request):
     """controla si el usuario se encuentra registrado, permite iniciar sesion
@@ -84,10 +110,26 @@ def desarrollo(request):
     return render_to_response('desarrollo.html',context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar')
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+def administrar(request):
+   # html = render_to_response('prueba.html')
+    return render_to_response('prueba.html',context_instance=RequestContext(request))
+
+>>>>>>> 422ad2cad28d48cc948a7890ed3910fb77c281e1
+>>>>>>> 64570d5fc03175bcdd7814fba88c89225e9a231d
 def configuracion(request):
     """permite acceder a la siguiente interfaz de modulo de administracion"""
     return render_to_response('configuracion.html',context_instance=RequestContext(request))
 
+<<<<<<< HEAD
+=======
+def tipoAtributo(request):
+    """permite acceder a la interfaz de opciones de administracion para los tipos de atributos"""
+    return render_to_response('gestionAtributo.html',context_instance=RequestContext(request))
+>>>>>>> 64570d5fc03175bcdd7814fba88c89225e9a231d
 
 @login_required(login_url='/ingresar')
 def usuario(request):
@@ -141,6 +183,7 @@ def lb(request):
 def cambio(request):
     """permite acceder a la interfaz de opciones de administracion para Solicitudes de cambio"""
     return render_to_response('gestionCambio.html',context_instance=RequestContext(request))
+<<<<<<< HEAD
 
 
 @login_required(login_url='/ingresar')
@@ -400,6 +443,20 @@ def registrarTipoAtributo(request):
 	y vuelve a la interfaz donde se despliega la lista de tipos atributos registrados en el sistema"""
 	if request.method == "POST":
 		formulario = TipoAtributoForm(request.POST, request.FILES)
+=======
+<<<<<<< HEAD
+=======
+
+def tipoAtributo(request):
+    """permite acceder a la siguiente interfaz de modulo de administracion"""
+    return render_to_response('gestionAtributo.html',context_instance=RequestContext(request))
+>>>>>>> 422ad2cad28d48cc948a7890ed3910fb77c281e1
+
+
+def registrarRol(request):
+        """Permite registrar un nuevo rol en el sistema"""
+	if request.method == "POST":
+		formulario = rolForm(request.POST, request.FILES)
 
 		if formulario.is_valid():
 			#forma para poder ingresar a los datos del formulario, tal vez para hacer nuestras propias validaciones
@@ -407,6 +464,37 @@ def registrarTipoAtributo(request):
 			print formulario.cleaned_data['nombre']
 			print "==============================================="
 			formulario.save()
+			return HttpResponseRedirect('/rolPermiso')
+
+	else:
+		formulario=rolForm()
+
+	return render(request, 'rol_form.html', {'formulario': formulario,})
+
+def lista_roles(request):
+	roles=Rol.objects.all()
+	# return render(request, 'index.html', {'usuarios': usuarios,})
+	return render_to_response('roles.html', {'roles': roles}, context_instance=RequestContext(request))
+
+def eliminar_rol(request):
+    rol=Rol.objects.get(pk="4")
+    rol.delete()
+    return HttpResponseRedirect('/rolPermiso')
+
+
+def registrarProyecto(request):
+        """Permite registrar un nuevo proyecto en el sistema"""
+	if request.method == "POST":
+		formulario = proyectoForm(request.POST, request.FILES)
+>>>>>>> 64570d5fc03175bcdd7814fba88c89225e9a231d
+
+		if formulario.is_valid():
+			#forma para poder ingresar a los datos del formulario, tal vez para hacer nuestras propias validaciones
+			print "==============================================="
+			print formulario.cleaned_data['nombre']
+			print "==============================================="
+			formulario.save()
+<<<<<<< HEAD
 			return HttpResponseRedirect('/tipoAtributo')
 
 	else:
@@ -548,3 +636,30 @@ def itemTipoItem(request, codigo):
     del proyecto, con el cual se filtra todas las fases pertenecientes al mismo. :return la lista de fases"""
     itemTipo=Item.objects.filter(tipoItem=codigo)
     return render_to_response('gestionTipoItem1.html',{'itemTipo': itemTipo }, context_instance=RequestContext(request))
+=======
+			return HttpResponseRedirect('/proyecto')
+
+	else:
+		formulario=proyectoForm()
+
+	return render(request, 'proyecto_form.html', {'formulario': formulario,})
+
+
+<<<<<<< HEAD
+=======
+def solicitudCambio(request):
+    """permite acceder a la siguiente interfaz de modulo de administracion"""
+    return render_to_response('gestionSolicitud.html',context_instance=RequestContext(request))
+
+def altaUsuario(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid:
+            form.save()
+            return HttpResponseRedirect('/administrar')
+    else:
+        form= UserCreationForm()
+    return render_to_response('altaUsuario.html', {'form':form}, context_instance=RequestContext(request))
+
+>>>>>>> 422ad2cad28d48cc948a7890ed3910fb77c281e1
+>>>>>>> 64570d5fc03175bcdd7814fba88c89225e9a231d

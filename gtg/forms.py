@@ -2,6 +2,7 @@ __author__ = 'viviana'
 
 
 from django import forms
+<<<<<<< HEAD
 from gtg.models import Roles
 from gtg.models import Usuario
 from gtg.models import Usuario_rol
@@ -62,11 +63,32 @@ class RolusuarioForm(forms.ModelForm):
 class TipoAtributoForm(forms.ModelForm):
     class Meta:
         model= TipoAtributo
+=======
+<<<<<<< HEAD
+from gtg.models import Rol
+from gtg.models import Proyecto
+
+
+
+class rolForm(forms.ModelForm):
+    class Meta:
+        model=Rol
+
+
+class proyectoForm(forms.ModelForm):
+    class Meta:
+        model=Proyecto
+>>>>>>> 64570d5fc03175bcdd7814fba88c89225e9a231d
 
 class TipoItemForm(forms.ModelForm):
     class Meta:
         model= TipoItem
 
+<<<<<<< HEAD
 class ItemForm(forms.ModelForm):
     class Meta:
         model= Item
+=======
+=======
+>>>>>>> 422ad2cad28d48cc948a7890ed3910fb77c281e1
+>>>>>>> 64570d5fc03175bcdd7814fba88c89225e9a231d
