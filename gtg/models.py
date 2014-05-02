@@ -17,7 +17,7 @@ class Usuario_rol(models.Model):
     des= models.TextField()
         #rol = models.ForeignKey()
 
-class Roles(models.Model):
+class Rol(models.Model):
     codigo = models.CharField(max_length=32, primary_key= True, unique=True)
     nombre = models.CharField(max_length=30)
     descripcion = models.TextField()
@@ -53,7 +53,7 @@ class Proyectos(models.Model):
         ('ACT','Activo'),
         ('FIN','Finalizado')
     )
-    fechaInicio = models.DateField(auto_now=True)
+    fechaInicio = models.DateField()
     nombre = models.CharField(max_length=32, unique=True)
     complejidad=models.IntegerField()
     #nrofase=models.IntegerField()
@@ -71,7 +71,7 @@ class Fases1(models.Model):
     )
 
     fechaInicio=models.DateField(auto_now=True)
-    fechaFin=models.DateField(auto_now=True)
+    fechaFin=models.DateField(auto_now=False)
     nombre=models.CharField(max_length=32, unique=True)
     descripcion=models.TextField(max_length=100)
     estado = models.CharField(max_length=20, choices=ESTADO_CHOICES)
@@ -81,18 +81,8 @@ class Fases1(models.Model):
 
 
 class ModificarRol(models.Model):
-    rol= models.ForeignKey(Roles)
+    rol= models.ForeignKey(Rol)
     fecha= models.DateField(auto_now=True)
-
-class Fase(models.Model):
-    fechaInicio=models.DateField(auto_now=True)
-    fechaFin=models.DateField(auto_now=True)
-    nombre=models.CharField(max_length=32, unique=True)
-    descripcion=models.TextField(max_length=100)
-    estado="INACTIVA"
-    def __unicode__(self):
-        return self.nombre
-
 
 class TipoAtributo(models.Model):
      codigo = models.CharField(max_length=32, primary_key= True, unique=True)
@@ -113,9 +103,28 @@ class TipoItem(models.Model):
     def __unicode__(self):
         return self.nombre
 
+
+class RolUsuario(models.Model):
+    rol= models.ForeignKey(Rol)
+    usuario=models.ForeignKey(User)
+    proyecto=models.ForeignKey(Proyectos)
+
+        #class Meta:
+        #    permissions=(("asociarRol","puede asociar roles a usuarios"),)
+
+
+
+class TipoAtributo(models.Model):
+     codigo = models.CharField(max_length=32, primary_key= True, unique=True)
+     nombre = models.CharField(max_length=32, unique=True)
+     descripcion=models.TextField(max_length=100)
+     def __unicode__(self):
+         return self.nombre
+
+
 class Item(models.Model):
     ESTADO_CHOICES=(
-        ('REDAC','En_Redaccion'),
+        ('REDAC','Redaccion'),
         ('TER', 'Terminado'),
         ('VAL','Validado'),
         ('DESAC','Desactivado'),
@@ -131,10 +140,8 @@ class Item(models.Model):
     tipoItem=models.ForeignKey(TipoItem)
     fase=models.ForeignKey(Fases1)
 
-class RolesUsuario(models.Model):
-    rol= models.ForeignKey(Roles)
-    usuario=models.ForeignKey(User)
-    proyecto=models.ForeignKey(Proyectos)
 
         #class Meta:
         #    permissions=(("asociarRol","puede asociar roles a usuarios"),)
+
+

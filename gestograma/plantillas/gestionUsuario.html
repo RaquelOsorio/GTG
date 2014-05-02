@@ -22,11 +22,9 @@
                                         <th>Id</th>
                                         <th>Nombre</th>
                                         <th>Estado Activo</th>
-                                        <th>Mail</th>
-                                        <th>Rol</th>
+                                        <th>Presione para editar</th>
+                                        <th>Presione para consultar</th>
 
-                                        <th>Presione para editar un usuario</th>
-                                        <th>Presione para consultar un usuario</th>
 
                                 </tr>
                             {% for usuarios in usuarios %}
@@ -36,22 +34,9 @@
                                         <td>{{usuarios.id}}</td>
                                         <td>{{usuarios.username}}</td>
                                         <td>{{ usuarios.is_active }}</td>
-                                        {% for usuario in usuario %}
-                                            {% if usuarios == usuario.user %}
-                                                <td>{{ usuario.mail }}</td>
-                                            {% endif %}
-                                        {% endfor %}
-                                        {% if b != 1 %}
-                                            <td></td>
-                                        {% endif %}
-                                        {% for usuariorol in usuariorol %}
-                                            {% if usuarios == usuariorol.usuario %}
-                                                <td>{{ usuariorol.rol }}</td>
-                                            {% endif %}
-                                        {% endfor %}
 
                                 <td><a href='/usuario/editarUsuario/{{ usuarios.id }}' class="button btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>
-                                <td><a href='/lista_usuarios/editarUsuario/{{ usuarios.id }}' class="button btn-small btn-danger"><input type='submit' value='Consultar'/></a></td>
+                                <td><a href='/usuario/consultarUsuario/{{ usuarios.id }}' class="button btn-small btn-danger"><input type='submit' value='Consultar'/></a></td>
 
                                 </tr>
                              {% empty %}

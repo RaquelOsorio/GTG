@@ -7,7 +7,7 @@
         <div class="row" >
                 <div class="span10">
                          <ul>
-                            <h3>Roles </h3>
+                         <p></p><center>   <h3>Roles </h3></center>
 
                             <li><a href="/rolPermiso/registrarRol/"><i class="icon-chevron-right"></i> Crear Rol</a></li>
 
@@ -17,24 +17,24 @@
                                         <th>Código</th>
                                         <th>Nombre</th>
 
-                                        <th>Presione Editar para editar el Rol</th>
-                                        <th>Presione Eliminar para eliminar el Rol</th>
-
+                                        <th>Presione para <p></p>editar el Rol</th>
+                                        <th>Presione para <p></p>eliminar el Rol</th>
                                 </tr>
-                            {% for r in roles %}
+                            {% for roles in roles %}
 
                                 <tr>
-                                        <td>{{r.codigo}}</td>
-                                        <td>{{r.nombre}}</td>
+                                        <td>{{roles.codigo}}</td>
+                                        <td>{{roles.nombre}}</td>
 
-                                <td><a href='/rolPermiso/editar/{{ r.codigo }}' class="btn btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>
-                                <td><a href='/rolPermiso/eliminar_rol/{{ r.codigo }}' class="btn btn-small btn-danger"><input type='submit' value='Eliminar'/></a></td>
+                                <td><a href='/rolPermiso/editar/{{ roles.codigo }}' class="btn btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>
+                                <td><a href='/rolPermiso/eliminar_rol/{{ roles.codigo }}' class="btn btn-small btn-danger"><input type='submit' value='Eliminar'/></a></td>
+
 
                                 </tr>
                              {% empty %}
 
                                 <tr>
-                                        No hay Proyectos registrados
+                                        No hay Roles registrados
                                 </tr>
                                 {% endfor %}
         </table>

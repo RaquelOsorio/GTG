@@ -18,12 +18,14 @@
         	<li class="start selected"><a href=/privado/>Inicio</a></li>
 
 
-                <li><a href='#'>Módulo de Administración</a>
+                <li><a href=''>Módulo de Administración</a>
             {% if user.is_superuser %}
+
                 <ul>
                     <li><a href='/tipoAtributo'>Gestión de Tipo de Atributo</a></li>
                     <li><a href='/usuario'>Gestión de Usuarios</a></li>
                     <li><a href='/proyecto'>Gestión de Proyectos</a></li>
+                    <li><a href='/rolPermiso'>Gestión de Roles y Permisos</a></li>
                 </ul>
             {% else %}
                 <ul>
@@ -35,13 +37,13 @@
                  <li><a href='#'>Módulo de Desarrollo</a>
                 <ul>
                     <li><a href='/item'>Gestión de Ítems</a></li>
-                    <li><a href='#'>Cálculo de Impacto</a></li>
+                    <li><a href=”#”>Cálculo de Impacto</a></li>
                 </ul>
                 </li>
                     <li><a href='#'>Módulo de Gestión de Configuración</a>
                 <ul>
-                    <li><a href='#'>Gestión de Línea Base</a></li>
-                    <li><a href='#'>Gestión de Solicitudes de Cambio</a></li>
+                    <li><a href=”#”>Gestión de Línea Base</a></li>
+                    <li><a href=”#”>Gestión de Solicitudes de Cambio</a></li>
 
                 </ul>
                 </li>
@@ -52,7 +54,7 @@
             </ul>
         </nav>
 
-		<img class="header-image" src="../static/css/images/imagen.jpg" alt="Buildings" />
+
     <div id="body">
 
 

@@ -3,38 +3,43 @@
 
 {% endblock %}
 
-{%block contenido%}
-    <div class="items">
-		<div class="container" align="center">
-            <h3 class="muted">{{usuario.username}} </h3>
+{% block contenido %}
 
-        </div>
-       	<div class="container">
-       	    <h3>Consultar Usuario</h3>
-            <hr>
-       	    <table>
-       	    <tr>
-	            <td>
-	        	    <strong>Fecha de alta: </strong>{{usuario.Fecha}}
-	            </td>
-                 <td>
-	        	    <strong>Fecha de Modificacion: </strong>{{usuario.Fecha}}
-	            </td>
-            </tr>
-            <tr>
-	            <td >
-	        	    <strong>Nombre: </strong>{{usuario.username}}
-	            </td>
-                <td>
-                    {% if usuario.is_active or usuario.is_superuser%}
-	        	        <strong>Estado: </strong>{{'Activo'}}
-                    {% endif %}
-	            </td>
-            </tr>
+        <div class="row" >
+                <div class="span10">
+                         <ul>
+                            <center><p></p><h3>Usuarios </h3></center>
+                            <div class="span3 bs-docs-sidebar">
+		        	            <ul class="nav nav-list bs-docs-sidenav">
 
-            </table>
-        <a class="button" href="/usuario/"><i class="icon-arrow-left"></i> Aceptar</a>
 
-        </div>
-    </div>
-{% endblock contenido%}
+					            </ul>
+				            </div>
+                         </ul>
+                        <table class="table table-striped table-bordered">
+                                <tr>
+                                        <th>Nombre</th>
+
+
+                                </tr>
+
+
+                                <tr>
+
+
+                                        <td>{{usuario.username}}</td>
+
+                                    <tr><th>Rol</th><tr>
+                                    {% for rol in rol %}
+                                            <tr>{% if usuario == rol.usuario %}
+                                                <td>{{ rol.rol }} </td>
+                                            {% endif %}</tr>
+                                        {% endfor %}
+
+                                </tr>
+
+        </table>
+               <a class="button" href='/usuario/'><i class="button"></i>Atrás</a>
+</div>
+</div>
+{% endblock %}

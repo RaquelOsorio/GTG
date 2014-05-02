@@ -7,7 +7,8 @@
     items de un proyecto, originalmente de software.</center> </p>
     <p><center>Gestograma permite la gestión de los items y la completa trazabilidad de los mismos
     con los diversos componentes generados en las distintas fases del proyecto.</center></p>
-
-
+    {% if user.is_active %}
+        <a class="button" href="/proyecto/"> Ir a proyecto>> </a>
+    {% endif %}
 
 {% endblock %}

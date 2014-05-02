@@ -18,6 +18,10 @@ urlpatterns = patterns('',
 
     url(r'^usuario/$','gtg.views.usuario'),
     url(r'^proyecto/$','gtg.views.proyecto'),
+
+    url(r'^usuario/$','gtg.views.usuario'),
+    url(r'^proyecto/$','gtg.views.proyecto'),
+    url(r'^proyectoAdmin/$','gtg.views.proyectoAdmin'),
     url(r'^fase1/(?P<codigo>\d+)/$','gtg.views.fase1'),
     url(r'^fase1/registrarFase/$','gtg.views.registrarFase'),
     url(r'^fase/$','gtg.views.fase'),
@@ -63,7 +67,21 @@ urlpatterns = patterns('',
     url(r'^fase1/$','gtg.views.fase'),
     url(r'^itemTipoItem/(?P<codigo>\d+)/$','gtg.views.itemTipoItem'),
 
+   url(r'^usuario/consultarUsuario/(?P<codigo>\d+)/$', 'gtg.views.consultarUsuario'),
+    url(r'^fase/lista_Fase/$','gtg.views.lista_Fase'),
+   # url(r'^fase/registrarFase/(?P<codigo>\d+)/$','gtg.views.registrarFase'),
+    url(r'^fase/editarFase/(?P<codigo>\d+)/$', 'gtg.views.editarFase'),
+    url(r'^fase/lista_Faseeliminar/$','gtg.views.lista_Faseeliminar'),
+    url(r'^fase/eliminar_fase/(?P<codigo>\d+)/$', 'gtg.views.eliminar_fase'),
 
+    url(r'^proyecto/lista_ProyectoEditar/$','gtg.views.lista_ProyectoEditar'),
+    url(r'^proyecto/editarProyecto/(?P<codigo>\d+)/$', 'gtg.views.editarProyecto'),
+    url(r'^tipoAtributo/$','gtg.views.tipoAtributo'),
+    url(r'^tipoAtributo/registrarTipoAtributo/$','gtg.views.registrarTipoAtributo'),
+    url(r'^tipoAtributo/eliminar_tipoAtributo/(?P<codigo>\d+)/$', 'gtg.views.eliminar_tipoAtributo'),
+    url(r'^tipoAtributo/modificar_tipoAtributo/(?P<codigo>\d+)/$', 'gtg.views.modificar_tipoAtributo'),
 
+    url(r'^eliTipoAtributo/(?P<codigo>\d+)/$', 'gtg.views.eliTipoAtributo'),
+    url(r'^tipoItem/registrarTipoItem/$','gtg.views.registrarTipoItem'),
 
     )
