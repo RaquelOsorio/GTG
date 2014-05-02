@@ -1,0 +1,29 @@
+<HEAD><TITLE>Fases</TITLE>
+  <meta charset='utf-8'>
+  <link rel='stylesheet' href='{{STATIC_URL}}css/base.css'>
+</HEAD>
+{% block encabezado %}
+	<h1><FONT COLOR="#191970">Fases registradas</FONT></h1>
+
+{% endblock %}
+
+{% block contenido %}
+<ul>
+	 		{% for fases in fases %}
+			<tr><br>
+                <td>{{ fases.nombre }}</td>
+				<td>{{ fases.descripcion }}</td>
+
+                <p style='margin-left: 2em'>
+                <td><a href='/lista_Faseeliminar/eliminar_fase/{{ fases.id }}' class="btn btn-small btn-danger"><input type='submit' value='Eliminar'/></a></td>
+                </p>
+                </br>
+			</tr>
+			{% empty %}
+				<tr>
+					<td>No hay fases registradas</td>
+				</tr>
+			{% endfor %}
+
+</ul>
+{% endblock %}

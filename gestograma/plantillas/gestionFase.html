@@ -1,18 +1,50 @@
-{% extends 'base.html' %}
-{% block style_css %}{% endblock %}
+{% extends 'index2.html' %}
+{% block encabezado %}
+
+{% endblock %}
 {% block contenido %}
 
-    <p>
-	<h1>
-        <FONT COLOR="black">Gestionar Fases</FONT>
-    </h1>
+        <div class="row" >
+                <div class="span10">
+                         <ul>
+                            <h3>Fases </h3>
 
-    <li><a href=''>Crear Fase</a></li>
-    <li><a href=''>Modificar Fase</a></li>
-    <li><a href="">Eliminar Fase</a></li>
-    <li><a href="">Importar Fase</a></li>
+                            <li><a href="/fase/registrarFase/"><i class="icon-chevron-right"></i> Crear Fase</a></li>
 
-    <p><a href="/administrar"><input type='submit' value='Cancelar'/></a></p>
+                        </ul>
+                        <table class="table table-striped table-bordered">
+                                <tr>
+                                        <th>Id</th>
+                                        <th>FechaInicio</th>
+                                        <th>Nombre</th>
+                                        <th>Estado</th>
+                                        <th>Proyecto</th>
 
-  </p>
-{% endblock %}
+                                        <th>Presione Editar para editar la fase</th>
+                                        <th>Presione Eliminar para eliminar la fase</th>
+
+                                </tr>
+                            {% for f in fases %}
+
+                                <tr>
+                                        <td>{{f.id}}</td>
+                                        <td>{{f.fechaInicio}}</td>
+                                        <td>{{f.nombre}}</td>
+                                        <td>{{ f.estado }}</td>
+                                        <td>{{ f.proyectos }}</td>
+
+
+                                <td><a href='/fase/editarFase/{{ f.id }}' class="button btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>
+                                <td><a href='/fase/eliminar_fase/{{ f.id }}' class="button btn-small btn-danger"><input type='submit' value='Eliminar'/></a></td>
+
+                                </tr>
+                             {% empty %}
+
+                                <tr>
+                                        No hay Fases registradas
+                                </tr>
+                                {% endfor %}
+        </table>
+</div>
+</div>
+{% endblock %}}

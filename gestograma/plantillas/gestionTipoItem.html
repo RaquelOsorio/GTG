@@ -1,22 +1,43 @@
-{% extends 'base.html' %}
-{% block style_css %}{% endblock %}
+{% extends 'index2.html' %}
+{% block encabezado %}
+
+{% endblock %}
 {% block contenido %}
 
-    <p>
-	<h1>
-<<<<<<< HEAD
-        <FONT COLOR="black">Gestionar Tipo de Item</FONT>
-    </h1>
+        <div class="row" >
+                <div class="span10">
+                         <ul>
+                            <h3>Tipo de Item </h3>
 
-    <li><a href=''>Crear tipo de Item</a></li>
-=======
-        <FONT COLOR="white">Gestionar Tipo de Ítem</FONT>
-    </h1>
+                            <li><a href="/tipoItem/registrarTipoItem/"><i class="icon-chevron-right"></i> Crear Tipo de Item</a></li>
 
-    <li><a href='/'>Crear Tipo de Ítem</a></li>
->>>>>>> fa2bf0c2a0e993123d861066e5fe54ae01ad4e38
+                        </ul>
+                        <table class="table table-striped table-bordered">
+                                <tr>
+                                        <th>Codigo</th>
+                                        <th>Nombre</th>
+                                        <th>TipoAtributo</th>
 
-    <p><a href="/administrar"><input type='submit' value='Cancelar'/></a></p>
 
-  </p>
-{% endblock %}
+
+
+                                </tr>
+                            {% for tI in tItem %}
+
+                                <tr>
+                                        <td>{{tI.codigo}}</td>
+
+                                        <td>{{tI.nombre}}</td>
+                                        <td>{{ tI.tipoAtributo }}</td>
+
+                                </tr>
+                             {% empty %}
+
+                                <tr>
+                                        No hay Tipo de Items registrados
+                                </tr>
+                                {% endfor %}
+        </table>
+</div>
+</div>
+{% endblock %}}

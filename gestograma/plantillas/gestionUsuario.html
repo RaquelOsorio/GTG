@@ -1,20 +1,52 @@
-{% extends 'base.html' %}
-{% block style_css %}{% endblock %}
+{% extends 'index2.html' %}
+{% block encabezado %}
+
+{% endblock %}
 {% block contenido %}
 
-    <p>
-	<h1>
-        <FONT COLOR="black">Gestionar Usuarios</FONT>
-    </h1>
+        <div class="row" >
+                <div class="span10">
+                         <ul>
+                            <center><p></p><h3>Usuarios </h3></center>
+                            <div class="span3 bs-docs-sidebar">
+		        	            <ul class="nav nav-list bs-docs-sidenav">
 
-    <li><a href='/'>Crear Usuario</a></li>
-    <li><a href='/'>Definir rol a usuario</a></li>
-    <li><a href="/">Modificar Usuario</a></li>
-    <li><a href="/">Incluir Integrante al comite de cambio</a></li>
-    <li><a href="/">Quitar integrante del comite de cambio</a></li>
-    <li><a href="/">Consultar Usuario</a></li>
+						            <li><a href="/usuario/nuevo_usuario/"><i class="icon-chevron-right"></i> Crear Usuario</a></li>
+                                    <li><a href="/usuario/nuevo_rolusuario/"><i class="icon-chevron-right"></i> Definir Rol a Usuario</a></li>
 
-    <p><a href="/administrar"><input type='submit' value='Cancelar'/></a></p>
+					            </ul>
+				            </div>
+                         </ul>
+                        <table class="table table-striped table-bordered">
+                                <tr>
+                                        <th>Id</th>
+                                        <th>Nombre</th>
+                                        <th>Estado Activo</th>
+                                        <th>Presione para editar</th>
+                                        <th>Presione para consultar</th>
 
-  </p>
+
+                                </tr>
+                            {% for usuarios in usuarios %}
+
+                                <tr>
+
+                                        <td>{{usuarios.id}}</td>
+                                        <td>{{usuarios.username}}</td>
+                                        <td>{{ usuarios.is_active }}</td>
+
+                                <td><a href='/usuario/editarUsuario/{{ usuarios.id }}' class="button btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>
+                                <td><a href='/usuario/consultarUsuario/{{ usuarios.id }}' class="button btn-small btn-danger"><input type='submit' value='Consultar'/></a></td>
+
+                                </tr>
+                             {% empty %}
+
+
+                                <tr>
+                                        No tiene usuarios
+                                </tr>
+                                {% endfor %}
+        </table>
+</div>
+</div>
 {% endblock %}

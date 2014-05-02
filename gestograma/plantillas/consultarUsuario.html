@@ -1,0 +1,44 @@
+{% extends 'index2.html' %}
+{% block encabezado %}
+
+{% endblock %}
+{% block contenido %}
+
+        <div class="row" >
+                <div class="span10">
+                         <ul>
+                            <center><p></p><h3>Usuarios </h3></center>
+                            <div class="span3 bs-docs-sidebar">
+		        	            <ul class="nav nav-list bs-docs-sidenav">
+
+
+					            </ul>
+				            </div>
+                         </ul>
+                        <table class="table table-striped table-bordered">
+                                <tr>
+                                        <th>Nombre</th>
+
+
+                                </tr>
+
+
+                                <tr>
+
+
+                                        <td>{{usuario.username}}</td>
+
+                                    <tr><th>Rol</th><tr>
+                                    {% for rol in rol %}
+                                            <tr>{% if usuario == rol.usuario %}
+                                                <td>{{ rol.rol }} </td>
+                                            {% endif %}</tr>
+                                        {% endfor %}
+
+                                </tr>
+
+        </table>
+               <a class="button" href='/usuario/'><i class="button"></i>Atrás</a>
+</div>
+</div>
+{% endblock %}

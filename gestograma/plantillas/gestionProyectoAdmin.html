@@ -1,0 +1,55 @@
+{% extends 'index2.html' %}
+{% block encabezado %}
+
+{% endblock %}
+{% block contenido %}
+
+        <div class="row" >
+                <div class="span10">
+                         <ul>
+                            <p></p><center><h3>Proyectos </h3></center>
+
+                            <li><a href="/proyecto/registrarProyecto/"><i class="icon-chevron-right"></i> Crear Proyecto</a></li>
+
+                        </ul>
+                        <table class="table table-striped table-bordered">
+                                <tr>
+                                        <th>Id</th>
+                                        <th>FechaInicio</th>
+                                        <th>Nombre</th>
+                                        <th>Nro Fases</th>
+                                        <th>Estado</th>
+                                        <th>Lider</th>
+
+                                        <th>Presione Editar para editar un Proyecto</th>
+                                        <th>Fase</th>
+
+
+                                </tr>
+                            {% for p in proyectos %}
+
+                                <tr>
+                                        <td>{{p.id}}</td>
+                                        <td>{{p.fechaInicio}}</td>
+                                        <td>{{p.nombre}}</td>
+                                        <td>{{ p.id }}</td>
+                                        <td>{{ p.estado }}</td>
+                                        <td>{{ p.lider }}</td>
+
+                                <td><a href='/proyecto/editarProyecto/{{ p.id }}' class="button btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>
+                                <td>
+                                {%if user.id == p.lider.id%}
+                                   <a class="button" href="/fase1/{{p.id}}"> Selec>> </a>
+                                {% endif %}
+                                        </td>
+                                </tr>
+                             {% empty %}
+
+                                <tr>
+                                        No hay Proyectos registrados
+                                </tr>
+                                {% endfor %}
+        </table>
+</div>
+</div>
+{% endblock %}}

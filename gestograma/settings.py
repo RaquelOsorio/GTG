@@ -15,6 +15,7 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
+AUTH_PROFILE_MODULE = 'gtg.Usuario'
 
 #En el nombre de la base de datos debe ir la ruta absoluta completa de la base de
 #datos, en el caso de Windows debe ir entre comillas
@@ -34,7 +35,7 @@ DATABASES = {
 # http://en.wikippedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # On Unix systems, a value of None will cause Django to use the same
-# timezone as the operating system.
+# timezone as the operating system.*
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
 TIME_ZONE = 'America/Asuncion'

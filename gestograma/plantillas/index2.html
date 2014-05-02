@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>GTG</title>
+<link rel="stylesheet" href="../static/css/styles.css" type="text/css" />
+<link rel='stylesheet' href='{{STATIC_URL}}css/styles.css'>
+
+</head>
+<body>
+<div id="container">
+    <header>
+    	<h1><a href="/">Gesto<span>grama</span></a></h1>
+        <h2>Gestión de Proyectos</h2>
+    </header>
+    <nav>
+    	<ul id="menu1">
+        	<li class="start selected"><a href=/privado/>Inicio</a></li>
+
+
+                <li><a href=''>Módulo de Administración</a>
+            {% if user.is_superuser %}
+
+                <ul>
+                    <li><a href='/tipoAtributo'>Gestión de Tipo de Atributo</a></li>
+                    <li><a href='/usuario'>Gestión de Usuarios</a></li>
+                    <li><a href='/proyecto'>Gestión de Proyectos</a></li>
+                    <li><a href='/rolPermiso'>Gestión de Roles y Permisos</a></li>
+                </ul>
+            {% else %}
+                <ul>
+                    <li><a href='/rolPermiso'>Gestión de Roles y Permisos</a></li>
+                    <li><a href='/fase'>Gestión de Fases</a></li>
+                    <li><a href='/tipoItem'>Gestión de Tipo de Ítems</a></li>
+                </ul>
+                </li>
+                 <li><a href=''>Módulo de Desarrollo</a>
+                <ul>
+                    <li><a href=”servicio1.html”>Gestión de Ítems</a></li>
+                    <li><a href=”servicio2.html”>Cálculo de Impacto</a></li>
+                </ul>
+                </li>
+                    <li><a href=''>Módulo de Gestión de Configuración</a>
+                <ul>
+                    <li><a href=”servicio1.html”>Gestión de Línea Base</a></li>
+                    <li><a href=”servicio2.html”>Gestión de Solicitudes de Cambio</a></li>
+
+                </ul>
+                </li>
+            {% endif %}
+                <li><a href='/cerrar'>Cerrar</a></li>
+                <li><a href="#contact">Usuario: {{ user.username}}</a></li>
+
+            </ul>
+        </nav>
+
+
+    <div id="body">
+
+
+
+		<section class='contenido'>
+            {% block contenido %}{% endblock %}
+        </section>
+
+
+
+        <div class="footer-content1">
+
+        </div>
+    <footer>
+        <div class="footer-bottom">
+            <p> Proyecto 2014 - Ingeniería de SoftwareII <p>  Facultad Politécnica - Universidad Nacional de Asunción.</p>
+        </div>
+    </footer>
+</div>
+</div>
+</body>
+</html>

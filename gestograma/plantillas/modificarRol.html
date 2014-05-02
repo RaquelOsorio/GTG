@@ -1,0 +1,15 @@
+{% extends 'extiende.html' %}
+<section class='contenido'>
+{% block contenido %}
+    <div id="body">
+        <h3>Modificar Rol </h3>
+	        <form id='formulario' method='post' action=''>{% csrf_token %}
+		        {{formulario}}
+                <p><input name="Aceptar" style="margin-left: 150px;" class="formbutton" value="Aceptar" type="submit" />
+                <p><input name="Cancelar" style="margin-left: 150px;" class="formbutton" value="Cancelar" type="submit" />
+        </p>
+
+	        </form>
+    </div>
+{% endblock %}
+</section>
