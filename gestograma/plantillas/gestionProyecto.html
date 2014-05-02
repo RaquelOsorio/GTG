@@ -1,25 +1,13 @@
-<<<<<<< HEAD
 {% extends 'index.html' %}
-=======
-{% extends 'index2.html' %}
->>>>>>> fe7246aeac811a8fed1421c108919f8234490cf0
 {% block encabezado %}
 
 {% endblock %}
 {% block contenido %}
 
-<<<<<<< HEAD
         <div class="row" >
                 <div class="span10">
                          <ul>
                             <p></p><center><h3>Proyectos </h3></center>
-=======
-<<<<<<< HEAD
-        <div class="row" >
-                <div class="span10">
-                         <ul>
-                            <h3>Proyectos </h3>
->>>>>>> fe7246aeac811a8fed1421c108919f8234490cf0
 
                             <li><a href="/proyecto/registrarProyecto/"><i class="icon-chevron-right"></i> Crear Proyecto</a></li>
 
@@ -33,15 +21,8 @@
                                         <th>Estado</th>
                                         <th>Lider</th>
 
-<<<<<<< HEAD
 
                                         <th>Ir</th>
-=======
-                                        <th>Presione Modificar para editar un Proyecto</th>
-                                        <th>Presione Visualizar para consultar un Proyecto</th>
-
-                                        <th>Ingresar al Proyecto</th>
->>>>>>> fe7246aeac811a8fed1421c108919f8234490cf0
 
 
                                 </tr>
@@ -55,11 +36,6 @@
                                         <td>{{ p.estado }}</td>
                                         <td>{{ p.lider }}</td>
 
-<<<<<<< HEAD
-=======
-                                <td><a href='/proyecto/editarProyecto/{{ p.id }}' class="button btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>
-                                <td><a href='/proyecto/verProyecto/{{ p.id }}' class="button btn-small btn-danger"><input type='submit' value='Visualizar'/></a></td>
->>>>>>> fe7246aeac811a8fed1421c108919f8234490cf0
 
                                 <td>
                                 {%if user.id == p.lider.id%}
@@ -76,35 +52,4 @@
         </table>
 </div>
 </div>
-<<<<<<< HEAD
 {% endblock %}}
-=======
-{% endblock %}}
-=======
-    <p>
-	<h1>
-        <FONT COLOR="black">Gestionar Proyectos</FONT>
-    </h1>
-
-    <li><a href='registrarProyecto'>Crear Proyecto</a></li>
-    <li><a href=''>Modificar Proyecto</a></li>
-    <li><a href="">Importar Proyecto</a></li>
-    <li><a href="">Visualizar Proyecto</a></li>
-<<<<<<< HEAD
-=======
-
-        <FONT COLOR="white">Gestionar Proyecto</FONT>
-    </h1>
-
-    <li><a href='/'>Crear Proyecto</a></li>
-    <li><a href='/'>Modificar Proyecto</a></li>
-    <li><a href="/">Importar Proyecto</a></li>
-    <li><a href="/">Vizualizar Proyecto</a></li>
->>>>>>> 422ad2cad28d48cc948a7890ed3910fb77c281e1
-
-    <p><a href="/administrar"><input type='submit' value='Cancelar'/></a></p>
-
-  </p>
-{% endblock %}
->>>>>>> 64570d5fc03175bcdd7814fba88c89225e9a231d
->>>>>>> fe7246aeac811a8fed1421c108919f8234490cf0

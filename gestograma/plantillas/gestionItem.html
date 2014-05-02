@@ -1,50 +1,21 @@
-{% extends 'index2.html' %}
-{% block encabezado %}
-
-{% endblock %}
+{% extends 'base.html' %}
+{% block style_css %}{% endblock %}
 {% block contenido %}
 
-        <div class="row" >
-                <div class="span10">
-                         <ul>
-                            <h3>Items </h3>
+    <p>
+	<h1>
+        <FONT COLOR="black">Gestionar Item</FONT>
+    </h1>
 
-                            <li><a href="/item/registrarItem/"><i class="icon-chevron-right"></i> Crear Item</a></li>
+    <li><a href='/'>Crear Item</a></li>
+    <li><a href='/'>Cambio de estado de Item</a></li>
+    <li><a href="/">Modificar item</a></li>
+    <li><a href='/'>Eliminar Item</a></li>
+    <li><a href="/">Relacionamiento de item</a></li>
+    <li><a href='/'>Reversionamiento de Item</a></li>
+    <li><a href="/">Revivir item</a></li>
 
-                        </ul>
-                        <table class="table table-striped table-bordered">
-                                <tr>
-                                        <th>Nombre</th>
-                                        <th>Estado</th>
-                                        <th>Version</th>
-                                        <th>Tipo Item</th>
-                                        <th>Tipo Atributo</th>
+    <p><a href="/desarrollo"><input type='submit' value='Cancelar'/></a></p>
 
-                                        <th>Presione Editar para editar el item</th>
-                                        <th>Presione Eliminar para eliminar el item</th>
-
-                                </tr>
-                            {% for i in items %}
-
-                                <tr>
-                                        <td>{{i.nombre}}</td>
-                                        <td>{{i.estado }}</td>
-                                        <td>{{i.version}}</td>
-                                        <td>{{i.tipoItem}}</td>
-                                        <td>{{i.tipoItem.tipoAtributo }}</td>
-
-                                {% if i.estado == 'REDAC' or i.estado == 'TER' %}
-                                     <td><a href='/item/modificarItem/{{ i.nroItem }}' class="button btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>
-                                     <td><a href="#" class="button btn-small btn-danger"><input type='submit' value='Eliminar'/></a></td>
-                                {% endif %}
-                                </tr>
-                             {% empty %}
-
-                                <tr>
-                                        No hay Items registrados
-                                </tr>
-                                {% endfor %}
-        </table>
-</div>
-</div>
+  </p>
 {% endblock %}

@@ -22,17 +22,9 @@
                                         <th>Id</th>
                                         <th>Nombre</th>
                                         <th>Estado Activo</th>
-<<<<<<< HEAD
                                         <th>Presione para editar</th>
                                         <th>Presione para consultar</th>
 
-=======
-                                        <th>Mail</th>
-                                        <th>Rol</th>
-
-                                        <th>Presione para editar un usuario</th>
-                                        <th>Presione para consultar un usuario</th>
->>>>>>> fe7246aeac811a8fed1421c108919f8234490cf0
 
                                 </tr>
                             {% for usuarios in usuarios %}
@@ -42,43 +34,12 @@
                                         <td>{{usuarios.id}}</td>
                                         <td>{{usuarios.username}}</td>
                                         <td>{{ usuarios.is_active }}</td>
-<<<<<<< HEAD
 
                                 <td><a href='/usuario/editarUsuario/{{ usuarios.id }}' class="button btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>
                                 <td><a href='/usuario/consultarUsuario/{{ usuarios.id }}' class="button btn-small btn-danger"><input type='submit' value='Consultar'/></a></td>
 
                                 </tr>
                              {% empty %}
-=======
-                                        {% for usuario in usuario %}
-                                            {% if usuarios == usuario.user %}
-                                                <td>{{ usuario.mail }}</td>
-                                            {% endif %}
-                                        {% endfor %}
-                                        {% if b != 1 %}
-                                            <td></td>
-                                        {% endif %}
-                                        {% for usuariorol in usuariorol %}
-                                            {% if usuarios == usuariorol.usuario %}
-                                                <td>{{ usuariorol.rol }}</td>
-                                            {% endif %}
-                                        {% endfor %}
-
-                                <td><a href='/usuario/editarUsuario/{{ usuarios.id }}' class="button btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>
-                                <td><a href='/lista_usuarios/editarUsuario/{{ usuarios.id }}' class="button btn-small btn-danger"><input type='submit' value='Consultar'/></a></td>
-
-<<<<<<< HEAD
-                                </tr>
-                             {% empty %}
-=======
-    <li><a href='/altaUsuario'>Crear Usuario</a></li>
-    <li><a href='/'>Definir rol a usuario</a></li>
-    <li><a href="/">Modificar Usuario</a></li>
-    <li><a href="/">Incluir Integrante al comite de cambio</a></li>
-    <li><a href="/">Quitar integrante del comite de cambio</a></li>
-    <li><a href="/">Consultar Usuario</a></li>
->>>>>>> 64570d5fc03175bcdd7814fba88c89225e9a231d
->>>>>>> fe7246aeac811a8fed1421c108919f8234490cf0
 
 
                                 <tr>

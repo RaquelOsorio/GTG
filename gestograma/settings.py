@@ -24,12 +24,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'sqlite3', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'gestograma',          # Or path to database file if using sqlite3.
-        'USER': 'sonia',                      # Not used with sqlite3.
-        'PASSWORD': 'sonia2014',                  # Not used with sqlite3.
+        'USER': 'viviana',                      # Not used with sqlite3.
+        'PASSWORD': 'orlandoybar',                  # Not used with sqlite3.
         'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '5432',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikippedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -110,7 +111,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.admindocs.middleware.XViewMiddleware',
     # Uncomment the next line for simple clickjacking protection:
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'gestograma.urls'

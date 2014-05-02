@@ -222,7 +222,6 @@ li ol, li ul {
 
 
 #container {
-<<<<<<< HEAD
 
 	margin: 20px auto;
 	padding: 90px;
@@ -233,15 +232,6 @@ li ol, li ul {
 }
 
 
-=======
-	width: 1114px;
-	margin: 20px auto;
-	padding: 150px;
-	box-shadow: 0 5px 5px 5px #CCCCCC;
-	background-color: #fff;
-}
-
->>>>>>> fe7246aeac811a8fed1421c108919f8234490cf0
 header {
 	padding: 35px 0;
 	background: #fff;
@@ -390,11 +380,7 @@ article .article-info a {
 	padding: 7px;
 	margin: 0;
 	line-height: 1.5em;
-<<<<<<< HEAD
 	font-size: 13px;
-=======
-	font-size: 13.5px;
->>>>>>> fe7246aeac811a8fed1421c108919f8234490cf0
 }
 
 .sidebar li ul li.text { 
