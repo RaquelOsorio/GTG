@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> fe7246aeac811a8fed1421c108919f8234490cf0
 {% extends 'index2.html' %}
 <section class='contenido'>
 {% block contenido %}
@@ -7,8 +11,31 @@
 		<table>{{formulario}}</table>
         <p>
             <input name="Guardar" style="margin-left: 150px;" class="formbutton" value="Guardar" type="submit" />
+<<<<<<< HEAD
+=======
+            <input name="Cancelar" style="margin-left: 150px;" class="formbutton" value="Cancelar" type="submit" />
+>>>>>>> fe7246aeac811a8fed1421c108919f8234490cf0
         </p>
 	</form>
  </div>
 {% endblock %}
+<<<<<<< HEAD
 </section>
+=======
+</section>
+=======
+
+<HEAD><TITLE>Crear un Nuevo Proyecto</TITLE>
+  <meta charset='utf-8'>
+  <link rel='stylesheet' href='{{STATIC_URL}}css/base.css'>
+</HEAD>
+{% block encabezado %}
+	<h1><FONT COLOR="#191970">Creación de un nuevo Proyecto</FONT></h1>
+        <form id='formulario' method='post' action=''>{% csrf_token %}
+		{{formulario.as_p}}
+		<p><input type='submit' value='Confirmar'/></p>
+
+	</form>
+{% endblock %}
+>>>>>>> 64570d5fc03175bcdd7814fba88c89225e9a231d
+>>>>>>> fe7246aeac811a8fed1421c108919f8234490cf0

@@ -2,6 +2,27 @@ footer, div, h1, h2, ul, li, a {
 	margin:5; padding:0;
 }
 body {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-color: black;
+    font-family: "Lucida Grande";
+    color: black;
+
+    background: lavender;
+    margin:50px;
+}
+a:link, a:visited {
+    color: black;
+>>>>>>> 422ad2cad28d48cc948a7890ed3910fb77c281e1
+>>>>>>> 64570d5fc03175bcdd7814fba88c89225e9a231d
+>>>>>>> fe7246aeac811a8fed1421c108919f8234490cf0
     margin: 10;
     padding: 10;
     font-size: 18px;
@@ -12,12 +33,44 @@ body {
 
  }
 a:link, a:visited {
+<<<<<<< HEAD
     color: black;
+=======
+<<<<<<< HEAD
+    color: black;
+=======
+<<<<<<< HEAD
+    color: black;
+=======
+    color: white;
+>>>>>>> 422ad2cad28d48cc948a7890ed3910fb77c281e1
+>>>>>>> 64570d5fc03175bcdd7814fba88c89225e9a231d
+>>>>>>> fe7246aeac811a8fed1421c108919f8234490cf0
     text-decoration: none;
     margin:10px;
 }
 header {
+<<<<<<< HEAD
 	background-color:white;
+=======
+<<<<<<< HEAD
+	background-color:white;
+=======
+<<<<<<< HEAD
+	background-color:white;
+=======
+	background-color:WHITE;
+	color:WHITE;
+	margin:10px;
+}
+nav ul li a{
+	text-decoration:none;
+	color: black;
+	margin:10px;
+	background-color:deepskyblue;
+>>>>>>> 422ad2cad28d48cc948a7890ed3910fb77c281e1
+>>>>>>> 64570d5fc03175bcdd7814fba88c89225e9a231d
+>>>>>>> fe7246aeac811a8fed1421c108919f8234490cf0
 	color:white;
 }
 nav ul li a{
@@ -29,7 +82,28 @@ nav ul li a{
   font-weight: bold;
 
 }
+<<<<<<< HEAD
 .impar {
+=======
+<<<<<<< HEAD
+.impar {
+=======
+<<<<<<< HEAD
+.impar {
+=======
+.impar { 
+	background-color:grey;
+}
+.par { 
+	background-color:grey;
+}
+#content-related h3 {
+    font-size: 12px;
+    color: black;
+    margin-bottom: 3px;
+>>>>>>> 422ad2cad28d48cc948a7890ed3910fb77c281e1
+>>>>>>> 64570d5fc03175bcdd7814fba88c89225e9a231d
+>>>>>>> fe7246aeac811a8fed1421c108919f8234490cf0
 	background-color:cornflowerblue;
 }
 .par {
@@ -40,4 +114,16 @@ nav ul li a{
     color: white;
     margin:5px;
     margin-bottom: 10px;
+<<<<<<< HEAD
 }
+=======
+<<<<<<< HEAD
+}
+=======
+<<<<<<< HEAD
+}
+=======
+}
+>>>>>>> 422ad2cad28d48cc948a7890ed3910fb77c281e1
+>>>>>>> 64570d5fc03175bcdd7814fba88c89225e9a231d
+>>>>>>> fe7246aeac811a8fed1421c108919f8234490cf0

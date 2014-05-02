@@ -9,8 +9,11 @@
                 <div class="span10">
                          <ul>
                             <h3>{{ fases.proyectos }} </h3>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> fe7246aeac811a8fed1421c108919f8234490cf0
                         </ul>
                         <table class="table table-striped table-bordered">
                                 <tr>
@@ -18,7 +21,11 @@
                                         <th>FechaInicio</th>
                                         <th>Nombre</th>
                                         <th>Estado</th>
+<<<<<<< HEAD
 
+=======
+                                        <th>Gestion Item</th>
+>>>>>>> fe7246aeac811a8fed1421c108919f8234490cf0
 
                                 </tr>
                             {% for f in fases %}
@@ -28,9 +35,13 @@
                                         <td>{{f.fechaInicio}}</td>
                                         <td>{{f.nombre}}</td>
                                         <td>{{ f.estado }}</td>
+<<<<<<< HEAD
 
 
 
+=======
+                                        <td><a class="button" href="/itemFase/{{f.id}}"> Ir a>> </a></td>
+>>>>>>> fe7246aeac811a8fed1421c108919f8234490cf0
                                 </tr>
 
                              {% empty %}
@@ -40,6 +51,10 @@
                                 </tr>
                                 {% endfor %}
         </table>
+<<<<<<< HEAD
+=======
+
+>>>>>>> fe7246aeac811a8fed1421c108919f8234490cf0
                 <a class="button" href="/proyecto/"><i class="icon-arrow-left"></i> Atras</a>
 
 </div>
