@@ -1,24 +1,47 @@
-{% extends 'base.html' %}
-{% block style_css %}{% endblock %}
+{% extends 'index2.html' %}
+{% block encabezado %}
+
+{% endblock %}
 {% block contenido %}
 
-    <p>
-	<h1>
-<<<<<<< HEAD
-        <FONT COLOR="black">Gestionar Tipo de Atributo</FONT>
-    </h1>
+        <div class="row" >
+                <div class="span10">
+                         <ul>
+                            <h3>Tipo de Atributos </h3>
 
-    <li><a href='/'>Crear Tipo de Atributo</a></li>
-=======
-        <FONT COLOR="white">Gestionar Tipo de Atributo</FONT>
-    </h1>
+                            <li><a href="/tipoAtributo/registrarTipoAtributo/"><i class="icon-chevron-right"></i> Crear Tipo de Atributo</a></li>
 
-    <li><a href='/crearTipoAtributo'>Crear Tipo de Atributo</a></li>
->>>>>>> fa2bf0c2a0e993123d861066e5fe54ae01ad4e38
-    <li><a href='/'>Modificar Tipo de Atributo</a></li>
-    <li><a href="/">Borrar Tipo de Atributo</a></li>
+                        </ul>
+                        <table class="table table-striped table-bordered">
+                                <tr>
+                                        <th>Codigo</th>
+                                        <th>Nombre</th>
 
-    <p><a href="/administrar"><input type='submit' value='Cancelar'/></a></p>
+                                        <th>Presione Modificar para editar el tipoAtributo</th>
+                                        <th>Presione Eliminar para eliminar el tipoAtributo</th>
 
-  </p>
-{% endblock %}
+
+                                </tr>
+                            {% for ta in tAtributos %}
+
+                                <tr>
+                                        <td>{{ta.codigo}}</td>
+
+                                        <td>{{ta.nombre}}</td>
+
+
+                                <td><a href='/tipoAtributo/modificar_tipoAtributo/{{ ta.codigo }}' class="button btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>
+                                <td><a href='/tipoAtributo/eliminar_tipoAtributo/{{ ta.codigo}}' class="button btn-small btn-danger"><input type='submit' value='Eliminar'/></a></td>
+
+
+                                </tr>
+                             {% empty %}
+
+                                <tr>
+                                        No hay Tipo de Atributos registrados
+                                </tr>
+                                {% endfor %}
+        </table>
+</div>
+</div>
+{% endblock %}}

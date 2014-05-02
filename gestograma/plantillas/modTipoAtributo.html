@@ -1,0 +1,16 @@
+{% extends 'index2.html' %}
+
+ <section class='contenido'>
+{% block contenido %}
+    <div id="body">
+
+
+            <p>No se puede modificar el tipo el atributo "{{t.tipoAtributo.nombre}}" porque esta asociado al tipo de item "{{ t.nombre }}"</p>
+            <a class="button" href="/tipoAtributo/"><i class="button"></i> Aceptar</a>
+
+
+
+
+    </div>
+{% endblock %}
+</section>

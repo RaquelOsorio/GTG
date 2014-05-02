@@ -1,0 +1,15 @@
+
+{% extends 'index2.html' %}
+<section class='contenido'>
+{% block contenido %}
+ <div id="body">
+        <h3>Registrar un nuevo Usuario </h3>
+		<form id='form' method='post' action=''>{% csrf_token %}
+		<table>{{form}}</table>
+        <p><input name="Cancelar" style="margin-left: 150px;" class="formbutton" value="Cancelar" type="submit" />
+            <input name="Guardar" style="margin-left: 150px;" class="formbutton" value="Guardar" type="submit" />
+        </p>
+	</form>
+ </div>
+{% endblock %}
+</section>

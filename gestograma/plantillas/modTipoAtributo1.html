@@ -1,0 +1,15 @@
+{% extends 'index2.html' %}
+<section class='contenido'>
+{% block contenido %}
+    <div id="body">
+        <h3>Modificar Tipo de Atributo </h3>
+	<form id='formulario' method='post' action=''>{% csrf_token %}
+		{{formulario.as_p}}
+		<p><input name="Aceptar" style="margin-left: 150px;" class="formbutton" value="Aceptar" type="submit" />
+        <input name="Cancelar" style="margin-left: 150px;" class="formbutton" value="Cancelar" type="submit" />
+        </p>
+	</form>
+
+</div>
+{% endblock %}
+</section>

@@ -1,0 +1,16 @@
+{% extends 'index2.html' %}
+
+ <section class='contenido'>
+{% block contenido %}
+    <div id="body">
+    {% if fase.estado == 'INA' %}
+        <p>Esta seguro que desea eliminar la fase: "{{ fase.nombre }}" perteneciente al Proyecto: "{{ fase.proyectos }}"</p>
+        <a class="button" href="/eliFase/{{ fase.id }}"><i class="button"></i> SI </a>
+        <a class="button" href="/fase/"><i class="button"></i> NO </a>
+    {% else %}
+        <p>No se puede eliminar la fase: "{{ fase.nombre }}" perteneciente al Proyecto: "{{ fase.proyectos }}" porque se encuentra en estado: "{{ fase.estado }}"</p>
+        <a class="button" href="/fase/"><i class="button"></i> Aceptar</a>
+    {% endif%}
+    </div>
+{% endblock %}
+</section>

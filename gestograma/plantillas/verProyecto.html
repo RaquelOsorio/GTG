@@ -1,0 +1,52 @@
+{% extends 'index2.html' %}
+{% block encabezado %}
+
+{% endblock %}
+
+{%block contenido%}
+    <div class="items">
+		<div class="container" align="center">
+            <h3 class="muted">{{proyecto.nombre}} </h3>
+
+        </div>
+       	<div class="container">
+       	    <h3>Consultar Proyecto</h3>
+            <hr>
+       	    <table>
+       	    <tr>
+	            <td>
+	        	    <strong>Fecha inicio: </strong>{{proyecto.fechaInicio}}
+	            </td>
+                <td>
+	        	    <strong>Fecha fin: </strong>{{proyecto.fechaInicio}}
+	            </td>
+                <td>
+	        	    <strong>Fecha modificacion: </strong>{{proyecto.fechaInicio}}
+	            </td>
+            </tr>
+            <tr>
+	            <td >
+	        	    <strong>Nombre: </strong>{{proyecto.nombre}}
+	            </td>
+                <td>
+	        	    <strong>Estado: </strong>{{proyecto.estado}}
+	            </td>
+                <td>
+	        	    <strong>Complejidad: </strong>{{proyecto.complejidad}}
+	            </td>
+            </tr>
+            <tr>
+                <td>
+	        	    <strong>Lider: </strong>{{proyecto.lider}}
+	            </td>
+                <td>
+	        	    <strong>Usuario Creador: </strong>{{user.username}}
+	            </td>
+                <td>
+	        	    <strong>Usuario Modificador: </strong>{{user.username}}
+	            </td>
+            </tr>
+            </table>
+        </div>
+    </div>
+{% endblock contenido%}

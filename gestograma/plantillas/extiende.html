@@ -1,0 +1,7 @@
+{% extends 'index2.html' %}
+
+{% block contenido %}
+    <p><center>Usted se ha identificado como:"{{ user.username }}" y no tiene permiso para realizar esta operacion</center></p>
+    <a class="button" href="/proyecto/"><i class="icon-arrow-left"></i> Atras</a>
+
+{% endblock %}
