@@ -1,0 +1,42 @@
+{% extends 'index2.html' %}
+{% block encabezado %}
+
+{% endblock %}
+{% block contenido %}
+
+        <div class="row" >
+                <div class="span10">
+                         <ul>
+                            <h3>{{ itemTipo.fase.proyectos}} - {{  itemTipo.fase }} </h3>
+                        </ul>
+                        <table class="table table-striped table-bordered">
+                                <tr>
+                                        <th>Codigo</th>
+                                        <th>Nombre</th>
+                                        <th>Tipo Atributo</th>
+
+
+                                </tr>
+                            {% for it in itemTipo %}
+
+                                <tr>
+                                        <td>{{it.tipoItem.codigo}}</td>
+                                        <td>{{it.tipoItem.nombre}}</td>
+                                        <td>{{it.tipoItem.tipoAtributo}}</td>
+
+
+                                </tr>
+
+                             {% empty %}
+
+                                <tr>
+                                        No hay Tipo items registrados
+                                </tr>
+                                {% endfor %}
+        </table>
+
+                <a class="button" href="/proyecto"><i class="icon-arrow-left"></i> Atras</a>
+
+</div>
+</div>
+{% endblock %}}

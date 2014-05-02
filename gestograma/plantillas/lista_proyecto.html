@@ -1,0 +1,31 @@
+<HEAD><TITLE>Proyectos</TITLE>
+     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link rel='stylesheet' href='{{STATIC_URL}}css/base.css'>
+</HEAD>
+{% block encabezado %}
+	<h1><FONT COLOR="#191970">Seleccione un Proyecto para crear la Fase</FONT></h1>
+
+{% endblock %}
+
+{% block contenido %}
+<ul>
+	 		{% for proyectos in proyectos %}
+			<tr><br>
+
+                <p style='margin-left: 2em'>
+                <td><a href='registrarFase' class="btn btn-small btn-danger">  <td>{{ proyectos.id }}</td>
+                <td>{{ proyectos.fechaInicio }}</td>
+				<td>{{ proyectos.nombre}}</td>
+				<td>{{ proyectos.complejidad }}</td>
+                <td>{{ proyectos.estado }}</td></a></td>
+                </p>
+                </br>
+			</tr>
+			{% empty %}
+				<tr>
+					<td>No hay proyectos registrados</td>
+				</tr>
+			{% endfor %}
+
+</ul>
+{% endblock %}

@@ -15,6 +15,7 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
+AUTH_PROFILE_MODULE = 'gtg.Usuario'
 
 #En el nombre de la base de datos debe ir la ruta absoluta completa de la base de
 #datos, en el caso de Windows debe ir entre comillas
@@ -23,8 +24,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'sqlite3', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'gestograma',          # Or path to database file if using sqlite3.
-        'USER': 'viviana',                      # Not used with sqlite3.
-        'PASSWORD': 'orlandoybar',                  # Not used with sqlite3.
+        'USER': 'sonia',                      # Not used with sqlite3.
+        'PASSWORD': 'sonia2014',                  # Not used with sqlite3.
         'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '5432',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -34,7 +35,7 @@ DATABASES = {
 # http://en.wikippedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # On Unix systems, a value of None will cause Django to use the same
-# timezone as the operating system.
+# timezone as the operating system.*
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
 TIME_ZONE = 'America/Asuncion'
