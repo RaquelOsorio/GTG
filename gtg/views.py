@@ -257,6 +257,7 @@ def fase1(request, codigo):
     """permite acceder a la interfaz de opciones de administracion para fases donde se despliega la lista de fases
     de cierto proyecto seleccionado. Recibe como :param request que es la peticion de la operacion y el codigo
     del proyecto, con el cual se filtra todas las fases pertenecientes al mismo. :return la lista de fases"""
+
     fases=Fases1.objects.filter(proyectos=codigo)
     return render_to_response('gestionFase.html',{'fases': fases }, context_instance=RequestContext(request))
 
@@ -273,6 +274,9 @@ def registrarFase(request):
 	"""Permite registrar una nueva fase dentro del proyecto en el sistema.Recibe como :param reuqest que es la peticion
 	de la operacion. Retorna :return el formulario con todos los campos para registrar una nueva fase. Al aceptar la
 	operacion vuevle a interfaz de fase donde se despliega la lista de fases actualmente registrados"""
+	proy=RolUsuario.objects.all()
+
+
 	if request.method == "POST":
 		formulario = Fases1Form(request.POST, request.FILES)
 
@@ -287,7 +291,7 @@ def registrarFase(request):
 	else:
 		formulario=Fases1Form()
 
-	return render(request, 'fase_form.html', {'formulario': formulario,})
+	return render(request, 'fase_form.html', {'formulario': formulario,'proy':proy})
 
 @login_required(login_url='/ingresar')
 def editarUsuario(request, codigo):

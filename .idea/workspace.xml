@@ -2,45 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1cc01d94-5543-4230-974a-5d3ba5a8f715" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gestograma/plantillas/combo.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionItem1.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionTipoItem1.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gestograma/plantillas/item_form.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gestograma/plantillas/modificarItem.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gestograma/plantillas/verProyecto.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gestograma/plantillas/visualizarProyecto.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/git/GTG" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma.db" afterPath="$PROJECT_DIR$/gestograma.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/404.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/404.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/500.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/500.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/admin.py" afterPath="$PROJECT_DIR$/gtg/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/altaUsuario.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/altaUsuario.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/static/css/base.css" afterPath="$PROJECT_DIR$/gestograma/static/css/base.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/base.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/configuracion.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/configuracion.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/consultarUsuario.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/consultarUsuario.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/fase_form.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/fase_form.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/forms.py" afterPath="$PROJECT_DIR$/gtg/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionAtributo.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionAtributo.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionFase.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionFase.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionFase1.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionFase1.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionItem.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionItem.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionProyecto.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionProyecto.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionRolesPermisos.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionRolesPermisos.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionTipoItem.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionTipoItem.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionUsuario.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionUsuario.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/index2.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/index2.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manage.py" afterPath="$PROJECT_DIR$/manage.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/models.py" afterPath="$PROJECT_DIR$/gtg/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/proyecto_form.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/proyecto_form.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/prueba.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/prueba.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/rol_form.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/rol_form.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/roles.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/roles.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/settings.py" afterPath="$PROJECT_DIR$/gestograma/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/static/css/styles.css" afterPath="$PROJECT_DIR$/gestograma/static/css/styles.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/test_inicio_sesion.py" afterPath="$PROJECT_DIR$/gtg/test_inicio_sesion.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/urls.py" afterPath="$PROJECT_DIR$/gestograma/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/views.py" afterPath="$PROJECT_DIR$/gtg/views.py" />
     </list>
     <ignored path="gestograma.iws" />
@@ -69,10 +32,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/gtg/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="496" column="0" selection-start="23255" selection-end="23255" vertical-scroll-proportion="0.0" vertical-offset="6712" max-vertical-offset="7095">
+            <state line="281" column="0" selection-start="12894" selection-end="12894" vertical-scroll-proportion="0.45864663" vertical-offset="3597" max-vertical-offset="7155">
               <folding />
             </state>
           </provider>
@@ -81,9 +44,11 @@
       <file leaf-file-name="forms.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gtg/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="68" column="0" selection-start="1647" selection-end="1647" vertical-scroll-proportion="0.0" vertical-offset="714" max-vertical-offset="1110">
+            <state line="55" column="18" selection-start="1401" selection-end="1401" vertical-scroll-proportion="0.0" vertical-offset="734" max-vertical-offset="1230">
               <folding>
                 <element signature="e#25#49#0" expanded="true" />
+                <marker date="1399054085454" expanded="true" signature="1366:1401" placeholder="..." />
+                <marker date="1399054085454" expanded="true" signature="1382:1401" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -109,10 +74,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="settings.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gestograma/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="172" column="0" selection-start="6041" selection-end="6041" vertical-scroll-proportion="0.86935866" vertical-offset="2214" max-vertical-offset="2670">
+            <state line="171" column="16" selection-start="6040" selection-end="6040" vertical-scroll-proportion="0.0" vertical-offset="2214" max-vertical-offset="2670">
               <folding />
             </state>
           </provider>
@@ -121,8 +86,21 @@
       <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gtg/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="146" column="0" selection-start="4416" selection-end="4416" vertical-scroll-proportion="0.0" vertical-offset="1854" max-vertical-offset="2250">
-              <folding />
+            <state line="124" column="40" selection-start="3884" selection-end="3884" vertical-scroll-proportion="0.0" vertical-offset="1646" max-vertical-offset="2370">
+              <folding>
+                <element signature="e#16#44#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fase_form.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gestograma/plantillas/fase_form.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="27" selection-start="220" selection-end="220" vertical-scroll-proportion="-3.75" vertical-offset="0" max-vertical-offset="285">
+              <folding>
+                <element signature="n#style#0;n#input#0;n#p#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -153,7 +131,6 @@
         <option value="$PROJECT_DIR$/gestograma/plantillas/rol_form.html" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/proyecto_form.html" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/modificarRol.html" />
-        <option value="$PROJECT_DIR$/gestograma/plantillas/fase_form.html" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/editar.html" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/tipoAtributo.html" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/tipoAtributo_form.html" />
@@ -185,12 +162,13 @@
         <option value="$PROJECT_DIR$/gestograma/plantillas/index2.html" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/gestionUsuario.html" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/consultarUsuario.html" />
-        <option value="$PROJECT_DIR$/gtg/forms.py" />
-        <option value="$PROJECT_DIR$/gtg/models.py" />
-        <option value="$PROJECT_DIR$/gtg/views.py" />
         <option value="$PROJECT_DIR$/gestograma/urls.py" />
         <option value="$PROJECT_DIR$/gtg/admin.py" />
         <option value="$PROJECT_DIR$/gestograma/settings.py" />
+        <option value="$PROJECT_DIR$/gestograma/plantillas/fase_form.html" />
+        <option value="$PROJECT_DIR$/gtg/views.py" />
+        <option value="$PROJECT_DIR$/gtg/forms.py" />
+        <option value="$PROJECT_DIR$/gtg/models.py" />
       </list>
     </option>
   </component>
@@ -304,6 +282,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="gestograma" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plantillas" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gestograma" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gestograma" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="GTG" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -313,7 +309,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Escritorio/recetario_mdw" />
     <property name="FullScreen" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
@@ -597,10 +593,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-5" width="1366" height="773" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32973805" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2975078" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31152648" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.317757" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -685,29 +681,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gtg/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="0" selection-start="1647" selection-end="1647" vertical-scroll-proportion="0.0" vertical-offset="714" max-vertical-offset="1110">
-          <folding>
-            <element signature="e#25#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gtg/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="146" column="0" selection-start="4416" selection-end="4416" vertical-scroll-proportion="0.0" vertical-offset="1854" max-vertical-offset="2250">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gtg/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="496" column="0" selection-start="23255" selection-end="23255" vertical-scroll-proportion="0.0" vertical-offset="6712" max-vertical-offset="7095">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gestograma/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="60" column="0" selection-start="3003" selection-end="3003" vertical-scroll-proportion="0.0" vertical-offset="534" max-vertical-offset="990">
@@ -726,7 +699,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gestograma/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="172" column="0" selection-start="6041" selection-end="6041" vertical-scroll-proportion="0.86935866" vertical-offset="2214" max-vertical-offset="2670">
+        <state line="171" column="16" selection-start="6040" selection-end="6040" vertical-scroll-proportion="0.0" vertical-offset="2214" max-vertical-offset="2670">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/fase_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="27" selection-start="220" selection-end="220" vertical-scroll-proportion="-3.75" vertical-offset="0" max-vertical-offset="285">
+          <folding>
+            <element signature="n#style#0;n#input#0;n#p#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gtg/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="55" column="18" selection-start="1401" selection-end="1401" vertical-scroll-proportion="0.0" vertical-offset="734" max-vertical-offset="1230">
+          <folding>
+            <element signature="e#25#49#0" expanded="true" />
+            <marker date="1399054085454" expanded="true" signature="1366:1401" placeholder="..." />
+            <marker date="1399054085454" expanded="true" signature="1382:1401" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gtg/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="124" column="40" selection-start="3884" selection-end="3884" vertical-scroll-proportion="0.0" vertical-offset="1646" max-vertical-offset="2370">
+          <folding>
+            <element signature="e#16#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gtg/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="281" column="0" selection-start="12894" selection-end="12894" vertical-scroll-proportion="0.45864663" vertical-offset="3597" max-vertical-offset="7155">
           <folding />
         </state>
       </provider>

@@ -2,6 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+
 # Create your models here.
 
 class Usuario(models.Model):
@@ -121,7 +122,12 @@ class Fases1(models.Model):
     descripcion=models.TextField(max_length=100)
     estado = models.CharField(max_length=20, choices=ESTADO_CHOICES)
     proyectos=models.ForeignKey(Proyectos)#.get_extra_descriptor_filter(estado=='INA')
-
+    usuariorol= RolUsuario.objects.all()
+    #queryset=Proyectos.objects.all()
+    #qs = Proyectos.objects.filter(estado="INA")
+    #qs = qs.filter(estado="INA")
+    #for e in qs:
+     #   print e.headline
     def __unicode__(self):
         return self.nombre
 

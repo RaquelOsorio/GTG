@@ -66,3 +66,12 @@ class TipoAtributoForm(forms.ModelForm):
 class TipoItemForm(forms.ModelForm):
     class Meta:
         model= TipoItem
+
+class ContactForm(forms.Form):
+    subject = forms.CharField(max_length=100)
+    message = forms.CharField()
+    def clean_message(self):
+        data = self.cleaned_data['message']
+        if data == 'patata':
+            raise forms.ValidationError('No se permite una patata como mensaje')
+        return data
