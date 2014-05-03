@@ -2,7 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
-
+import datetime
 # Create your models here.
 
 class Usuario(models.Model):
@@ -16,7 +16,6 @@ class Usuario_rol(models.Model):
     usuario = models.ForeignKey(User)
     des= models.TextField()
         #rol = models.ForeignKey()
-
 
 class Rol(models.Model):
     codigo = models.CharField(max_length=32, primary_key= True, unique=True)
@@ -63,21 +62,27 @@ class Proyectos(models.Model):
     def __unicode__(self):
         return self.nombre
 
+class Fases1(models.Model):
+    ESTADO_CHOICES=(
+         ('INA','Inactiva'),
+        ('PEN','Pendiente'),
+        ('ACT','Activa'),
+        ('FIN','Finalizada')
+    )
+
+    fechaInicio=models.DateField(auto_now=True)
+    fechaFin=models.DateField(auto_now=False)
+    nombre=models.CharField(max_length=32, unique=True)
+    descripcion=models.TextField(max_length=100)
+    estado = models.CharField(max_length=20, choices=ESTADO_CHOICES)
+    proyectos=models.ForeignKey(Proyectos)
+    def __unicode__(self):
+        return self.nombre
 
 
 class ModificarRol(models.Model):
     rol= models.ForeignKey(Rol)
     fecha= models.DateField(auto_now=True)
-
-class Fase(models.Model):
-    fechaInicio=models.DateField(auto_now=False)
-    fechaFin=models.DateField(auto_now=False)
-    nombre=models.CharField(max_length=32, unique=True)
-    descripcion=models.TextField(max_length=100)
-    estado="INACTIVA"
-    rol=models.ForeignKey(Rol)
-    def __unicode__(self):
-        return self.nombre
 
 class TipoAtributo(models.Model):
      codigo = models.CharField(max_length=32, primary_key= True, unique=True)
@@ -108,28 +113,13 @@ class RolUsuario(models.Model):
         #    permissions=(("asociarRol","puede asociar roles a usuarios"),)
 
 
-class Fases1(models.Model):
-    ESTADO_CHOICES=(
-         ('INA','Inactiva'),
-        ('PEN','Pendiente'),
-        ('ACT','Activa'),
-        ('FIN','Finalizada')
-    )
 
-    fechaInicio=models.DateField(auto_now=False)
-    fechaFin=models.DateField(auto_now=False)
-    nombre=models.CharField(max_length=32, unique=True)
-    descripcion=models.TextField(max_length=100)
-    estado = models.CharField(max_length=20, choices=ESTADO_CHOICES)
-    proyectos=models.ForeignKey(Proyectos)#.get_extra_descriptor_filter(estado=='INA')
-    usuariorol= RolUsuario.objects.all()
-    #queryset=Proyectos.objects.all()
-    #qs = Proyectos.objects.filter(estado="INA")
-    #qs = qs.filter(estado="INA")
-    #for e in qs:
-     #   print e.headline
-    def __unicode__(self):
-        return self.nombre
+class TipoAtributo(models.Model):
+     codigo = models.CharField(max_length=32, primary_key= True, unique=True)
+     nombre = models.CharField(max_length=32, unique=True)
+     descripcion=models.TextField(max_length=100)
+     def __unicode__(self):
+         return self.nombre
 
 
 class Item(models.Model):
@@ -140,13 +130,21 @@ class Item(models.Model):
         ('DESAC','Desactivado'),
         ('REV','En_Revision'),
     )
-    nroItem=models.IntegerField()
+    nroItem=models.IntegerField(max_length=32, primary_key= True, unique=True)
+    nombre=models.CharField(max_length=32, unique=True)
     version=models.IntegerField(max_length=32)
     prioridad=models.IntegerField(max_length=32)
     estado = models.CharField(max_length=20, choices=ESTADO_CHOICES)
     descripcion=models.TextField(max_length=100)
-    tipoItem=TipoItem()
+    fechaModi=models.DateField(auto_now=True)
+    tipoItem=models.ForeignKey(TipoItem)
     fase=models.ForeignKey(Fases1)
+    antecesorHorizontal= models.OneToOneField('self',related_name='RantecesorHorizontal',null=True, blank= True)
+    antecesorVertical=models.OneToOneField('self',related_name='RantecesorVertical',null=True, blank=True)
+    def __unicode__(self):
+         return self.nombre
 
+        #class Meta:
+        #    permissions=(("asociarRol","puede asociar roles a usuarios"),)
 
 

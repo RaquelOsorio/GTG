@@ -2,11 +2,15 @@ from django.contrib import admin
 
 # Register your models here.
 
+from django.contrib import admin
+from gtg.models import Usuario
+admin.site.register(Usuario)
+from gtg.models import ModificarRol
 from gtg.models import Rol
 from django.contrib import admin
 from gtg.models import Usuario
 admin.site.register(Rol)
-admin.site.register(Usuario)
+
 from gtg.models import ModificarRol
 from gtg.models import RolUsuario
 from django.contrib.auth.admin import UserAdmin

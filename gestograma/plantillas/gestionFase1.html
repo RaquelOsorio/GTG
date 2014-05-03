@@ -10,7 +10,6 @@
                          <ul>
                             <h3>{{ fases.proyectos }} </h3>
 
-
                         </ul>
                         <table class="table table-striped table-bordered">
                                 <tr>
@@ -18,7 +17,7 @@
                                         <th>FechaInicio</th>
                                         <th>Nombre</th>
                                         <th>Estado</th>
-
+                                        <th>Gestion Item</th>
 
                                 </tr>
                             {% for f in fases %}
@@ -28,9 +27,7 @@
                                         <td>{{f.fechaInicio}}</td>
                                         <td>{{f.nombre}}</td>
                                         <td>{{ f.estado }}</td>
-
-
-
+                                        <td><a class="button" href="/itemFase/{{f.id}}"> Ir a>> </a></td>
                                 </tr>
 
                              {% empty %}
