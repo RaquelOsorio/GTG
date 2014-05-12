@@ -11,6 +11,20 @@
                             <h3>{{ fases.proyectos }} </h3>
 
                         </ul>
+
+                    <ul>
+                             {% for fa in fases %}
+
+                                <p><center><h3>{{ fa.proyectos }} </h3></center></p>
+
+                             {% endfor %}
+                    <li><a href="/fase1/registrarFase/{{ proyecto }}"><i class="addlink"></i> Crear Fase</a></li>
+
+                        </ul>
+                    <ul>
+
+
+                        </ul>
                         <table class="table table-striped table-bordered">
                                 <tr>
                                         <th>Id</th>

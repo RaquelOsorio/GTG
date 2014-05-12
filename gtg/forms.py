@@ -13,7 +13,8 @@ from gtg.models import Proyectos
 from gtg.models import Fases1
 from gtg.models import TipoItem
 from gtg.models import Item
-
+from gtg.models import ItemRelacion
+from django.forms import Select
 
 class rolForm(forms.ModelForm):
     class Meta:
@@ -26,6 +27,14 @@ class ProyectoForm(forms.ModelForm):
 class Fases1Form(forms.ModelForm):
     class Meta:
         model=Fases1
+        fields =(
+            "fechaInicio",
+            "fechaFin",
+            "nombre",
+            "descripcion",
+            #"proyecto",
+            "estado",
+        )
 
 class usuarioForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -72,8 +81,24 @@ class relacionarForm(forms.ModelForm):
         model= Item
         fields=("antecesorHorizontal","antecesorVertical")
 
+class EliminarItemForm(forms.ModelForm):
+    class Meta:
+        model= Item
+        fields=("estado",)
+
 
 class rolusuarioForm(forms.ModelForm):
     class Meta:
         model=RolUsuario
 
+class ItemRelacionForm(forms.ModelForm):
+    """
+
+    Formulario que permite la carga de relaciones items.
+
+    """
+    class Meta:
+        model = ItemRelacion
+        fields = ['origen', 'destino']
+        widgets ={'origen': Select(attrs={'size': 10}),\
+                  'destino': Select(attrs={'size': 10})}

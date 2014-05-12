@@ -16,6 +16,7 @@
                                 <tr>
                                         <th>Codigo</th>
                                         <th>Nombre</th>
+                                        <th>Tipo</th>
 
                                         <th>Presione Modificar para editar el tipoAtributo</th>
                                         <th>Presione Eliminar para eliminar el tipoAtributo</th>
@@ -29,7 +30,7 @@
 
                                         <td>{{ta.nombre}}</td>
 
-
+                                        <td>{{ta.tipo}}</td>
                                 <td><a href='/tipoAtributo/modificar_tipoAtributo/{{ ta.codigo }}' class="button btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>
                                 <td><a href='/tipoAtributo/eliminar_tipoAtributo/{{ ta.codigo}}' class="button btn-small btn-danger"><input type='submit' value='Eliminar'/></a></td>
 

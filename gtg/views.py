@@ -31,6 +31,13 @@ from gtg.models import TipoItem
 from gtg.forms import TipoItemForm
 from gtg.models import Item
 from gtg.forms import ItemForm
+from gtg.models import ItemRelacion
+from gtg.forms import ItemRelacionForm
+from django.views.generic.edit import CreateView,  DeleteView
+from django.views.generic import ListView
+from gtg.forms import EliminarItemForm
+from django.core.urlresolvers import reverse
+
 def ingresar(request):
     """controla si el usuario se encuentra registrado, permite iniciar sesion
     :param request:
@@ -264,7 +271,7 @@ def fase1(request, codigo):
     del proyecto, con el cual se filtra todas las fases pertenecientes al mismo. :return la lista de fases"""
 
     fases=Fases1.objects.filter(proyectos=codigo)
-    return render_to_response('gestionFase1.html',{'fases': fases }, context_instance=RequestContext(request))
+    return render_to_response('gestionFase1.html',{'fases': fases, 'proyecto':codigo }, context_instance=RequestContext(request))
 
 def fase(request):
     """permite acceder a la interfaz de opciones de administracion para fases"""
@@ -275,28 +282,42 @@ def fase(request):
 ####Vista del formulario para registrar una fase dentro del proyecto seleccinado#############
 ############################################################################################
 @login_required(login_url='/ingresar')
-def registrarFase(request):
-	"""Permite registrar una nueva fase dentro del proyecto en el sistema.Recibe como :param reuqest que es la peticion
-	de la operacion. Retorna :return el formulario con todos los campos para registrar una nueva fase. Al aceptar la
-	operacion vuevle a interfaz de fase donde se despliega la lista de fases actualmente registrados"""
-	proy=RolUsuario.objects.all()
+def registrarFase(request,codigo):
+    """
+        Permite registrar una nueva fase dentro del proyecto en el sistema.Recibe como :param reuqest que es la peticion
+	    de la operacion. Retorna :return el formulario con todos los campos para registrar una nueva fase. Al aceptar la
+	    operacion vuevle a interfaz de fase donde se despliega la lista de fases actualmente registrados
+	"""
+    proyecto = Proyectos.objects.get(pk=codigo)
+    fase = Fases1(proyectos=proyecto)
+    formulario = Fases1Form(request.POST, instance=fase)
+    if formulario.is_valid():
+        formulario.save()
+        return HttpResponseRedirect('/fase')
+    else:
+        return render(request, 'fase_form.html', {'formulario': formulario})
 
+    """proy=RolUsuario.objects.all()
+    request.POST=request.POST.copy()
+    request.POST.__setitem__('proyecto',codigo)
+    proyecto=Proyectos.objects.get(pk=codigo)
+    form = Fases1Form(request.POST or None)
+    if request.method == "POST":
+        formulario = Fases1Form(request.POST, request.FILES)
+        if formulario.is_valid():
+		    #forma para poder ingresar a los datos del formulario, tal vez para hacer nuestras propias validaciones
+            print "==============================================="
+            print formulario.cleaned_data['nombre']
+            print "==============================================="
+            f = Fases1(nombre=request.POST['nombre'], descripcion=request.POST['descripcion'],proyectos=proyecto,)
 
-	if request.method == "POST":
-		formulario = Fases1Form(request.POST, request.FILES)
-
-		if formulario.is_valid():
-			#forma para poder ingresar a los datos del formulario, tal vez para hacer nuestras propias validaciones
-			print "==============================================="
-			print formulario.cleaned_data['nombre']
-			print "==============================================="
-			formulario.save()
-			return HttpResponseRedirect('/fase')
-
-	else:
-		formulario=Fases1Form()
+            formulario.save()
+            return HttpResponseRedirect('/fase')
+    else:
+        formulario=Fases1Form()
 
 	return render(request, 'fase_form.html', {'formulario': formulario,'proy':proy})
+    """
 
 @login_required(login_url='/ingresar')
 def editarUsuario(request, codigo):
@@ -339,10 +360,9 @@ def eliminar_fase(request, codigo):
     return render_to_response('eliFase.html',{'fase':fase}, context_instance=RequestContext(request))
 
 def eliFase(request, codigo):
+    fase= Fases1.objects.get(pk=codigo)
     fase.delete()
     return HttpResponseRedirect('/fase')
-
-
 
 @login_required(login_url='/ingresar')
 def editarProyecto(request, codigo):
@@ -418,11 +438,6 @@ def consultarUsuario(request, codigo):
     rol=RolUsuario.objects.all()
     return render(request, 'consultarUsuario.html', {'usuario': usuario , 'rol':rol})
 
-
-
-
-
-
 @login_required(login_url='/ingresar')
 def lista_usuarios(request):
     usuarios= User.objects.all()
@@ -458,15 +473,6 @@ def editarFase(request, codigo):
 
 	return render(request,'modificarFase.html', {'formulario': formulario})
 
-@login_required(login_url='/ingresar')
-def eliminar_fase(request, codigo):
-    """"""
-    fase=Fases1.objects.get(pk=codigo) # request.GET.get('codigo')
-    return render_to_response('eliFase.html',{'fase':fase}, context_instance=RequestContext(request))
-
-def eliFase(request, codigo):
-    fase.delete()
-    return HttpResponseRedirect('/fase')
 
 @login_required(login_url='/ingresar')
 def lista_ProyectoEditar(request, mesagge= ""):
@@ -694,3 +700,42 @@ def registrarTipoItem(request):
 
 	return render(request, 'tipoItem_form.html', {'formulario': formulario,})
 
+@login_required(login_url='/ingresar')
+def eliminarItem(request, codigo):
+    """Funcion que elimina un tipo de atributo que no este asociado a ningun tipo de item. \nRecibe @param un request,
+    peticion de operacion, y el codigo del tipo de atributo a eliminar. Elimina el mismo y\n @return a la interfaz
+    donde se despliega la lista de tipos de atributos existentes en el sistema."""
+    item= Item.objects.get(pk=codigo) # request.GET.get('codigo')
+    return render_to_response('eliminarItem.html',{'item':item}, context_instance=RequestContext(request))
+
+@login_required(login_url='/ingresar')
+def eliItem(request, codigo):
+    """Funcion que elimina un tipo de atributo que no este asociado a ningun tipo de item. \nRecibe @param un request,
+    peticion de operacion, y el codigo del tipo de atributo a eliminar. Elimina el mismo y\n @return a la interfaz
+    donde se despliega la lista de tipos de atributos existentes en el sistema."""
+    item=Item.objects.get(pk=codigo)
+    if request.method == "POST":
+        formulario = EliminarItemForm(request.POST, request.FILES, instance = item)
+        if formulario.is_valid():
+            formulario.save()
+            return HttpResponseRedirect('/item')
+    else:
+        formulario=EliminarItemForm(instance = item)
+    return render(request,'eliminarItem1.html', {'formulario': formulario})
+
+        #item.estado= 'Desactivado'
+        #return HttpResponseRedirect('/item')
+@login_required(login_url='/ingresar')
+def revivirItem(request, codigo):
+    """Funcion que revive un item eliminado. \nRecibe @param un request,
+    peticion de operacion, y el codigo del item a revivir. Revive el mismo y\n @return a la interfaz
+    donde se despliega la lista de items existentes en el sistema."""
+    item=Item.objects.get(pk=codigo)
+    if request.method == "POST":
+        formulario = EliminarItemForm(request.POST, request.FILES, instance = item)
+        if formulario.is_valid():
+            formulario.save()
+            return HttpResponseRedirect('/item')
+    else:
+        formulario=EliminarItemForm(instance = item)
+    return render(request,'revivirItem.html', {'formulario': formulario})

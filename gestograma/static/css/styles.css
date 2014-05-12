@@ -4,7 +4,7 @@ body {
 	background: #E6E7E9;
 	margin:0;
 	padding:0;
-	font-family: 'courier', Arial, Helvetica, sans-serif;
+	font-family: 'normal', Arial, Helvetica, sans-serif;
 	font-size: 16px;
 	color: #888;
 }
@@ -65,7 +65,7 @@ blockquote {
 
 blockquote p {
 	font-style: italic;
-	font-family: Georgia, "courier", Times, serif;
+	font-family: Georgia, "normal", Times, serif;
 	margin: 0;
 	color: #333;
 	height: 1%;
@@ -135,7 +135,7 @@ form input, form select, form textarea {
 	border-right:1px solid #ccc;
 	border-bottom:1px solid #ccc;
 	background-color:#fff;
-	font-family: 'courier', Arial, Helvetica;
+	font-family: 'normal', Arial, Helvetica;
 	font-size: 13px;
 }
 
@@ -146,7 +146,7 @@ form input.formbutton {
 	font-weight: bold;
 	padding: 6px 10px;
 	font-size: 12px;
-	font-family: 'courier', Arial, Helvetica, sans-serif;
+	font-family: 'normal', Arial, Helvetica, sans-serif;
 	letter-spacing: 1px;
 	width: auto;
 	overflow: visible;
@@ -179,7 +179,7 @@ h2 {
 	font-weight: normal;
 	padding: 0 0 5px;
 	margin: 0;
-	font-family: 'courier', Arial, sans-serif;
+	font-family: 'normal', Arial, sans-serif;
 }
 
 h3 {
@@ -188,11 +188,11 @@ h3 {
 	font-weight: normal;
 	margin-bottom: 10px;
 	letter-spacing: -1px;
-	font-family: 'courier', Arial, sans-serif;
+	font-family: 'normal', Arial, sans-serif;
 }
 
 h4 {
-    font-family: 'courier', Arial, sans-serif;
+    font-family: 'normal', Arial, sans-serif;
     color: #799AC0;
     font-size: 18px;
     font-weight: normal;
@@ -248,7 +248,7 @@ header h1 a, header h1 a:hover {
     text-decoration: none;
     text-transform: uppercase;
 }
-header h1 a span { 
+header h1 a span {
 	color: #000000;
 }
 
@@ -282,7 +282,7 @@ nav ul li {
 nav ul li a {
     color: #eee;
     display: block;
-    font-family: 'courier',Arial,sans-serif;
+    font-family: 'normal',Arial,sans-serif;
     font-size: 13px;
     letter-spacing: 0;
    margin: 0;
@@ -292,9 +292,9 @@ nav ul li a {
 	border-right:1px solid #668CB7;
 }
 nav ul li.selected a,
-nav ul li.selected a:hover { 
+nav ul li.selected a:hover {
 	background-color: #4076AB;
-	color: #fff; 
+	color: #fff;
 	font-weight:bold;
 }
 
@@ -325,7 +325,7 @@ article {
     padding: 10px 10px 20px 10px;
  }
 
-article h2 { 
+article h2 {
     padding-bottom: 0;
 }
 
@@ -336,7 +336,7 @@ article .article-info {
     padding: 0 0 10px 0;
 }
 
-article .article-info a { 
+article .article-info a {
 	color: #666;
 }
 
@@ -383,7 +383,7 @@ article .article-info a {
 	font-size: 13px;
 }
 
-.sidebar li ul li.text { 
+.sidebar li ul li.text {
 	border-bottom: none;
 }
 
@@ -461,7 +461,7 @@ footer .footer-content li a {
     text-decoration: underline;
 }
 
-footer .footer-content li a:hover { 
+footer .footer-content li a:hover {
 	color: #222;
 }
 
