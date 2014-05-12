@@ -18,7 +18,6 @@ class Usuario_rol(models.Model):
         #rol = models.ForeignKey()
 
 class Rol(models.Model):
-    codigo = models.CharField(max_length=32, primary_key= True, unique=True)
     nombre = models.CharField(max_length=30)
     descripcion = models.TextField()
     controlTotal=models.BooleanField()
@@ -80,12 +79,7 @@ class Fases1(models.Model):
         return self.nombre
 
 
-class ModificarRol(models.Model):
-    rol= models.ForeignKey(Rol)
-    fecha= models.DateField(auto_now=True)
-
 class TipoAtributo(models.Model):
-     codigo = models.CharField(max_length=32, primary_key= True, unique=True)
      nombre = models.CharField(max_length=32, unique=True)
      descripcion=models.TextField(max_length=100)
      def __unicode__(self):
@@ -96,7 +90,6 @@ class TipoItem(models.Model):
          ('RF','Requerimientos Funcionales'),
         ('RNF','Requerimientos No Funcionales'),
     )
-    codigo = models.CharField(max_length=32, primary_key= True, unique=True)
     nombre = models.CharField(max_length=32, unique=True)
     descripcion=models.TextField(max_length=100)
     tipoAtributo= models.ForeignKey(TipoAtributo)
@@ -109,13 +102,13 @@ class RolUsuario(models.Model):
     usuario=models.ForeignKey(User)
     proyecto=models.ForeignKey(Proyectos)
 
-        #class Meta:
+    class Meta:
+            unique_together = ('rol', 'usuario', 'proyecto')
         #    permissions=(("asociarRol","puede asociar roles a usuarios"),)
 
 
 
 class TipoAtributo(models.Model):
-     codigo = models.CharField(max_length=32, primary_key= True, unique=True)
      nombre = models.CharField(max_length=32, unique=True)
      descripcion=models.TextField(max_length=100)
      def __unicode__(self):
@@ -130,7 +123,6 @@ class Item(models.Model):
         ('DESAC','Desactivado'),
         ('REV','En_Revision'),
     )
-    nroItem=models.IntegerField(max_length=32, primary_key= True, unique=True)
     nombre=models.CharField(max_length=32, unique=True)
     version=models.IntegerField(max_length=32)
     prioridad=models.IntegerField(max_length=32)
@@ -140,6 +132,8 @@ class Item(models.Model):
     tipoItem=models.ForeignKey(TipoItem)
     fase=models.ForeignKey(Fases1)
     antecesorHorizontal= models.OneToOneField('self',related_name='RantecesorHorizontal',null=True, blank= True)
+    sucesorHorizontal= models.OneToOneField('self',related_name='RsucesorHorizontal',null=True, blank= True)
+    sucesorVertical= models.OneToOneField('self',related_name='RsucesorVertical',null=True, blank= True)
     antecesorVertical=models.OneToOneField('self',related_name='RantecesorVertical',null=True, blank=True)
     def __unicode__(self):
          return self.nombre
@@ -148,3 +142,5 @@ class Item(models.Model):
         #    permissions=(("asociarRol","puede asociar roles a usuarios"),)
 
 
+class lineaBase(models.Model):
+    nroFase= models.IntegerField()

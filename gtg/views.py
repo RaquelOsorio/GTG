@@ -18,8 +18,7 @@ from django.conf import settings
 from gtg.forms import rolusuarioForm
 from gtg.models import RolUsuario
 from django.shortcuts import render_to_response
-from gtg.models import ModificarRol
-from gtg.forms import ModificarRolForm
+
 from gtg.models import TipoAtributo
 from gtg.forms import relacionarForm
 from gtg.forms import TipoAtributoForm
@@ -77,7 +76,8 @@ def cerrar(request):
 
 @login_required(login_url='/ingresar')
 def administrar(request):
-    """permite acceder a la siguiente interfaz de modulo de administracion"""
+
+    """permite acceder a la siguiente interfaz de modulo de administracion """
     return render_to_response('prueba.html',context_instance=RequestContext(request))
 
 
@@ -124,7 +124,8 @@ def proyecto(request):
     """permite acceder a la interfaz de opciones de administracion para proyectos, recibe un :param request que es la
     peticion para realizar cierta operacion. :return retorna la lista de proyectos existentes en el sistema"""
     proyectos=Proyectos.objects.all()
-    return render_to_response('gestionProyecto.html',{'proyectos': proyectos }, context_instance=RequestContext(request))
+    permisos= RolUsuario.objects.all()
+    return render_to_response('gestionProyecto.html',{'proyectos': proyectos, 'permisos': permisos}, context_instance=RequestContext(request))
 
 #@login_required(login_url='/ingresar')
 #def fase(request):
@@ -626,7 +627,7 @@ def registrarItem(request):
 def modificarItem(request, codigo):
     """Permita modificar item registrados en el sistema, controla que el item en cuestion este en un estado para
     ser modificado: REDAC o TER. Recibe :param request, que es la peticion de la operacion y el codigo del item
-    a modificar. Retorna :return a la interfaz de confirmacion de la operacion, esto es,despliega el
+    a modificar. \nRetorna :return a la interfaz de confirmacion de la operacion, esto es,despliega el
      formulario con todos los campos del item a modificar. Al aceptar la operacion vuelve a la interfaz del listado
       items de existenes en el sistema"""
 

@@ -1,4 +1,4 @@
-Cosas que recordar para la puesta en producción
+puesta en producción
 
 - Configurar el servidor y el puerto de salida, solo en el caso de Windows las rutas deben ir entre comillas para evitar errores
 - Configurar el servidor y el puerto de salida para los archivos estaticos, solo en windows las rutas deben ir entre comillas
@@ -9,3 +9,11 @@ Cosas que recordar para la puesta en producción
 - No olvidar tener las plantillas para errores 404 y 500
 - Cambiar el dueño y grupo de la carpeta por el usuario del servidor
 - Copiar carpeta admin de django/contrib/admin/static/admin para los estilos
+
+Documentacion
+export PYTHONPATH=$PYTHONPATH:/path/to/gestograma
+export DJANGO_SETTINGS_MODULE=gestograma.settings
+epydoc --html --parse-only --docformat plaintext gestograma
+pydoc -p 1234
+
+ir a http://localhost:1234/gtg.views.html

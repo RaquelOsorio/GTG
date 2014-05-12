@@ -8,8 +8,8 @@
         <div class="row" >
                 <div class="span10">
                          <ul>
-                            <h3>Proyectos </h3>
-                            <p></p><center><h3>Proyectos </h3></center>
+
+                            <p></p><center><h3>Listado de Proyectos </h3></center>
 
                             <li><a href="/proyecto/registrarProyecto/"><i class="icon-chevron-right"></i> Crear Proyecto</a></li>
 
@@ -35,26 +35,32 @@
                             {% for p in proyectos %}
 
                                 <tr>
-                                        <td>{{p.id}}</td>
-                                        <td>{{p.fechaInicio}}</td>
-                                        <td>{{p.nombre}}</td>
-                                        <td>{{ p.id }}</td>
-                                        <td>{{ p.estado }}</td>
-                                        <td>{{ p.lider }}</td>
+                                        {% for permisos in permisos %}
+                                            <tr>{% if permisos.proyectos.id == p.id  %}
 
-                                <td><a href='/proyecto/editarProyecto/{{ p.id }}' class="button btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>
-                                <td><a href='/proyecto/verProyecto/{{ p.id }}' class="button btn-small btn-danger"><input type='submit' value='Visualizar'/></a></td>
 
-                                <td>
-                                {%if user.id == p.lider.id%}
-                                   <a class="button" href="/fase1/{{p.id}}"> Selec>> </a>
-                                {% endif %}
-                                        </td>
-                                </tr>
+                                                <td>{{p.id}}</td>
+                                                <td>{{p.fechaInicio}}</td>
+                                                <td>{{p.nombre}}</td>
+                                                <td>{{ p.id }}</td>
+                                                <td>{{ p.estado }}</td>
+                                                <td>{{ p.lider }}</td>
+
+                                                <td><a href='/proyecto/editarProyecto/{{ p.id }}' class="button btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>
+                                                <td><a href='/proyecto/verProyecto/{{ p.id }}' class="button btn-small btn-danger"><input type='submit' value='Visualizar'/></a></td>
+
+                                                <td>
+                                                {%if user.id == p.lider.id%}
+                                                    <a class="button" href="/fase1/{{p.id}}"> Selec>> </a>
+                                                {% endif %}
+                                                </td>
+
+                                            {% endif %}</tr>
+                                        {% endfor %}
                              {% empty %}
 
                                 <tr>
-                                        No hay Proyectos registrados
+                                        No hay Proyectos que mostrar
                                 </tr>
                                 {% endfor %}
         </table>

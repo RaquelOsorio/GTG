@@ -6,7 +6,7 @@ from gtg.models import Rol
 from gtg.models import Usuario
 from gtg.models import Usuario_rol
 from django.contrib.auth.forms import UserCreationForm
-from gtg.models import ModificarRol
+
 from gtg.models import RolUsuario
 from gtg.models import TipoAtributo
 from gtg.models import Proyectos
@@ -47,9 +47,6 @@ class usuarioForm(UserCreationForm):
          #   user.save()
         #return user
 
-class ModificarRolForm(forms.ModelForm):
-    class Meta:
-        model=ModificarRol
 
 
 
@@ -65,12 +62,12 @@ class TipoItemForm(forms.ModelForm):
 class ItemForm(forms.ModelForm):
     class Meta:
         model= Item
-        fields=("nroItem","nombre","estado","version","prioridad","descripcion","tipoItem","fase")
+        fields=("id","nombre","estado","version","prioridad","descripcion","tipoItem","fase")
 
 class relacionarForm(forms.ModelForm):
     class Meta:
         model= Item
-        fields=("antecesorHorizontal","antecesorVertical")
+        fields=("antecesorHorizontal","antecesorVertical","sucesorHorizontal","sucesorVertical")
 
 
 class rolusuarioForm(forms.ModelForm):
