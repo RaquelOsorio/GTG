@@ -2,61 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1cc01d94-5543-4230-974a-5d3ba5a8f715" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/admin.py" afterPath="$PROJECT_DIR$/gtg/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/class-tree.html" afterPath="$PROJECT_DIR$/html/class-tree.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/forms.py" afterPath="$PROJECT_DIR$/gtg/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionLB.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionLB.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionProyecto.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionProyecto.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gestograma-module.html" afterPath="$PROJECT_DIR$/html/gestograma-module.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gestograma-pysrc.html" afterPath="$PROJECT_DIR$/html/gestograma-pysrc.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gestograma.settings-module.html" afterPath="$PROJECT_DIR$/html/gestograma.settings-module.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gestograma.settings-pysrc.html" afterPath="$PROJECT_DIR$/html/gestograma.settings-pysrc.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gestograma.urls-module.html" afterPath="$PROJECT_DIR$/html/gestograma.urls-module.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gestograma.urls-pysrc.html" afterPath="$PROJECT_DIR$/html/gestograma.urls-pysrc.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gestograma.wsgi-module.html" afterPath="$PROJECT_DIR$/html/gestograma.wsgi-module.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gestograma.wsgi-pysrc.html" afterPath="$PROJECT_DIR$/html/gestograma.wsgi-pysrc.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg-module.html" afterPath="$PROJECT_DIR$/html/gtg-module.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg-pysrc.html" afterPath="$PROJECT_DIR$/html/gtg-pysrc.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg.admin-module.html" afterPath="$PROJECT_DIR$/html/gtg.admin-module.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg.admin-pysrc.html" afterPath="$PROJECT_DIR$/html/gtg.admin-pysrc.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg.admin.UserAdmin-class.html" afterPath="$PROJECT_DIR$/html/gtg.admin.UserAdmin-class.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg.admin.UserProfileInline-class.html" afterPath="$PROJECT_DIR$/html/gtg.admin.UserProfileInline-class.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg.forms-module.html" afterPath="$PROJECT_DIR$/html/gtg.forms-module.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg.forms-pysrc.html" afterPath="$PROJECT_DIR$/html/gtg.forms-pysrc.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg.forms.ModificarRolForm-class.html" afterPath="$PROJECT_DIR$/html/gtg.forms.ModificarRolForm-class.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg.forms.ModificarRolForm.Meta-class.html" afterPath="$PROJECT_DIR$/html/gtg.forms.ModificarRolForm.Meta-class.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg.forms.rolForm-class.html" afterPath="$PROJECT_DIR$/html/gtg.forms.rolForm-class.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg.forms.rolForm.Meta-class.html" afterPath="$PROJECT_DIR$/html/gtg.forms.rolForm.Meta-class.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg.forms.rolusuarioForm-class.html" afterPath="$PROJECT_DIR$/html/gtg.forms.rolusuarioForm-class.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg.forms.rolusuarioForm.Meta-class.html" afterPath="$PROJECT_DIR$/html/gtg.forms.rolusuarioForm.Meta-class.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg.forms.usuarioForm-class.html" afterPath="$PROJECT_DIR$/html/gtg.forms.usuarioForm-class.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg.forms.usuarioForm.Meta-class.html" afterPath="$PROJECT_DIR$/html/gtg.forms.usuarioForm.Meta-class.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg.models-module.html" afterPath="$PROJECT_DIR$/html/gtg.models-module.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg.models-pysrc.html" afterPath="$PROJECT_DIR$/html/gtg.models-pysrc.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg.models.ModificarRol-class.html" afterPath="$PROJECT_DIR$/html/gtg.models.ModificarRol-class.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg.models.Rol-class.html" afterPath="$PROJECT_DIR$/html/gtg.models.Rol-class.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg.models.RolUsuario-class.html" afterPath="$PROJECT_DIR$/html/gtg.models.RolUsuario-class.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg.models.Usuario-class.html" afterPath="$PROJECT_DIR$/html/gtg.models.Usuario-class.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg.models.Usuario_rol-class.html" afterPath="$PROJECT_DIR$/html/gtg.models.Usuario_rol-class.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg.test_inicio_sesion-module.html" afterPath="$PROJECT_DIR$/html/gtg.test_inicio_sesion-module.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg.test_inicio_sesion-pysrc.html" afterPath="$PROJECT_DIR$/html/gtg.test_inicio_sesion-pysrc.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg.test_inicio_sesion.TestInicio_sesion-class.html" afterPath="$PROJECT_DIR$/html/gtg.test_inicio_sesion.TestInicio_sesion-class.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg.views-module.html" afterPath="$PROJECT_DIR$/html/gtg.views-module.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/gtg.views-pysrc.html" afterPath="$PROJECT_DIR$/html/gtg.views-pysrc.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/help.html" afterPath="$PROJECT_DIR$/html/help.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apache_demo/hosts" afterPath="$PROJECT_DIR$/apache_demo/hosts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apache_demo/httpd.conf" afterPath="$PROJECT_DIR$/apache_demo/httpd.conf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/identifier-index.html" afterPath="$PROJECT_DIR$/html/identifier-index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/index2.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/index2.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apache_demo/leeme" afterPath="$PROJECT_DIR$/apache_demo/leeme" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/models.py" afterPath="$PROJECT_DIR$/gtg/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/module-tree.html" afterPath="$PROJECT_DIR$/html/module-tree.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/static/css/styles.css" afterPath="$PROJECT_DIR$/gestograma/static/css/styles.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/toc-gtg-module.html" afterPath="$PROJECT_DIR$/html/toc-gtg-module.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/toc-gtg.forms-module.html" afterPath="$PROJECT_DIR$/html/toc-gtg.forms-module.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/toc-gtg.models-module.html" afterPath="$PROJECT_DIR$/html/toc-gtg.models-module.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/toc-gtg.views-module.html" afterPath="$PROJECT_DIR$/html/toc-gtg.views-module.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/views.py" afterPath="$PROJECT_DIR$/gtg/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="gestograma.iws" />
@@ -124,7 +69,7 @@
       <file leaf-file-name="models.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/gtg/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="145" column="34" selection-start="4701" selection-end="4701" vertical-scroll-proportion="0.8076923" vertical-offset="1752" max-vertical-offset="2220">
+            <state line="145" column="34" selection-start="4701" selection-end="4701" vertical-scroll-proportion="2.7" vertical-offset="1752" max-vertical-offset="2220">
               <folding />
             </state>
           </provider>
@@ -568,7 +513,7 @@
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32973805" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18535826" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.6962617" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.317757" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -908,7 +853,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gtg/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="145" column="34" selection-start="4701" selection-end="4701" vertical-scroll-proportion="0.8076923" vertical-offset="1752" max-vertical-offset="2220">
+        <state line="145" column="34" selection-start="4701" selection-end="4701" vertical-scroll-proportion="2.7" vertical-offset="1752" max-vertical-offset="2220">
           <folding />
         </state>
       </provider>
