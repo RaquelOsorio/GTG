@@ -73,15 +73,13 @@ class TipoItemForm(forms.ModelForm):
 class ItemForm(forms.ModelForm):
     class Meta:
         model= Item
-        fields=("nroItem",
+        fields=(
                 "nombre",
-                "estado",
                 "version",
                 "prioridad",
                 "descripcion",
-                "tipoItem")
-
-        fields=("id","nombre","version","prioridad","descripcion","tipoItem","fase")
+                "tipoItem"
+        )
 
 class ItemForm1(forms.ModelForm):
     class Meta:

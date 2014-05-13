@@ -522,9 +522,7 @@ def registrarTipoAtributo(request):
 
 		if formulario.is_valid():
 			#forma para poder ingresar a los datos del formulario, tal vez para hacer nuestras propias validaciones
-			print "==============================================="
-			print formulario.cleaned_data['nombre']
-			print "==============================================="
+
 			formulario.save()
 			return HttpResponseRedirect('/tipoAtributo')
 
@@ -544,6 +542,7 @@ def modificar_tipoAtributo(request, codigo):
     tipoItem= TipoItem.objects.all()
     for t in tipoItem:
         if t.tipoAtributo.id == codigo:
+            b=1
             return render_to_response('modTipoAtributo.html',{'t':t}, context_instance=RequestContext(request))
 
     tAtributo=TipoAtributo.objects.get(pk=codigo)
