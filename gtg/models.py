@@ -52,12 +52,16 @@ class Proyectos(models.Model):
         ('ACT','Activo'),
         ('FIN','Finalizado')
     )
-    fechaInicio = models.DateField()
+    fechaInicio = models.DateField(null=True)
+    fechaFin= models.DateField(null=True)
+    fechaMod= models.DateField(auto_now=True)
     nombre = models.CharField(max_length=32, unique=True)
     complejidad=models.IntegerField()
     #nrofase=models.IntegerField()
-    estado = models.CharField(max_length=20, choices=ESTADO_CHOICES)
-    lider= models.ForeignKey(User)
+    estado = models.CharField(max_length=20,
+                              choices=ESTADO_CHOICES,
+                              default='PEN')
+    lider= models.ForeignKey(User, related_name='lider')
     def __unicode__(self):
         return self.nombre
 
@@ -69,12 +73,16 @@ class Fases1(models.Model):
         ('FIN','Finalizada')
     )
 
-    fechaInicio=models.DateField(auto_now=True)
+    fechaInicio=models.DateField(null=True)
     fechaFin=models.DateField(auto_now=False)
+    fechaMod= models.DateField(auto_now=True)
     nombre=models.CharField(max_length=32, unique=True)
     descripcion=models.TextField(max_length=100)
-    estado = models.CharField(max_length=20, choices=ESTADO_CHOICES)
-    proyectos=models.ForeignKey(Proyectos)
+    estado = models.CharField(max_length=20,
+                              choices=ESTADO_CHOICES,
+                              default='INA')
+    proyectos=models.ForeignKey(Proyectos, related_name='proyecto', blank=True)
+
     def __unicode__(self):
         return self.nombre
 
@@ -84,6 +92,17 @@ class TipoAtributo(models.Model):
      descripcion=models.TextField(max_length=100)
      def __unicode__(self):
          return self.nombre
+     TIPO_CHOICES=(
+        ('Entero', models.IntegerField),
+        ('Cadena', models.CharField),
+        ('Fecha',models.DateField),
+        ('Mail', models.EmailField),
+     )
+     nombre = models.CharField(max_length=32, unique=True)
+     descripcion=models.TextField(max_length=100)
+     tipo= models.CharField(max_length=20,choices=TIPO_CHOICES,default='Entero')
+     def __unicode__(self):
+        return self.tipo
 
 class TipoItem(models.Model):
     TATRIBUTO_CHOICES=(
@@ -98,14 +117,13 @@ class TipoItem(models.Model):
 
 
 class RolUsuario(models.Model):
-    rol= models.ForeignKey(Rol)
-    usuario=models.ForeignKey(User)
+    rol= models.ForeignKey(Rol, unique=True)
+    usuario=models.ForeignKey(User, unique=True)
     proyecto=models.ForeignKey(Proyectos)
 
     class Meta:
             unique_together = ('rol', 'usuario', 'proyecto')
         #    permissions=(("asociarRol","puede asociar roles a usuarios"),)
-
 
 
 class TipoAtributo(models.Model):
@@ -116,21 +134,27 @@ class TipoAtributo(models.Model):
 
 
 class Item(models.Model):
+    E_REDACCION='REDAC'
+    E_TERMINADO='TER'
+    E_VALIDADO='VAL'
+    E_DESACTIVADO='DESAC'
+    E_REVISION='REV'
     ESTADO_CHOICES=(
-        ('REDAC','Redaccion'),
-        ('TER', 'Terminado'),
-        ('VAL','Validado'),
-        ('DESAC','Desactivado'),
-        ('REV','En_Revision'),
+        (E_REDACCION,'Redaccion'),
+        (E_TERMINADO, 'Terminado'),
+        (E_VALIDADO,'Validado'),
+        (E_DESACTIVADO,'Desactivado'),
+        (E_REVISION,'En_Revision'),
     )
     nombre=models.CharField(max_length=32, unique=True)
     version=models.IntegerField(max_length=32)
     prioridad=models.IntegerField(max_length=32)
-    estado = models.CharField(max_length=20, choices=ESTADO_CHOICES)
+    estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default=E_REDACCION, null=False,blank= False)
     descripcion=models.TextField(max_length=100)
     fechaModi=models.DateField(auto_now=True)
     tipoItem=models.ForeignKey(TipoItem)
     fase=models.ForeignKey(Fases1)
+
     antecesorHorizontal= models.OneToOneField('self',related_name='RantecesorHorizontal',null=True, blank= True)
     sucesorHorizontal= models.OneToOneField('self',related_name='RsucesorHorizontal',null=True, blank= True)
     sucesorVertical= models.OneToOneField('self',related_name='RsucesorVertical',null=True, blank= True)
@@ -143,4 +167,53 @@ class Item(models.Model):
 
 
 class lineaBase(models.Model):
-    nroFase= models.IntegerField()
+
+    E_ABIERTA='ABIERTA'
+    E_CERRADA='CERRADA'
+    E_ROTA='ROTA'
+    E_REVISION='REVISION'
+    ESTADO_CHOICES=(
+        (E_ABIERTA,'Abierta'),
+        (E_CERRADA, 'Cerrada'),
+        (E_ROTA,'Rota'),
+        (E_REVISION,'En_Revision'),
+    )
+    estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default=E_ABIERTA, null=False,blank= False)
+    fase= models.ForeignKey(Fases1,null=True, blank= True)
+    itemsAsociados= models.ForeignKey(Item,null=True, blank= True)
+
+
+class ItemRelacion(models.Model):
+    """
+
+    :Model: ItemRelacion
+    Modelo que permite almacenar las relaciones entre items.
+    Items de una misma fase.
+    Items de fases antecesoras.
+
+    """
+    #Estado de una relacion
+    ESTADO_CHOICES=(
+        ('DEL','Eliminado'),
+        ('ACT', 'Activo'),
+    )
+    estado = models.CharField(max_length=20,
+                              choices=ESTADO_CHOICES,
+                              default='ACT')
+
+    #Tipo de relacion : interno (Intrafase) o externa(InterFase)
+    E_INT = 'I'
+    E_EXT = 'E'
+    TIPO_CHOICES=(
+        (E_INT,'Padre -> Hijo'),
+        (E_EXT, 'Antecesor -->> Sucesor'),
+    )
+    tipo = models.CharField(max_length=20,
+                              choices=TIPO_CHOICES)
+    origen = models.ForeignKey(Item, related_name="origen")
+    destino = models.ForeignKey(Item,related_name="destino")
+    def set_tipo(self):
+        if self.origen.fase == self.destino.fase:
+            self.tipo = self.E_INT
+        else:
+            self.tipo = self.E_EXT
