@@ -74,7 +74,13 @@ class TipoItemForm(forms.ModelForm):
 class ItemForm(forms.ModelForm):
     class Meta:
         model= Item
-        fields=("nroItem","nombre","estado","version","prioridad","descripcion","tipoItem","fase")
+        fields=("nroItem",
+                "nombre",
+                "estado",
+                "version",
+                "prioridad",
+                "descripcion",
+                "tipoItem")
 
 class relacionarForm(forms.ModelForm):
     class Meta:
