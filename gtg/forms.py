@@ -6,7 +6,7 @@ from gtg.models import Rol
 from gtg.models import Usuario
 from gtg.models import Usuario_rol
 from django.contrib.auth.forms import UserCreationForm
-from gtg.models import ModificarRol
+
 from gtg.models import RolUsuario
 from gtg.models import TipoAtributo
 from gtg.models import Proyectos
@@ -14,6 +14,7 @@ from gtg.models import Fases1
 from gtg.models import TipoItem
 from gtg.models import Item
 from gtg.models import ItemRelacion
+from gtg.models import lineaBase
 from django.forms import Select
 
 class rolForm(forms.ModelForm):
@@ -23,6 +24,7 @@ class rolForm(forms.ModelForm):
 class ProyectoForm(forms.ModelForm):
     class Meta:
         model= Proyectos
+        fields = ("fechaInicio","fechaFin","nombre","complejidad","lider")
 
 class Fases1Form(forms.ModelForm):
     class Meta:
@@ -33,7 +35,7 @@ class Fases1Form(forms.ModelForm):
             "nombre",
             "descripcion",
             #"proyecto",
-            "estado",
+
         )
 
 class usuarioForm(UserCreationForm):
@@ -56,9 +58,6 @@ class usuarioForm(UserCreationForm):
          #   user.save()
         #return user
 
-class ModificarRolForm(forms.ModelForm):
-    class Meta:
-        model=ModificarRol
 
 
 
@@ -82,10 +81,19 @@ class ItemForm(forms.ModelForm):
                 "descripcion",
                 "tipoItem")
 
+        fields=("id","nombre","version","prioridad","descripcion","tipoItem","fase")
+
+class ItemForm1(forms.ModelForm):
+    class Meta:
+        model= Item
+        fields=("estado","nombre","version","prioridad","descripcion","tipoItem","fase")
+
+
+
 class relacionarForm(forms.ModelForm):
     class Meta:
         model= Item
-        fields=("antecesorHorizontal","antecesorVertical")
+        fields=("antecesorHorizontal","antecesorVertical","sucesorHorizontal","sucesorVertical")
 
 class EliminarItemForm(forms.ModelForm):
     class Meta:
@@ -108,3 +116,8 @@ class ItemRelacionForm(forms.ModelForm):
         fields = ['origen', 'destino']
         widgets ={'origen': Select(attrs={'size': 10}),\
                   'destino': Select(attrs={'size': 10})}
+
+class lbForm(forms.ModelForm):
+    class Meta:
+        model= lineaBase
+        fields=()

@@ -18,7 +18,6 @@ class Usuario_rol(models.Model):
         #rol = models.ForeignKey()
 
 class Rol(models.Model):
-    codigo = models.CharField(max_length=32, primary_key= True, unique=True)
     nombre = models.CharField(max_length=30)
     descripcion = models.TextField()
     controlTotal=models.BooleanField()
@@ -88,24 +87,21 @@ class Fases1(models.Model):
         return self.nombre
 
 
-class ModificarRol(models.Model):
-    rol= models.ForeignKey(Rol)
-    fecha= models.DateField(auto_now=True)
-
 class TipoAtributo(models.Model):
-    TIPO_CHOICES=(
+     nombre = models.CharField(max_length=32, unique=True)
+     descripcion=models.TextField(max_length=100)
+     def __unicode__(self):
+         return self.nombre
+     TIPO_CHOICES=(
         ('Entero', models.IntegerField),
         ('Cadena', models.CharField),
         ('Fecha',models.DateField),
         ('Mail', models.EmailField),
-    )
-    codigo = models.CharField(max_length=32, primary_key= True, unique=True)
-    nombre = models.CharField(max_length=32, unique=True)
-    descripcion=models.TextField(max_length=100)
-    tipo= models.CharField(max_length=20,
-                           choices=TIPO_CHOICES,
-                           default='Entero')
-    def __unicode__(self):
+     )
+     nombre = models.CharField(max_length=32, unique=True)
+     descripcion=models.TextField(max_length=100)
+     tipo= models.CharField(max_length=20,choices=TIPO_CHOICES,default='Entero')
+     def __unicode__(self):
         return self.tipo
 
 class TipoItem(models.Model):
@@ -113,7 +109,6 @@ class TipoItem(models.Model):
          ('RF','Requerimientos Funcionales'),
         ('RNF','Requerimientos No Funcionales'),
     )
-    codigo = models.CharField(max_length=32, primary_key= True, unique=True)
     nombre = models.CharField(max_length=32, unique=True)
     descripcion=models.TextField(max_length=100)
     tipoAtributo= models.ForeignKey(TipoAtributo)
@@ -126,8 +121,16 @@ class RolUsuario(models.Model):
     usuario=models.ForeignKey(User, unique=True)
     proyecto=models.ForeignKey(Proyectos)
 
-        #class Meta:
+    class Meta:
+            unique_together = ('rol', 'usuario', 'proyecto')
         #    permissions=(("asociarRol","puede asociar roles a usuarios"),)
+
+
+class TipoAtributo(models.Model):
+     nombre = models.CharField(max_length=32, unique=True)
+     descripcion=models.TextField(max_length=100)
+     def __unicode__(self):
+         return self.nombre
 
 
 class Item(models.Model):
@@ -143,7 +146,6 @@ class Item(models.Model):
         (E_DESACTIVADO,'Desactivado'),
         (E_REVISION,'En_Revision'),
     )
-    nroItem=models.IntegerField(max_length=32, primary_key= True, unique=True)
     nombre=models.CharField(max_length=32, unique=True)
     version=models.IntegerField(max_length=32)
     prioridad=models.IntegerField(max_length=32)
@@ -154,12 +156,31 @@ class Item(models.Model):
     fase=models.ForeignKey(Fases1, related_name='fase', blank=True)
 
     antecesorHorizontal= models.OneToOneField('self',related_name='RantecesorHorizontal',null=True, blank= True)
+    sucesorHorizontal= models.OneToOneField('self',related_name='RsucesorHorizontal',null=True, blank= True)
+    sucesorVertical= models.OneToOneField('self',related_name='RsucesorVertical',null=True, blank= True)
     antecesorVertical=models.OneToOneField('self',related_name='RantecesorVertical',null=True, blank=True)
     def __unicode__(self):
          return self.nombre
 
         #class Meta:
         #    permissions=(("asociarRol","puede asociar roles a usuarios"),)
+
+
+class lineaBase(models.Model):
+
+    E_ABIERTA='ABIERTA'
+    E_CERRADA='CERRADA'
+    E_ROTA='ROTA'
+    E_REVISION='REVISION'
+    ESTADO_CHOICES=(
+        (E_ABIERTA,'Abierta'),
+        (E_CERRADA, 'Cerrada'),
+        (E_ROTA,'Rota'),
+        (E_REVISION,'En_Revision'),
+    )
+    estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default=E_ABIERTA, null=False,blank= False)
+    fase= models.ForeignKey(Fases1,null=True, blank= True)
+    itemsAsociados= models.ForeignKey(Item,null=True, blank= True)
 
 
 class ItemRelacion(models.Model):
@@ -189,7 +210,6 @@ class ItemRelacion(models.Model):
     )
     tipo = models.CharField(max_length=20,
                               choices=TIPO_CHOICES)
-    idrelacion = models.AutoField(primary_key=True)
     origen = models.ForeignKey(Item, related_name="origen")
     destino = models.ForeignKey(Item,related_name="destino")
     def set_tipo(self):
@@ -197,4 +217,3 @@ class ItemRelacion(models.Model):
             self.tipo = self.E_INT
         else:
             self.tipo = self.E_EXT
-

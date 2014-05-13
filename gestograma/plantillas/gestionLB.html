@@ -1,18 +1,58 @@
-{% extends 'base.html' %}
-{% block style_css %}{% endblock %}
+{% extends 'index2.html' %}
+{% block encabezado %}
+
+{% endblock %}
 {% block contenido %}
 
-     <p>
-	<h1>
-        <FONT COLOR="black">Gestionar Línea Base</FONT>
-    </h1>
+        <div class="row" >
+                <div class="span10">
+                         <ul>
 
-    <li><a href='/'>Generar Línea Base</a></li>
-    <li><a href='/'>Relacionamiento de items a la linea base</a></li>
-    <li><a href="/">Modificar ítems validados</a></li>
-    <li><a href='/'>Mostrar historial de cambios </a></li>
-    <li><a href="/">Cambio de estado de Línea Base</a></li>
-    <p><a href="/configuracion"><input type='submit' value='Cancelar'/></a></p>
+                            <p></p><center><h3>Listado de Línea Base </h3></center>
 
-  </p>
-{% endblock %}
+                            <li><a href="/lb/generarlb"><i class="icon-chevron-right"></i> Generar Línea Base</a></li>
+
+                        </ul>
+                        <table class="table table-striped table-bordered">
+                                <tr>
+                                        <th>Id</th>
+                                        <th>Estado</th>
+
+
+
+                                        <th>Presione para relacionar items a la Línea Base</th>
+                                        <th>Presione Visualizar una Línea Base</th>
+
+
+
+
+
+                                </tr>
+                            {% for lb in lb %}
+
+                                <tr>
+
+                                            <tr>
+
+
+                                                <td>{{lb.id}}</td>
+                                                <td>{{lb.estado}}</td>
+
+                                                <td>
+                                                {%if user.id == p.lider.id%}
+                                                    <a class="button" href="/fase1/{{p.id}}"> Selec>> </a>
+                                                {% endif %}
+                                                </td>
+
+                                            </tr>
+
+                             {% empty %}
+
+                                <tr>
+                                        No hay Proyectos que mostrar
+                                </tr>
+                                {% endfor %}
+        </table>
+</div>
+</div>
+{% endblock %}}

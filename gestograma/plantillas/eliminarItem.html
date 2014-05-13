@@ -5,7 +5,7 @@
     <div id="body">
             {% if item.estado != 'VAL' and item.estado != 'REV'%}
                 <p>¿Esta seguro que desea eliminar el item?</p>
-                <a class="button" href="/eliItem/{{ item.nroItem }}"><i class="button"></i> SI </a>
+                <a class="button" href="/eliItem/{{ item.id }}"><i class="button"></i> SI </a>
                 <a class="button" href="/item/"><i class="button"></i> NO </a>
             {% else %}
                 <p>No se puede eliminar el item "{{item.nombre}}" porque esta en estado "{{ item.estado }}"</p>

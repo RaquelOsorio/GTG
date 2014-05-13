@@ -38,9 +38,9 @@
                                         <td>{{items.tipoItem.tipoAtributo }}</td>
 
                                 {% if items.estado == 'REDAC' or items.estado == 'TER'%}
-                                     <td><a href='/item/modificarItem/{{ items.nroItem }}' class="button btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>
-                                     <td><a href='/item/eliminarItem/{{ items.nroItem }}' class="button btn-small btn-danger"><input type='submit' value='Eliminar'/></a></td>
-                                     <td><a href='/item/relacionarItem/{{ items.nroItem }}' class="button btn-small btn-danger"><input type='submit' value='Relacionar'/></a></td>
+                                     <td><a href='/item/modificarItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>
+                                     <td><a href='/item/eliminarItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Eliminar'/></a></td>
+                                     <td><a href='/item/relacionarItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Relacionar'/></a></td>
                                      <td>--------------------</td>
                                 {% else %}
 
@@ -48,7 +48,7 @@
                                     <td>Inhabilitado</td>
                                     <td>Inhabilitado</td>
                                     {% if items.estado != 'REV' %}
-                                        <td><a href='/item/revivirItem/{{ items.nroItem }}' class="button btn-small btn-danger"><input type='submit' value='Revivir'/></a></td>
+                                        <td><a href='/item/revivirItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Revivir'/></a></td>
                                     {% else %}
                                         <td><a href='#' class="button btn-small btn-danger"><input type='submit' value='Revisar'/></a></td>
                                     {% endif %}

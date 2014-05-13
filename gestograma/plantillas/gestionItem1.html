@@ -17,11 +17,11 @@
 
                         <table class="table table-striped table-bordered">
                                 <tr>
-                                        <th>NroItem</th>
+                                        <th>id</th>
                                         <th>Nombre</th>
                                         <th>Version</th>
                                         <th>Estado</th>
-                                        <th>Tipo Item</th>
+
 
 
 
@@ -29,11 +29,11 @@
                             {% for i in items %}
 
                                 <tr>
-                                        <td>{{i.nroItem}}</td>
+                                        <td>{{i.id}}</td>
                                         <td>{{i.nombre}}</td>
                                         <td>{{i.version}}</td>
                                         <td>{{i.estado}}</td>
-                                        <td><a class="button" href="/itemTipoItem/{{i.nroItem}}"> Ir a>> </a></td>
+
 
                                 </tr>
 

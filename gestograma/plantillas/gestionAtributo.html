@@ -26,13 +26,13 @@
                             {% for ta in tAtributos %}
 
                                 <tr>
-                                        <td>{{ta.codigo}}</td>
+                                        <td>{{ta.id}}</td>
 
                                         <td>{{ta.nombre}}</td>
 
                                         <td>{{ta.tipo}}</td>
-                                <td><a href='/tipoAtributo/modificar_tipoAtributo/{{ ta.codigo }}' class="button btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>
-                                <td><a href='/tipoAtributo/eliminar_tipoAtributo/{{ ta.codigo}}' class="button btn-small btn-danger"><input type='submit' value='Eliminar'/></a></td>
+                                <td><a href='/tipoAtributo/modificar_tipoAtributo/{{ ta.id }}' class="button btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>
+                                <td><a href='/tipoAtributo/eliminar_tipoAtributo/{{ ta.id}}' class="button btn-small btn-danger"><input type='submit' value='Eliminar'/></a></td>
 
 
                                 </tr>

@@ -14,7 +14,7 @@
                         </ul>
                         <table class="table table-striped table-bordered">
                                 <tr>
-                                        <th>Código</th>
+                                        <th>Id</th>
                                         <th>Nombre</th>
 
                                         <th>Presione para <p></p>editar el Rol</th>
@@ -23,7 +23,7 @@
                             {% for roles in roles %}
 
                                 <tr>
-                                        <td>{{roles.codigo}}</td>
+                                        <td>{{roles.id}}</td>
                                         <td>{{roles.nombre}}</td>
 
                                 <td><a href='/rolPermiso/editar/{{ roles.codigo }}' class="button btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>

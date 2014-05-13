@@ -18,8 +18,7 @@ from django.conf import settings
 from gtg.forms import rolusuarioForm
 from gtg.models import RolUsuario
 from django.shortcuts import render_to_response
-from gtg.models import ModificarRol
-from gtg.forms import ModificarRolForm
+
 from gtg.models import TipoAtributo
 from gtg.forms import relacionarForm
 from gtg.forms import TipoAtributoForm
@@ -36,6 +35,8 @@ from gtg.forms import ItemRelacionForm
 from django.views.generic.edit import CreateView,  DeleteView
 from django.views.generic import ListView
 from gtg.forms import EliminarItemForm
+from gtg.models import lineaBase
+from gtg.forms import lbForm
 from django.core.urlresolvers import reverse
 
 def ingresar(request):
@@ -69,10 +70,10 @@ def privado(request):
     """recibe un :param request con el cual permite acceder a la siguiente interfaz de modulos del proyecto
     :return a la interfaz principal"""
     usuario = request.user
-    #if(request.user.is_superuser):
-    return render_to_response('descripcion.html',context_instance=RequestContext(request))
-    #else:
-     #   return HttpResponseRedirect('/proyecto')
+    if(request.user.is_superuser):
+        return HttpResponseRedirect('/proyectoAdmin')
+    else:
+        return HttpResponseRedirect('/proyecto')
     #return render_to_response('gestionProyecto.html', {'usuario':usuario}, context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar')
@@ -84,7 +85,8 @@ def cerrar(request):
 
 @login_required(login_url='/ingresar')
 def administrar(request):
-    """permite acceder a la siguiente interfaz de modulo de administracion"""
+
+    """permite acceder a la siguiente interfaz de modulo de administracion """
     return render_to_response('prueba.html',context_instance=RequestContext(request))
 
 
@@ -131,7 +133,8 @@ def proyecto(request):
     """permite acceder a la interfaz de opciones de administracion para proyectos, recibe un :param request que es la
     peticion para realizar cierta operacion. :return retorna la lista de proyectos existentes en el sistema"""
     proyectos=Proyectos.objects.all()
-    return render_to_response('gestionProyecto.html',{'proyectos': proyectos }, context_instance=RequestContext(request))
+    permisos= RolUsuario.objects.all()
+    return render_to_response('gestionProyecto.html',{'proyectos': proyectos, 'permisos': permisos}, context_instance=RequestContext(request))
 
 #@login_required(login_url='/ingresar')
 #def fase(request):
@@ -151,9 +154,11 @@ def item(request):
     return render_to_response('gestionItem.html',context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar')
-def lb(request):
-    """permite acceder a la interfaz de opciones de linea base"""
-    return render_to_response('gestionLB.html',context_instance=RequestContext(request))
+def lb(request, codigoFase):
+    """permite acceder a la interfaz de opciones de administracion para linea base, recibe un :param request que es la
+    peticion para realizar cierta operacion. :return retorna la lista de lineas base existentes en el proyecto"""
+    linea=lineaBase.objects.filter(id=codigoFase)
+    return render_to_response('gestionLB.html',{'lb': linea , 'fase': codigoFase}, context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar')
 def cambio(request):
@@ -223,7 +228,7 @@ def registrarProyecto(request):
 			    print formulario.cleaned_data['nombre']
 			    print "==============================================="
 			    formulario.save()
-			    return HttpResponseRedirect('/proyecto')
+			    return HttpResponseRedirect('/proyectoAdmin')
     	else:
             formulario=ProyectoForm()
         return render(request, 'proyecto_form.html', {'formulario': formulario,})
@@ -538,8 +543,7 @@ def modificar_tipoAtributo(request, codigo):
 
     tipoItem= TipoItem.objects.all()
     for t in tipoItem:
-        if t.tipoAtributo.codigo == codigo:
-            b=1
+        if t.tipoAtributo.id == codigo:
             return render_to_response('modTipoAtributo.html',{'t':t}, context_instance=RequestContext(request))
 
     tAtributo=TipoAtributo.objects.get(pk=codigo)
@@ -560,7 +564,7 @@ def eliminar_tipoAtributo(request, codigo):
     de tipo de atributos existenes en el sistema"""
     tipoitem=TipoItem.objects.all()
     for ti in tipoitem:
-        if ti.tipoAtributo.codigo == codigo:
+        if ti.tipoAtributo.id == codigo:
             return render_to_response('eliTipoAtributo.html',{'ti':ti}, context_instance=RequestContext(request))
     return render_to_response('eliTipoAtributo1.html',{'codigo':codigo}, context_instance=RequestContext(request))
 
@@ -626,18 +630,18 @@ def registrarItem(request,codigo):
 def modificarItem(request, codigo):
     """Permita modificar item registrados en el sistema, controla que el item en cuestion este en un estado para
     ser modificado: REDAC o TER. Recibe :param request, que es la peticion de la operacion y el codigo del item
-    a modificar. Retorna :return a la interfaz de confirmacion de la operacion, esto es,despliega el
+    a modificar. \nRetorna :return a la interfaz de confirmacion de la operacion, esto es,despliega el
      formulario con todos los campos del item a modificar. Al aceptar la operacion vuelve a la interfaz del listado
       items de existenes en el sistema"""
 
     item=Item.objects.get(pk=codigo)
     if request.method == "POST":
-        formulario = ItemForm(request.POST, request.FILES, instance = item)
+        formulario = ItemForm1(request.POST, request.FILES, instance = item)
         if formulario.is_valid():
             formulario.save()
             return HttpResponseRedirect('/item')
     else:
-        formulario=ItemForm(instance = item)
+        formulario=ItemForm1(instance = item)
     return render(request,'modificarItem.html', {'formulario': formulario})
 
 
@@ -911,3 +915,19 @@ class ListaRelacionesView(ListView,codigo):
         context['proyecto'] = self.kwargs.get(codigo)
         return context
 """
+@login_required(login_url='/ingresar')
+def generarlb(request):
+	"""Permite generar una linea base dentro del proyecto en el sistema. Recibe como :param request que
+	es la peticion de la operacion.Retorna :return el formulario con los campos a completar, se acepta la operacion
+	y vuelve a la interfaz donde se despliega la lista de tipos de items registrados en el sistema"""
+	if request.method == "POST":
+		formulario = lbForm(request.POST, request.FILES)
+
+		if formulario.is_valid():
+			formulario.save()
+			return HttpResponseRedirect('/')
+
+	else:
+		formulario=lbForm()
+
+	return render(request, 'lbForm.html', {'formulario': formulario,})

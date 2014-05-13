@@ -5,13 +5,12 @@ from django.contrib import admin
 from django.contrib import admin
 from gtg.models import Usuario
 admin.site.register(Usuario)
-from gtg.models import ModificarRol
+
 from gtg.models import Rol
 from django.contrib import admin
 from gtg.models import Usuario
 admin.site.register(Rol)
 
-from gtg.models import ModificarRol
 from gtg.models import RolUsuario
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
@@ -30,7 +29,6 @@ class UserAdmin(UserAdmin):
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 admin.site.register(RolUsuario)
-admin.site.register(ModificarRol)
 admin.site.register(TipoAtributo)
 admin.site.register(Proyectos)
 
