@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1cc01d94-5543-4230-974a-5d3ba5a8f715" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/forms.py" afterPath="$PROJECT_DIR$/gtg/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionAtributo.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionAtributo.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionFase1.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionFase1.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionItem1.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionItem1.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionTipoItem.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionTipoItem.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionTipoItem1.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionTipoItem1.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/views.py" afterPath="$PROJECT_DIR$/gtg/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="1cc01d94-5543-4230-974a-5d3ba5a8f715" name="Default" comment="" />
     <ignored path="gestograma.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
