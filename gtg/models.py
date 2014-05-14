@@ -146,8 +146,8 @@ class Item(models.Model):
         (E_DESACTIVADO,'Desactivado'),
         (E_REVISION,'En_Revision'),
     )
-    nombre=models.CharField(max_length=32, unique=True)
-    version=models.IntegerField(max_length=32)
+    nombre=models.CharField(max_length=32, unique=False)
+    version=models.IntegerField(max_length=32, default=1)
     prioridad=models.IntegerField(max_length=32)
     estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default=E_REDACCION, null=False,blank= False)
     descripcion=models.TextField(max_length=100)
@@ -164,6 +164,7 @@ class Item(models.Model):
 
         #class Meta:
         #    permissions=(("asociarRol","puede asociar roles a usuarios"),)
+
 
 
 class lineaBase(models.Model):

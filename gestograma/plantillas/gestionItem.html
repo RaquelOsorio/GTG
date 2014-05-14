@@ -23,6 +23,7 @@
                                         <th>Presione para editar el item</th>
                                         <th>Presione para eliminar el item</th>
                                         <th>Presione para relacionar a un item</th>
+                                        <th>Presione para reversionar un item</th>
                                         <th>Presione para revivir al item</th>
 
 
@@ -41,6 +42,7 @@
                                      <td><a href='/item/modificarItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>
                                      <td><a href='/item/eliminarItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Eliminar'/></a></td>
                                      <td><a href='/item/relacionarItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Relacionar'/></a></td>
+                                    <td><a href='/item/reversionarItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Reversionar'/></a></td>
                                      <td>--------------------</td>
                                 {% else %}
 

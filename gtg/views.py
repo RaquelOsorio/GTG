@@ -30,6 +30,9 @@ from gtg.models import TipoItem
 from gtg.forms import TipoItemForm
 from gtg.models import Item
 from gtg.forms import ItemForm
+from gtg.forms import ItemReversionar
+
+from gtg.forms import ItemForm1
 from gtg.models import ItemRelacion
 from gtg.forms import ItemRelacionForm
 from django.views.generic.edit import CreateView,  DeleteView
@@ -649,6 +652,19 @@ def modificarItem(request, codigo):
     else:
         formulario=ItemForm1(instance = item)
     return render(request,'modificarItem.html', {'formulario': formulario})
+
+
+def reversionarItem(request, codigo):
+    it=Item.objects.all()
+    item = Item.objects.get(pk=codigo)
+    itemR = Item( antecesorHorizontal=item.antecesorHorizontal,sucesorHorizontal=item.sucesorHorizontal,sucesorVertical=item.sucesorVertical,antecesorVertical=item.antecesorVertical,tipoItem=item.tipoItem,fase=item.fase,version=item.version+1, nombre=item.nombre, estado=item.estado, prioridad=item.prioridad, descripcion=item.descripcion)
+    formulario = ItemReversionar(request.POST, instance=itemR)
+    if formulario.is_valid():
+        formulario.save()
+        return render(request, 'item_form1.html', {'formulario': formulario,"it":it,"item":item})
+    else:
+        return render(request, 'item_form1.html', {'formulario': formulario,"it":it,"item":item})
+
 
 
 def relacionarItem(request, codigo):
