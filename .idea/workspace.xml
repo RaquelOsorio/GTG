@@ -2,14 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1cc01d94-5543-4230-974a-5d3ba5a8f715" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/forms.py" afterPath="$PROJECT_DIR$/gtg/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionItem.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionItem.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionLB.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionLB.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/index2.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/index2.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/item_form.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/item_form.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/models.py" afterPath="$PROJECT_DIR$/gtg/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/urls.py" afterPath="$PROJECT_DIR$/gestograma/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/views.py" afterPath="$PROJECT_DIR$/gtg/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="gestograma.iws" />
@@ -42,7 +34,10 @@
         <entry file="file://$PROJECT_DIR$/gtg/forms.py">
           <provider selected="true" editor-type-id="text-editor">
             <state line="99" column="19" selection-start="2482" selection-end="2482" vertical-scroll-proportion="0.0" vertical-offset="1230" max-vertical-offset="1905">
-              <folding />
+              <folding>
+                <marker date="1400095208931" expanded="true" signature="2446:2500" placeholder="..." />
+                <marker date="1400095208931" expanded="true" signature="2462:2500" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -68,7 +63,7 @@
       <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/gtg/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="659" column="181" selection-start="31072" selection-end="31072" vertical-scroll-proportion="0.47297296" vertical-offset="9640" max-vertical-offset="11760">
+            <state line="659" column="181" selection-start="31072" selection-end="31072" vertical-scroll-proportion="1.4939024" vertical-offset="9640" max-vertical-offset="11760">
               <folding>
                 <element signature="e#1#59#0" expanded="true" />
               </folding>
@@ -561,10 +556,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-5" width="1366" height="773" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32973805" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.03271028" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.58411217" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.317757" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -843,7 +838,10 @@
     <entry file="file://$PROJECT_DIR$/gtg/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="99" column="19" selection-start="2482" selection-end="2482" vertical-scroll-proportion="0.0" vertical-offset="1230" max-vertical-offset="1905">
-          <folding />
+          <folding>
+            <marker date="1400095208931" expanded="true" signature="2446:2500" placeholder="..." />
+            <marker date="1400095208931" expanded="true" signature="2462:2500" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -879,8 +877,8 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="14" selection-start="537" selection-end="537" vertical-scroll-proportion="0.35977858" vertical-offset="0" max-vertical-offset="542">
           <folding>
-            <element signature="n#style#0;n#a#0;n#p#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#1;n#p#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#p#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#a#1;n#p#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -901,7 +899,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gtg/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="659" column="181" selection-start="31072" selection-end="31072" vertical-scroll-proportion="0.47297296" vertical-offset="9640" max-vertical-offset="11760">
+        <state line="659" column="181" selection-start="31072" selection-end="31072" vertical-scroll-proportion="1.4939024" vertical-offset="9640" max-vertical-offset="11760">
           <folding>
             <element signature="e#1#59#0" expanded="true" />
           </folding>
