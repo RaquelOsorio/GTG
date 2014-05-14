@@ -91,6 +91,9 @@ urlpatterns = patterns('',
     url(r'^item/eliminarItem/(?P<codigo>\d+)/$', 'gtg.views.eliminarItem'),
     url(r'^eliItem/(?P<codigo>\d+)/$', 'gtg.views.eliItem'),
     url(r'^item/revivirItem/(?P<codigo>\d+)/$', 'gtg.views.revivirItem'),
+    url(r'^lb/listaItemsTer/(?P<codigo>\d+)/$', 'gtg.views.listaItemsTer'),
+    url(r'^listaItemsTer/relaionarItemLb/(?P<codigo>\d+)/(?P<codigo1>\d+)/$', 'gtg.views.relaionarItemLb'),
+
 
 #relaciones
    # url(r'^relacion/crear/(?P<idproyecto>\d+)$', CreaRelacionView.as_view(), name="relacion_crear"),

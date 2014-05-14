@@ -132,6 +132,22 @@ class TipoAtributo(models.Model):
      def __unicode__(self):
          return self.nombre
 
+class lineaBase(models.Model):
+
+    E_ABIERTA='ABIERTA'
+    E_CERRADA='CERRADA'
+    E_ROTA='ROTA'
+    E_REVISION='REVISION'
+    ESTADO_CHOICES=(
+        (E_ABIERTA,'Abierta'),
+        (E_CERRADA, 'Cerrada'),
+        (E_ROTA,'Rota'),
+        (E_REVISION,'En_Revision'),
+    )
+    estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default=E_ABIERTA, null=False,blank= False)
+    fase= models.ForeignKey(Fases1,null=True, blank= True)
+    #itemsAsociados= models.ForeignKey(Item,null=True, blank= True)
+
 
 class Item(models.Model):
     E_REDACCION='REDAC'
@@ -154,7 +170,7 @@ class Item(models.Model):
     fechaModi=models.DateField(auto_now=True)
     tipoItem=models.ForeignKey(TipoItem)
     fase=models.ForeignKey(Fases1, related_name='fase', blank=True)
-
+    lb= models.ForeignKey(lineaBase, null=True, blank= True)
     antecesorHorizontal= models.OneToOneField('self',related_name='RantecesorHorizontal',null=True, blank= True)
     sucesorHorizontal= models.OneToOneField('self',related_name='RsucesorHorizontal',null=True, blank= True)
     sucesorVertical= models.OneToOneField('self',related_name='RsucesorVertical',null=True, blank= True)
@@ -166,21 +182,6 @@ class Item(models.Model):
         #    permissions=(("asociarRol","puede asociar roles a usuarios"),)
 
 
-class lineaBase(models.Model):
-
-    E_ABIERTA='ABIERTA'
-    E_CERRADA='CERRADA'
-    E_ROTA='ROTA'
-    E_REVISION='REVISION'
-    ESTADO_CHOICES=(
-        (E_ABIERTA,'Abierta'),
-        (E_CERRADA, 'Cerrada'),
-        (E_ROTA,'Rota'),
-        (E_REVISION,'En_Revision'),
-    )
-    estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default=E_ABIERTA, null=False,blank= False)
-    fase= models.ForeignKey(Fases1,null=True, blank= True)
-    itemsAsociados= models.ForeignKey(Item,null=True, blank= True)
 
 
 class ItemRelacion(models.Model):

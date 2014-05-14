@@ -1,7 +1,7 @@
 __author__ = 'sonia'
 #from django.test import TestCase
 from django.utils import unittest
-from gtg.models import Proyectos
+import gtg.models
 from django.contrib.auth.models import User
 
 class TestProyectoView(unittest.TestCase):

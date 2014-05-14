@@ -119,3 +119,7 @@ class lbForm(forms.ModelForm):
     class Meta:
         model= lineaBase
         fields=()
+class ItemLbForm(forms.ModelForm):
+    class Meta:
+        model= Item
+        fields=("version", "estado")

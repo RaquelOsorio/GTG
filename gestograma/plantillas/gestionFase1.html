@@ -32,6 +32,7 @@
                                         <th>Nombre</th>
                                         <th>Estado</th>
                                         <th>Gestion Item</th>
+                                        <th>Linea Base</th>
 
                                 </tr>
                             {% for f in fases %}
@@ -42,6 +43,7 @@
                                         <td>{{f.nombre}}</td>
                                         <td>{{ f.estado }}</td>
                                         <td><a class="button" href="/itemFase/{{f.id}}"> Ir a>> </a></td>
+                                        <td><a class="button" href="/lb/{{f.id}}"> Ir a>> </a></td>
                                 </tr>
 
                              {% empty %}

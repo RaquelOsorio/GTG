@@ -18,7 +18,7 @@ from django.conf import settings
 from gtg.forms import rolusuarioForm
 from gtg.models import RolUsuario
 from django.shortcuts import render_to_response
-
+from gtg.forms import ItemForm1
 from gtg.models import TipoAtributo
 from gtg.forms import relacionarForm
 from gtg.forms import TipoAtributoForm
@@ -37,6 +37,7 @@ from django.views.generic import ListView
 from gtg.forms import EliminarItemForm
 from gtg.models import lineaBase
 from gtg.forms import lbForm
+from gtg.forms import ItemLbForm
 from django.core.urlresolvers import reverse
 
 def ingresar(request):
@@ -930,3 +931,22 @@ def generarlb(request):
 		formulario=lbForm()
 
 	return render(request, 'lbForm.html', {'formulario': formulario,})
+
+@login_required(login_url='/ingresar')
+def listaItemsTer(request,codigo):
+    lb= lineaBase.objects.get(pk=codigo)
+    items= Item.objects.filter(estado='TER')
+    return render_to_response('listaItemTer.html', {'items': items, 'lb':lb,}, context_instance=RequestContext(request))
+
+@login_required(login_url='/ingresar')
+def relaionarItemLb(request, codigo, codigo1):
+    id= Item.objects.get(pk1=codigo1)
+    lb = lineaBase.objects.get(pk=codigo)
+    item = Item( lb=lb, estado='VAL')
+    formulario = ItemForm(request.POST, instance= id)
+    if formulario.is_valid():
+			formulario.save()
+			return HttpResponseRedirect('/')
+    formulario= ItemLbForm(instance=item)
+    return render(request,'ItemLb_form.html', {'formulario': formulario,})
+

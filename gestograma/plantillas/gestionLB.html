@@ -36,7 +36,9 @@
 
 
                                                 <td>{{lb.id}}</td>
-                                                <td>{{lb.estado}}</td>
+                                                <td>{{lb.fase}}</td>
+                                                <td><center><a href='/lb/listaItemsTer/{{ lb.id }}' class="button btn-small btn-danger"><input type='submit' value='Relacionar'/></a></center></td>
+
 
                                                 <td>
                                                 {%if user.id == p.lider.id%}
