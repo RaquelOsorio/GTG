@@ -9,6 +9,7 @@ from gtg.models import Rol
 from gtg.models import Usuario
 from gtg.forms import usuarioForm
 from gtg.forms import rolForm
+from gtg.forms import importarFaseForm
 from django.shortcuts import render, render_to_response, redirect
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
@@ -946,3 +947,15 @@ def generarlb(request):
 		formulario=lbForm()
 
 	return render(request, 'lbForm.html', {'formulario': formulario,})
+
+def importarFase(request, codigo):
+    fase = Fases1.objects.get(pk=codigo)
+    faseI=Fases1(fechaInicio=fase.fechaInicio,fechaFin=fase.fechaFin,nombre=fase.nombre,descripcion=fase.descripcion,estado=fase.estado)
+    formulario = importarFaseForm(request.POST, instance=faseI)
+    if formulario.is_valid():
+        formulario.save()
+        return HttpResponseRedirect('/fase')
+    else:
+        return render(request, 'faseImport.html', {'formulario': formulario})
+
+

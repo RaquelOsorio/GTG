@@ -70,6 +70,7 @@ urlpatterns = patterns('',
 
     url(r'^item/relacionarItem/(?P<codigo>\d+)/$', 'gtg.views.relacionarItem'),
     url(r'^itemFase/(?P<codigo>\d+)/$','gtg.views.itemFase'),
+    url(r'^importarFase/(?P<codigo>\d+)/$','gtg.views.importarFase'),
    # url(r'^fase1/$','gtg.views.fase'),
     url(r'^itemTipoItem/(?P<codigo>\d+)/$','gtg.views.itemTipoItem'),
 

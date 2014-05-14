@@ -73,7 +73,7 @@ class TipoItemForm(forms.ModelForm):
 class ItemForm(forms.ModelForm):
     class Meta:
         model= Item
-        fields=("id","nombre","prioridad","descripcion","tipoItem","fase")
+        fields=("id","nombre","prioridad","descripcion","tipoItem")
     def clean(self):
 
     # get bitcoin address from form
@@ -117,7 +117,7 @@ class relacionarForm(forms.ModelForm):
 class EliminarItemForm(forms.ModelForm):
     class Meta:
         model= Item
-        fields=("estado",)
+        fields=()
 
 
 class rolusuarioForm(forms.ModelForm):
@@ -140,3 +140,9 @@ class lbForm(forms.ModelForm):
     class Meta:
         model= lineaBase
         fields=()
+
+
+class importarFaseForm(forms.ModelForm):
+    class Meta:
+        model=Fases1
+        fields=('proyectos','nombre',)

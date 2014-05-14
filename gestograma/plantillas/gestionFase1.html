@@ -13,11 +13,7 @@
                         </ul>
 
                     <ul>
-                             {% for fa in fases %}
 
-                                <p><center><h3>{{ fa.proyectos }} </h3></center></p>
-
-                             {% endfor %}
                     <li><a href="/fase1/registrarFase/{{ proyecto.id }}"><i class="addlink"></i> Crear Fase</a></li>
 
                         </ul>
@@ -32,6 +28,7 @@
                                         <th>Nombre</th>
                                         <th>Estado</th>
                                         <th>Gestion Item</th>
+                                        <th>Importar Fase</th>
 
                                 </tr>
                             {% for f in fases %}
@@ -42,6 +39,7 @@
                                         <td>{{f.nombre}}</td>
                                         <td>{{ f.estado }}</td>
                                         <td><a class="button" href="/itemFase/{{f.id}}"> Ir a>> </a></td>
+                                        <td><a class="button" href="/importarFase/{{f.id}}"> Ir a>> </a></td>
                                 </tr>
 
                              {% empty %}
