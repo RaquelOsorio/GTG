@@ -86,7 +86,13 @@ class ItemForm(forms.ModelForm):
                 raise forms.ValidationError('Ya existe un item con ese nombre.')
             i=1
         return self.cleaned_data
-
+        fields=(
+                "nombre",
+                "version",
+                "prioridad",
+                "descripcion",
+                "tipoItem"
+        )
 
 class ItemForm1(forms.ModelForm):
     class Meta:

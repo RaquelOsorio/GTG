@@ -153,7 +153,7 @@ class Item(models.Model):
     descripcion=models.TextField(max_length=100)
     fechaModi=models.DateField(auto_now=True)
     tipoItem=models.ForeignKey(TipoItem)
-    fase=models.ForeignKey(Fases1)
+    fase=models.ForeignKey(Fases1, related_name='fase', blank=True)
 
     antecesorHorizontal= models.OneToOneField('self',related_name='RantecesorHorizontal',null=True, blank= True)
     sucesorHorizontal= models.OneToOneField('self',related_name='RsucesorHorizontal',null=True, blank= True)

@@ -2,6 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1cc01d94-5543-4230-974a-5d3ba5a8f715" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/forms.py" afterPath="$PROJECT_DIR$/gtg/forms.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionAtributo.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionAtributo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionFase1.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionFase1.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionItem1.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionItem1.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionRolesPermisos.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionRolesPermisos.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionTipoItem.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionTipoItem.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionTipoItem1.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionTipoItem1.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/models.py" afterPath="$PROJECT_DIR$/gtg/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/settings.py" afterPath="$PROJECT_DIR$/gestograma/settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/urls.py" afterPath="$PROJECT_DIR$/gestograma/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/views.py" afterPath="$PROJECT_DIR$/gtg/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="gestograma.iws" />
@@ -33,11 +44,8 @@
       <file leaf-file-name="forms.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gtg/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="99" column="19" selection-start="2482" selection-end="2482" vertical-scroll-proportion="0.0" vertical-offset="1230" max-vertical-offset="1905">
-              <folding>
-                <marker date="1400095208931" expanded="true" signature="2446:2500" placeholder="..." />
-                <marker date="1400095208931" expanded="true" signature="2462:2500" placeholder="..." />
-              </folding>
+            <state line="87" column="32" selection-start="2242" selection-end="2242" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2010">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -54,7 +62,7 @@
       <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gtg/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="160" column="4" selection-start="5373" selection-end="5390" vertical-scroll-proportion="0.0" vertical-offset="1830" max-vertical-offset="3345">
+            <state line="161" column="4" selection-start="5406" selection-end="5423" vertical-scroll-proportion="0.0" vertical-offset="1845" max-vertical-offset="3345">
               <folding />
             </state>
           </provider>
@@ -63,7 +71,7 @@
       <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/gtg/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="659" column="181" selection-start="31072" selection-end="31072" vertical-scroll-proportion="1.4939024" vertical-offset="9640" max-vertical-offset="11760">
+            <state line="104" column="0" selection-start="4187" selection-end="4187" vertical-scroll-proportion="0.57281554" vertical-offset="1383" max-vertical-offset="14310">
               <folding>
                 <element signature="e#1#59#0" expanded="true" />
               </folding>
@@ -92,7 +100,7 @@
       <file leaf-file-name="gestionFase1.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gestograma/plantillas/gestionFase1.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="16" selection-start="1928" selection-end="2005" vertical-scroll-proportion="-21.333334" vertical-offset="268" max-vertical-offset="930">
+            <state line="53" column="16" selection-start="1868" selection-end="1945" vertical-scroll-proportion="-21.333334" vertical-offset="283" max-vertical-offset="945">
               <folding />
             </state>
           </provider>
@@ -177,11 +185,11 @@
         <option value="$PROJECT_DIR$/gtg/models.py" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/gestionItem.html" />
         <option value="$PROJECT_DIR$/gestograma/urls.py" />
-        <option value="$PROJECT_DIR$/gtg/forms.py" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/item_form.html" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/reversionarItem.html" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/item_form1.html" />
         <option value="$PROJECT_DIR$/gtg/views.py" />
+        <option value="$PROJECT_DIR$/gtg/forms.py" />
       </list>
     </option>
   </component>
@@ -559,7 +567,7 @@
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32973805" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.58411217" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35825545" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.317757" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -835,16 +843,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gtg/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="99" column="19" selection-start="2482" selection-end="2482" vertical-scroll-proportion="0.0" vertical-offset="1230" max-vertical-offset="1905">
-          <folding>
-            <marker date="1400095208931" expanded="true" signature="2446:2500" placeholder="..." />
-            <marker date="1400095208931" expanded="true" signature="2462:2500" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gestograma/plantillas/gestionItem.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="44" column="54" selection-start="2315" selection-end="2328" vertical-scroll-proportion="-14.416667" vertical-offset="314" max-vertical-offset="1140">
@@ -868,7 +866,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gestograma/plantillas/gestionFase1.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="16" selection-start="1928" selection-end="2005" vertical-scroll-proportion="-21.333334" vertical-offset="268" max-vertical-offset="930">
+        <state line="53" column="16" selection-start="1868" selection-end="1945" vertical-scroll-proportion="-21.333334" vertical-offset="283" max-vertical-offset="945">
           <folding />
         </state>
       </provider>
@@ -892,14 +890,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gtg/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="160" column="4" selection-start="5373" selection-end="5390" vertical-scroll-proportion="0.0" vertical-offset="1830" max-vertical-offset="3345">
+        <state line="161" column="4" selection-start="5406" selection-end="5423" vertical-scroll-proportion="0.0" vertical-offset="1845" max-vertical-offset="3345">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gtg/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="87" column="32" selection-start="2242" selection-end="2242" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2010">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gtg/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="659" column="181" selection-start="31072" selection-end="31072" vertical-scroll-proportion="1.4939024" vertical-offset="9640" max-vertical-offset="11760">
+        <state line="104" column="0" selection-start="4187" selection-end="4187" vertical-scroll-proportion="0.57281554" vertical-offset="1383" max-vertical-offset="14310">
           <folding>
             <element signature="e#1#59#0" expanded="true" />
           </folding>

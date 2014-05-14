@@ -8,9 +8,10 @@
                 <div class="span10">
 
                         <ul>
-                             {% for it in items %}
-                                <p><center><h3>{{ it.fase.proyectos }} - {{  it.fase }} </h3></center></p>
-                             {% endfor %}
+
+                                <p><center><h3>{{ fase.proyectos }} - {{  fase.nombre }} </h3></center></p>
+
+                            <li><a href="/item/registrarItem/{{fase.id}}"><i class="icon-chevron-right"></i> Crear Item</a></li>
 
                         </ul>
 
@@ -20,6 +21,7 @@
                                         <th>Nombre</th>
                                         <th>Version</th>
                                         <th>Estado</th>
+                                        <th>Tipo de Item</th>
 
 
 
@@ -32,6 +34,7 @@
                                         <td>{{i.nombre}}</td>
                                         <td>{{i.version}}</td>
                                         <td>{{i.estado}}</td>
+                                        <td>{{i.tipoItem}}</td>
 
 
                                 </tr>
@@ -44,7 +47,7 @@
                                 {% endfor %}
         </table>
 
-                <a class="button" href="/proyecto"><i class="icon-arrow-left"></i> Atras</a>
+                <a class="button" href="/fase1/{{fase.id}}"><i class="icon-arrow-left"></i> Atras</a>
 
 </div>
 </div>

@@ -64,7 +64,7 @@ urlpatterns = patterns('',
     url(r'^eliTipoAtributo/(?P<codigo>\d+)/$', 'gtg.views.eliTipoAtributo'),
     url(r'^tipoItem/registrarTipoItem/$','gtg.views.registrarTipoItem'),
     url(r'^item/$','gtg.views.item'),
-    url(r'^item/registrarItem/$','gtg.views.registrarItem'),
+    url(r'^item/registrarItem/(?P<codigo>\d+)/$','gtg.views.registrarItem'),
     url(r'^item/modificarItem/(?P<codigo>\d+)/$', 'gtg.views.modificarItem'),
     url(r'^item/reversionarItem/(?P<codigo>\d+)/$', 'gtg.views.reversionarItem'),
 
