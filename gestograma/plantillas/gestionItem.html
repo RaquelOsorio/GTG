@@ -7,9 +7,8 @@
         <div class="row" >
                 <div class="span10">
                          <ul>
-                            <h3>Items </h3>
+                            <p><center><h3>Listado de Items </h3></center></p>
 
-                            <li><a href="/item/registrarItem/"><i class="icon-chevron-right"></i> Crear Item</a></li>
 
                         </ul>
                         <table class="table table-striped table-bordered">
@@ -23,6 +22,7 @@
                                         <th>Presione para editar el item</th>
                                         <th>Presione para eliminar el item</th>
                                         <th>Presione para relacionar a un item</th>
+                                        <th>Presione para reversionar un item</th>
                                         <th>Presione para revivir al item</th>
 
 
@@ -41,13 +41,16 @@
                                      <td><a href='/item/modificarItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>
                                      <td><a href='/item/eliminarItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Eliminar'/></a></td>
                                      <td><a href='/item/relacionarItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Relacionar'/></a></td>
+                                    <td><a href='/item/reversionarItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Reversionar'/></a></td>
                                      <td>--------------------</td>
                                 {% else %}
 
                                     <td>Inhabilitado</td>
                                     <td>Inhabilitado</td>
                                     <td>Inhabilitado</td>
-                                    {% if items.estado != 'REV' %}
+
+                                    <td>Inhabilitado</td>
+                                    {% if items.estado != 'REV' and items.estado != 'VAL' %}
                                         <td><a href='/item/revivirItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Revivir'/></a></td>
                                     {% else %}
                                         <td><a href='#' class="button btn-small btn-danger"><input type='submit' value='Revisar'/></a></td>

@@ -26,13 +26,13 @@ class Test_crear_fase(TestCase):
         print ('\n2 Test acceder a crear item en una fase existente')
 
         resp = c.post('/gtg/registrarItem/2',{'nombre':'Item1'})
-        self.assertEqual(resp.status_code,404)
+        self.assertEqual(resp.status_code,200)
         print ('\n3 No crea el item si no completa todos los campos')
 
         resp = c.post('/gtg/registrarItem/2',{'nombre':'Item1', 'descripcion':'dsdd','prioridad':'1'})
-        self.assertEqual(resp.status_code,404)
+        self.assertEqual(resp.status_code,200)
         print ('\n4 No crea el item si un campo esta mal completado')
 
-        resp = c.post('/gtg/registrarItem/3',{"pk": 1, "lb": 1, "tipoItem": 1, "version": 1, "descripcion": "jkjk", "nombre": "Item1", "fechaModi": "2014-05-14", "estado": "VAL", "prioridad": 1, "fase": 1})
-        self.assertTrue(resp.status_code,200)
-        print ('\n5 Crea el item si esta correctamente completado\n')
+        resp = c.post('/gtg/registrarItem/3',{"pk": 1, "model": "gtg.item", "lb": 1, "tipoItem": 1, "version": 1, "descripcion": "jkjk", "nombre": "Item1", "fechaModi": "2014-05-14", "estado": "VAL", "prioridad": 1, "fase": 1})
+        self.assertEqual(resp.status_code,200)
+        print ('\n5 Crea el item si esta correctamente completado')

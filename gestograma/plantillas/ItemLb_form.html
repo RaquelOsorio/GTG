@@ -2,11 +2,12 @@
 <section class='contenido'>
 {% block contenido %}
  <div id="body">
-        <h3>Relacionar ítems a una Línea Base </h3>
-        <p>Confirme para relacionar ítems a la Línea Base </p>
-		<form id='formulario' method='post' action=''>{% csrf_token %}
+        <p><h3>Relacionar ítems a una Línea Base </h3>
+        <form id='formulario' method='post' action=''>{% csrf_token %}
 		<table>{{formulario}}</table>
         <p>
+            <p>Confirme para relacionar ítems a la Línea Base </p>
+
             <input name="Guardar" style="margin-left: 150px;" class="formbutton" value="Confirmar" type="submit" />
         </p>
 	</form>

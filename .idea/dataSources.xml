@@ -5,8 +5,8 @@
       <driver-ref>sqlite.xerial</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://127.0.0.1:5432/gestograma</jdbc-url>
-      <user-name>viviana</user-name>
-      <user-password>dfc5dfd8dfc6dfcbdfc4dfcedfc5dfd3dfc8dfcbdfd8</user-password>
+      <user-name>sonia</user-name>
+      <user-password>dfd9dfc5dfc4dfc3dfcbdf98df9adf9bdf9e</user-password>
       <libraries />
     </data-source>
     <data-source source="LOCAL" name="PostgreSQL - @localhost" uuid="fc113f27-5e5d-4535-849d-5b6e33e5039b">

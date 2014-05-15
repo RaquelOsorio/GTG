@@ -73,6 +73,19 @@ class TipoItemForm(forms.ModelForm):
 class ItemForm(forms.ModelForm):
     class Meta:
         model= Item
+        fields=("id","nombre","prioridad","descripcion","tipoItem")
+    def clean(self):
+
+    # get bitcoin address from form
+        name =  self.cleaned_data.get('nombre')
+        i=0
+        ite=Item.objects.all()
+        for it in ite:
+            print( self.cleaned_data.get('nombre'))
+            if (name == it.nombre):
+                raise forms.ValidationError('Ya existe un item con ese nombre.')
+            i=1
+        return self.cleaned_data
         fields=(
                 "nombre",
                 "version",
@@ -84,7 +97,15 @@ class ItemForm(forms.ModelForm):
 class ItemForm1(forms.ModelForm):
     class Meta:
         model= Item
-        fields=("estado","nombre","version","prioridad","descripcion","tipoItem","fase")
+        fields=("estado","nombre","version","prioridad","descripcion","tipoItem")
+
+
+
+class ItemReversionar(forms.ModelForm):
+    class Meta:
+        model= Item
+        fields=()
+
 
 
 
@@ -96,7 +117,7 @@ class relacionarForm(forms.ModelForm):
 class EliminarItemForm(forms.ModelForm):
     class Meta:
         model= Item
-        fields=("estado",)
+        fields=( )
 
 
 class rolusuarioForm(forms.ModelForm):
@@ -119,7 +140,8 @@ class lbForm(forms.ModelForm):
     class Meta:
         model= lineaBase
         fields=()
+
 class ItemLbForm(forms.ModelForm):
     class Meta:
         model= Item
-        fields=("version", "estado")
+        fields=( )
