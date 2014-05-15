@@ -2,27 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1cc01d94-5543-4230-974a-5d3ba5a8f715" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gestograma/plantillas/item_form1.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gestograma/plantillas/reversionarItem.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/ItemLb_form.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/ItemLb_form.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/forms.py" afterPath="$PROJECT_DIR$/gtg/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionFase1.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionFase1.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionItem.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionItem.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionItem1.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionItem1.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionLB.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionLB.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gestograma.iml" afterPath="$PROJECT_DIR$/.idea/gestograma.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/index2.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/index2.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/item_form.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/item_form.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/fixtures/items_testmaker.json" afterPath="$PROJECT_DIR$/gtg/fixtures/items_testmaker.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/listaItemTer.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/listaItemTer.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/models.py" afterPath="$PROJECT_DIR$/gtg/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/testFase.py" afterPath="$PROJECT_DIR$/gtg/testFase.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/test_inicio_sesion.py" afterPath="$PROJECT_DIR$/gtg/test_inicio_sesion.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/test_proyecto.py" afterPath="$PROJECT_DIR$/gtg/test_proyecto.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/test_usuario.py" afterPath="$PROJECT_DIR$/gtg/test_usuario.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/urls.py" afterPath="$PROJECT_DIR$/gestograma/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/views.py" afterPath="$PROJECT_DIR$/gtg/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="gestograma.iws" />
@@ -70,7 +49,7 @@
       <file leaf-file-name="ItemLb_form.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/gestograma/plantillas/ItemLb_form.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="8" selection-start="334" selection-end="334" vertical-scroll-proportion="0.39589444" vertical-offset="0" max-vertical-offset="341">
+            <state line="9" column="0" selection-start="332" selection-end="332" vertical-scroll-proportion="0.39589444" vertical-offset="0" max-vertical-offset="341">
               <folding>
                 <element signature="n#style#0;n#input#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
               </folding>
@@ -674,10 +653,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-4" width="1303" height="773" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32973805" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3559322" sideWeight="0.4996016" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3559322" sideWeight="0.4996016" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3174114" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28525898" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1031,7 +1010,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gestograma/plantillas/ItemLb_form.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="8" selection-start="334" selection-end="334" vertical-scroll-proportion="0.39589444" vertical-offset="0" max-vertical-offset="341">
+        <state line="9" column="0" selection-start="332" selection-end="332" vertical-scroll-proportion="0.39589444" vertical-offset="0" max-vertical-offset="341">
           <folding>
             <element signature="n#style#0;n#input#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
           </folding>
