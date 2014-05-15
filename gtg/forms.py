@@ -145,3 +145,8 @@ class ItemLbForm(forms.ModelForm):
     class Meta:
         model= Item
         fields=( )
+
+class importarFaseForm(forms.ModelForm):
+    class Meta:
+        model=Fases1
+        fields=('proyectos','nombre',)

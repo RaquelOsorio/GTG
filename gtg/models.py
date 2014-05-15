@@ -81,7 +81,7 @@ class Fases1(models.Model):
     estado = models.CharField(max_length=20,
                               choices=ESTADO_CHOICES,
                               default='INA')
-    proyectos=models.ForeignKey(Proyectos, related_name='proyecto', blank=True)
+    proyectos=models.ForeignKey(Proyectos, related_name='proyecto')
 
     def __unicode__(self):
         return self.nombre

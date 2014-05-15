@@ -1,0 +1,16 @@
+{% extends 'index2.html' %}
+<section class='contenido'>
+{% block contenido %}
+ <div id="body">
+        <h3>Importar Fase </h3>
+        <p>Ingrese el nuevo nombre para la fase y el Proyecto al que desea importar la fase</p>
+		<form id='formulario' method='post' action=''>{% csrf_token %}
+		<table>{{formulario}}</table>
+        <p>
+            <input name="Guardar" style="margin-left: 150px;" class="formbutton" value="Guardar" type="submit" />
+
+        </p>
+	</form>
+ </div>
+{% endblock %}
+</section>
