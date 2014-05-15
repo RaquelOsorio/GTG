@@ -1,4 +1,7 @@
+
+
 {% extends 'index2.html' %}
+{% load i18n %}
 {% block encabezado %}
 
 {% endblock %}
@@ -29,11 +32,15 @@
 
 
                                 </tr>
-                            {% for items in items %}
+
+
+                               {% for items in items %}
+
+
 
                                 <tr>
                                         <td>{{items.nombre}}</td>
-                                        <td>{{items.estado }}</td>
+                                        <td>{{items.prioridad }}</td>
                                         <td>{{items.version}}</td>
                                         <td>{{items.tipoItem}}</td>
                                         <td>{{items.tipoItem.tipoAtributo }}</td>

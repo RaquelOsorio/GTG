@@ -152,10 +152,7 @@ def rolPermiso(request, mesagge= ""):
     roles=Rol.objects.all()
     return render_to_response('gestionRolesPermisos.html', {'roles': roles, 'message': mesagge}, context_instance=RequestContext(request))
 
-@login_required(login_url='/ingresar')
-def item(request):
-    """permite acceder a la interfaz de opciones de administracion para items"""
-    return render_to_response('gestionItem.html',context_instance=RequestContext(request))
+
 
 @login_required(login_url='/ingresar')
 def lb(request, codigoFase):
@@ -613,8 +610,15 @@ def registrarTipoItem(request):
 def item(request):
     """permite acceder a la interfaz de Item, donde se despliega la lista de todos los items
     registrados en el sistema. Recibe un :param request, peticion de operacion y :return la lista"""
-    items=Item.objects.all()
-    return render_to_response('gestionItem.html',{'items':items},context_instance=RequestContext(request))
+    indice=0
+    items=Item.objects.all().order_by('nombre') #[:10]
+    priori= Item.objects.all()
+    for i in priori:
+        for it in items:
+            if(it.nombre==i.nombre ):
+                it=i
+    p=1
+    return render_to_response('gestionItem.html',{'items':items,'p':p},context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar')
 def registrarItem(request,codigo):
@@ -651,13 +655,28 @@ def modificarItem(request, codigo):
 def reversionarItem(request, codigo):
     it=Item.objects.all()
     item = Item.objects.get(pk=codigo)
-    itemR = Item( antecesorHorizontal=item.antecesorHorizontal,sucesorHorizontal=item.sucesorHorizontal,sucesorVertical=item.sucesorVertical,antecesorVertical=item.antecesorVertical,tipoItem=item.tipoItem,fase=item.fase,version=item.version+1, nombre=item.nombre, estado=item.estado, prioridad=item.prioridad, descripcion=item.descripcion)
+    ultima_version=0
+    priori=0
+    for itm in it:
+        if(itm.nombre==item.nombre and itm.version >= ultima_version):
+            ultima_version=itm.version
+        if(itm.nombre==item.nombre and itm.prioridad>= priori):
+            priori=itm.prioridad
+    itms=Item(antecesorHorizontal=item.antecesorHorizontal,sucesorHorizontal=item.sucesorHorizontal,sucesorVertical=item.sucesorVertical,
+            antecesorVertical=item.antecesorVertical,tipoItem=item.tipoItem,fase=item.fase,version=item.version, nombre=item.nombre, estado=item.estado,
+            prioridad=-1, descripcion=item.descripcion)
+
+    itemR = Item( antecesorHorizontal=item.antecesorHorizontal,sucesorHorizontal=item.sucesorHorizontal,sucesorVertical=item.sucesorVertical,
+            antecesorVertical=item.antecesorVertical,tipoItem=item.tipoItem,fase=item.fase,version=ultima_version+1, nombre=item.nombre, estado=item.estado,
+            prioridad=priori+1, descripcion=item.descripcion)
+
     formulario = ItemReversionar(request.POST, instance=itemR)
     if formulario.is_valid():
         formulario.save()
-        return render(request, 'item_form1.html', {'formulario': formulario,"it":it,"item":item})
+
+        return render(request, 'item_form1.html', {'formulario': formulario})
     else:
-        return render(request, 'item_form1.html', {'formulario': formulario,"it":it,"item":item})
+        return render(request, 'item_form1.html', {'formulario': formulario})
 
 
 
@@ -669,12 +688,18 @@ def relacionarItem(request, codigo):
 
     item=Item.objects.get(pk=codigo)
     if request.method == "POST":
+
         formulario = relacionarForm(request.POST, request.FILES, instance = item)
+        #formulario.fields['antecesorHorizontal'].queryset=Item.objects.filter(nombre='item1')
+        formulario.fields['antecesorHorizontal'].queryset = Item.objects.filter(fase=item.fase)
+        formulario.fields['antecesorVertical'].queryset = Item.objects.filter(nombre='item1')
         if formulario.is_valid():
             formulario.save()
             return HttpResponseRedirect('/item')
     else:
         formulario=relacionarForm(instance = item)
+        formulario.fields['antecesorHorizontal'].queryset = Item.objects.filter(fase=item.fase)
+        formulario.fields['antecesorVertical'].queryset = Item.objects.filter(nombre='item1')
     return render(request,'relacionarItem.html', {'formulario': formulario})
 
 ######Vista de la lista de items pertenecientes a la fase selecionada##########
