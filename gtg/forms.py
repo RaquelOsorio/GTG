@@ -81,7 +81,7 @@ class ItemForm(forms.ModelForm):
         i=0
         ite=Item.objects.all()
         for it in ite:
-            print self.cleaned_data.get('nombre')
+            print( self.cleaned_data.get('nombre'))
             if (name == it.nombre):
                 raise forms.ValidationError('Ya existe un item con ese nombre.')
             i=1
@@ -91,7 +91,7 @@ class ItemForm(forms.ModelForm):
 class ItemForm1(forms.ModelForm):
     class Meta:
         model= Item
-        fields=("estado","nombre","version","prioridad","descripcion","tipoItem","fase")
+        fields=("estado","nombre","version","prioridad","descripcion","tipoItem")
 
 
 
@@ -152,7 +152,7 @@ class relacionarForm(forms.ModelForm):
 class EliminarItemForm(forms.ModelForm):
     class Meta:
         model= Item
-        fields=()
+        fields=( )
 
 
 class rolusuarioForm(forms.ModelForm):
@@ -176,6 +176,10 @@ class lbForm(forms.ModelForm):
         model= lineaBase
         fields=()
 
+class ItemLbForm(forms.ModelForm):
+    class Meta:
+        model= Item
+        fields=( )
 
 class importarFaseForm(forms.ModelForm):
     class Meta:

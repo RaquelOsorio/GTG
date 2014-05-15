@@ -10,7 +10,7 @@
 
                             <p></p><center><h3>Listado de Línea Base </h3></center>
 
-                            <li><a href="/lb/generarlb"><i class="icon-chevron-right"></i> Generar Línea Base</a></li>
+                            <li><a href="/lb/generarlb/{{fa.id}}"><i class="icon-chevron-right"></i> Generar Línea Base</a></li>
 
                         </ul>
                         <table class="table table-striped table-bordered">
@@ -20,7 +20,7 @@
 
 
 
-                                        <th>Presione para relacionar items a la Línea Base</th>
+                                        <th><center>Presione para relacionar items a la Línea Base</center></th>
                                         <th>Presione para Visualizar una Línea Base</th>
 
 
@@ -36,7 +36,9 @@
 
 
                                                 <td>{{lb.id}}</td>
-                                                <td>{{lb.estado}}</td>
+                                                <td>{{lb.fase}}</td>
+                                                <td><center><a href='/lb/listaItemsTer/{{ lb.id }}' class="button btn-small btn-danger"><input type='submit' value='Relacionar'/></a></center></td>
+
 
                                                 <td>
                                                 {%if user.id == p.lider.id%}
