@@ -126,11 +126,6 @@ class RolUsuario(models.Model):
         #    permissions=(("asociarRol","puede asociar roles a usuarios"),)
 
 
-class TipoAtributo(models.Model):
-     nombre = models.CharField(max_length=32, unique=True)
-     descripcion=models.TextField(max_length=100)
-     def __unicode__(self):
-         return self.nombre
 
 
 class Item(models.Model):
@@ -155,10 +150,11 @@ class Item(models.Model):
     tipoItem=models.ForeignKey(TipoItem)
     fase=models.ForeignKey(Fases1, related_name='fase')
 
-    antecesorHorizontal= models.OneToOneField('self',related_name='RantecesorHorizontal',null=True, blank= True)
-    sucesorHorizontal= models.OneToOneField('self',related_name='RsucesorHorizontal',null=True, blank= True)
-    sucesorVertical= models.OneToOneField('self',related_name='RsucesorVertical',null=True, blank= True)
-    antecesorVertical=models.OneToOneField('self',related_name='RantecesorVertical',null=True, blank=True)
+    antecesorHorizontal= models.ForeignKey('self',related_name='RantecesorHorizontal',null=True, blank= True)
+    sucesorHorizontal= models.ForeignKey('self',related_name='RsucesorHorizontal',null=True, blank= True)
+    sucesorVertical= models.ForeignKey('self',related_name='RsucesorVertical',null=True, blank= True)
+    antecesorVertical=models.ForeignKey('self',related_name='RantecesorVertical',null=True, blank=True)
+
     def __unicode__(self):
          return self.nombre
 
@@ -218,3 +214,5 @@ class ItemRelacion(models.Model):
             self.tipo = self.E_INT
         else:
             self.tipo = self.E_EXT
+
+

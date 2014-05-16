@@ -11,9 +11,10 @@
         <div class="row" >
                 <div class="span10">
                          <ul>
-                            <h3>Items </h3>
+                            <center><h3>Items </h3></center>
 
-                            <li><a href="/item/registrarItem/"><i class="icon-chevron-right"></i> Crear Item</a></li>
+
+                            <li>Obs: Para crear ítems debe seleccionar el proyecto y la fase al que pertenecerá</li>
 
                         </ul>
                         <table class="table table-striped table-bordered">
@@ -58,7 +59,8 @@
                                     <td>Inhabilitado</td>
                                     <td>Inhabilitado</td>
                                     {% if items.estado != 'REV' %}
-                                        <td><a href='/item/revivirItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Revivir'/></a></td>
+                                        <td><center><a href='/item/revivirItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Revivir'/></a></center></td>
+                                        <td>--------------------</td>
                                     {% else %}
                                         <td><a href='#' class="button btn-small btn-danger"><input type='submit' value='Revisar'/></a></td>
                                     {% endif %}

@@ -1,0 +1,52 @@
+
+
+
+{% extends 'index2.html' %}
+{% load i18n %}
+{% block encabezado %}
+
+{% endblock %}
+{% block contenido %}
+
+        <div class="row" >
+                <div class="span10">
+                         <ul>
+                            <p></p><center><h3>{{ proyectos.nombre }} </h3></center>
+
+
+                            <p></p>
+                            <p><center>
+                                Relacionar al Item: {{ item.nombre }}
+
+                            </center></p>
+                        </ul>
+                        <table class="table table-striped table-bordered">
+                                <tr>
+                                    {% for fases in fases %}
+
+                                        {% if fases.id <= item.fase.id %}
+                                            <th>{{ fases.nombre }}</th>
+                                            <th>Relacionar</th>
+
+                                            {% for items in items %}
+                                                <tr>
+                                                {% if items.fase == fases and items != item%}
+                                                    <td>{{items.nombre}}</td>
+                                                    <td><center><a class="button" href="/item/relacItem/{{ item.id}}/{{items.id }}"> Relacionar -> </a></center></td>
+                                                {% endif %}
+                                                </tr>
+                                            {% endfor %}
+                                         {% endif %}
+
+
+                                     {% endfor %}
+
+
+                                </tr>
+
+
+
+        </table>
+</div>
+</div>
+{% endblock %}

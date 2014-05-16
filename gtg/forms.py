@@ -12,6 +12,7 @@ from gtg.models import TipoAtributo
 from gtg.models import Proyectos
 from gtg.models import Fases1
 from gtg.models import TipoItem
+
 from gtg.models import Item
 from gtg.models import ItemRelacion
 from gtg.models import lineaBase
@@ -105,11 +106,11 @@ class ItemReversionar(forms.ModelForm):
 
 class relacionarForm(forms.ModelForm):
     #antecesorHorizontal = forms.ModelChoiceField(queryset=Item.objects.all())
-    antecesorHorizontal = forms.ModelChoiceField(queryset=Item.objects.none())
-    antecesorVertical = forms.ModelChoiceField(queryset=Item.objects.none())
+    #antecesorHorizontal = forms.ModelChoiceField(queryset=Item.objects.none())
+    #antecesorVertical = forms.ModelChoiceField(queryset=Item.objects.none())
     class Meta:
         model= Item
-        fields=('antecesorHorizontal','antecesorVertical')
+        fields=()
 
 
 

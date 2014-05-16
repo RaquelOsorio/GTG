@@ -32,7 +32,6 @@ from gtg.forms import TipoItemForm
 from gtg.models import Item
 from gtg.forms import ItemForm
 from gtg.forms import ItemReversionar
-
 from gtg.forms import ItemForm1
 from gtg.models import ItemRelacion
 from gtg.forms import ItemRelacionForm
@@ -665,27 +664,44 @@ def reversionarItem(request, codigo):
 
 
 
-def relacionarItem(request, codigo):
-    """Permita relacionar items registrados en el sistema, controla que el item en cuestion este en un estado para
-    ser modificado: REDAC o TER. Recibe :param request, que es la peticion de la operacion y el codigo del item
-    a modificar. Retorna :return a la interfaz de confirmacion de la operacion, esto es,despliega el
+def relacionarItem(request, codigo,codigop):
+    """Permite visualizar la lista de posibles items para relacionar a otro preciamente
+     seleccionado :param request, que es la peticion de la operacion y el codigo del item
+    a relacionar. Retorna :return a la interfaz de confirmacion de la operacion, esto es,despliega el
      formulario con las opciones de relacionar con un antecesor o sucesor del listado de items de existenes en el sistema"""
 
     item=Item.objects.get(pk=codigo)
-    if request.method == "POST":
+    proyecto=Proyectos.objects.get(pk=codigop)
+    fases=Fases1.objects.filter(proyectos=proyecto)
+    items=Item.objects.all()
+    return render(request,'listaRelacion.html', {'item': item,'items':items,'proyectos':proyecto,'fases':fases})
 
-        formulario = relacionarForm(request.POST, request.FILES, instance = item)
-        #formulario.fields['antecesorHorizontal'].queryset=Item.objects.filter(nombre='item1')
-        formulario.fields['antecesorHorizontal'].queryset = Item.objects.filter(fase=item.fase)
-        formulario.fields['antecesorVertical'].queryset = Item.objects.filter(fase=item.fase)
+
+def relacItem(request, codigo,codigop):
+    """Permite registrar un nuevo item a partir de un tipo de item dentro del proyecto en el sistema. Recibe como :param request que
+    es la peticion de la operacion.Retorna :return el formulario con los campos a completar, se acepta la operacion
+    y vuelve a la interfaz donde se despliega la lista de items registrados en el sistema"""
+    item=Item.objects.get(pk=codigo)
+    itemRelacionado=Item.objects.get(pk=codigop)
+    if (item.fase.id == itemRelacionado.fase.id):
+        item.antecesorVertical=itemRelacionado
+    else:
+        item.antecesorHorizontal=itemRelacionado
+
+    if request.method == "POST":
+        formulario = EliminarItemForm(request.POST, request.FILES, instance = item)
         if formulario.is_valid():
             formulario.save()
             return HttpResponseRedirect('/item')
     else:
-        formulario=relacionarForm(instance = item)
-        formulario.fields['antecesorHorizontal'].queryset = Item.objects.filter(fase=item.fase)
-        formulario.fields['antecesorVertical'].queryset = Item.objects.filter(fase=item.fase)
-    return render(request,'relacionarItem.html', {'formulario': formulario})
+        formulario=EliminarItemForm(instance = item)
+    return render(request,'relacionarItems.html', {'formulario': formulario})
+
+
+
+
+
+
 
 ######Vista de la lista de items pertenecientes a la fase selecionada##########
  ################################################################################
