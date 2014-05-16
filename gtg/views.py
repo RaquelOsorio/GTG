@@ -32,7 +32,7 @@ from gtg.forms import TipoItemForm
 from gtg.models import Item
 from gtg.forms import ItemForm
 from gtg.forms import ItemReversionar
-
+from django.contrib import messages
 from gtg.forms import ItemForm1
 from gtg.models import ItemRelacion
 from gtg.forms import ItemRelacionForm
@@ -610,6 +610,9 @@ def registrarItem(request,codigo):
     formulario = ItemForm(request.POST, instance=item)
     if formulario.is_valid():
         formulario.save()
+        messages.success(request,
+                         'El item "' + item.nombre + '" ha sido creado con exito')
+
         return HttpResponseRedirect('/item')
     else:
         return render(request, 'item_form.html', {'formulario': formulario,})
@@ -735,181 +738,6 @@ def revivirItem(request, codigo):
         formulario=EliminarItemForm(instance = item)
     return render(request,'revivirItem.html', {'formulario': formulario})
 
-####desde aqui modifique
-
-TEMPL_RELACION_FORM = 'form_relacion.html'
-TEMPL_RELACION_LISTA = 'lista_relaciones.html'
-
-
-class CreaRelacionView(CreateView):
-
-    """
-    Vista que permite crear relaciones entre items.
-    De una misma fase.
-    De fases antecesoras.
-    """
-
-    model = ItemRelacion
-    template_name = TEMPL_RELACION_FORM
-    form_class = ItemRelacionForm
-    valido = True
-
-
-    #def get_success_url(self):
-     #   return reverse('relacion_listar', codigo)
-
-    def get_form(self, form_class):
-        form = CreateView.get_form(self, form_class)
-        #el selector solo debe desplegar los items del proyecto
-        #fases = Fase.objects.filter(idproyecto_id=self.kwargs['idproyecto'])
-
-        fases = Fases1.objects.filter(proyectos=self.kwargs['id'])
-        #lista los items que coinciden con las fases de proyecto
-        items = Item.objects.filter(fase=fases).exclude(estado=Item.E_DESACTIVADO)
-        #cargamos los selectores con los items y mostrando a que fase pertenecen
-        opciones = [(item.pk,'['+ item.fase.__str__()[0:5]+'..] ' +\
-                     '[' + item.estado +']  | ' +
-                      item.nombre[0:40] ) for item in items]
-        form.fields['origen'].choices = opciones
-        form.fields['destino'].choices = opciones
-        return form
-"""
-    def get_context_data(self, **kwargs):
-        context = CreateView.get_context_data(self, **kwargs)
-        context['action'] = reverse('relacion_crear',codigo)
-        if not self.valido:
-            context['nodefault'] = 'index2.html'
-
-        return context
-
-    def form_valid(self, form):
-        #establece el tipo de la relacion , si es interna a la fase o externa
-        # es decir padre e hijo o antecesor sucesor.
-        form.instance.set_tipo()
-        origen = form.instance.origen
-        destino = form.instance.destino
-        #Serie de validaciones
-        if self.valid_relacion_unica(origen, destino):
-            messages.error(self.request, 'La relacion ya existe: ' + \
-                           origen.__str__()+ ' --> '+ destino.__str__())
-            self.valido = False
-            return self.form_invalid(form)
-
-        if self.valid_existe_ciclo(form.instance.origen_id, form.instance.destino_id):
-            messages.error(self.request, 'se ha detectado un ciclo: ' + \
-                origen.__str__()+ ' --> '+ destino.__str__())
-
-            self.valido = False
-            return self.form_invalid(form)
-
-
-
-        return CreateView.form_valid(self, form)
-
-    def form_invalid(self, form):
-        self.valido = False
-        return CreateView.form_invalid(self, form)
-
-    @classmethod
-    def __lista_antecesores(self,idItem):
-        #retorno = list(db.session.query(Relacion).filter(Relacion.idSucesor == idItem ).all())
-        retorno = ItemRelacion.objects.filter(destino_id=idItem)
-        antecesores = []
-        for r in retorno:
-            antecesores.append(r.origen_id)
-            antecesores += self.__lista_antecesores(r.origen_id)
-        return antecesores
-
-    @classmethod
-    def __lista_sucesores(self,idItem):
-        #retorno = list(db.session.query(Relacion).filter(Relacion.idAntecesor == idItem ).all())
-        retorno = ItemRelacion.objects.filter(origen_id=idItem)
-        sucesores = []
-        for r in retorno:
-            sucesores.append(r.destino_id)
-            sucesores += self.__lista_sucesores(r.destino_id)
-        return sucesores
-
-    @classmethod
-    def valid_existe_ciclo(self, idorigen, iddestino):
-
-
-        Destecta un ciclo en un par de items (origen , destino).
-
-        Se carga listas todos los de origenes posibles y destinos posibles
-        Se itera para verificar si existe alguna forma de llegar
-        al origen por medio del destino
-        Retorna True si existe el camino.
-
-
-        # caso autociclo
-        if idorigen == iddestino:
-            return True
-        a = self.__lista_antecesores(idorigen)
-        b = self.__lista_sucesores(iddestino)
-        # caso sencillo 1->2, 2->1
-        for ante in a:
-            if str(ante) == str(iddestino):
-                return True
-        #otros casos
-        for isgte in a:
-            for iant in b:
-                if( isgte == iant):
-                    return True
-
-        return False
-
-    @classmethod
-    def valid_relacion_unica(self,porigen, pdestino):
-
-
-        Valida que aun no exista la relacion.
-        -Tiene en cuenta que pueden existir relaciones eliminadas y las ignora.
-
-
-        relacion = ItemRelacion.objects.filter(Q(origen=porigen) & Q(destino=pdestino)).\
-        exclude(estado=ItemRelacion.E_ELIMINADO)
-        return relacion.count()
-
-class ListaRelacionesView(ListView,codigo):
-
-
-    Vista que consulta las relaciones a nivel de :
-    -Fase.
-    -Item.
-    -Proyecto en general.
-
-    model = ItemRelacion
-    template_name = TEMPL_RELACION_LISTA
-
-    def get_queryset(self):
-
-        #lista las relaciones que tiene una fase
-        if self.kwargs.get('fase',None):
-            object_list = None
-
-        #lista todas las relaciones que implican ese item
-        if self.kwargs.get('nroItem',None):
-            object_list = ItemRelacion.objects.filter().all()
-
-        #lista todas las relaciones que implican ese item
-        if self.kwargs.get(codigo,None):
-            #No es optima esta consulta
-            fases=Fases1.objects.filter(proyectos=codigo)
-
-            #fases = Fases1.objects.filter(idproyecto_id=self.kwargs.get('idproyecto'))
-            items = Item.objects.filter(fase=fases)
-
-            object_list = ItemRelacion.objects.filter((Q(origen__in=items)|\
-                                                       Q(destino__in=items)) &\
-                                                    Q(estado=ItemRelacion.E_ACTIVO))
-        return object_list
-
-    def get_context_data(self, **kwargs):
-        context = ListView.get_context_data(self, **kwargs)
-        context['proyecto'] = self.kwargs.get(codigo)
-        return context
-"""
 @login_required(login_url='/ingresar')
 def generarlb(request, codigo):
     """Permite generar una linea base dentro del proyecto en el sistema. Recibe como :param request que

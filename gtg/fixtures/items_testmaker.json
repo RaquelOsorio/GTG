@@ -9,12 +9,12 @@
         "is_active": true, 
         "is_superuser": true, 
         "is_staff": true, 
-        "last_login": "2014-05-15T00:19:15.849Z", 
+        "last_login": "2014-05-15T20:45:44.248Z", 
         "groups": [], 
         "user_permissions": [], 
-        "password": "pbkdf2_sha256$12000$xBvvf4i3xIuj$CbeVlOYOK11x1maAbjqGZM3xdPgWIp+asCtTu894b7A=", 
+        "password": "pbkdf2_sha256$12000$eOHccmUMLoQl$NE0giNld/z9TRRiZAII83DLqn3P93xFswNCkUvBS1rE=", 
         "email": "", 
-        "date_joined": "2014-05-15T00:18:20.506Z"
+        "date_joined": "2014-05-15T20:42:58.595Z"
     }
 },
 {
@@ -27,19 +27,19 @@
         "is_active": true, 
         "is_superuser": false, 
         "is_staff": false, 
-        "last_login": "2014-05-15T00:20:53.906Z", 
+        "last_login": "2014-05-15T20:47:30.947Z", 
         "groups": [], 
         "user_permissions": [], 
-        "password": "pbkdf2_sha256$12000$t5vOEWeWfV7N$o6KDdbo6HyvfSAddnqiDpCIqqdH5//a1M0CCWhvBdEQ=", 
+        "password": "pbkdf2_sha256$12000$08FwqcNy5edv$nGDPooZsCgyRNlo9mTO6nkevuIH/a1UfHGPN3v6q/94=", 
         "email": "", 
-        "date_joined": "2014-05-15T00:19:38.586Z"
+        "date_joined": "2014-05-15T20:46:01.995Z"
     }
 },
 {
-    "pk": "6f98gfgfjgvph6m38qbs2xaer48q5h1q", 
+    "pk": "u2x2g8phdn1bfre9o3ctoevwvpts6c9i", 
     "model": "sessions.session", 
     "fields": {
-        "expire_date": "2014-05-29T00:20:53.918Z", 
+        "expire_date": "2014-05-29T20:47:31.003Z", 
         "session_data": "M2QyOWUyZDA2MjVhNTUzMGNiOTRiYWFiODk0YTUzNzc5ZWUyYWQ2NDp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6Mn0="
     }
 },
@@ -71,7 +71,7 @@
     "pk": 1, 
     "model": "gtg.proyectos", 
     "fields": {
-        "fechaMod": "2014-05-14", 
+        "fechaMod": "2014-05-15", 
         "fechaInicio": "2014-05-07", 
         "lider": 2, 
         "complejidad": 1, 
@@ -81,13 +81,26 @@
     }
 },
 {
+    "pk": 2, 
+    "model": "gtg.proyectos", 
+    "fields": {
+        "fechaMod": "2014-05-15", 
+        "fechaInicio": "2014-05-07", 
+        "lider": 2, 
+        "complejidad": 1, 
+        "nombre": "gtg", 
+        "estado": "PEN", 
+        "fechaFin": "2015-05-07"
+    }
+},
+{
     "pk": 1, 
     "model": "gtg.fases1", 
     "fields": {
-        "fechaMod": "2014-05-14", 
+        "fechaMod": "2014-05-15", 
         "proyectos": 1, 
         "fechaInicio": "2014-05-07", 
-        "descripcion": "jkjkj", 
+        "descripcion": "dfdf", 
         "nombre": "fase1", 
         "estado": "INA", 
         "fechaFin": "2015-05-07"
@@ -97,37 +110,11 @@
     "pk": 2, 
     "model": "gtg.fases1", 
     "fields": {
-        "fechaMod": "2014-05-14", 
+        "fechaMod": "2014-05-15", 
         "proyectos": 1, 
         "fechaInicio": "2014-05-07", 
-        "descripcion": "hjhjh", 
-        "nombre": "fase4", 
-        "estado": "INA", 
-        "fechaFin": "2015-05-07"
-    }
-},
-{
-    "pk": 3, 
-    "model": "gtg.fases1", 
-    "fields": {
-        "fechaMod": "2014-05-14", 
-        "proyectos": 1, 
-        "fechaInicio": "2014-05-07", 
-        "descripcion": "jhj", 
-        "nombre": "fase3", 
-        "estado": "INA", 
-        "fechaFin": "2015-05-07"
-    }
-},
-{
-    "pk": 4, 
-    "model": "gtg.fases1", 
-    "fields": {
-        "fechaMod": "2014-05-14", 
-        "proyectos": 1, 
-        "fechaInicio": "2014-05-07", 
-        "descripcion": "sdsd", 
-        "nombre": "f4", 
+        "descripcion": "sdsds", 
+        "nombre": "fase2", 
         "estado": "INA", 
         "fechaFin": "2015-05-07"
     }
@@ -136,7 +123,7 @@
     "pk": 1, 
     "model": "gtg.tipoatributo", 
     "fields": {
-        "descripcion": "jkjkj", 
+        "descripcion": "khh", 
         "nombre": "Atributo1", 
         "tipo": "Entero"
     }
@@ -145,7 +132,7 @@
     "pk": 1, 
     "model": "gtg.tipoitem", 
     "fields": {
-        "descripcion": "klklk", 
+        "descripcion": "ddfdd", 
         "nombre": "tipo1", 
         "tipoAtributo": 1
     }
@@ -155,63 +142,23 @@
     "model": "gtg.lineabase", 
     "fields": {
         "estado": "ABIERTA", 
-        "fase": null
-    }
-},
-{
-    "pk": 2, 
-    "model": "gtg.lineabase", 
-    "fields": {
-        "estado": "ABIERTA", 
-        "fase": null
-    }
-},
-{
-    "pk": 3, 
-    "model": "gtg.lineabase", 
-    "fields": {
-        "estado": "ABIERTA", 
         "fase": 1
-    }
-},
-{
-    "pk": 4, 
-    "model": "gtg.lineabase", 
-    "fields": {
-        "estado": "ABIERTA", 
-        "fase": 4
-    }
-},
-{
-    "pk": 5, 
-    "model": "gtg.lineabase", 
-    "fields": {
-        "estado": "ABIERTA", 
-        "fase": 4
-    }
-},
-{
-    "pk": 6, 
-    "model": "gtg.lineabase", 
-    "fields": {
-        "estado": "ABIERTA", 
-        "fase": 4
     }
 },
 {
     "pk": 1, 
     "model": "gtg.item", 
     "fields": {
-        "antecesorVertical": null, 
+        "antecesorVertical": 1, 
         "sucesorHorizontal": null, 
         "lb": 1, 
         "antecesorHorizontal": null, 
-        "sucesorVertical": null, 
+        "sucesorVertical": 2, 
         "tipoItem": 1, 
         "version": 1, 
-        "descripcion": "jkjk", 
+        "descripcion": "dsds", 
         "nombre": "Item1", 
-        "fechaModi": "2014-05-14", 
+        "fechaModi": "2014-05-15", 
         "estado": "VAL", 
         "prioridad": 1, 
         "fase": 1
@@ -228,164 +175,12 @@
         "sucesorVertical": null, 
         "tipoItem": 1, 
         "version": 1, 
-        "descripcion": "ghghg", 
+        "descripcion": "fdfdf", 
         "nombre": "Item2", 
-        "fechaModi": "2014-05-14", 
-        "estado": "VAL", 
-        "prioridad": 1, 
-        "fase": 1
-    }
-},
-{
-    "pk": 3, 
-    "model": "gtg.item", 
-    "fields": {
-        "antecesorVertical": null, 
-        "sucesorHorizontal": null, 
-        "lb": 1, 
-        "antecesorHorizontal": null, 
-        "sucesorVertical": null, 
-        "tipoItem": 1, 
-        "version": 2, 
-        "descripcion": "jkjk", 
-        "nombre": "Item1", 
-        "fechaModi": "2014-05-14", 
-        "estado": "VAL", 
-        "prioridad": 1, 
-        "fase": 1
-    }
-},
-{
-    "pk": 4, 
-    "model": "gtg.item", 
-    "fields": {
-        "antecesorVertical": null, 
-        "sucesorHorizontal": null, 
-        "lb": 1, 
-        "antecesorHorizontal": null, 
-        "sucesorVertical": null, 
-        "tipoItem": 1, 
-        "version": 1, 
-        "descripcion": "ddfdf", 
-        "nombre": "Item3", 
-        "fechaModi": "2014-05-14", 
-        "estado": "VAL", 
-        "prioridad": 1, 
-        "fase": 2
-    }
-},
-{
-    "pk": 5, 
-    "model": "gtg.item", 
-    "fields": {
-        "antecesorVertical": null, 
-        "sucesorHorizontal": null, 
-        "lb": 1, 
-        "antecesorHorizontal": null, 
-        "sucesorVertical": null, 
-        "tipoItem": 1, 
-        "version": 1, 
-        "descripcion": "jhjhjh", 
-        "nombre": "Item5", 
-        "fechaModi": "2014-05-14", 
-        "estado": "VAL", 
-        "prioridad": 1, 
-        "fase": 1
-    }
-},
-{
-    "pk": 6, 
-    "model": "gtg.item", 
-    "fields": {
-        "antecesorVertical": null, 
-        "sucesorHorizontal": null, 
-        "lb": null, 
-        "antecesorHorizontal": null, 
-        "sucesorVertical": null, 
-        "tipoItem": 1, 
-        "version": 1, 
-        "descripcion": "jhhj", 
-        "nombre": "Item6", 
-        "fechaModi": "2014-05-14", 
-        "estado": "REDAC", 
-        "prioridad": 1, 
-        "fase": 1
-    }
-},
-{
-    "pk": 7, 
-    "model": "gtg.item", 
-    "fields": {
-        "antecesorVertical": null, 
-        "sucesorHorizontal": null, 
-        "lb": null, 
-        "antecesorHorizontal": null, 
-        "sucesorVertical": null, 
-        "tipoItem": 1, 
-        "version": 1, 
-        "descripcion": "kk", 
-        "nombre": "Item7", 
-        "fechaModi": "2014-05-14", 
-        "estado": "TER", 
-        "prioridad": 1, 
-        "fase": 3
-    }
-},
-{
-    "pk": 8, 
-    "model": "gtg.item", 
-    "fields": {
-        "antecesorVertical": null, 
-        "sucesorHorizontal": null, 
-        "lb": 4, 
-        "antecesorHorizontal": null, 
-        "sucesorVertical": null, 
-        "tipoItem": 1, 
-        "version": 1, 
-        "descripcion": "ssd", 
-        "nombre": "i3", 
-        "fechaModi": "2014-05-14", 
-        "estado": "VAL", 
-        "prioridad": 1, 
-        "fase": 4
-    }
-},
-{
-    "pk": 9, 
-    "model": "gtg.item", 
-    "fields": {
-        "antecesorVertical": null, 
-        "sucesorHorizontal": null, 
-        "lb": 3, 
-        "antecesorHorizontal": null, 
-        "sucesorVertical": null, 
-        "tipoItem": 1, 
-        "version": 1, 
-        "descripcion": "sdsds", 
-        "nombre": "i5", 
-        "fechaModi": "2014-05-15", 
-        "estado": "VAL", 
-        "prioridad": 1, 
-        "fase": 1
-    }
-},
-{
-    "pk": 10, 
-    "model": "gtg.item", 
-    "fields": {
-        "antecesorVertical": null, 
-        "sucesorHorizontal": null, 
-        "lb": null, 
-        "antecesorHorizontal": null, 
-        "sucesorVertical": null, 
-        "tipoItem": 1, 
-        "version": 1, 
-        "descripcion": "jhjhj", 
-        "nombre": "i6", 
         "fechaModi": "2014-05-15", 
         "estado": "REDAC", 
-        "prioridad": 9, 
-        "fase": 4
+        "prioridad": 1, 
+        "fase": 1
     }
 }
 ]

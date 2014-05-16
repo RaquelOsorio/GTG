@@ -3,6 +3,7 @@ import unittest
 from django.test import Client
 from django.test import TestCase
 from django.contrib.auth.models import User
+from django.contrib.auth import SESSION_KEY
 
 class Test_modificar_usuario(TestCase):
     def test_detalle_usuarios(self):
