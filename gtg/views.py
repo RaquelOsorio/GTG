@@ -10,6 +10,7 @@ from gtg.models import Usuario
 from gtg.forms import usuarioForm
 from gtg.forms import rolForm
 from gtg.forms import importarFaseForm
+from gtg.forms import finalizarFaseForm
 from django.shortcuts import render, render_to_response, redirect
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
@@ -685,16 +686,18 @@ def relacItem(request, codigo,codigop):
     itemRelacionado=Item.objects.get(pk=codigop)
     if (item.fase.id == itemRelacionado.fase.id):
         item.antecesorVertical=itemRelacionado
+        item.antecesorHorizontal=None
     else:
         item.antecesorHorizontal=itemRelacionado
-
+        item.antecesorVertical=None
     if request.method == "POST":
-        formulario = EliminarItemForm(request.POST, request.FILES, instance = item)
+
+        formulario = relacionarForm(request.POST, request.FILES, instance = item)
         if formulario.is_valid():
             formulario.save()
             return HttpResponseRedirect('/item')
     else:
-        formulario=EliminarItemForm(instance = item)
+        formulario=relacionarForm(instance = item)
     return render(request,'relacionarItems.html', {'formulario': formulario})
 
 
@@ -1006,4 +1009,17 @@ def importarFase(request, codigo):
     else:
         return render(request, 'faseImport.html', {'formulario': formulario})
 
+def finalizarFase(request, codigo):
+    fase = Fases1.objects.get(pk=codigo)
+    formulario = finalizarFaseForm(request.POST, instance=fase)
+    item= Item.objects.all()
+    for i in item:
+        if (i.fase== fase and i.estado!= 'VAL'):
+            return render(request, 'faseNofinalizada.html')
+    fase.estado= 'FIN'
+    if formulario.is_valid():
+        formulario.save()
+        return HttpResponseRedirect('/fase')
+    else:
+        return render(request, 'faseImport.html', {'formulario': formulario})
 

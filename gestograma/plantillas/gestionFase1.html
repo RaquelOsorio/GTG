@@ -32,7 +32,7 @@
                                         <th>Gestion Item</th>
                                         <th>Linea Base</th>
                                         <th>Importar Fase</th>
-
+                                        <th>Finalizar Fase</th>
                                 </tr>
                             {% for f in fases %}
 
@@ -41,9 +41,17 @@
                                         <td>{{f.fechaInicio}}</td>
                                         <td>{{f.nombre}}</td>
                                         <td>{{ f.estado }}</td>
-                                        <td><a class="button" href="/itemFase/{{f.id}}"> Ir a>> </a></td>
-                                        <td><a class="button" href="/lb/{{f.id}}"> Ir a>> </a></td>
-                                        <td><a class="button" href="/importarFase/{{f.id}}"> Ir a>> </a></td>
+                                    {% if f.estado != 'FIN' %}
+                                        <td><center><a class="button" href="/itemFase/{{f.id}}"> Ir a>> </a></center></td>
+                                        <td><center><a class="button" href="/lb/{{f.id}}"> Ir a>> </a></center></td>
+                                        <td><center><a class="button" href="/importarFase/{{f.id}}"> Ir a>> </a></center></td>
+                                        <td><center><a class="button" href="/finalizarFase/{{f.id}}"> Ir a>> </a></center></td>
+                                    {% else %}
+                                        <td><center>Inhabilitado</center></td>
+                                        <td><center>Inhabilitado</center></td>
+                                        <td><center>Inhabilitado</center></td>
+                                        <td><center>Inhabilitado</center></td>
+                                    {% endif %}
                                 </tr>
 
                              {% empty %}

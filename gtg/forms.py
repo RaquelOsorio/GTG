@@ -128,20 +128,13 @@ class relacionarForm(forms.ModelForm):
         ite=Item.objects.filter(self)
         ite2=Item.objects.filter(self)
 
-        while(ite.antecesorHorizontal != None or ite.antecesorVerticar != None):
+        while(ite.sucesorVertical != None):
+            ite=ite.sucesorVertical
             print self.cleaned_data.get('nombre')
-            if (ite == ite2):
+            if (ite == antecesorV):
                 raise forms.ValidationError('Se forma un ciclo.')
             else:
                 return self.cleaned_data
-            if(ite.antecesorHorizontal != None and ite.antecesorHorizontal.antecesorHorizontal != None):
-                ite.antecesorHorizontal=ite.antecesorHorizontal.antecesorHorizontal
-            if(ite.antecesorHorizontal != None and ite.antecesorHorizontal.antecesorVertical != None):
-                ite.antecesorVertical=ite.antecesorHorizontal.antecesorVertical
-            if(ite.antecesorVertical != None and ite.antecesorVertical.antecesorVertical != None):
-                ite.antecesorVertical=ite.antecesorVertical.antecesorVertical
-            if(ite.antecesorVertical != None and ite.antecesorVertical.antecesorHorizontal != None):
-                ite.antecesorHorizontal=ite.antecesorHorizontal.antecesorHorizontal
 
         return self.cleaned_data
 
@@ -186,3 +179,8 @@ class importarFaseForm(forms.ModelForm):
     class Meta:
         model=Fases1
         fields=('proyectos','nombre',)
+
+class finalizarFaseForm(forms.ModelForm):
+    class Meta:
+        model=Fases1
+        fields=()

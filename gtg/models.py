@@ -179,6 +179,9 @@ class lineaBase(models.Model):
     fase= models.ForeignKey(Fases1,null=True, blank= True)
     itemsAsociados= models.ForeignKey(Item,null=True, blank= True)
 
+    def __unicode__(self):
+         return self.estado
+
 
 class ItemRelacion(models.Model):
     """
