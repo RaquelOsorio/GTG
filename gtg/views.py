@@ -296,27 +296,7 @@ def registrarFase(request,codigo):
     else:
         return render(request, 'fase_form.html', {'formulario': formulario})
 
-    """proy=RolUsuario.objects.all()
-    request.POST=request.POST.copy()
-    request.POST.__setitem__('proyecto',codigo)
-    proyecto=Proyectos.objects.get(pk=codigo)
-    form = Fases1Form(request.POST or None)
-    if request.method == "POST":
-        formulario = Fases1Form(request.POST, request.FILES)
-        if formulario.is_valid():
-		    #forma para poder ingresar a los datos del formulario, tal vez para hacer nuestras propias validaciones
-            print "==============================================="
-            print formulario.cleaned_data['nombre']
-            print "==============================================="
-            f = Fases1(nombre=request.POST['nombre'], descripcion=request.POST['descripcion'],proyectos=proyecto,)
 
-            formulario.save()
-            return HttpResponseRedirect('/fase')
-    else:
-        formulario=Fases1Form()
-
-	return render(request, 'fase_form.html', {'formulario': formulario,'proy':proy})
-    """
 
 @login_required(login_url='/ingresar')
 def editarUsuario(request, codigo):
@@ -637,38 +617,39 @@ def modificarItem(request, codigo):
     return render(request,'modificarItem.html', {'formulario': formulario})
 
 
-def reversionarItem(request, codigo):
+def reversionarItem(request,codigo):
     it=Item.objects.all()
     item = Item.objects.get(pk=codigo)
     ultima_version=0
     priori=0
+    relacionado=0
     for itm in it:
         if(itm.nombre==item.nombre and itm.version >= ultima_version):
             ultima_version=itm.version
         if(itm.nombre==item.nombre and itm.prioridad>= priori):
             priori=itm.prioridad
-    itms=Item(antecesorHorizontal=item.antecesorHorizontal,sucesorHorizontal=item.sucesorHorizontal,sucesorVertical=item.sucesorVertical,
-            antecesorVertical=item.antecesorVertical,tipoItem=item.tipoItem,fase=item.fase,version=item.version, nombre=item.nombre, estado=item.estado,
-            prioridad=-1, descripcion=item.descripcion)
 
     itemR = Item( antecesorHorizontal=item.antecesorHorizontal,sucesorHorizontal=item.sucesorHorizontal,sucesorVertical=item.sucesorVertical,
             antecesorVertical=item.antecesorVertical,tipoItem=item.tipoItem,fase=item.fase,version=ultima_version+1, nombre=item.nombre, estado=item.estado,
-            prioridad=priori+1, descripcion=item.descripcion)
+            prioridad=priori+1)
 
     formulario = ItemReversionar(request.POST, instance=itemR)
-    if formulario.is_valid():
-        formulario.save()
-
-        return render(request, 'item_form1.html', {'formulario': formulario})
+    if request.method == "POST":
+        formulario = ItemReversionar(request.POST, instance=itemR)
+        if formulario.is_valid():
+            formulario.save()
+            return HttpResponseRedirect('/item')
     else:
-        return render(request, 'item_form1.html', {'formulario': formulario})
+        formulario=ItemReversionar(request.POST, instance=itemR)
+    return render(request,'item_form1.html', {'formulario': formulario,'item':item})
 
 
 
 def relacionarItem(request, codigo,codigop):
     """Permite visualizar la lista de posibles items para relacionar a otro preciamente
-     seleccionado :param request, que es la peticion de la operacion y el codigo del item
-    a relacionar. Retorna :return a la interfaz de confirmacion de la operacion, esto es,despliega el
+     seleccionado
+     \n@param request, que es la peticion de la operacion y el codigo del item
+    a relacionar.\n Retorna @return a la interfaz de confirmacion de la operacion, esto es,despliega el
      formulario con las opciones de relacionar con un antecesor o sucesor del listado de items de existenes en el sistema"""
 
     item=Item.objects.get(pk=codigo)
@@ -679,8 +660,9 @@ def relacionarItem(request, codigo,codigop):
 
 
 def relacItem(request, codigo,codigop):
-    """Permite registrar un nuevo item a partir de un tipo de item dentro del proyecto en el sistema. Recibe como :param request que
-    es la peticion de la operacion.Retorna :return el formulario con los campos a completar, se acepta la operacion
+    """Permite registrar un nuevo item a partir de un tipo de item dentro del proyecto en el sistema. \nRecibe como
+    @param request que
+    es la peticion de la operacion.Retorna \n@return el formulario con los campos a completar, se acepta la operacion
     y vuelve a la interfaz donde se despliega la lista de items registrados en el sistema"""
     item=Item.objects.get(pk=codigo)
     itemRelacionado=Item.objects.get(pk=codigop)
@@ -710,8 +692,8 @@ def relacItem(request, codigo,codigop):
  ################################################################################
 def itemFase(request, codigo):
     """permite acceder a la interfaz de opciones de administracion para fases donde se despliega la lista de fases
-    de cierto proyecto seleccionado. Recibe como :param request que es la peticion de la operacion y el codigo
-    del proyecto, con el cual se filtra todas las fases pertenecientes al mismo. :return la lista de fases"""
+    de cierto proyecto seleccionado. \nRecibe como @param request que es la peticion de la operacion y el codigo
+    del proyecto, con el cual se filtra todas las fases pertenecientes al mismo. \n@return la lista de fases"""
     items=Item.objects.filter(fase=codigo)
     fase=Fases1.objects.get(pk=codigo)
     return render_to_response('gestionItem1.html',{'items': items, 'fase':fase }, context_instance=RequestContext(request))
@@ -818,147 +800,10 @@ class CreaRelacionView(CreateView):
         form.fields['origen'].choices = opciones
         form.fields['destino'].choices = opciones
         return form
-"""
-    def get_context_data(self, **kwargs):
-        context = CreateView.get_context_data(self, **kwargs)
-        context['action'] = reverse('relacion_crear',codigo)
-        if not self.valido:
-            context['nodefault'] = 'index2.html'
-
-        return context
-
-    def form_valid(self, form):
-        #establece el tipo de la relacion , si es interna a la fase o externa
-        # es decir padre e hijo o antecesor sucesor.
-        form.instance.set_tipo()
-        origen = form.instance.origen
-        destino = form.instance.destino
-        #Serie de validaciones
-        if self.valid_relacion_unica(origen, destino):
-            messages.error(self.request, 'La relacion ya existe: ' + \
-                           origen.__str__()+ ' --> '+ destino.__str__())
-            self.valido = False
-            return self.form_invalid(form)
-
-        if self.valid_existe_ciclo(form.instance.origen_id, form.instance.destino_id):
-            messages.error(self.request, 'se ha detectado un ciclo: ' + \
-                origen.__str__()+ ' --> '+ destino.__str__())
-
-            self.valido = False
-            return self.form_invalid(form)
-
-
-
-        return CreateView.form_valid(self, form)
-
-    def form_invalid(self, form):
-        self.valido = False
-        return CreateView.form_invalid(self, form)
-
-    @classmethod
-    def __lista_antecesores(self,idItem):
-        #retorno = list(db.session.query(Relacion).filter(Relacion.idSucesor == idItem ).all())
-        retorno = ItemRelacion.objects.filter(destino_id=idItem)
-        antecesores = []
-        for r in retorno:
-            antecesores.append(r.origen_id)
-            antecesores += self.__lista_antecesores(r.origen_id)
-        return antecesores
-
-    @classmethod
-    def __lista_sucesores(self,idItem):
-        #retorno = list(db.session.query(Relacion).filter(Relacion.idAntecesor == idItem ).all())
-        retorno = ItemRelacion.objects.filter(origen_id=idItem)
-        sucesores = []
-        for r in retorno:
-            sucesores.append(r.destino_id)
-            sucesores += self.__lista_sucesores(r.destino_id)
-        return sucesores
-
-    @classmethod
-    def valid_existe_ciclo(self, idorigen, iddestino):
-
-
-        Destecta un ciclo en un par de items (origen , destino).
-
-        Se carga listas todos los de origenes posibles y destinos posibles
-        Se itera para verificar si existe alguna forma de llegar
-        al origen por medio del destino
-        Retorna True si existe el camino.
-
-
-        # caso autociclo
-        if idorigen == iddestino:
-            return True
-        a = self.__lista_antecesores(idorigen)
-        b = self.__lista_sucesores(iddestino)
-        # caso sencillo 1->2, 2->1
-        for ante in a:
-            if str(ante) == str(iddestino):
-                return True
-        #otros casos
-        for isgte in a:
-            for iant in b:
-                if( isgte == iant):
-                    return True
-
-        return False
-
-    @classmethod
-    def valid_relacion_unica(self,porigen, pdestino):
-
-
-        Valida que aun no exista la relacion.
-        -Tiene en cuenta que pueden existir relaciones eliminadas y las ignora.
-
-
-        relacion = ItemRelacion.objects.filter(Q(origen=porigen) & Q(destino=pdestino)).\
-        exclude(estado=ItemRelacion.E_ELIMINADO)
-        return relacion.count()
-
-class ListaRelacionesView(ListView,codigo):
-
-
-    Vista que consulta las relaciones a nivel de :
-    -Fase.
-    -Item.
-    -Proyecto en general.
-
-    model = ItemRelacion
-    template_name = TEMPL_RELACION_LISTA
-
-    def get_queryset(self):
-
-        #lista las relaciones que tiene una fase
-        if self.kwargs.get('fase',None):
-            object_list = None
-
-        #lista todas las relaciones que implican ese item
-        if self.kwargs.get('nroItem',None):
-            object_list = ItemRelacion.objects.filter().all()
-
-        #lista todas las relaciones que implican ese item
-        if self.kwargs.get(codigo,None):
-            #No es optima esta consulta
-            fases=Fases1.objects.filter(proyectos=codigo)
-
-            #fases = Fases1.objects.filter(idproyecto_id=self.kwargs.get('idproyecto'))
-            items = Item.objects.filter(fase=fases)
-
-            object_list = ItemRelacion.objects.filter((Q(origen__in=items)|\
-                                                       Q(destino__in=items)) &\
-                                                    Q(estado=ItemRelacion.E_ACTIVO))
-        return object_list
-
-    def get_context_data(self, **kwargs):
-        context = ListView.get_context_data(self, **kwargs)
-        context['proyecto'] = self.kwargs.get(codigo)
-        return context
-"""
 @login_required(login_url='/ingresar')
 def generarlb(request, codigo):
-    """Permite generar una linea base dentro del proyecto en el sistema. Recibe como :param request que
-    es la peticion de la operacion.Retorna :return el formulario con los campos a completar, se acepta la operacion
+    """Permite generar una linea base dentro del proyecto en el sistema. \nRecibe como @param request que
+    es la peticion de la operacion.\nRetorna @return el formulario con los campos a completar, se acepta la operacion
     y vuelve a la interfaz donde se despliega la lista de tipos de items registrados en el sistema"""
     fase= Fases1.objects.get(pk=codigo)
     lineaB= lineaBase(fase=fase)
@@ -1015,11 +860,22 @@ def finalizarFase(request, codigo):
     item= Item.objects.all()
     for i in item:
         if (i.fase== fase and i.estado!= 'VAL'):
-            return render(request, 'faseNofinalizada.html')
+            return render(request, 'faseNofinalizada.html', {'fase':codigo})
     fase.estado= 'FIN'
     if formulario.is_valid():
         formulario.save()
         return HttpResponseRedirect('/fase')
     else:
-        return render(request, 'faseImport.html', {'formulario': formulario})
+        return render(request, 'faseImport.html', {'formulario': formulario,'fase':codigo})
 
+
+
+@login_required(login_url='/ingresar')
+def comite(request,codigo):
+    """permite acceder a la interfaz de opciones de administracion para usuarios, \nrecibe un @param request, el cual
+    es la peticion de acceso. Esta funcion muestra la lista de usuarios registrados en el sistema con ciertas operaciones
+    a realizarse sobre ellos. \n@return la lista de usuarios en una tabla"""
+    usuarios=User.objects.all()
+    usuario=Usuario.objects.all()
+    usuariorol= RolUsuario.objects.all()
+    return render_to_response('gestionUsuario.html', {'usuarios': usuarios, 'usuario': usuario, 'usuariorol': usuariorol }, context_instance=RequestContext(request))

@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     url(r'^usuario/consultarUsuario/(?P<codigo>\d+)/$', 'gtg.views.consultarUsuario'),
 
     url(r'^usuario/$','gtg.views.usuario'),
+    url(r'^comite/(?P<codigo>\d+)/$','gtg.views.comite'),
     url(r'^proyecto/$','gtg.views.proyecto'),
 
     url(r'^usuario/$','gtg.views.usuario'),

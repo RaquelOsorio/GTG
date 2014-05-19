@@ -92,14 +92,14 @@ class ItemForm(forms.ModelForm):
 class ItemForm1(forms.ModelForm):
     class Meta:
         model= Item
-        fields=("estado","nombre","version","prioridad","descripcion","tipoItem")
+        fields=("estado","nombre","prioridad")
 
 
 
 class ItemReversionar(forms.ModelForm):
     class Meta:
         model= Item
-        fields=()
+        fields=("descripcion","prioridad")
 
 
 

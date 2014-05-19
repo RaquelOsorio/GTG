@@ -24,7 +24,9 @@
                                         <th>Version</th>
                                         <th>Tipo Item</th>
                                         <th>Tipo Atributo</th>
+                                        <th>Antecesor Horizontal</th>
 
+                                        <th>Antecesor Vertical</th>
                                         <th>Presione para editar el item</th>
                                         <th>Presione para eliminar el item</th>
                                         <th>Presione para relacionar a un item</th>
@@ -46,7 +48,16 @@
                                         <td>{{items.version}}</td>
                                         <td>{{items.tipoItem}}</td>
                                         <td>{{items.tipoItem.tipoAtributo }}</td>
-
+                                        {% if  items.antecesorHorizontal == None %}
+                                            <td>Ninguno</td>
+                                        {% else %}
+                                            <td>{{ items.antecesorHorizontal}} </td>
+                                        {% endif %}
+                                        {% if  items.antecesorVertical == None %}
+                                            <td>Ninguno</td>
+                                        {% else %}
+                                            <td>{{ items.antecesorVertical}} </td>
+                                        {% endif %}
                                 {% if items.estado == 'REDAC' or items.estado == 'TER'%}
                                      <td><a href='/item/modificarItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>
                                      <td><a href='/item/eliminarItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Eliminar'/></a></td>
