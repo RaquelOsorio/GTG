@@ -89,10 +89,10 @@ def cerrar(request):
     return HttpResponseRedirect('/')
 
 @login_required(login_url='/ingresar')
-def administrar(request):
-
+def administrar(request,codigoProyecto):
+    proyecto= Proyectos.objects.get(pk=codigoProyecto)
     """permite acceder a la siguiente interfaz de modulo de administracion """
-    return render_to_response('prueba.html',context_instance=RequestContext(request))
+    return render(request, 'index2.html', {'proyecto': proyecto })
 
 
 @login_required(login_url='/ingresar')
@@ -161,12 +161,13 @@ def lb(request, codigo):
     peticion para realizar cierta operacion. \n@return retorna la lista de lineas base existentes en el proyecto"""
     linea=lineaBase.objects.filter(id=codigo)
     fa= Fases1.objects.get(pk=codigo)
-    return render_to_response('gestionLB.html',{'lb': linea , 'fa': fa}, context_instance=RequestContext(request))
+    return render_to_response('gestionLB.html',{'lb': linea , 'fa': fa,'proyecto':fa.proyectos}, context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar')
-def cambio(request):
+def cambio(request,codigoProyecto):
     """permite acceder a la interfaz de opciones de administracion para Solicitudes de cambio"""
-    return render_to_response('gestionCambio.html',context_instance=RequestContext(request))
+    proyecto=Proyectos.objects.get(pk=codigoProyecto)
+    return render_to_response('gestionCambio.html',{'proyecto':proyecto},context_instance=RequestContext(request))
 
 
 @login_required(login_url='/ingresar')
@@ -263,19 +264,19 @@ def lista_proyectos(request):
 
 ######Vista de la lista de fases pertenecientes al proyecto selecionado##########
  ################################################################################
-def fase1(request, codigo):
+def fase1(request, codigoProyecto):
     """permite acceder a la interfaz de opciones de administracion para fases donde se despliega la lista de fases
     de cierto proyecto seleccionado.\n Recibe como @param request que es la peticion de la operacion y el codigo
     del proyecto, con el cual se filtra todas las fases pertenecientes al mismo. \n@return la lista de fases"""
 
-    fases=Fases1.objects.filter(proyectos=codigo)
-    proyecto= Proyectos.objects.get(pk=codigo)
+    fases=Fases1.objects.filter(proyectos=codigoProyecto)
+    proyecto= Proyectos.objects.get(pk=codigoProyecto)
     return render_to_response('gestionFase1.html',{'fases': fases, 'proyecto':proyecto }, context_instance=RequestContext(request))
 
-def fase(request):
-    """permite acceder a la interfaz de opciones de administracion para fases"""
-    fases=Fases1.objects.all()
-    return render_to_response('gestionFase.html',{'fases': fases }, context_instance=RequestContext(request))
+#def fase(request):
+#    """permite acceder a la interfaz de opciones de administracion para fases"""
+#    fases=Fases1.objects.all()
+#    return render_to_response('gestionFase.html',{'fases': fases }, context_instance=RequestContext(request))
 
 #############################################################################################
 ####Vista del formulario para registrar una fase dentro del proyecto seleccinado#############
@@ -289,12 +290,13 @@ def registrarFase(request,codigo):
 	"""
     proyecto = Proyectos.objects.get(pk=codigo)
     fase = Fases1(proyectos=proyecto)
+    fases=Fases1.objects.all()
     formulario = Fases1Form(request.POST, instance=fase)
     if formulario.is_valid():
         formulario.save()
-        return HttpResponseRedirect('/fase')
+        return render_to_response('gestionFase1.html',{'fases': fases, 'proyecto':fase.proyectos }, context_instance=RequestContext(request))
     else:
-        return render(request, 'fase_form.html', {'formulario': formulario})
+        return render(request, 'fase_form.html', {'formulario': formulario,'proyecto':proyecto})
 
 
 
@@ -320,28 +322,33 @@ def lista_usuarios(request):
 @login_required(login_url='/ingresar')
 def editarFase(request, codigo):
         """Permite editar fases registradas en el sistema"""
+	fases=Fases1.objects.all()
 	fase=Fases1.objects.get(pk=codigo)
+
 	if request.method == "POST":
 		formulario = Fases1Form(request.POST, request.FILES, instance = fase)
 		if formulario.is_valid():
 			formulario.save()
-			return HttpResponseRedirect('/fase')
+			return render_to_response('gestionFase1.html',{'fases': fases, 'proyecto':fase.proyectos }, context_instance=RequestContext(request))
+
 
 	else:
 		formulario=Fases1Form(instance = fase)
 
-	return render(request,'modificarFase.html', {'formulario': formulario})
+	return render(request,'modificarFase.html', {'formulario': formulario,'proyecto':fase.proyectos})
 
 @login_required(login_url='/ingresar')
 def eliminar_fase(request, codigo):
     """"""
     fase=Fases1.objects.get(pk=codigo) # request.GET.get('codigo')
-    return render_to_response('eliFase.html',{'fase':fase}, context_instance=RequestContext(request))
+    return render_to_response('eliFase.html',{'fase':fase,'proyecto':fase.proyectos}, context_instance=RequestContext(request))
 
 def eliFase(request, codigo):
     fase= Fases1.objects.get(pk=codigo)
+    fases=Fases1.objects.all()
     fase.delete()
-    return HttpResponseRedirect('/fase')
+    return render_to_response('gestionFase1.html',{'fases': fases, 'proyecto':fase.proyectos }, context_instance=RequestContext(request))
+
 
 @login_required(login_url='/ingresar')
 def editarProyecto(request, codigo):
@@ -433,20 +440,20 @@ def nuevo_rolusuario(request):
 
 
 
-@login_required(login_url='/ingresar')
-def editarFase(request, codigo):
-        """Permite editar fases registradas en el sistema"""
-	fase=Fases1.objects.get(pk=codigo)
-	if request.method == "POST":
-		formulario = Fases1Form(request.POST, request.FILES, instance = fase)
-		if formulario.is_valid():
-			formulario.save()
-			return HttpResponseRedirect('/fase')
-
-	else:
-		formulario=Fases1Form(instance = fase)
-
-	return render(request,'modificarFase.html', {'formulario': formulario})
+#@login_required(login_url='/ingresar')
+#def editarFase(request, codigo):
+ #       """Permite editar fases registradas en el sistemahdsjahda"""
+#	fase=Fases1.objects.get(pk=codigo)
+#	if request.method == "POST":
+#		formulario = Fases1Form(request.POST, request.FILES, instance = fase)
+#		if formulario.is_valid():
+#			formulario.save()
+#			return HttpResponseRedirect('/fase')
+#
+#	else:
+#		formulario=Fases1Form(instance = fase)
+#
+#	return render(request,'modificarFase.html', {'formulario': formulario})
 
 
 @login_required(login_url='/ingresar')
@@ -545,37 +552,40 @@ def eliTipoAtributo(request, codigo):
     return HttpResponseRedirect('/tipoAtributo')
 
 @login_required(login_url='/ingresar')
-def tipoItem(request):
+def tipoItem(request, codigoProyecto):
     """permite acceder a la interfaz  de tipo de Item, donde se despliega la lista de todos los tipos de items
     registrados en el sistema. \nRecibe un @param request, peticion de operacion y \n@return la lista"""
     tItem=TipoItem.objects.all()
-    return render_to_response('gestionTipoItem.html',{'tItem':tItem},context_instance=RequestContext(request))
+    proyecto=Proyectos.objects.get(pk=codigoProyecto)
+    return render_to_response('gestionTipoItem.html',{'tItem':tItem,'proyecto':proyecto},context_instance=RequestContext(request))
 
-@login_required(login_url='/ingresar')
-def registrarTipoItem(request):
-	"""Permite registrar un nuevo tipo de item a partir de un tipo de atributo dentro del proyecto en el sistema. \nRecibe como @param request que
-	es la peticion de la operacion.\nRetorna @return el formulario con los campos a completar, se acepta la operacion
-	y vuelve a la interfaz donde se despliega la lista de tipos de items registrados en el sistema"""
-	if request.method == "POST":
-		formulario = TipoItemForm(request.POST, request.FILES)
-
-		if formulario.is_valid():
-			formulario.save()
-			return HttpResponseRedirect('/tipoItem')
-
-	else:
-		formulario=TipoItemForm()
-
-	return render(request, 'tipoItem_form.html', {'formulario': formulario,})
+#@login_required(login_url='/ingresar')
+#def registrarTipoItem(request, codigoProyecto):
+#	"""Permite registrar un nuevo tipo de item a partir de un tipo de atributo dentro del proyecto en el sistema. \nRecibe como @param request que
+#	es la peticion de la operacion.\nRetorna @return el formulario con los campos a completar, se acepta la operacion
+#	y vuelve a la interfaz donde se despliega la lista de tipos de items registrados en el sistema"""
+#	proyecto=Proyectos.objects.get(pk=codigoProyecto)
+#	if request.method == "POST":
+#		formulario = TipoItemForm(request.POST, request.FILES)
+#
+#		if formulario.is_valid():
+#			formulario.save()
+#			return HttpResponseRedirect('/tipoItem')
+#
+#	else:
+#		formulario=TipoItemForm()
+#
+#	return render(request, 'tipoItem_form.html', {'formulario': formulario,'proyecto':proyecto})
 
 ############### Vista Item #####################################################
 ##############################################################################
 @login_required(login_url='/ingresar')
 @login_required(login_url='/ingresar')
-def item(request):
+def item(request, codigoProyecto):
     """permite acceder a la interfaz de Item, donde se despliega la lista de todos los items
     registrados en el sistema. Recibe un :param request, peticion de operacion y :return la lista"""
     indice=0
+    proyecto=Proyectos.objects.get(pk=codigoProyecto)
     items=Item.objects.all().order_by('nombre') #[:10]
     priori= Item.objects.all()
     for i in priori:
@@ -583,7 +593,7 @@ def item(request):
             if(it.nombre==i.nombre ):
                 it=i
     p=1
-    return render_to_response('gestionItem.html',{'items':items,'p':p},context_instance=RequestContext(request))
+    return render_to_response('gestionItem.html',{'items':items,'p':p,'proyecto':proyecto},context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar')
 def registrarItem(request,codigo):
@@ -592,12 +602,13 @@ def registrarItem(request,codigo):
     y vuelve a la interfaz donde se despliega la lista de items registrados en el sistema"""
     fase= Fases1.objects.get(pk=codigo)
     item= Item(fase=fase)
+    items=Item.objects.all()
     formulario = ItemForm(request.POST, instance=item)
     if formulario.is_valid():
         formulario.save()
-        return HttpResponseRedirect('/item')
+        return render_to_response('gestionItem.html',{'items':items,'proyecto':fase.proyectos},context_instance=RequestContext(request))
     else:
-        return render(request, 'item_form.html', {'formulario': formulario,})
+        return render(request, 'item_form.html', {'formulario': formulario,'proyecto':fase.proyectos})
 
 def modificarItem(request, codigo):
     """Permita modificar item registrados en el sistema, controla que el item en cuestion este en un estado para
@@ -605,21 +616,22 @@ def modificarItem(request, codigo):
     a modificar. \nRetorna :return a la interfaz de confirmacion de la operacion, esto es,despliega el
      formulario con todos los campos del item a modificar. Al aceptar la operacion vuelve a la interfaz del listado
       items de existenes en el sistema"""
-
+    items=Item.objects.all()
     item=Item.objects.get(pk=codigo)
     if request.method == "POST":
         formulario = ItemForm1(request.POST, request.FILES, instance = item)
         if formulario.is_valid():
             formulario.save()
-            return HttpResponseRedirect('/item')
+            return render_to_response('gestionItem.html',{'items':items,'proyecto':item.fase.proyectos},context_instance=RequestContext(request))
     else:
         formulario=ItemForm1(instance = item)
-    return render(request,'modificarItem.html', {'formulario': formulario})
+    return render(request,'modificarItem.html', {'formulario': formulario,'proyecto':item.fase.proyectos})
 
 
 def reversionarItem(request,codigo):
     it=Item.objects.all()
     item = Item.objects.get(pk=codigo)
+    items=Item.objects.all()
     ultima_version=0
     priori=0
     relacionado=0
@@ -638,10 +650,10 @@ def reversionarItem(request,codigo):
         formulario = ItemReversionar(request.POST, instance=itemR)
         if formulario.is_valid():
             formulario.save()
-            return HttpResponseRedirect('/item')
+            return render_to_response('gestionItem.html',{'items':items,'proyecto':item.fase.proyectos},context_instance=RequestContext(request))
     else:
         formulario=ItemReversionar(request.POST, instance=itemR)
-    return render(request,'item_form1.html', {'formulario': formulario,'item':item})
+    return render(request,'item_form1.html', {'formulario': formulario,'item':item,'proyecto':item.fase.proyectos})
 
 
 
@@ -656,7 +668,7 @@ def relacionarItem(request, codigo,codigop):
     proyecto=Proyectos.objects.get(pk=codigop)
     fases=Fases1.objects.filter(proyectos=proyecto)
     items=Item.objects.all()
-    return render(request,'listaRelacion.html', {'item': item,'items':items,'proyectos':proyecto,'fases':fases})
+    return render(request,'listaRelacion.html', {'item': item,'items':items,'proyecto':proyecto,'fases':fases})
 
 
 def relacItem(request, codigo,codigop):
@@ -665,6 +677,7 @@ def relacItem(request, codigo,codigop):
     es la peticion de la operacion.Retorna \n@return el formulario con los campos a completar, se acepta la operacion
     y vuelve a la interfaz donde se despliega la lista de items registrados en el sistema"""
     item=Item.objects.get(pk=codigo)
+    items=Item.objects.all()
     itemRelacionado=Item.objects.get(pk=codigop)
     if (item.fase.id == itemRelacionado.fase.id):
         item.antecesorVertical=itemRelacionado
@@ -677,10 +690,10 @@ def relacItem(request, codigo,codigop):
         formulario = relacionarForm(request.POST, request.FILES, instance = item)
         if formulario.is_valid():
             formulario.save()
-            return HttpResponseRedirect('/item')
+            return render_to_response('gestionItem.html',{'items':items,'proyecto':item.fase.proyectos},context_instance=RequestContext(request))
     else:
         formulario=relacionarForm(instance = item)
-    return render(request,'relacionarItems.html', {'formulario': formulario})
+    return render(request,'relacionarItems.html', {'formulario': formulario,'proyecto':item.fase.proyectos})
 
 
 
@@ -696,29 +709,29 @@ def itemFase(request, codigo):
     del proyecto, con el cual se filtra todas las fases pertenecientes al mismo. \n@return la lista de fases"""
     items=Item.objects.filter(fase=codigo)
     fase=Fases1.objects.get(pk=codigo)
-    return render_to_response('gestionItem1.html',{'items': items, 'fase':fase }, context_instance=RequestContext(request))
+    return render_to_response('gestionItem1.html',{'items': items, 'fase':fase,'proyecto':fase.proyectos }, context_instance=RequestContext(request))
 
-def itemTipoItem(request, codigo):
-    """permite acceder a la interfaz de opciones de administracion para tipos de items donde se despliega la lista de fases
-    de cierto proyecto seleccionado. Recibe como \n@param request que es la peticion de la operacion y el codigo
-    del item, con el cual se filtra todas los tipos de item pertenecientes al mismo. \n@return la lista de items"""
-    itemTipo=Item.objects.filter(tipoItem=codigo)
-    item= Item.objects.get(pk=codigo)
-    return render_to_response('gestionTipoItem1.html',{'itemTipo': itemTipo, 'item':item }, context_instance=RequestContext(request))
+#def itemTipoItem(request, codigo):
+ #   """permite acceder a la interfaz de opciones de administracion para tipos de items donde se despliega la lista de fases
+  #  de cierto proyecto seleccionado. Recibe como \n@param request que es la peticion de la operacion y el codigo
+   # del item, con el cual se filtra todas los tipos de item pertenecientes al mismo. \n@return la lista de items"""
+    #itemTipo=Item.objects.filter(tipoItem=codigo)
+    #item= Item.objects.get(pk=codigo)
+    #return render_to_response('gestionTipoItem1.html',{'itemTipo': itemTipo, 'item':item }, context_instance=RequestContext(request))
 
-@login_required(login_url='/ingresar')
-def registrarTipoItem(request):
+#@login_required(login_url='/ingresar')
+def registrarTipoItem(request,codigoProyecto):
     """Permite registrar un nuevo tipo de item a partir de un tipo de atributo dentro del proyecto en el sistema.|n Recibe como @param request que
     es la peticion de la operacion.\nRetorna @return el formulario con los campos a completar, se acepta la operacion
     y vuelve a la interfaz donde se despliega la lista de tipos de items registrados en el sistema"""
+    proyecto = Proyectos.objects.get(pk=codigoProyecto)
+    tItem=TipoItem.objects.all()
     formulario = TipoItemForm(request.POST, request.FILES)
     if formulario.is_valid():
         formulario.save()
-        return HttpResponseRedirect('/tipoItem')
+        return render_to_response('gestionTipoItem.html',{'proyecto':proyecto,'tItem':tItem }, context_instance=RequestContext(request))
     else:
-        formulario=TipoItemForm()
-
-	return render(request, 'tipoItem_form.html', {'formulario': formulario,})
+        return render(request, 'tipoItem_form.html', {'formulario': formulario,'proyecto':proyecto})
 
 @login_required(login_url='/ingresar')
 def eliminarItem(request, codigo):
@@ -726,7 +739,7 @@ def eliminarItem(request, codigo):
     peticion de operacion, y el codigo del tipo de atributo a eliminar. Elimina el mismo y\n @return a la interfaz
     donde se despliega la lista de tipos de atributos existentes en el sistema."""
     item= Item.objects.get(pk=codigo) # request.GET.get('codigo')
-    return render_to_response('eliminarItem.html',{'item':item}, context_instance=RequestContext(request))
+    return render_to_response('eliminarItem.html',{'item':item,'proyecto':item.fase.proyectos}, context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar')
 def eliItem(request, codigo):
@@ -735,14 +748,15 @@ def eliItem(request, codigo):
     donde se despliega la lista de tipos de atributos existentes en el sistema."""
     item=Item.objects.get(pk=codigo)
     item.estado='DESAC'
+    items=Item.objects.all()
     if request.method == "POST":
         formulario = EliminarItemForm(request.POST, request.FILES, instance = item)
         if formulario.is_valid():
             formulario.save()
-            return HttpResponseRedirect('/item')
+            return render_to_response('gestionItem.html',{'items':items,'proyecto':item.fase.proyectos},context_instance=RequestContext(request))
     else:
         formulario=EliminarItemForm(instance = item)
-    return render(request,'eliminarItem1.html', {'formulario': formulario})
+    return render(request,'eliminarItem1.html', {'formulario': formulario,'proyecto':item.fase.proyectos})
 
         #item.estado= 'Desactivado'
         #return HttpResponseRedirect('/item')
@@ -753,11 +767,12 @@ def revivirItem(request, codigo):
     donde se despliega la lista de items existentes en el sistema."""
     item=Item.objects.get(pk=codigo)
     item.estado='REDAC'
+    items=Item.objects.all()
     if request.method == "POST":
         formulario = EliminarItemForm(request.POST, request.FILES, instance = item)
         if formulario.is_valid():
             formulario.save()
-            return HttpResponseRedirect('/item')
+            return render_to_response('gestionItem.html',{'items':items,'proyecto':item.fase.proyectos},context_instance=RequestContext(request))
     else:
         formulario=EliminarItemForm(instance = item)
     return render(request,'revivirItem.html', {'formulario': formulario})
@@ -800,12 +815,14 @@ class CreaRelacionView(CreateView):
         form.fields['origen'].choices = opciones
         form.fields['destino'].choices = opciones
         return form
+    ################falta#######################################
 @login_required(login_url='/ingresar')
 def generarlb(request, codigo):
     """Permite generar una linea base dentro del proyecto en el sistema. \nRecibe como @param request que
     es la peticion de la operacion.\nRetorna @return el formulario con los campos a completar, se acepta la operacion
     y vuelve a la interfaz donde se despliega la lista de tipos de items registrados en el sistema"""
     fase= Fases1.objects.get(pk=codigo)
+
     lineaB= lineaBase(fase=fase)
     formulario = lbForm(request.POST, request.FILES, instance=lineaB)
     if formulario.is_valid():
@@ -814,7 +831,7 @@ def generarlb(request, codigo):
     else:
         formulario=lbForm(instance=lineaB)
 
-	return render(request, 'lbForm.html', {'formulario': formulario,})
+	return render(request, 'lbForm.html', {'formulario': formulario, 'proyecto':fase.proyectos})
 
 @login_required(login_url='/ingresar')
 def listaItemsTer(request,codigo):
@@ -846,36 +863,39 @@ def relaionarItemLb(request, codigo, codigo1):
 
 def importarFase(request, codigo):
     fase = Fases1.objects.get(pk=codigo)
+    fases=Fases1.objects.all()
     faseI=Fases1(fechaInicio=fase.fechaInicio,fechaFin=fase.fechaFin,nombre=fase.nombre,descripcion=fase.descripcion,estado=fase.estado)
     formulario = importarFaseForm(request.POST, instance=faseI)
     if formulario.is_valid():
         formulario.save()
-        return HttpResponseRedirect('/fase')
+        return render_to_response('gestionFase1.html',{'fases': fases, 'proyecto':fase.proyectos}, context_instance=RequestContext(request))
     else:
-        return render(request, 'faseImport.html', {'formulario': formulario})
+        return render(request, 'faseImport.html', {'formulario': formulario,'proyecto':fase.proyectos})
 
 def finalizarFase(request, codigo):
     fase = Fases1.objects.get(pk=codigo)
+    fases=Fases1.objects.all()
     formulario = finalizarFaseForm(request.POST, instance=fase)
     item= Item.objects.all()
     for i in item:
         if (i.fase== fase and i.estado!= 'VAL'):
-            return render(request, 'faseNofinalizada.html', {'fase':codigo})
+            return render(request, 'faseNofinalizada.html', {'fase':codigo,'proyecto':fase.proyectos})
     fase.estado= 'FIN'
     if formulario.is_valid():
         formulario.save()
-        return HttpResponseRedirect('/fase')
+        return render_to_response('gestionFase1.html',{'fases': fases, 'proyecto':fase.proyectos }, context_instance=RequestContext(request))
     else:
-        return render(request, 'faseImport.html', {'formulario': formulario,'fase':codigo})
+        return render(request, 'faseImport.html', {'formulario': formulario,'fase':codigo,'proyecto':fase.proyectos})
 
 
 
 @login_required(login_url='/ingresar')
-def comite(request,codigo):
+def comite(request,codigoProyecto):
     """permite acceder a la interfaz de opciones de administracion para usuarios, \nrecibe un @param request, el cual
     es la peticion de acceso. Esta funcion muestra la lista de usuarios registrados en el sistema con ciertas operaciones
     a realizarse sobre ellos. \n@return la lista de usuarios en una tabla"""
+    proyecto= Proyectos.objects.get(pk=codigoProyecto)
     usuarios=User.objects.all()
     usuario=Usuario.objects.all()
     usuariorol= RolUsuario.objects.all()
-    return render_to_response('gestionUsuario.html', {'usuarios': usuarios, 'usuario': usuario, 'usuariorol': usuariorol }, context_instance=RequestContext(request))
+    return render_to_response('gestionUsuario.html', {'proyecto':proyecto,'usuarios': usuarios, 'usuario': usuario, 'usuariorol': usuariorol }, context_instance=RequestContext(request))

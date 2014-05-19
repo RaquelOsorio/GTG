@@ -29,6 +29,8 @@
                                         <th>FechaInicio</th>
                                         <th>Nombre</th>
                                         <th>Estado</th>
+                                        <th>Editar</th>
+                                        <th>Eliminar</th>
                                         <th>Gestion Item</th>
                                         <th>Linea Base</th>
                                         <th>Importar Fase</th>
@@ -41,7 +43,11 @@
                                         <td>{{f.fechaInicio}}</td>
                                         <td>{{f.nombre}}</td>
                                         <td>{{ f.estado }}</td>
+
                                     {% if f.estado != 'FIN' %}
+                                         <td><a href='/fase/editarFase/{{ f.id }}' class="button btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>
+                                <td><a href='/fase/eliminar_fase/{{ f.id }}' class="button btn-small btn-danger"><input type='submit' value='Eliminar'/></a></td>
+
                                         <td><center><a class="button" href="/itemFase/{{f.id}}"> Ir a>> </a></center></td>
                                         <td><center><a class="button" href="/lb/{{f.id}}"> Ir a>> </a></center></td>
                                         <td><center><a class="button" href="/importarFase/{{f.id}}"> Ir a>> </a></center></td>
@@ -51,6 +57,9 @@
                                         <td><center>Inhabilitado</center></td>
                                         <td><center>Inhabilitado</center></td>
                                         <td><center>Inhabilitado</center></td>
+                                        <td><center>Inhabilitado</center></td>
+                                        <td><center>Inhabilitado</center></td>
+
                                     {% endif %}
                                 </tr>
 
