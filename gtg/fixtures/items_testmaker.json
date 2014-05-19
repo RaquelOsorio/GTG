@@ -1,22 +1,5 @@
 [
-{
-    "pk": 1, 
-    "model": "auth.user", 
-    "fields": {
-        "username": "sonia", 
-        "first_name": "", 
-        "last_name": "", 
-        "is_active": true, 
-        "is_superuser": true, 
-        "is_staff": true, 
-        "last_login": "2014-05-15T20:45:44.248Z", 
-        "groups": [], 
-        "user_permissions": [], 
-        "password": "pbkdf2_sha256$12000$eOHccmUMLoQl$NE0giNld/z9TRRiZAII83DLqn3P93xFswNCkUvBS1rE=", 
-        "email": "", 
-        "date_joined": "2014-05-15T20:42:58.595Z"
-    }
-},
+
 {
     "pk": 2, 
     "model": "auth.user", 
@@ -27,20 +10,20 @@
         "is_active": true, 
         "is_superuser": false, 
         "is_staff": false, 
-        "last_login": "2014-05-15T20:47:30.947Z", 
+        "last_login": "2014-05-16T15:19:14.040Z", 
         "groups": [], 
         "user_permissions": [], 
-        "password": "pbkdf2_sha256$12000$08FwqcNy5edv$nGDPooZsCgyRNlo9mTO6nkevuIH/a1UfHGPN3v6q/94=", 
+        "password": "pbkdf2_sha256$12000$8jv5YD9fnD2w$yALvJqjm6TYN5fxve0HILNjOyj1Rh7L/QBQQwopsVa8=", 
         "email": "", 
-        "date_joined": "2014-05-15T20:46:01.995Z"
+        "date_joined": "2014-05-16T15:17:57.921Z"
     }
 },
 {
-    "pk": "u2x2g8phdn1bfre9o3ctoevwvpts6c9i", 
+    "pk": "49f740y3gh0mqchebzguhnv1vipxy7ay", 
     "model": "sessions.session", 
     "fields": {
-        "expire_date": "2014-05-29T20:47:31.003Z", 
-        "session_data": "M2QyOWUyZDA2MjVhNTUzMGNiOTRiYWFiODk0YTUzNzc5ZWUyYWQ2NDp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6Mn0="
+        "expire_date": "2014-05-30T16:05:37.115Z", 
+        "session_data": "YjQ1OTk1NGQ3YzdiMzhiZTliYmIyZmU2ZGVjNTg3Nzg5ZjQ5NmI1OTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0="
     }
 },
 {
@@ -53,38 +36,9 @@
 },
 {
     "pk": 1, 
-    "model": "gtg.usuario", 
-    "fields": {
-        "mail": "", 
-        "user": 1
-    }
-},
-{
-    "pk": 2, 
-    "model": "gtg.usuario", 
-    "fields": {
-        "mail": "", 
-        "user": 2
-    }
-},
-{
-    "pk": 1, 
     "model": "gtg.proyectos", 
     "fields": {
-        "fechaMod": "2014-05-15", 
-        "fechaInicio": "2014-05-07", 
-        "lider": 2, 
-        "complejidad": 1, 
-        "nombre": "lpm", 
-        "estado": "PEN", 
-        "fechaFin": "2015-05-07"
-    }
-},
-{
-    "pk": 2, 
-    "model": "gtg.proyectos", 
-    "fields": {
-        "fechaMod": "2014-05-15", 
+        "fechaMod": "2014-05-16", 
         "fechaInicio": "2014-05-07", 
         "lider": 2, 
         "complejidad": 1, 
@@ -97,10 +51,10 @@
     "pk": 1, 
     "model": "gtg.fases1", 
     "fields": {
-        "fechaMod": "2014-05-15", 
+        "fechaMod": "2014-05-16", 
         "proyectos": 1, 
         "fechaInicio": "2014-05-07", 
-        "descripcion": "dfdf", 
+        "descripcion": "KKKK", 
         "nombre": "fase1", 
         "estado": "INA", 
         "fechaFin": "2015-05-07"
@@ -110,11 +64,11 @@
     "pk": 2, 
     "model": "gtg.fases1", 
     "fields": {
-        "fechaMod": "2014-05-15", 
+        "fechaMod": "2014-05-16", 
         "proyectos": 1, 
         "fechaInicio": "2014-05-07", 
-        "descripcion": "sdsds", 
-        "nombre": "fase2", 
+        "descripcion": "dsds", 
+        "nombre": "fase3", 
         "estado": "INA", 
         "fechaFin": "2015-05-07"
     }
@@ -123,7 +77,7 @@
     "pk": 1, 
     "model": "gtg.tipoatributo", 
     "fields": {
-        "descripcion": "khh", 
+        "descripcion": "kll", 
         "nombre": "Atributo1", 
         "tipo": "Entero"
     }
@@ -132,33 +86,24 @@
     "pk": 1, 
     "model": "gtg.tipoitem", 
     "fields": {
-        "descripcion": "ddfdd", 
+        "descripcion": "dsds", 
         "nombre": "tipo1", 
         "tipoAtributo": 1
     }
 },
 {
     "pk": 1, 
-    "model": "gtg.lineabase", 
-    "fields": {
-        "estado": "ABIERTA", 
-        "fase": 1
-    }
-},
-{
-    "pk": 1, 
     "model": "gtg.item", 
     "fields": {
-        "antecesorVertical": 1, 
+        "antecesorVertical": 2, 
         "sucesorHorizontal": null, 
-        "lb": 1, 
         "antecesorHorizontal": null, 
-        "sucesorVertical": 2, 
+        "sucesorVertical": null, 
         "tipoItem": 1, 
         "version": 1, 
-        "descripcion": "dsds", 
+        "descripcion": "jkjk", 
         "nombre": "Item1", 
-        "fechaModi": "2014-05-15", 
+        "fechaModi": "2014-05-16", 
         "estado": "VAL", 
         "prioridad": 1, 
         "fase": 1
@@ -168,19 +113,108 @@
     "pk": 2, 
     "model": "gtg.item", 
     "fields": {
-        "antecesorVertical": null, 
+        "antecesorVertical": 1, 
         "sucesorHorizontal": null, 
-        "lb": null, 
         "antecesorHorizontal": null, 
         "sucesorVertical": null, 
         "tipoItem": 1, 
         "version": 1, 
-        "descripcion": "fdfdf", 
+        "descripcion": "dsdsd", 
         "nombre": "Item2", 
-        "fechaModi": "2014-05-15", 
+        "fechaModi": "2014-05-16", 
+        "estado": "VAL", 
+        "prioridad": 1, 
+        "fase": 1
+    }
+},
+{
+    "pk": 3, 
+    "model": "gtg.item", 
+    "fields": {
+        "antecesorVertical": null, 
+        "sucesorHorizontal": null, 
+        "antecesorHorizontal": null, 
+        "sucesorVertical": null, 
+        "tipoItem": 1, 
+        "version": 1, 
+        "descripcion": "sdd", 
+        "nombre": "Item3", 
+        "fechaModi": "2014-05-16", 
+        "estado": "TER", 
+        "prioridad": 1, 
+        "fase": 1
+    }
+},
+{
+    "pk": 4, 
+    "model": "gtg.item", 
+    "fields": {
+        "antecesorVertical": 5, 
+        "sucesorHorizontal": null, 
+        "antecesorHorizontal": null, 
+        "sucesorVertical": null, 
+        "tipoItem": 1, 
+        "version": 1, 
+        "descripcion": "jjjj", 
+        "nombre": "Item5", 
+        "fechaModi": "2014-05-16", 
+        "estado": "TER", 
+        "prioridad": 1, 
+        "fase": 2
+    }
+},
+{
+    "pk": 5, 
+    "model": "gtg.item", 
+    "fields": {
+        "antecesorVertical": null, 
+        "sucesorHorizontal": null, 
+        "antecesorHorizontal": 3, 
+        "sucesorVertical": null, 
+        "tipoItem": 1, 
+        "version": 1, 
+        "descripcion": "dsd", 
+        "nombre": "Item6", 
+        "fechaModi": "2014-05-16", 
+        "estado": "TER", 
+        "prioridad": 1, 
+        "fase": 2
+    }
+},
+{
+    "pk": 6, 
+    "model": "gtg.item", 
+    "fields": {
+        "antecesorVertical": null, 
+        "sucesorHorizontal": null, 
+        "antecesorHorizontal": null, 
+        "sucesorVertical": null, 
+        "tipoItem": 1, 
+        "version": 1, 
+        "descripcion": "jkjk", 
+        "nombre": "item7", 
+        "fechaModi": "2014-05-16", 
         "estado": "REDAC", 
         "prioridad": 1, 
         "fase": 1
+    }
+},
+{
+    "pk": 1, 
+    "model": "gtg.lineabase", 
+    "fields": {
+        "itemsAsociados": null, 
+        "estado": "ABIERTA", 
+        "fase": 1
+    }
+},
+{
+    "pk": 2, 
+    "model": "gtg.lineabase", 
+    "fields": {
+        "itemsAsociados": null, 
+        "estado": "ABIERTA", 
+        "fase": 2
     }
 }
 ]

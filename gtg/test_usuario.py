@@ -4,7 +4,7 @@ from django.contrib.auth import SESSION_KEY
 from django.test import Client
 from django.test import TestCase
 from django.contrib.auth.models import User
-class PMSTestCase(TestCase):
+class GTGTestCase(TestCase):
 
     def test_crear_usuario(self):
         '''

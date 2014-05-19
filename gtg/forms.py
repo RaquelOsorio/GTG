@@ -86,13 +86,7 @@ class ItemForm(forms.ModelForm):
                 raise forms.ValidationError('Ya existe un item con ese nombre.')
             i=1
         return self.cleaned_data
-        fields=(
-                "nombre",
-                "version",
-                "prioridad",
-                "descripcion",
-                "tipoItem"
-        )
+
 
 class ItemForm1(forms.ModelForm):
     class Meta:
@@ -110,9 +104,48 @@ class ItemReversionar(forms.ModelForm):
 
 
 class relacionarForm(forms.ModelForm):
+    #antecesorHorizontal = forms.ModelChoiceField(queryset=Item.objects.all())
     class Meta:
         model= Item
-        fields=("antecesorHorizontal","antecesorVertical","sucesorHorizontal","sucesorVertical")
+        fields=('antecesorHorizontal','antecesorVertical')
+
+
+
+    def clean(self):
+
+        antecesorH =  self.cleaned_data.get('antecesorHorizontal')
+        antecesorV =self.cleaned_data.get('antecesorVertical')
+        print (self.cleaned_data.get('antecesorH'))
+        print (self.cleaned_data.get('antecesorV'))
+        if (antecesorH !=None  and antecesorV != None):
+            raise forms.ValidationError('Un item solo puede tener un antecesor.')
+        else:
+            return self.cleaned_data
+
+        ite=Item.objects.filter(self)
+        ite2=Item.objects.filter(self)
+
+        while(ite.antecesorHorizontal != None or ite.antecesorVertical != None):
+            print( self.cleaned_data.get('nombre'))
+            if (ite == ite2):
+                raise forms.ValidationError('Se forma un ciclo.')
+            else:
+                return self.cleaned_data
+            if(ite.antecesorHorizontal != None and ite.antecesorHorizontal.antecesorHorizontal != None):
+                ite.antecesorHorizontal=ite.antecesorHorizontal.antecesorHorizontal
+            if(ite.antecesorHorizontal != None and ite.antecesorHorizontal.antecesorVertical != None):
+                ite.antecesorVertical=ite.antecesorHorizontal.antecesorVertical
+            if(ite.antecesorVertical != None and ite.antecesorVertical.antecesorVertical != None):
+                ite.antecesorVertical=ite.antecesorVertical.antecesorVertical
+            if(ite.antecesorVertical != None and ite.antecesorVertical.antecesorHorizontal != None):
+                ite.antecesorHorizontal=ite.antecesorHorizontal.antecesorHorizontal
+
+        return self.cleaned_data
+
+
+
+
+
 
 class EliminarItemForm(forms.ModelForm):
     class Meta:

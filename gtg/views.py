@@ -153,10 +153,7 @@ def rolPermiso(request, mesagge= ""):
     roles=Rol.objects.all()
     return render_to_response('gestionRolesPermisos.html', {'roles': roles, 'message': mesagge}, context_instance=RequestContext(request))
 
-@login_required(login_url='/ingresar')
-def item(request):
-    """permite acceder a la interfaz de opciones de administracion para items"""
-    return render_to_response('gestionItem.html',context_instance=RequestContext(request))
+
 
 @login_required(login_url='/ingresar')
 def lb(request, codigo):
@@ -594,16 +591,24 @@ def registrarTipoItem(request):
 ############### Vista Item #####################################################
 ##############################################################################
 @login_required(login_url='/ingresar')
+@login_required(login_url='/ingresar')
 def item(request):
     """permite acceder a la interfaz de Item, donde se despliega la lista de todos los items
-    registrados en el sistema.\n Recibe un @param request, peticion de operacion \ny @return la lista"""
-    items=Item.objects.all()
-    return render_to_response('gestionItem.html',{'items':items},context_instance=RequestContext(request))
+    registrados en el sistema. Recibe un :param request, peticion de operacion y :return la lista"""
+    indice=0
+    items=Item.objects.all().order_by('nombre') #[:10]
+    priori= Item.objects.all()
+    for i in priori:
+        for it in items:
+            if(it.nombre==i.nombre ):
+                it=i
+    p=1
+    return render_to_response('gestionItem.html',{'items':items,'p':p},context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar')
 def registrarItem(request,codigo):
-    """Permite registrar un nuevo item a partir de un tipo de item dentro del proyecto en el sistema.\n Recibe como @param request que
-    es la peticion de la operacion.\nRetorna @return el formulario con los campos a completar, se acepta la operacion
+    """Permite registrar un nuevo item a partir de un tipo de item dentro del proyecto en el sistema. Recibe como :param request que
+    es la peticion de la operacion.Retorna :return el formulario con los campos a completar, se acepta la operacion
     y vuelve a la interfaz donde se despliega la lista de items registrados en el sistema"""
     fase= Fases1.objects.get(pk=codigo)
     item= Item(fase=fase)
@@ -619,8 +624,8 @@ def registrarItem(request,codigo):
 
 def modificarItem(request, codigo):
     """Permita modificar item registrados en el sistema, controla que el item en cuestion este en un estado para
-    ser modificado: REDAC o TER.\n Recibe @param request, que es la peticion de la operacion y el codigo del item
-    a modificar. \nRetorna @return a la interfaz de confirmacion de la operacion, esto es,despliega el
+    ser modificado: REDAC o TER. Recibe :param request, que es la peticion de la operacion y el codigo del item
+    a modificar. \nRetorna :return a la interfaz de confirmacion de la operacion, esto es,despliega el
      formulario con todos los campos del item a modificar. Al aceptar la operacion vuelve a la interfaz del listado
       items de existenes en el sistema"""
 
@@ -638,25 +643,42 @@ def modificarItem(request, codigo):
 def reversionarItem(request, codigo):
     it=Item.objects.all()
     item = Item.objects.get(pk=codigo)
-    itemR = Item( antecesorHorizontal=item.antecesorHorizontal,sucesorHorizontal=item.sucesorHorizontal,sucesorVertical=item.sucesorVertical,antecesorVertical=item.antecesorVertical,tipoItem=item.tipoItem,fase=item.fase,version=item.version+1, nombre=item.nombre, estado=item.estado, prioridad=item.prioridad, descripcion=item.descripcion)
+    ultima_version=0
+    priori=0
+    for itm in it:
+        if(itm.nombre==item.nombre and itm.version >= ultima_version):
+            ultima_version=itm.version
+        if(itm.nombre==item.nombre and itm.prioridad>= priori):
+            priori=itm.prioridad
+    itms=Item(antecesorHorizontal=item.antecesorHorizontal,sucesorHorizontal=item.sucesorHorizontal,sucesorVertical=item.sucesorVertical,
+            antecesorVertical=item.antecesorVertical,tipoItem=item.tipoItem,fase=item.fase,version=item.version, nombre=item.nombre, estado=item.estado,
+            prioridad=-1, descripcion=item.descripcion)
+
+    itemR = Item( antecesorHorizontal=item.antecesorHorizontal,sucesorHorizontal=item.sucesorHorizontal,sucesorVertical=item.sucesorVertical,
+            antecesorVertical=item.antecesorVertical,tipoItem=item.tipoItem,fase=item.fase,version=ultima_version+1, nombre=item.nombre, estado=item.estado,
+            prioridad=priori+1, descripcion=item.descripcion)
+
     formulario = ItemReversionar(request.POST, instance=itemR)
     if formulario.is_valid():
         formulario.save()
-        return render(request, 'item_form1.html', {'formulario': formulario,"it":it,"item":item})
+
+        return render(request, 'item_form1.html', {'formulario': formulario})
     else:
-        return render(request, 'item_form1.html', {'formulario': formulario,"it":it,"item":item})
+        return render(request, 'item_form1.html', {'formulario': formulario})
 
 
 
 def relacionarItem(request, codigo):
     """Permita relacionar items registrados en el sistema, controla que el item en cuestion este en un estado para
-    ser modificado: REDAC o TER. \nRecibe @param request, que es la peticion de la operacion y el codigo del item
-    a modificar. |nRetorna @return a la interfaz de confirmacion de la operacion, esto es,despliega el
+    ser modificado: REDAC o TER. Recibe :param request, que es la peticion de la operacion y el codigo del item
+    a modificar. Retorna :return a la interfaz de confirmacion de la operacion, esto es,despliega el
      formulario con las opciones de relacionar con un antecesor o sucesor del listado de items de existenes en el sistema"""
 
     item=Item.objects.get(pk=codigo)
     if request.method == "POST":
+
         formulario = relacionarForm(request.POST, request.FILES, instance = item)
+        #formulario.fields['antecesorHorizontal'].queryset=Item.objects.filter(nombre='item1')
         if formulario.is_valid():
             formulario.save()
             return HttpResponseRedirect('/item')
@@ -668,8 +690,8 @@ def relacionarItem(request, codigo):
  ################################################################################
 def itemFase(request, codigo):
     """permite acceder a la interfaz de opciones de administracion para fases donde se despliega la lista de fases
-    de cierto proyecto seleccionado. \nRecibe como @param request que es la peticion de la operacion y el codigo
-    del proyecto, con el cual se filtra todas las fases pertenecientes al mismo. \n@return la lista de fases"""
+    de cierto proyecto seleccionado. Recibe como :param request que es la peticion de la operacion y el codigo
+    del proyecto, con el cual se filtra todas las fases pertenecientes al mismo. :return la lista de fases"""
     items=Item.objects.filter(fase=codigo)
     fase=Fases1.objects.get(pk=codigo)
     return render_to_response('gestionItem1.html',{'items': items, 'fase':fase }, context_instance=RequestContext(request))
@@ -765,7 +787,7 @@ def listaItemsTer(request,codigo):
     return render_to_response('listaItemTer.html', {'items': items, 'lb':lb,}, context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar')
-def relaionarItemLb(request, codigo, codigo1):
+def relacionarItemLb(request, codigo, codigo1):
     """
     Relaciona cierto item a una linea base. \nRecibe como @param request, peticion de la operacion, el codigo del item a relacionar
     y el codigo de la linea base en cuestion. Genera la relacion \n Retorna @return a la intefaz para confirmar la operacion

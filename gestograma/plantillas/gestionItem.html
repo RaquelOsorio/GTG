@@ -1,3 +1,4 @@
+
 {% extends 'index2.html' %}
 {% block encabezado %}
 
@@ -53,7 +54,7 @@
                                     {% if items.estado != 'REV' and items.estado != 'VAL' %}
                                         <td><a href='/item/revivirItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Revivir'/></a></td>
                                     {% else %}
-                                        <td><a href='#' class="button btn-small btn-danger"><input type='submit' value='Revisar'/></a></td>
+                                        <td>--------------------</td>
                                     {% endif %}
                                 {%endif%}
 
