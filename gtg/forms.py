@@ -12,6 +12,7 @@ from gtg.models import TipoAtributo
 from gtg.models import Proyectos
 from gtg.models import Fases1
 from gtg.models import TipoItem
+
 from gtg.models import Item
 from gtg.models import ItemRelacion
 from gtg.models import lineaBase
@@ -91,23 +92,25 @@ class ItemForm(forms.ModelForm):
 class ItemForm1(forms.ModelForm):
     class Meta:
         model= Item
-        fields=("estado","nombre","version","prioridad","descripcion","tipoItem")
+        fields=("estado","nombre","prioridad")
 
 
 
 class ItemReversionar(forms.ModelForm):
     class Meta:
         model= Item
-        fields=()
+        fields=("descripcion","prioridad")
 
 
 
 
 class relacionarForm(forms.ModelForm):
     #antecesorHorizontal = forms.ModelChoiceField(queryset=Item.objects.all())
+    #antecesorHorizontal = forms.ModelChoiceField(queryset=Item.objects.none())
+    #antecesorVertical = forms.ModelChoiceField(queryset=Item.objects.none())
     class Meta:
         model= Item
-        fields=('antecesorHorizontal','antecesorVertical')
+        fields=()
 
 
 
@@ -128,17 +131,13 @@ class relacionarForm(forms.ModelForm):
         while(ite.antecesorHorizontal != None or ite.antecesorVertical != None):
             print( self.cleaned_data.get('nombre'))
             if (ite == ite2):
-                raise forms.ValidationError('Se forma un ciclo.')
-            else:
-                return self.cleaned_data
-            if(ite.antecesorHorizontal != None and ite.antecesorHorizontal.antecesorHorizontal != None):
-                ite.antecesorHorizontal=ite.antecesorHorizontal.antecesorHorizontal
-            if(ite.antecesorHorizontal != None and ite.antecesorHorizontal.antecesorVertical != None):
-                ite.antecesorVertical=ite.antecesorHorizontal.antecesorVertical
-            if(ite.antecesorVertical != None and ite.antecesorVertical.antecesorVertical != None):
-                ite.antecesorVertical=ite.antecesorVertical.antecesorVertical
-            if(ite.antecesorVertical != None and ite.antecesorVertical.antecesorHorizontal != None):
-                ite.antecesorHorizontal=ite.antecesorHorizontal.antecesorHorizontal
+                while(ite.sucesorVertical != None):
+                    ite=ite.sucesorVertical
+                    print (self.cleaned_data.get('nombre'))
+                    if (ite == antecesorV):
+                        raise forms.ValidationError('Se forma un ciclo.')
+                    else:
+                        return self.cleaned_data
 
         return self.cleaned_data
 
@@ -183,3 +182,13 @@ class importarFaseForm(forms.ModelForm):
     class Meta:
         model=Fases1
         fields=('proyectos','nombre',)
+
+class finalizarFaseForm(forms.ModelForm):
+    class Meta:
+        model=Fases1
+        fields=()
+
+class EliminarRelacionItemForm(forms.ModelForm):
+    class Meta:
+        model= Item
+        fields=( )

@@ -1,17 +1,17 @@
-<VirtualHost *:90>
+<VirtualHost *:80>
 
-    WSGIScriptAlias / /home/viviana/Escritorio/gestograma/gestograma/wsgi.py
+    WSGIScriptAlias / /home/viviana/Escritorio/nuevo/gestograma/gestograma/wsgi.py
 
-    Alias /static/ /home/viviana/Escritorio/gestograma/gestograma/gestograma/static/
+    Alias /static/ /home/viviana/Escritorio/nuevo/gestograma/gestograma/gestograma/static/
 
-    <Directory home/viviana/Escritorio/gestograma/gestograma>
+    <Directory home/viviana/Escritorio/nuevo/gestograma/gestograma>
     <Files wsgi.py>
     Order deny,allow
     Allow from all
     </Files>
     </Directory>
 
-    <Directory /home/viviana/Escritorio/gestograma/gestograma/gestograma/static/>
+    <Directory /home/viviana/Escritorio/nuevo/gestograma/gestograma/gestograma/static/>
     Order deny,allow
     Allow from all
     </Directory>

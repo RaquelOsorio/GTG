@@ -126,11 +126,6 @@ class RolUsuario(models.Model):
         #    permissions=(("asociarRol","puede asociar roles a usuarios"),)
 
 
-class TipoAtributo(models.Model):
-     nombre = models.CharField(max_length=32, unique=True)
-     descripcion=models.TextField(max_length=100)
-     def __unicode__(self):
-         return self.nombre
 
 
 class Item(models.Model):
@@ -146,6 +141,11 @@ class Item(models.Model):
         (E_DESACTIVADO,'Desactivado'),
         (E_REVISION,'En_Revision'),
     )
+        #Estado de una relacion
+    E_ELIMINADO = 'DEL'
+    E_ACTIVO = 'ACT'
+    ESTADOS_RELACION = ((E_ELIMINADO, 'Eliminado'),(E_ACTIVO, 'Activo'))
+
     nombre=models.CharField(max_length=32, unique=False)
     version=models.IntegerField(max_length=32, default=1)
     prioridad=models.IntegerField(max_length=32)
@@ -155,10 +155,12 @@ class Item(models.Model):
     tipoItem=models.ForeignKey(TipoItem)
     fase=models.ForeignKey(Fases1, related_name='fase')
 
-    antecesorHorizontal= models.OneToOneField('self',related_name='RantecesorHorizontal',null=True, blank= True)
-    sucesorHorizontal= models.OneToOneField('self',related_name='RsucesorHorizontal',null=True, blank= True)
-    sucesorVertical= models.OneToOneField('self',related_name='RsucesorVertical',null=True, blank= True)
-    antecesorVertical=models.OneToOneField('self',related_name='RantecesorVertical',null=True, blank=True)
+    antecesorHorizontal= models.ForeignKey('self',related_name='RantecesorHorizontal',null=True, blank= True)
+    sucesorHorizontal= models.ForeignKey('self',related_name='RsucesorHorizontal',null=True, blank= True)
+    sucesorVertical= models.ForeignKey('self',related_name='RsucesorVertical',null=True, blank= True)
+    antecesorVertical=models.ForeignKey('self',related_name='RantecesorVertical',null=True, blank=True)
+    relacion= models.CharField(max_length=20, choices= ESTADOS_RELACION, null=True, blank=True)
+
     def __unicode__(self):
          return self.nombre
 
@@ -182,6 +184,9 @@ class lineaBase(models.Model):
     estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default=E_ABIERTA, null=False,blank= False)
     fase= models.ForeignKey(Fases1,null=True, blank= True)
     itemsAsociados= models.ForeignKey(Item,null=True, blank= True)
+
+    def __unicode__(self):
+         return self.estado
 
 
 class ItemRelacion(models.Model):
@@ -218,3 +223,5 @@ class ItemRelacion(models.Model):
             self.tipo = self.E_INT
         else:
             self.tipo = self.E_EXT
+
+

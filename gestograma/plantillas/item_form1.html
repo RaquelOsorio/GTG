@@ -2,12 +2,12 @@
 <section class='contenido'>
 {% block contenido %}
  <div id="body">
-        <h3>Se ha reversionado el Item {{item.nombre}}  </h3>
+        <h3>Reversionar el item: {{item.nombre}}  </h3>
 
 		<form id='formulario' method='post' action=''>{% csrf_token %}
 		<table>{{formulario}}</table>
         <p>
-            <a class="button" href="/item/"><i class="icon-arrow-left"></i> Volver</a>
+            <input name="Guardar" style="margin-left: 150px;" class="formbutton" value="Guardar" type="submit" />
         </p>
 	</form>
  </div>
