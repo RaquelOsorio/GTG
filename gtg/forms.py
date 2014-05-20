@@ -12,6 +12,7 @@ from gtg.models import TipoAtributo
 from gtg.models import Proyectos
 from gtg.models import Fases1
 from gtg.models import TipoItem
+from gtg.models import Comite
 
 from gtg.models import Item
 from gtg.models import ItemRelacion
@@ -101,7 +102,10 @@ class ItemReversionar(forms.ModelForm):
         model= Item
         fields=("descripcion","prioridad")
 
-
+class ComiteForm(forms.ModelForm):
+    class Meta:
+        model= Comite
+        fields=("usuario",)
 
 
 class relacionarForm(forms.ModelForm):

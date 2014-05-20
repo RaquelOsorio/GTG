@@ -11,6 +11,7 @@ from gtg.forms import usuarioForm
 from gtg.forms import rolForm
 from gtg.forms import importarFaseForm
 from gtg.forms import finalizarFaseForm
+
 from django.shortcuts import render, render_to_response, redirect
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
@@ -43,6 +44,8 @@ from gtg.models import lineaBase
 from gtg.forms import lbForm
 from gtg.forms import ItemLbForm
 from django.core.urlresolvers import reverse
+from gtg.models import Comite
+from gtg.forms import ComiteForm
 
 def ingresar(request):
     """controla si el usuario se encuentra registrado, permite iniciar sesion
@@ -891,11 +894,25 @@ def finalizarFase(request, codigo):
 
 @login_required(login_url='/ingresar')
 def comite(request,codigoProyecto):
-    """permite acceder a la interfaz de opciones de administracion para usuarios, \nrecibe un @param request, el cual
-    es la peticion de acceso. Esta funcion muestra la lista de usuarios registrados en el sistema con ciertas operaciones
-    a realizarse sobre ellos. \n@return la lista de usuarios en una tabla"""
+    """permite acceder a la interfaz con la lista de usuarios registrados , \nrecibe un @param request, el cual
+    es la peticion de acceso. Esta funcion muestra la lista de usuarios registrados en el sistema y las opciones
+    de incluir y quitar del comite de cambios a estos"""
     proyecto= Proyectos.objects.get(pk=codigoProyecto)
+    comit=Comite.objects.all()
     usuarios=User.objects.all()
     usuario=Usuario.objects.all()
     usuariorol= RolUsuario.objects.all()
-    return render_to_response('gestionUsuario.html', {'proyecto':proyecto,'usuarios': usuarios, 'usuario': usuario, 'usuariorol': usuariorol }, context_instance=RequestContext(request))
+    return render_to_response('comite.html', {'comite':comit,'proyecto':proyecto,'usuarios': usuarios, 'usuario': usuario, 'usuariorol': usuariorol }, context_instance=RequestContext(request))
+
+
+
+def incluir_al_Comite(request,codigoProyecto,codigoUsuario):
+    usuario= User.objects.get(pk= codigoUsuario)
+    if request.method=="POST":
+        formulario= UserCreationForm(request.POST, request.FILES, instance= usuario)
+        if formulario.is_valid():
+            formulario.save()
+            return HttpResponseRedirect('/usuario')
+    else:
+        formulario= UserCreationForm(instance=usuario)
+    return render(request, 'modificarUsuario.html', {'formulario': formulario})

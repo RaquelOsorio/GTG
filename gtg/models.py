@@ -218,4 +218,10 @@ class ItemRelacion(models.Model):
         else:
             self.tipo = self.E_EXT
 
+class Comite(models.Model):
+    proyecto= models.ForeignKey(Proyectos, unique=True)
+    usuario=models.ForeignKey(User)
+    cantidad_integrantes=models.IntegerField(default=0)
+    class Meta:
+            unique_together = ('proyecto', 'usuario')
 
