@@ -3,13 +3,13 @@
 {% block contenido %}
 
      <p>
-	<h1>
-        <FONT COLOR="black">Gestionar Solicitudes de Cambio</FONT>
-    </h1>
+	<h3>
+       <center> Gestionar Solicitudes de Cambio Proyecto: {{ proyecto.nombre }}</center>
+    </h3>
 
-    <li><a href=''>Generar Solicitud de Cambio</a></li>
+    <li><a href='/listaSolicitudes'>Generar Solicitud de Cambio</a></li>
     <li><a href=''>Responder Solicitud de Cambio</a></li>
     <li><a href="">Consultar Solicitudes de Cambio</a></li>
-    <p><a href="/configuracion"><input type='submit' value='Cancelar'/></a></p>
+    <p><p><a class="button" href="/configuracion"><i class="button"></i> Cancelar</a></p>
   </p>
 {% endblock %}

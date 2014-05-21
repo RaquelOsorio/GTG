@@ -1,0 +1,33 @@
+{% extends 'index2.html' %}
+{% block contenido %}
+	<p></p><h3><center>Detalle de la solicitud: {{ solicitud.nombre }}</center></h3>
+
+    <hr>
+    <table>
+        <tr>
+            <td><strong>Motivo: </strong>{{ solicitud.descripcion }}</td>
+            <td><strong>Solicitante: </strong>{{ solicitud.usuario}}</td>
+            <td><strong>Proyecto: </strong>{{ solicitud.proyecto.nombre }}</td>
+
+        </tr>
+        <tr>
+            <td><strong>Fase: </strong>{{ solicitud.item.fase.nombre }}</td>
+            <td><strong>Item: </strong>{{ solicitud.item.nombre }}</td>
+            <td><strong>Costo total de la modificacion: </strong>{{ solicitud.costo }}</td>
+
+        </tr>
+        <tr>
+            <td><strong>Votos a favor: </strong>{{ favor }}</td>
+            <td><strong>Votos en contra: </strong>{{ contra }}</td>
+            <td><strong>Mimbros que ya votaron: </strong>
+
+        {% for miembro in usuarios %}
+            <i>Nombre: </i>{{ miembro }}</td>
+
+        {% empty %}
+            Ningun miembro ha emitido su voto
+        </tr>
+        {% endfor %}
+    </table>
+    <p></p><a class="button" href="/listaSolicitudes/"><i class="icon-backward"></i> Regresar</a>
+{% endblock %}

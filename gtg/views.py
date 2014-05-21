@@ -35,8 +35,8 @@ from gtg.forms import ItemForm
 from gtg.forms import ItemReversionar
 from django.contrib import messages
 from gtg.forms import ItemForm1
-from gtg.models import ItemRelacion
-from gtg.forms import ItemRelacionForm
+#from gtg.models import ItemRelacion
+#from gtg.forms import ItemRelacionForm
 from django.views.generic.edit import CreateView,  DeleteView
 from django.views.generic import ListView
 from gtg.forms import EliminarItemForm
@@ -45,6 +45,12 @@ from gtg.forms import lbForm
 from gtg.forms import ItemLbForm
 from django.core.urlresolvers import reverse
 from gtg.forms import EliminarRelacionItemForm
+from gtg.models import SolicitudCambio
+from gtg.forms import SolicitudCambioForm
+from gtg.models import Voto
+from gtg.forms import VotoForm
+from gtg.models import Comite
+from gtg.forms import ComiteForm
 
 def ingresar(request):
     """controla si el usuario se encuentra registrado, permite iniciar sesion
@@ -143,11 +149,11 @@ def proyecto(request):
     permisos= RolUsuario.objects.all()
     return render_to_response('gestionProyecto.html',{'proyectos': proyectos, 'permisos': permisos}, context_instance=RequestContext(request))
 
-#@login_required(login_url='/ingresar')
-#def fase(request):
- #   """permite acceder a la interfaz de opciones de administracion para fases"""
-  #  fases=Fase.objects.all()
-   # return render_to_response('gestionFase.html',{'fases': fases }, context_instance=RequestContext(request))
+@login_required(login_url='/ingresar')
+def fase(request):
+   """permite acceder a la interfaz de opciones de administracion para fases"""
+    #fases=Fases1.objects.all()
+    #return render_to_response('gestionFase.html',{'fases': fases }, context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar')
 def rolPermiso(request, mesagge= ""):
@@ -720,13 +726,13 @@ def itemFase(request, codigo):
     fase=Fases1.objects.get(pk=codigo)
     return render_to_response('gestionItem1.html',{'items': items, 'fase':fase,'proyecto':fase.proyectos }, context_instance=RequestContext(request))
 
-#def itemTipoItem(request, codigo):
- #   """permite acceder a la interfaz de opciones de administracion para tipos de items donde se despliega la lista de fases
-  #  de cierto proyecto seleccionado. Recibe como \n@param request que es la peticion de la operacion y el codigo
-   # del item, con el cual se filtra todas los tipos de item pertenecientes al mismo. \n@return la lista de items"""
-    #itemTipo=Item.objects.filter(tipoItem=codigo)
-    #item= Item.objects.get(pk=codigo)
-    #return render_to_response('gestionTipoItem1.html',{'itemTipo': itemTipo, 'item':item }, context_instance=RequestContext(request))
+def itemTipoItem(request, codigo):
+    """permite acceder a la interfaz de opciones de administracion para tipos de items donde se despliega la lista de fases
+    de cierto proyecto seleccionado. Recibe como \n@param request que es la peticion de la operacion y el codigo
+    del item, con el cual se filtra todas los tipos de item pertenecientes al mismo. \n@return la lista de items"""
+    itemTipo=Item.objects.filter(tipoItem=codigo)
+    item= Item.objects.get(pk=codigo)
+    return render_to_response('gestionTipoItem1.html',{'itemTipo': itemTipo, 'item':item }, context_instance=RequestContext(request))
 
 #@login_required(login_url='/ingresar')
 def registrarTipoItem(request,codigoProyecto):
@@ -883,11 +889,172 @@ def finalizarFase(request, codigo):
 
 @login_required(login_url='/ingresar')
 def comite(request,codigoProyecto):
-    """permite acceder a la interfaz de opciones de administracion para usuarios, \nrecibe un @param request, el cual
-    es la peticion de acceso. Esta funcion muestra la lista de usuarios registrados en el sistema con ciertas operaciones
-    a realizarse sobre ellos. \n@return la lista de usuarios en una tabla"""
-    proyecto= Proyectos.objects.get(pk=codigoProyecto)
+
+    proyectoa= Proyectos.objects.get(pk=codigoProyecto)
+    comit=Comite.objects.get_or_create(proyecto=proyectoa)
     usuarios=User.objects.all()
     usuario=Usuario.objects.all()
-    usuariorol= RolUsuario.objects.all()
-    return render_to_response('gestionUsuario.html', {'proyecto':proyecto,'usuarios': usuarios, 'usuario': usuario, 'usuariorol': usuariorol }, context_instance=RequestContext(request))
+
+    return render_to_response('comite.html', {'comite':comit,'proyecto':proyectoa,'usuarios': usuarios, 'usuario': usuario }, context_instance=RequestContext(request))
+
+
+
+def incluir_al_Comite(request,codigoProyecto, codigoUsuario):
+    usuarios=User.objects.all()
+    proyectoR=Proyectos.objects.get(pk=codigoProyecto)
+    usuarioR=User.objects.get(pk=codigoUsuario)
+    comit=Comite.objects.get(proyecto=proyectoR)
+    comit.cantidad_integrantes=1
+    comit.usuario=usuarioR
+    comit.proyecto=proyectoR
+    if request.method == "POST":
+        formulario = ComiteForm(request.POST, request.FILES, instance = comit)
+        if formulario.is_valid():
+            formulario.save()
+            return render_to_response('comite.html', {'comite':comit,'proyecto':proyectoR,'usuarios': usuarios}, context_instance=RequestContext(request))
+    else:
+        formulario=ComiteForm(instance = comit)
+    return render(request,'nuevoIntegrante.html', {'formulario': formulario,'proyecto':proyectoR})
+
+
+@login_required(login_url='/ingresar')
+def crearSolicitudCambio(request,codigo):
+    '''
+    Vista para la creacion de una solicitud de cambio para un item especificado en id_item
+    '''
+    item= Item.objects.get(pk= codigo)
+    solicitud= SolicitudCambio(proyecto= item.fase.proyectos, item= item, costo= 0, usuario= request.user)
+    if request.method=='POST':
+        formulario= SolicitudCambioForm(request.POST, instance= solicitud)
+        if formulario.is_valid():
+            solicitud.save()
+            item.estado='REV'
+            item.save()
+            return render_to_response('creacion_correcta.html',{'id_fase':item.fase.id}, context_instance=RequestContext(request))
+    else:
+        formulario=SolicitudCambioForm(instance= solicitud)
+    return render_to_response('crear_solicitud.html',{'formulario':formulario, 'id_fase':item.fase.id}, context_instance=RequestContext(request))
+
+
+@login_required
+def listaSolicitudes(request):
+
+    '''
+    vista para listar los proyectos asignados a un usuario expecifico
+    '''
+
+
+
+    listaProyectos=Proyectos.objects.filter(lider=request.user.id)
+    listaSolicitudes=[]
+    if len(listaProyectos)==0:
+        return HttpResponseRedirect('/')
+
+    for proyecto in listaProyectos:
+        lista= SolicitudCambio.objects.filter(proyecto=proyecto,estado= 'EN_ESPERA')
+        for solicitud in lista:
+            listaSolicitudes.append(solicitud)
+
+
+    return render_to_response('listaSolicitudes.html', {'datos': listaSolicitudes}, context_instance=RequestContext(request))
+
+def puedeVotar(id_usuario,id_solicitud):
+    solicitud= SolicitudCambio.objects.get(id=id_solicitud)
+    proyecto= SolicitudCambio.objects.filter(proyecto= solicitud.proyecto)
+    comite= Comite.objects.filter(proyecto= proyecto)
+    autorizado= Comite.objects.filter(usuario=id_usuario)
+    if len(autorizado)==0:
+        return HttpResponseRedirect('/voto')
+    voto=Voto.objects.filter(usuario_id=id_usuario, solicitud=solicitud)
+    if len(voto)!=0:
+        return False
+    else:
+        return True
+
+@login_required
+def votar(request, id_solicitud):
+    if puedeVotar(request.user.id, id_solicitud)!=True:
+        return HttpResponseRedirect('/voto')
+    solicitud= SolicitudCambio.objects.get(id=id_solicitud)
+    item=solicitud.item
+    voto=Voto(solicitud=solicitud,usuario=request.user)
+
+    if request.method=='POST':
+        formulario=VotoForm(request.POST, instance= voto)
+        if formulario.is_valid():
+            formulario.save()
+            votacionCerrada(solicitud)
+            aprobada=2
+            if votacionCerrada(solicitud):
+                resultado(solicitud)
+                if solicitud.estado=='APROBADA':
+                    aprobada=1
+                    item.estado='REDAC'
+                    item.save()
+                    lb=item.lb
+                    lb.estado='ROTA'
+                    lb.save()
+                else:
+                    item.estado='VAL'
+                    item.save()
+                    aprobada=0
+
+            return render_to_response('votacionSatisfactoria.html',{'aprobada':aprobada}, context_instance=RequestContext(request))
+    else:
+        formulario=VotoForm(instance= voto)
+    return render_to_response('votarSolicitud.html',{'formulario':formulario,'solicitud':solicitud}, context_instance=RequestContext(request))
+
+def voto(request):
+    usuario= request.user
+    parte= Comite.objects.filter(usuario=usuario.id)
+    return render_to_response('accesoDenegado.html',{'usuario':parte}, context_instance=RequestContext(request))
+
+
+def votacionCerrada(solicitud):
+    comite = Comite.objects.filter(proyecto=solicitud.proyecto.id)
+    voto=[]
+    cant=0
+    for miembro in comite:
+        voto=Voto.objects.filter(usuario=miembro.usuario.id, solicitud=solicitud.id)
+        if len(voto)==0:
+            return False
+        cant +=1
+    if cant == 1:
+        return True
+    else:
+        return False
+
+def resultado(solicitud):
+    votos = Voto.objects.filter(solicitud=solicitud.id)
+    favor=0
+    contra=0
+    for voto in votos:
+        if voto.voto=='RECHAZAR':
+            contra+=1
+        else:
+            favor+=1
+
+    if contra>favor:
+        solicitud.estado='RECHAZADA'
+    else:
+        solicitud.estado='APROBADA'
+    solicitud.save()
+
+def consultarSolicitud(request,id_solicitud):
+    solicitud= SolicitudCambio.objects.get(id=id_solicitud)
+    #id_usuario=request.user.id
+    #lista_proyectos=Proyecto.objects.filter(comite__id=id_usuario, id=solicitud.proyecto.id)
+    #if len(lista_proyectos)==0:
+     #   return HttpResponseRedirect('/denegado')
+
+    votos = Voto.objects.filter(solicitud_id=solicitud.id)
+    favor=0
+    contra=0
+    usuarios=[]
+    for voto in votos:
+        usuarios.append(voto.usuario)
+        if voto.voto=='RECHAZAR':
+            contra+=1
+        else:
+            favor+=1
+    return render_to_response('consultarSolicitud.html',{'usuarios':usuarios,'solicitud':solicitud, 'favor':favor, 'contra':contra}, context_instance=RequestContext(request))

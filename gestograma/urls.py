@@ -101,7 +101,13 @@ urlpatterns = patterns('',
     url(r'^item/revivirItem/(?P<codigo>\d+)/$', 'gtg.views.revivirItem'),
     url(r'^lb/listaItemsTer/(?P<codigo>\d+)/$', 'gtg.views.listaItemsTer'),
     url(r'^listaItemsTer/relaionarItemLb/(?P<codigo>\d+)/(?P<codigo1>\d+)/$', 'gtg.views.relacionarItemLb'),
-
+    url(r'^comite/(?P<codigoProyecto>\d+)/$','gtg.views.comite'),
+    url(r'^incluir_al_Comite/(?P<codigoProyecto>\d+)/(?P<codigoUsuario>\d+)/$','gtg.views.incluir_al_Comite'),
+    url(r'^listaSolicitudes/$', 'gtg.views.listaSolicitudes'),
+    url(r'^itemFase/crearSolicitudCambio/(?P<codigo>\d+)/$', 'gtg.views.crearSolicitudCambio'),
+    url(r'^listaSolicitudes/consultarSolicitud/(?P<id_solicitud>\d+)/$', 'gtg.views.consultarSolicitud'),
+    url(r'^listaSolicitudes/votar/(?P<id_solicitud>\d+)/$', 'gtg.views.votar'),
+    url(r'^voto/$', 'gtg.views.voto'),
 
 #relaciones
    # url(r'^relacion/crear/(?P<idproyecto>\d+)$', CreaRelacionView.as_view(), name="relacion_crear"),

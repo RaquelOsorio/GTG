@@ -21,7 +21,7 @@
                                 <tr>
                                         <th>Id</th>
                                         <th>Nombre</th>
-                                        <th>Estado Activo</th>
+                                        <th>Estado</th>
                                         <th>Presione para editar</th>
                                         <th>Presione para consultar</th>
 
@@ -33,7 +33,12 @@
 
                                         <td>{{usuarios.id}}</td>
                                         <td>{{usuarios.username}}</td>
-                                        <td>{{ usuarios.is_active }}</td>
+
+                                        {% if usuarios.is_active == True%}
+                                            <td>Activo</td>
+                                        {% else %}
+                                            <td>Inactivo</td>
+                                        {% endif %}
 
                                 <td><a href='/usuario/editarUsuario/{{ usuarios.id }}' class="button btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>
                                 <td><a href='/usuario/consultarUsuario/{{ usuarios.id }}' class="button btn-small btn-danger"><input type='submit' value='Consultar'/></a></td>

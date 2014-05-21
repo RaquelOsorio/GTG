@@ -14,9 +14,12 @@ from gtg.models import Fases1
 from gtg.models import TipoItem
 
 from gtg.models import Item
-from gtg.models import ItemRelacion
+#from gtg.models import ItemRelacion
 from gtg.models import lineaBase
 from django.forms import Select
+from gtg.models import Voto
+from gtg.models import SolicitudCambio
+from gtg.models import Comite
 
 class rolForm(forms.ModelForm):
     class Meta:
@@ -156,17 +159,6 @@ class rolusuarioForm(forms.ModelForm):
     class Meta:
         model=RolUsuario
 
-class ItemRelacionForm(forms.ModelForm):
-    """
-
-    Formulario que permite la carga de relaciones items.
-
-    """
-    class Meta:
-        model = ItemRelacion
-        fields = ['origen', 'destino']
-        widgets ={'origen': Select(attrs={'size': 10}),\
-                  'destino': Select(attrs={'size': 10})}
 
 class lbForm(forms.ModelForm):
     class Meta:
@@ -192,3 +184,20 @@ class EliminarRelacionItemForm(forms.ModelForm):
     class Meta:
         model= Item
         fields=( )
+
+class SolicitudCambioForm(forms.ModelForm):
+    class Meta:
+        model= SolicitudCambio
+        fields=('nombre', 'descripcion',)
+
+
+class VotoForm(forms.ModelForm):
+    class Meta:
+        model= Voto
+        fields=('voto',)
+
+
+class ComiteForm(forms.ModelForm):
+    class Meta:
+        model= Comite
+        fields=()

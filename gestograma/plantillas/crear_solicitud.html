@@ -1,0 +1,12 @@
+{% extends 'index2.html' %}
+{% block contenido %}
+    <p></p><h3><center>Generar solicitud de cambio</center>  </h3>
+
+	<form id='formulario' method='post' action=''>{% csrf_token %}
+		<table>{{formulario}}</table>
+            <br>
+
+        <p><input type='submit' value='Enviar Solicitud'/></p>
+        <a class="button" href="/itemFase/{{ id_fase }}"><i class="icon-arrow-left"></i> Regresar</a>
+	</form>
+{% endblock %}

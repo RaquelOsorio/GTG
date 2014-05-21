@@ -1,0 +1,26 @@
+{% extends 'index2.html' %}
+{% block contenido %}
+
+    <p></p><form id='formulario' method='post' action=''>{% csrf_token %}
+		<table>{{formulario}}</table>
+
+        <hr>
+    <table>
+        <tr>
+            <td><strong>Motivo: </strong>{{ solicitud.descripcion }}</td>
+            <td><strong>Solicitante: </strong>{{ solicitud.usuario}}</td>
+            <td><strong>Proyecto: </strong>{{ solicitud.proyecto.nombre }}</td>
+
+        </tr>
+        <tr>
+            <td><strong>Fase: </strong>{{ solicitud.item.fase.nombre }}</td>
+            <td><strong>Item: </strong>{{ solicitud.item.nombre }}</td>
+            <td><strong>Costo total de la modificacion: </strong>{{ solicitud.costo }}</td>
+
+        </tr>
+    </table>
+        <p></p><p><input type='submit' value='Votar'/></p>
+
+            <a class="button" href="/listaSolicitudes/"><i class="icon-backward"></i> Regresar</a>
+	</form>
+{% endblock %}

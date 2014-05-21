@@ -13,7 +13,7 @@ from gtg.models import TipoAtributo
 from gtg.models import TipoItem
 from gtg.models import Item
 from gtg.models import lineaBase
-from gtg.models import ItemRelacion
+#from gtg.models import ItemRelacion
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from gtg.models import TipoAtributo

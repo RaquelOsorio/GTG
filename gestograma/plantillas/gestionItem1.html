@@ -52,7 +52,9 @@
                                     <td><a href='/item/reversionarItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Reversionar'/></a></td>
                                      <td>--------------------</td>
                                 {% else %}
-
+                                    {% if items.estado == 'VAL' %}
+                                        <td><a href='/itemFase/crearSolicitudCambio/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Cambio'/></a></td>
+                                    {% endif %}
                                     <td>Inhabilitado</td>
                                     <td>Inhabilitado</td>
                                     <td>Inhabilitado</td>
