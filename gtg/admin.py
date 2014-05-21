@@ -19,7 +19,6 @@ from django.contrib.auth.models import User
 from gtg.models import TipoAtributo
 from gtg.models import Proyectos
 from gtg.models import Item
-
 class UserProfileInline(admin.StackedInline):
     model = Usuario
     can_delete = False
@@ -29,3 +28,8 @@ class UserAdmin(UserAdmin):
     inlines = (UserProfileInline, )
 
 # Re-register UserAdmin
+
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)
+admin.site.register(RolUsuario)
+admin.site.register(Proyectos)

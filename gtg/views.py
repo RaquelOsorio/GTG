@@ -11,6 +11,7 @@ from gtg.forms import usuarioForm
 from gtg.forms import rolForm
 from gtg.forms import importarFaseForm
 from gtg.forms import finalizarFaseForm
+
 from django.shortcuts import render, render_to_response, redirect
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
@@ -44,12 +45,13 @@ from gtg.models import lineaBase
 from gtg.forms import lbForm
 from gtg.forms import ItemLbForm
 from django.core.urlresolvers import reverse
+
+from gtg.forms import ComiteForm
 from gtg.forms import EliminarRelacionItemForm
 from gtg.models import SolicitudCambio
 from gtg.forms import SolicitudCambioForm
 from gtg.models import Voto
 from gtg.forms import VotoForm
-from gtg.models import Comite
 from gtg.forms import ComiteForm
 
 def ingresar(request):
@@ -899,22 +901,19 @@ def comite(request,codigoProyecto):
 
 
 
-def incluir_al_Comite(request,codigoProyecto, codigoUsuario):
-    usuarios=User.objects.all()
-    proyectoR=Proyectos.objects.get(pk=codigoProyecto)
-    usuarioR=User.objects.get(pk=codigoUsuario)
-    comit=Comite.objects.get(proyecto=proyectoR)
-    comit.cantidad_integrantes=1
-    comit.usuario=usuarioR
-    comit.proyecto=proyectoR
+def incluir_al_Comite(request,codigoProyecto):
+    proyecto=Proyectos.objects.get(pk=codigoProyecto)
     if request.method == "POST":
-        formulario = ComiteForm(request.POST, request.FILES, instance = comit)
+        formulario = ComiteForm(request.POST, request.FILES, instance = proyecto)
         if formulario.is_valid():
+            print "====================================="
+            print formulario.cleaned_data['comite']
+            print"========================================"
             formulario.save()
-            return render_to_response('comite.html', {'comite':comit,'proyecto':proyectoR,'usuarios': usuarios}, context_instance=RequestContext(request))
+            return HttpResponseRedirect('/proyecto')
     else:
-        formulario=ComiteForm(instance = comit)
-    return render(request,'nuevoIntegrante.html', {'formulario': formulario,'proyecto':proyectoR})
+	    formulario=ComiteForm(instance = proyecto)
+    return render(request,'comite.html', {'formulario': formulario})
 
 
 @login_required(login_url='/ingresar')
@@ -961,11 +960,11 @@ def listaSolicitudes(request):
 def puedeVotar(id_usuario,id_solicitud):
     solicitud= SolicitudCambio.objects.get(id=id_solicitud)
     proyecto= SolicitudCambio.objects.filter(proyecto= solicitud.proyecto)
-    comite= Comite.objects.filter(proyecto= proyecto)
-    autorizado= Comite.objects.filter(usuario=id_usuario)
+    #comite= Comite.objects.filter(proyecto= proyecto)
+    autorizado= SolicitudCambio.objects.filter(usuario=id_usuario)
     if len(autorizado)==0:
         return HttpResponseRedirect('/voto')
-    voto=Voto.objects.filter(usuario_id=id_usuario, solicitud=solicitud)
+    voto=Voto.objects.filter(usuario=id_usuario, solicitud=solicitud)
     if len(voto)!=0:
         return False
     else:
@@ -973,7 +972,7 @@ def puedeVotar(id_usuario,id_solicitud):
 
 @login_required
 def votar(request, id_solicitud):
-    if puedeVotar(request.user.id, id_solicitud)!=True:
+    if puedeVotar(request.user.id, id_solicitud)== False:
         return HttpResponseRedirect('/voto')
     solicitud= SolicitudCambio.objects.get(id=id_solicitud)
     item=solicitud.item
@@ -1006,20 +1005,22 @@ def votar(request, id_solicitud):
 
 def voto(request):
     usuario= request.user
-    parte= Comite.objects.filter(usuario=usuario.id)
-    return render_to_response('accesoDenegado.html',{'usuario':parte}, context_instance=RequestContext(request))
+    #parte= Comite.objects.filter(usuario=usuario.id)
+    return render_to_response('accesoDenegado.html',{'usuario':usuario}, context_instance=RequestContext(request))
 
 
 def votacionCerrada(solicitud):
-    comite = Comite.objects.filter(proyecto=solicitud.proyecto.id)
+    proyecto = SolicitudCambio.objects.filter(proyecto=solicitud.proyecto.id)
     voto=[]
     cant=0
-    for miembro in comite:
-        voto=Voto.objects.filter(usuario=miembro.usuario.id, solicitud=solicitud.id)
+    cantIntegrantes= solicitud.proyecto.comite.count()
+
+    for miembro in solicitud.proyecto.comite.all():
+        voto=Voto.objects.filter(usuario=miembro.id, solicitud=solicitud.id)
         if len(voto)==0:
             return False
         cant +=1
-    if cant == 1:
+    if cant == cantIntegrantes:
         return True
     else:
         return False
@@ -1058,3 +1059,9 @@ def consultarSolicitud(request,id_solicitud):
         else:
             favor+=1
     return render_to_response('consultarSolicitud.html',{'usuarios':usuarios,'solicitud':solicitud, 'favor':favor, 'contra':contra}, context_instance=RequestContext(request))
+
+
+
+
+
+

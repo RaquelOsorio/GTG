@@ -57,11 +57,11 @@ class Proyectos(models.Model):
     fechaMod= models.DateField(auto_now=True)
     nombre = models.CharField(max_length=32, unique=True)
     complejidad=models.IntegerField()
-    #nrofase=models.IntegerField()
     estado = models.CharField(max_length=20,
                               choices=ESTADO_CHOICES,
                               default='PEN')
     lider= models.ForeignKey(User, related_name='lider')
+    comite=models.ManyToManyField(User,blank=True, null=True)
     def __unicode__(self):
         return self.nombre
 
@@ -132,10 +132,10 @@ class lineaBase(models.Model):
     E_ROTA='ROTA'
     E_REVISION='REVISION'
     ESTADO_CHOICES=(
-        (E_ABIERTA,'Abierta'),
-        (E_CERRADA, 'Cerrada'),
-        (E_ROTA,'Rota'),
-        (E_REVISION,'En_Revision'),
+        ('ABIERTA','Abierta'),
+        ('CERRADA', 'Cerrada'),
+        ('ROTA','Rota'),
+        ('REVISION','En_Revision'),
     )
     estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default=E_ABIERTA, null=False,blank= False)
     fase= models.ForeignKey(Fases1,null=True, blank= True)
@@ -218,7 +218,3 @@ class Voto(models.Model):
     voto=models.CharField(max_length=10, verbose_name='Voto',choices=VOTOS, null=False)
 
 
-class Comite(models.Model):
-    proyecto= models.ForeignKey(Proyectos, unique=True,null=True, blank= True)
-    usuario=models.ForeignKey(User,null=True, blank= True)
-    cantidad_integrantes=models.IntegerField(default=0)

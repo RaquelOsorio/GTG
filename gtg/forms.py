@@ -19,7 +19,6 @@ from gtg.models import lineaBase
 from django.forms import Select
 from gtg.models import Voto
 from gtg.models import SolicitudCambio
-from gtg.models import Comite
 
 class rolForm(forms.ModelForm):
     class Meta:
@@ -103,6 +102,25 @@ class ItemReversionar(forms.ModelForm):
     class Meta:
         model= Item
         fields=("descripcion","prioridad")
+
+class ComiteForm(forms.ModelForm):
+    class Meta:
+        model= Proyectos
+        fields=("comite",)
+    def clean(self):
+
+        comit =  self.cleaned_data.get('comite')
+        c=comit.count()
+        print (self.cleaned_data.get('c'))
+        if (c % 2 == 0):
+            raise forms.ValidationError('El nro de integrantes debe ser impar.')
+        else:
+            if( c > 7):
+                raise forms.ValidationError('Se ha superado el limite de integrantes.')
+        return self.cleaned_data
+
+
+
 
 
 
@@ -197,7 +215,3 @@ class VotoForm(forms.ModelForm):
         fields=('voto',)
 
 
-class ComiteForm(forms.ModelForm):
-    class Meta:
-        model= Comite
-        fields=()
