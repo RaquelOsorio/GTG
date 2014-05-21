@@ -34,6 +34,7 @@ from gtg.forms import TipoItemForm
 from gtg.models import Item
 from gtg.forms import ItemForm
 from gtg.forms import ItemReversionar
+from django.contrib import messages
 from gtg.forms import ItemForm1
 from gtg.models import ItemRelacion
 from gtg.forms import ItemRelacionForm
@@ -44,8 +45,11 @@ from gtg.models import lineaBase
 from gtg.forms import lbForm
 from gtg.forms import ItemLbForm
 from django.core.urlresolvers import reverse
+
 from gtg.models import Comite
 from gtg.forms import ComiteForm
+from gtg.forms import EliminarRelacionItemForm
+from gtg.models import Miembros
 
 def ingresar(request):
     """controla si el usuario se encuentra registrado, permite iniciar sesion
@@ -609,6 +613,10 @@ def registrarItem(request,codigo):
     formulario = ItemForm(request.POST, instance=item)
     if formulario.is_valid():
         formulario.save()
+        messages.success(request,
+                         'El item "' + item.nombre + '" ha sido creado con exito')
+
+        #return HttpResponseRedirect('/item')
         return render_to_response('gestionItem.html',{'items':items,'proyecto':fase.proyectos},context_instance=RequestContext(request))
     else:
         return render(request, 'item_form.html', {'formulario': formulario,'proyecto':fase.proyectos})
@@ -684,13 +692,16 @@ def relacItem(request, codigo,codigop):
     itemRelacionado=Item.objects.get(pk=codigop)
     if (item.fase.id == itemRelacionado.fase.id):
         item.antecesorVertical=itemRelacionado
+        item.antecesorVertical.relacon= 'ACT'
         item.antecesorHorizontal=None
     else:
         item.antecesorHorizontal=itemRelacionado
+        item.antecesorHorizontal.relacion= 'ACT'
         item.antecesorVertical=None
     if request.method == "POST":
 
         formulario = relacionarForm(request.POST, request.FILES, instance = item)
+        #formulario.fields['antecesorHorizontal'].queryset=Item.objects.filter(nombre='item1')
         if formulario.is_valid():
             formulario.save()
             return render_to_response('gestionItem.html',{'items':items,'proyecto':item.fase.proyectos},context_instance=RequestContext(request))
@@ -750,8 +761,17 @@ def eliItem(request, codigo):
     peticion de operacion, y el codigo del tipo de atributo a eliminar. Elimina el mismo y\n @return a la interfaz
     donde se despliega la lista de tipos de atributos existentes en el sistema."""
     item=Item.objects.get(pk=codigo)
-    item.estado='DESAC'
     items=Item.objects.all()
+    for i in items:
+        if i.antecesorVertical == item:
+            i.antecesorVertical.relacion= 'DEL'
+            formAntecesor=EliminarRelacionItemForm(request.POST, instance=i)
+            formAntecesor.save()
+        if i.antecesorHorizontal == item:
+            i.antecesorHorizontal.relacion= 'DEL'
+            formAntecesor= EliminarRelacionItemForm(request.POST, instance=i)
+            formAntecesor.save()
+    item.estado='DESAC'
     if request.method == "POST":
         formulario = EliminarItemForm(request.POST, request.FILES, instance = item)
         if formulario.is_valid():
@@ -769,8 +789,18 @@ def revivirItem(request, codigo):
     peticion de operacion, y el codigo del item a revivir. Revive el mismo y\n @return a la interfaz
     donde se despliega la lista de items existentes en el sistema."""
     item=Item.objects.get(pk=codigo)
-    item.estado='REDAC'
     items=Item.objects.all()
+    for i in items:
+        if i.antecesorVertical == item:
+            i.antecesorVertical.relacion= 'ACT'
+            formAntecesor=EliminarRelacionItemForm(request.POST, instance=i)
+            formAntecesor.save()
+        if i.antecesorHorizontal == item:
+            i.antecesorHorizontal.relacion= 'ACT'
+            formAntecesor= EliminarRelacionItemForm(request.POST, instance=i)
+            formAntecesor.save()
+
+    item.estado='REDAC'
     if request.method == "POST":
         formulario = EliminarItemForm(request.POST, request.FILES, instance = item)
         if formulario.is_valid():
@@ -780,44 +810,8 @@ def revivirItem(request, codigo):
         formulario=EliminarItemForm(instance = item)
     return render(request,'revivirItem.html', {'formulario': formulario})
 
-####desde aqui modifique
-
-TEMPL_RELACION_FORM = 'form_relacion.html'
-TEMPL_RELACION_LISTA = 'lista_relaciones.html'
 
 
-class CreaRelacionView(CreateView):
-
-    """
-    Vista que permite crear relaciones entre items.
-    De una misma fase.
-    De fases antecesoras.
-    """
-
-    model = ItemRelacion
-    template_name = TEMPL_RELACION_FORM
-    form_class = ItemRelacionForm
-    valido = True
-
-
-    #def get_success_url(self):
-     #   return reverse('relacion_listar', codigo)
-
-    def get_form(self, form_class):
-        form = CreateView.get_form(self, form_class)
-        #el selector solo debe desplegar los items del proyecto
-        #fases = Fase.objects.filter(idproyecto_id=self.kwargs['idproyecto'])
-
-        fases = Fases1.objects.filter(proyectos=self.kwargs['id'])
-        #lista los items que coinciden con las fases de proyecto
-        items = Item.objects.filter(fase=fases).exclude(estado=Item.E_DESACTIVADO)
-        #cargamos los selectores con los items y mostrando a que fase pertenecen
-        opciones = [(item.pk,'['+ item.fase.__str__()[0:5]+'..] ' +\
-                     '[' + item.estado +']  | ' +
-                      item.nombre[0:40] ) for item in items]
-        form.fields['origen'].choices = opciones
-        form.fields['destino'].choices = opciones
-        return form
     ################falta#######################################
 @login_required(login_url='/ingresar')
 def generarlb(request, codigo):
@@ -847,7 +841,7 @@ def listaItemsTer(request,codigo):
     return render_to_response('listaItemTer.html', {'items': items, 'lb':lb,}, context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar')
-def relaionarItemLb(request, codigo, codigo1):
+def relacionarItemLb(request, codigo, codigo1):
     """
     Relaciona cierto item a una linea base. \nRecibe como @param request, peticion de la operacion, el codigo del item a relacionar
     y el codigo de la linea base en cuestion. Genera la relacion \n Retorna @return a la intefaz para confirmar la operacion
@@ -894,25 +888,54 @@ def finalizarFase(request, codigo):
 
 @login_required(login_url='/ingresar')
 def comite(request,codigoProyecto):
-    """permite acceder a la interfaz con la lista de usuarios registrados , \nrecibe un @param request, el cual
-    es la peticion de acceso. Esta funcion muestra la lista de usuarios registrados en el sistema y las opciones
-    de incluir y quitar del comite de cambios a estos"""
-    proyecto= Proyectos.objects.get(pk=codigoProyecto)
-    comit=Comite.objects.all()
+
+    proyectoa= Proyectos.objects.get(pk=codigoProyecto)
+#    comit=Comite.objects.get_or_create(proyecto=proyectoa)
+    comite=Comite.objects.all()
     usuarios=User.objects.all()
     usuario=Usuario.objects.all()
-    usuariorol= RolUsuario.objects.all()
-    return render_to_response('comite.html', {'comite':comit,'proyecto':proyecto,'usuarios': usuarios, 'usuario': usuario, 'usuariorol': usuariorol }, context_instance=RequestContext(request))
+
+    return render_to_response('comite.html', {'comite':comite,'proyecto':proyectoa,'usuarios': usuarios, 'usuario': usuario }, context_instance=RequestContext(request))
 
 
 
-def incluir_al_Comite(request,codigoProyecto,codigoUsuario):
-    usuario= User.objects.get(pk= codigoUsuario)
-    if request.method=="POST":
-        formulario= UserCreationForm(request.POST, request.FILES, instance= usuario)
-        if formulario.is_valid():
-            formulario.save()
-            return HttpResponseRedirect('/usuario')
+def incluir_al_Comite(request,codigoProyecto):
+    proyecto=Proyectos.objects.get(pk=codigoProyecto)
+    proyecto.cantIntegrantes=proyecto.cantIntegrantes+1
+    if request.method == "POST":
+		formulario = ComiteForm(request.POST, request.FILES, instance = proyecto)
+		if formulario.is_valid():
+			print "==============================================="
+			print formulario.cleaned_data['comite']
+			print "==============================================="
+			formulario.save()
+			return HttpResponseRedirect('/proyecto')
     else:
-        formulario= UserCreationForm(instance=usuario)
-    return render(request, 'modificarUsuario.html', {'formulario': formulario})
+	    formulario=ComiteForm(instance = proyecto)
+    return render(request,'modificarProyecto.html', {'formulario': formulario})
+
+
+#    usuarios=User.objects.all()
+#    proyectoR=Proyectos.objects.get(pk=codigoProyecto)
+#    usuarioR=User.objects.get(pk=codigoUsuario)
+        #comit=Comite.objects.get(proyecto=proyectoR)
+        #comit.cantidad_integrantes=comit.cantidad_integrantes+1
+        #comit.usuario=usuarioR
+        #comit.proyecto=proyectoR
+#    cont=0
+#    cmt=Comite.objects.all()
+#    for c in cmt:
+#        if(c.proyecto==proyectoR):
+#            cont=cont+1
+
+#    comit=Comite(proyecto=proyectoR,usuario=usuarioR,cantidad_integrantes=cont+1)
+#    if request.method == "POST":
+#        formulario = ComiteForm(request.POST, request.FILES,instance=comit)
+#        if formulario.is_valid():
+#            formulario.save()
+#            return render_to_response('comite.html', {'comite':comit,'proyecto':proyectoR,'usuarios': usuarios}, context_instance=RequestContext(request))
+#    else:
+#        formulario=ComiteForm(instance = comit)
+#    return render(request,'nuevoIntegrante.html', {'formulario': formulario,'proyecto':proyectoR})
+
+

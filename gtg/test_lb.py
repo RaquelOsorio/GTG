@@ -17,7 +17,7 @@ class GTGTestCase(TestCase):
         test para comprobar que se listan los pryectos de un usuario especifico
         '''
         c = Client()
-        c.login(username='sonia', password='sonia')
+        c.login(username='vivi', password='vivi')
 
         resp = c.get('/proyecto/')
         a=self.assertEqual(resp.status_code, 200)
@@ -29,7 +29,7 @@ class GTGTestCase(TestCase):
         test para comprobar que se abren las fases de un proyecto y usuarios especificos
         '''
         c = Client()
-        c.login(username='sonia', password='sonia')
+        c.login(username='vivi', password='vivi')
 
         resp = c.get('/fase1/500')
         self.assertTrue(resp.status_code, 404)
@@ -45,7 +45,7 @@ class GTGTestCase(TestCase):
         test para comprobar que se abren las fases de un proyecto y usuarios especificos
         '''
         c = Client()
-        c.login(username='sonia', password='sonia')
+        c.login(username='vivi', password='vivi')
 
         resp = c.get('/lb/500')
         self.assertTrue(resp.status_code, 404)
@@ -63,7 +63,7 @@ class GTGTestCase(TestCase):
         '''
 
         c = Client()
-        c.login(username='sonia', password='sonia')
+        c.login(username='vivi', password='vivi')
         print('\n------Ejecutando test para generar linea base-------\n')
 
         resp = c.get('/lb/generarlb/132')
@@ -83,7 +83,7 @@ class GTGTestCase(TestCase):
         '''
 
         c = Client()
-        c.login(username='sonia', password='sonia')
+        c.login(username='vivi', password='vivi')
         print('\n------Ejecutando test para relacionar item a la linea base-------\n')
 
         resp = c.get('/lb/listaItemsTer/45')
@@ -99,4 +99,52 @@ class GTGTestCase(TestCase):
         self.assertTrue(resp.status_code,200)
         print ('Relaciona el item a la linea base\n')
 
+
+    def test_eliminar_item(self):
+
+        c = Client()
+        c.login(username='vivi', password='vivi')
+        print('\n------Ejecutando test para eliminar item-------\n')
+        resp = c.get('/eliItem/88')
+        self.assertEqual(resp.status_code, 301)
+        print ('Test eliminar item que no existe')
+
+        resp = c.get('/eliItem/1')
+        self.assertTrue(resp.status_code, 200)
+        print( 'Test eliminar item que existe\n')
+
+    def test_revivir_item(self):
+
+        c = Client()
+        c.login(username='vivi', password='vivi')
+        print('\n------Ejecutando test para revivir item-------\n')
+
+        resp = c.get('/item/revivirItem/88')
+        self.assertEqual(resp.status_code, 301)
+        print ('Test revivir item que no existe')
+
+        resp = c.get('/item/revivirItem/1')
+        self.assertTrue(resp.status_code, 200)
+        print( 'Test revivir item que existe\n')
+
+    def test_reversionar(self):
+        '''
+        test para comprobar que se reversiona un item
+        '''
+
+        c = Client()
+        c.login(username='vivi', password='vivi')
+
+        resp = c.get('/item/reversionarItem/45')
+        self.assertTrue(resp.status_code, 404)
+
+        print ('Test acceder reversionar item inexistente')
+
+        resp = c.get('/item/reversionarItem/2')
+        self.assertTrue(resp.status_code, 200)
+        print ('Test acceder a reversionar item existente')
+
+        resp = c.post('/item/reversionarItem/2', {'version':1})
+        self.assertTrue(resp.status_code,200)
+        print ('Reversiona el item')
 

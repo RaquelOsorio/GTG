@@ -1,0 +1,18 @@
+{% extends 'index2.html' %}
+
+ <section class='contenido'>
+{% block contenido %}
+    <div id="body">
+
+        <P></P><h3>Comité de Cambios </h3>
+
+        <form id='formulario' method='post' action=''>{% csrf_token %}
+		{{formulario.as_p}}
+        <p>se ha incluido el integrante al comite</p>
+        <p><input name="Aceptar" style="margin-left: 150px;" class="formbutton" value="Aceptar" type="submit" />
+	</form>
+
+
+    </div>
+{% endblock %}
+</section>

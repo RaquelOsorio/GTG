@@ -13,22 +13,18 @@ class GTGTestCase(TestCase):
         '''
 
         c = Client()
-        c.login(username='viviana', password='orlandoybar')
+        c.login(username='vivi', password='vivi')
         print('\n------Ejecutando test para registrar un tipo de atributo-------\n')
 
-        resp = c.post('/tipoAtributo/registrarTipoAtributo',{'nombre':'cadena'})
+        resp = c.post('/tipoAtributo/registrarTipoAtributo',{'nombre':'Atributo1'})
         self.assertTrue(resp.status_code,302)
         print ('\n1 No crea el tipo de atributo si no completa todos los campos')
 
-        resp = c.post('/tipoAtributo/registrarTipoAtributo',{ "descripcion": 123,
-        "nombre": "cadena",
-        "tipo": "Cadena"})
+        resp = c.post('/tipoAtributo/registrarTipoAtributo',{"descripcion": "1", "nombre": "Atributo1", "tipo": "Entero"})
         self.assertEqual(resp.status_code,301)
         print ('\n2 No crea el tipo de atributo si un campo esta mal completado')
 
-        resp = c.post('/tipoAtributo/registrarTipoAtributo',{ "descripcion": "tipo cadena",
-        "nombre": "cadena",
-        "tipo": "Cadena"})
+        resp = c.post('/tipoAtributo/registrarTipoAtributo',{"descripcion": "kll", "nombre": "Atributo1", "tipo": "Entero"})
         self.assertTrue(resp.status_code,200)
         print ('\n3 Crea el tipo de atributo si esta correctamente completado\n')
 
@@ -38,7 +34,7 @@ class GTGTestCase(TestCase):
         '''
 
         c = Client()
-        c.login(username='viviana', password='orlandoybar')
+        c.login(username='vivi', password='vivi')
         print('\n------Ejecutando test para modificar tipo de atributo-------\n')
 
         resp = c.get('/tipoAtributo/modificar_tipoAtributo/45')
@@ -55,12 +51,12 @@ class GTGTestCase(TestCase):
         print ('Modifica el tipo de atributo\n')
 
 
-    def test_eliminar_tipo_atributo(self):
+    def test_eliminar_item(self):
         '''
         test para comprobar que se elimina un tipo de atributo
         '''
         c = Client()
-        c.login(username='viviana', password='orlandoybar')
+        c.login(username='vivi', password='vivi')
         print('\n------Ejecutando test para eliminar tipo de atributo-------\n')
         resp = c.get('/eliTipoAtributo/88')
         self.assertEqual(resp.status_code, 301)

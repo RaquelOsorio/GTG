@@ -1,8 +1,5 @@
 
-
-
 {% extends 'index2.html' %}
-{% load i18n %}
 {% block encabezado %}
 
 {% endblock %}
@@ -11,6 +8,8 @@
         <div class="row" >
                 <div class="span10">
                          <ul>
+                            <p><center><h3>Listado de Items </h3></center></p>
+
                             <center><h3>Items </h3></center>
 
 
@@ -36,11 +35,7 @@
 
 
                                 </tr>
-
-
-                               {% for items in items %}
-
-
+                            {% for items in items %}
 
                                 <tr>
                                         <td>{{items.nombre}}</td>
@@ -48,12 +43,14 @@
                                         <td>{{items.version}}</td>
                                         <td>{{items.tipoItem}}</td>
                                         <td>{{items.tipoItem.tipoAtributo }}</td>
-                                        {% if  items.antecesorHorizontal == None %}
+                                        {% if  items.antecesorHorizontal == None or items.antecesorHorizontal.relacion == 'DEL '%}
                                             <td>Ninguno</td>
                                         {% else %}
-                                            <td>{{ items.antecesorHorizontal}} </td>
+                                            {% if items.antecesorHorizontal.estado == 'VAL' %}
+                                                <td>{{ items.antecesorHorizontal}} </td>
+                                            {% endif %}
                                         {% endif %}
-                                        {% if  items.antecesorVertical == None %}
+                                        {% if  items.antecesorVertical == None or items.antecesorVertical.relacion == 'DEL'%}
                                             <td>Ninguno</td>
                                         {% else %}
                                             <td>{{ items.antecesorVertical}} </td>
@@ -67,16 +64,16 @@
 
                                     <td>Inhabilitado</td>
                                     <td>Inhabilitado</td>
+                                    <td>Inhabilitado</td>
 
-                                    {% if items.estado != 'REV' %}
-                                        <td><center><a href='/item/revivirItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Revivir'/></a></center></td>
-                                        <td>--------------------</td>
+                                    {% if items.estado == 'DESAC' %}
+                                        <td><a href='/item/revivirItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Revivir'/></a></td>
                                     {% else %}
-                                        <td><a href='#' class="button btn-small btn-danger"><input type='submit' value='Revisar'/></a></td>
-                                    {% endif %}
-                                {%endif%}
+                                        <td>Inhabilitado</td>
 
+                                    {%endif%}
 
+                            {% endif %}
 
                                 </tr>
                              {% empty %}

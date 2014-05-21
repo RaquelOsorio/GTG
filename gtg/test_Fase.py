@@ -16,7 +16,7 @@ class GTGTestCase(TestCase):
         test para comprobar que se listan los pryectos de un usuario especifico
         '''
         c = Client()
-        c.login(username='sonia', password='sonia')
+        c.login(username='vivi', password='vivi')
 
         resp = c.get('/proyecto/')
         a=self.assertEqual(resp.status_code, 200)
@@ -28,7 +28,7 @@ class GTGTestCase(TestCase):
         test para comprobar que se abren las fases de un proyecto y usuarios especificos
         '''
         c = Client()
-        c.login(username='sonia', password='sonia')
+        c.login(username='vivi', password='vivi')
 
         resp = c.get('/fase1/500')
         self.assertTrue(resp.status_code, 404)
@@ -47,7 +47,7 @@ class GTGTestCase(TestCase):
         '''
 
         c = Client()
-        c.login(username='sonia', password='sonia')
+        c.login(username='vivi', password='vivi')
         print('\n------Ejecutando test para registrar una fase-------\n')
 
         resp = c.get('/fase1/registrarFase/132')
@@ -62,23 +62,11 @@ class GTGTestCase(TestCase):
         self.assertTrue(resp.status_code,302)
         print ('\n3 No crea la fase si no completa todos los campos')
 
-        resp = c.post('/fase1/registrarFase/1',{"fechaMod": "2014-05-17",
-        "proyectos": 1,
-        "fechaInicio": "2015-02-12",
-        "descripcion": "fase1",
-        "nombre": "fase1",
-        "estado": "INA",
-        "fechaFin": "fgfgf"})
+        resp = c.post('/fase1/registrarFase/1',{'nombre':'fase1', 'descripcion':'KKKK','estado':'1'})
         self.assertEqual(resp.status_code,301)
         print ('\n4 No crea la fase si un campo esta mal completado')
 
-        resp = c.post('/fase1/registrarFase/1',{"fechaMod": "2014-05-17",
-        "proyectos": 1,
-        "fechaInicio": "2015-02-12",
-        "descripcion": "fase1",
-        "nombre": "fase1",
-        "estado": "INA",
-        "fechaFin": "2015-02-12"})
+        resp = c.post('/fase1/registrarFase/1',{"fechaMod": "2014-05-16", "proyectos": 1, "fechaInicio": "2014-05-07", "descripcion": "KKKK", "nombre": "fase1", "estado": "INA", "fechaFin": "2015-05-07"})
         self.assertTrue(resp.status_code,200)
         print ('\n5 Crea la fase si esta correctamente completado\n')
 
@@ -88,7 +76,7 @@ class GTGTestCase(TestCase):
         '''
 
         c = Client()
-        c.login(username='sonia', password='sonia')
+        c.login(username='vivi', password='vivi')
         print('\n------Ejecutando test para modificar fase-------\n')
 
         resp = c.get('/fase/editarFase/45')
@@ -108,7 +96,7 @@ class GTGTestCase(TestCase):
     def test_eliminar_item(self):
 
         c = Client()
-        c.login(username='sonia', password='sonia')
+        c.login(username='vivi', password='vivi')
         print('\n------Ejecutando test para eliminar fase-------\n')
         resp = c.get('/fase/eliminar_fase/88')
         self.assertEqual(resp.status_code, 301)

@@ -62,8 +62,15 @@ class Proyectos(models.Model):
                               choices=ESTADO_CHOICES,
                               default='PEN')
     lider= models.ForeignKey(User, related_name='lider')
+    comite=models.ManyToManyField(User,blank=True, null=True)
+    cantIntegrantes=models.IntegerField(default=0)
     def __unicode__(self):
         return self.nombre
+
+class Miembros(models.Model):
+    integrante=models.ForeignKey(User)
+    proyec=models.ForeignKey(Proyectos)
+    cantidad=models.IntegerField()
 
 class Fases1(models.Model):
     ESTADO_CHOICES=(
@@ -141,6 +148,11 @@ class Item(models.Model):
         (E_DESACTIVADO,'Desactivado'),
         (E_REVISION,'En_Revision'),
     )
+        #Estado de una relacion
+    E_ELIMINADO = 'DEL'
+    E_ACTIVO = 'ACT'
+    ESTADOS_RELACION = ((E_ELIMINADO, 'Eliminado'),(E_ACTIVO, 'Activo'))
+
     nombre=models.CharField(max_length=32, unique=False)
     version=models.IntegerField(max_length=32, default=1)
     prioridad=models.IntegerField(max_length=32)
@@ -154,6 +166,7 @@ class Item(models.Model):
     sucesorHorizontal= models.ForeignKey('self',related_name='RsucesorHorizontal',null=True, blank= True)
     sucesorVertical= models.ForeignKey('self',related_name='RsucesorVertical',null=True, blank= True)
     antecesorVertical=models.ForeignKey('self',related_name='RantecesorVertical',null=True, blank=True)
+    relacion= models.CharField(max_length=20, choices= ESTADOS_RELACION, null=True, blank=True)
 
     def __unicode__(self):
          return self.nombre
@@ -219,9 +232,7 @@ class ItemRelacion(models.Model):
             self.tipo = self.E_EXT
 
 class Comite(models.Model):
-    proyecto= models.ForeignKey(Proyectos, unique=True)
-    usuario=models.ForeignKey(User)
+    #proyecto= models.ForeignKey(Proyectos, unique=False,null=True, blank= True)
+    usuario=models.ForeignKey(User,null=True, blank= True)
     cantidad_integrantes=models.IntegerField(default=0)
-    class Meta:
-            unique_together = ('proyecto', 'usuario')
 

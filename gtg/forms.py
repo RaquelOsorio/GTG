@@ -13,7 +13,7 @@ from gtg.models import Proyectos
 from gtg.models import Fases1
 from gtg.models import TipoItem
 from gtg.models import Comite
-
+from gtg.models import Miembros
 from gtg.models import Item
 from gtg.models import ItemRelacion
 from gtg.models import lineaBase
@@ -104,8 +104,24 @@ class ItemReversionar(forms.ModelForm):
 
 class ComiteForm(forms.ModelForm):
     class Meta:
-        model= Comite
-        fields=("usuario",)
+        model= Proyectos
+        fields=("comite",)
+    def clean(self):
+
+        comit =  self.cleaned_data.get('comite')
+        c=comit.count()
+        print (self.cleaned_data.get('c'))
+        if (c % 2 == 0):
+            raise forms.ValidationError('El nro de integrantes debe ser impar.')
+        else:
+            if( c > 7):
+                raise forms.ValidationError('Se ha superado el limite de integrantes.')
+        return self.cleaned_data
+
+
+
+
+
 
 
 class relacionarForm(forms.ModelForm):
@@ -122,8 +138,8 @@ class relacionarForm(forms.ModelForm):
 
         antecesorH =  self.cleaned_data.get('antecesorHorizontal')
         antecesorV =self.cleaned_data.get('antecesorVertical')
-        print self.cleaned_data.get('antecesorH')
-        print self.cleaned_data.get('antecesorV')
+        print (self.cleaned_data.get('antecesorH'))
+        print (self.cleaned_data.get('antecesorV'))
         if (antecesorH !=None  and antecesorV != None):
             raise forms.ValidationError('Un item solo puede tener un antecesor.')
         else:
@@ -132,13 +148,16 @@ class relacionarForm(forms.ModelForm):
         ite=Item.objects.filter(self)
         ite2=Item.objects.filter(self)
 
-        while(ite.sucesorVertical != None):
-            ite=ite.sucesorVertical
-            print self.cleaned_data.get('nombre')
-            if (ite == antecesorV):
-                raise forms.ValidationError('Se forma un ciclo.')
-            else:
-                return self.cleaned_data
+        while(ite.antecesorHorizontal != None or ite.antecesorVertical != None):
+            print( self.cleaned_data.get('nombre'))
+            if (ite == ite2):
+                while(ite.sucesorVertical != None):
+                    ite=ite.sucesorVertical
+                    print (self.cleaned_data.get('nombre'))
+                    if (ite == antecesorV):
+                        raise forms.ValidationError('Se forma un ciclo.')
+                    else:
+                        return self.cleaned_data
 
         return self.cleaned_data
 
@@ -188,3 +207,8 @@ class finalizarFaseForm(forms.ModelForm):
     class Meta:
         model=Fases1
         fields=()
+
+class EliminarRelacionItemForm(forms.ModelForm):
+    class Meta:
+        model= Item
+        fields=( )

@@ -1,64 +1,29 @@
 [
-{
-    "pk": 1,
-    "model": "auth.user",
-    "fields": {
-        "username": "viviana",
-        "first_name": "",
-        "last_name": "",
-        "is_active": true,
-        "is_superuser": true,
-        "is_staff": true,
-        "last_login": "2014-05-17T05:13:38.467Z",
-        "groups": [],
-        "user_permissions": [],
-        "password": "pbkdf2_sha256$12000$PR8e8Hv0xhnf$053IvE/uYtPUlns0CwxannzBqLKqkdXz0Nn+wl6U6zg=",
-        "email": "",
-        "date_joined": "2014-05-17T05:13:21.882Z"
-    }
-},
+
 {
     "pk": 2, 
     "model": "auth.user", 
     "fields": {
-        "username": "sonia", 
+        "username": "vivi", 
         "first_name": "", 
         "last_name": "", 
         "is_active": true, 
         "is_superuser": false, 
         "is_staff": false, 
-        "last_login": "2014-05-17T05:16:31.378Z", 
+        "last_login": "2014-05-16T15:19:14.040Z", 
         "groups": [], 
         "user_permissions": [], 
-        "password": "pbkdf2_sha256$12000$muKz5vcaM3li$1YcPqD8wV7IxXHlPjQ/cRLRMiophpQC5U7ixCvS6hS8=", 
+        "password": "pbkdf2_sha256$12000$8jv5YD9fnD2w$yALvJqjm6TYN5fxve0HILNjOyj1Rh7L/QBQQwopsVa8=", 
         "email": "", 
-        "date_joined": "2014-05-17T05:14:32.378Z"
+        "date_joined": "2014-05-16T15:17:57.921Z"
     }
 },
 {
-    "pk": 3, 
-    "model": "auth.user", 
-    "fields": {
-        "username": "victor", 
-        "first_name": "", 
-        "last_name": "", 
-        "is_active": true, 
-        "is_superuser": false, 
-        "is_staff": false, 
-        "last_login": "2014-05-17T05:14:48.373Z", 
-        "groups": [], 
-        "user_permissions": [], 
-        "password": "pbkdf2_sha256$12000$TIdndZWqYGLM$YrUfo2+k7MzygGkeBecBbFfVd2GpAKDGC3pElHIow3g=", 
-        "email": "", 
-        "date_joined": "2014-05-17T05:14:48.373Z"
-    }
-},
-{
-    "pk": "i1r3s4bdo3md4vmxe9xqefirqjpkjg5y", 
+    "pk": "49f740y3gh0mqchebzguhnv1vipxy7ay", 
     "model": "sessions.session", 
     "fields": {
-        "expire_date": "2014-05-31T05:16:31.393Z", 
-        "session_data": "M2QyOWUyZDA2MjVhNTUzMGNiOTRiYWFiODk0YTUzNzc5ZWUyYWQ2NDp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6Mn0="
+        "expire_date": "2014-05-30T16:05:37.115Z", 
+        "session_data": "YjQ1OTk1NGQ3YzdiMzhiZTliYmIyZmU2ZGVjNTg3Nzg5ZjQ5NmI1OTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0="
     }
 },
 {
@@ -69,86 +34,59 @@
         "name": "example.com"
     }
 },
-
 {
     "pk": 1, 
     "model": "gtg.proyectos", 
     "fields": {
-        "fechaMod": "2014-05-17", 
-        "fechaInicio": "2014-12-12", 
+        "fechaMod": "2014-05-16", 
+        "fechaInicio": "2014-05-07", 
         "lider": 2, 
         "complejidad": 1, 
-        "nombre": "proyecto1", 
+        "nombre": "gtg", 
         "estado": "PEN", 
-        "fechaFin": "2015-02-12"
-    }
-},
-{
-    "pk": 2, 
-    "model": "gtg.proyectos", 
-    "fields": {
-        "fechaMod": "2014-05-17", 
-        "fechaInicio": "2015-02-12", 
-        "lider": 3, 
-        "complejidad": 1, 
-        "nombre": "proyecto2", 
-        "estado": "PEN", 
-        "fechaFin": "2018-02-12"
+        "fechaFin": "2015-05-07"
     }
 },
 {
     "pk": 1, 
     "model": "gtg.fases1", 
     "fields": {
-        "fechaMod": "2014-05-17", 
+        "fechaMod": "2014-05-16", 
         "proyectos": 1, 
-        "fechaInicio": "2015-02-12", 
-        "descripcion": "fase1", 
+        "fechaInicio": "2014-05-07", 
+        "descripcion": "KKKK", 
         "nombre": "fase1", 
         "estado": "INA", 
-        "fechaFin": "2015-02-12"
+        "fechaFin": "2015-05-07"
     }
 },
 {
     "pk": 2, 
     "model": "gtg.fases1", 
     "fields": {
-        "fechaMod": "2014-05-17", 
+        "fechaMod": "2014-05-16", 
         "proyectos": 1, 
-        "fechaInicio": "2015-02-12", 
-        "descripcion": "fase2", 
-        "nombre": "fase2", 
+        "fechaInicio": "2014-05-07", 
+        "descripcion": "dsds", 
+        "nombre": "fase3", 
         "estado": "INA", 
-        "fechaFin": "2017-02-12"
-    }
-},
-{
-    "pk": 3, 
-    "model": "gtg.fases1", 
-    "fields": {
-        "fechaMod": "2014-05-17", 
-        "proyectos": 1, 
-        "fechaInicio": "2015-02-12", 
-        "descripcion": "fase2", 
-        "nombre": "faseImport", 
-        "estado": "INA", 
-        "fechaFin": "2017-02-12"
+        "fechaFin": "2015-05-07"
     }
 },
 {
     "pk": 1, 
     "model": "gtg.tipoatributo", 
     "fields": {
-        "descripcion": "tipo cadena", 
-        "nombre": "cadena", 
-        "tipo": "Cadena"
+        "descripcion": "kll", 
+        "nombre": "Atributo1", 
+        "tipo": "Entero"
     }
 },
 {
     "pk": 1, 
     "model": "gtg.tipoitem", 
     "fields": {
-        "descripcion": "tipo1", 
+        "descripcion": "dsds", 
         "nombre": "tipo1", 
         "tipoAtributo": 1
     }
@@ -157,16 +95,16 @@
     "pk": 1, 
     "model": "gtg.item", 
     "fields": {
-        "antecesorVertical": null, 
+        "antecesorVertical": 2, 
         "sucesorHorizontal": null, 
         "antecesorHorizontal": null, 
         "sucesorVertical": null, 
         "tipoItem": 1, 
         "version": 1, 
-        "descripcion": "item1", 
-        "nombre": "item1", 
-        "fechaModi": "2014-05-17", 
-        "estado": "REDAC", 
+        "descripcion": "jkjk", 
+        "nombre": "Item1", 
+        "fechaModi": "2014-05-16", 
+        "estado": "VAL", 
         "prioridad": 1, 
         "fase": 1
     }
@@ -175,16 +113,16 @@
     "pk": 2, 
     "model": "gtg.item", 
     "fields": {
-        "antecesorVertical": null, 
+        "antecesorVertical": 1, 
         "sucesorHorizontal": null, 
         "antecesorHorizontal": null, 
         "sucesorVertical": null, 
         "tipoItem": 1, 
         "version": 1, 
-        "descripcion": "item2", 
-        "nombre": "item2", 
-        "fechaModi": "2014-05-17", 
-        "estado": "REDAC", 
+        "descripcion": "dsdsd", 
+        "nombre": "Item2", 
+        "fechaModi": "2014-05-16", 
+        "estado": "VAL", 
         "prioridad": 1, 
         "fase": 1
     }
@@ -193,34 +131,34 @@
     "pk": 3, 
     "model": "gtg.item", 
     "fields": {
-        "antecesorVertical": 4, 
-        "sucesorHorizontal": null, 
-        "antecesorHorizontal": null, 
-        "sucesorVertical": null, 
-        "tipoItem": 1, 
-        "version": 1, 
-        "descripcion": "item de la fase 2", 
-        "nombre": "itemf2-1", 
-        "fechaModi": "2014-05-17", 
-        "estado": "REDAC", 
-        "prioridad": 1, 
-        "fase": 2
-    }
-},
-{
-    "pk": 4, 
-    "model": "gtg.item", 
-    "fields": {
         "antecesorVertical": null, 
         "sucesorHorizontal": null, 
         "antecesorHorizontal": null, 
         "sucesorVertical": null, 
         "tipoItem": 1, 
         "version": 1, 
-        "descripcion": "item de la fase 2", 
-        "nombre": "itemf2-2", 
-        "fechaModi": "2014-05-17", 
-        "estado": "REDAC", 
+        "descripcion": "sdd", 
+        "nombre": "Item3", 
+        "fechaModi": "2014-05-16", 
+        "estado": "TER", 
+        "prioridad": 1, 
+        "fase": 1
+    }
+},
+{
+    "pk": 4, 
+    "model": "gtg.item", 
+    "fields": {
+        "antecesorVertical": 5, 
+        "sucesorHorizontal": null, 
+        "antecesorHorizontal": null, 
+        "sucesorVertical": null, 
+        "tipoItem": 1, 
+        "version": 1, 
+        "descripcion": "jjjj", 
+        "nombre": "Item5", 
+        "fechaModi": "2014-05-16", 
+        "estado": "TER", 
         "prioridad": 1, 
         "fase": 2
     }
@@ -231,16 +169,34 @@
     "fields": {
         "antecesorVertical": null, 
         "sucesorHorizontal": null, 
+        "antecesorHorizontal": 3, 
+        "sucesorVertical": null, 
+        "tipoItem": 1, 
+        "version": 1, 
+        "descripcion": "dsd", 
+        "nombre": "Item6", 
+        "fechaModi": "2014-05-16", 
+        "estado": "TER", 
+        "prioridad": 1, 
+        "fase": 2
+    }
+},
+{
+    "pk": 6, 
+    "model": "gtg.item", 
+    "fields": {
+        "antecesorVertical": null, 
+        "sucesorHorizontal": null, 
         "antecesorHorizontal": null, 
         "sucesorVertical": null, 
         "tipoItem": 1, 
-        "version": 2, 
-        "descripcion": "item de la fase 2", 
-        "nombre": "itemf2-1", 
-        "fechaModi": "2014-05-17", 
+        "version": 1, 
+        "descripcion": "jkjk", 
+        "nombre": "item7", 
+        "fechaModi": "2014-05-16", 
         "estado": "REDAC", 
-        "prioridad": 2, 
-        "fase": 2
+        "prioridad": 1, 
+        "fase": 1
     }
 },
 {
@@ -250,6 +206,15 @@
         "itemsAsociados": null, 
         "estado": "ABIERTA", 
         "fase": 1
+    }
+},
+{
+    "pk": 2, 
+    "model": "gtg.lineabase", 
+    "fields": {
+        "itemsAsociados": null, 
+        "estado": "ABIERTA", 
+        "fase": 2
     }
 }
 ]

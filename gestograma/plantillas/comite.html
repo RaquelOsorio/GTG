@@ -9,7 +9,7 @@
                          <ul>
                             <center><p></p><h3>Incluir/Quitar integrante al Comité de Cambios </h3></center>
                              <p>Obs: El comité debe estar conformado por un número impar de integrantes</p>
-                             <p>Número actual de Integrantes: {{ comite.cantidad_integrantes }}</p>
+                             <p>Número actual de Integrantes: {{ comite.cantidad_integrantes }} </p>
                             <div class="span3 bs-docs-sidebar">
 		        	            <ul class="nav nav-list bs-docs-sidenav">
 
@@ -33,15 +33,17 @@
 
                                         <td>{{usuarios.username}}</td>
                                         <td>{{ usuarios.is_active }}</td>
-
+                                    {% for comite in comite %}
                                         {% if comite.proyecto == proyecto and comite.usuario == usuarios%}
                                             <td>------------------</td>
+
                                             <td><a href='/usuario/editarUsuario/{{ usuarios.id }}' class="button btn-small btn-danger"><input type='submit' value='Quitar'/></a></td>
 
                                         {% else %}
-                                            <td><a href='incluir_al_comite/{{ proyecto.id }}/{{ usuarios.id }}' class="button btn-small btn-danger"><input type='submit' value='Incluir'/></a></td>
-                                            <td>------------------</td>
+                                             <td><a href='/incluir_al_Comite/{{ proyecto.id }}/{{ usuarios.id }}' class="button btn-small btn-danger"><input type='submit' value='Incluir'/></a></td>
+                                             <td>------------------</td>
                                         {% endif %}
+                                    {% endfor %}
                                 </tr>
                              {% empty %}
 
