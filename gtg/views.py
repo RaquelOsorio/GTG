@@ -918,9 +918,13 @@ def incluir_al_Comite(request,codigoProyecto):
 
 @login_required(login_url='/ingresar')
 def crearSolicitudCambio(request,codigo):
-    '''
-    Vista para la creacion de una solicitud de cambio para un item especificado en id_item
-    '''
+    """
+    Vista para la creacion de una solicitud de cambio para un item especificado
+     \nRecibe como @param el request que es la peticion de la operacion y el id_item en cuestion
+     \nRetorna @return al formulario para completar los datos de la solicitud para luego remitirlos
+     a la lista de espera
+    """
+
     item= Item.objects.get(pk= codigo)
     solicitud= SolicitudCambio(proyecto= item.fase.proyectos, item= item, costo= 0, usuario= request.user)
     if request.method=='POST':
@@ -935,12 +939,15 @@ def crearSolicitudCambio(request,codigo):
     return render_to_response('crear_solicitud.html',{'formulario':formulario, 'id_fase':item.fase.id}, context_instance=RequestContext(request))
 
 
-@login_required
+@login_required(login_url='/ingresar')
 def listaSolicitudes(request):
 
-    '''
-    vista para listar los proyectos asignados a un usuario expecifico
-    '''
+    """
+    Vista para listar las solicitudes asignadas a un item expecifico
+    \nRecibe como @param request, que es la peticion de la operacion
+    \nRetorna @return la lista de todas las solicitudes de cambio de
+     un item existenes dentro del proyecto
+    """
 
 
 
@@ -957,23 +964,39 @@ def listaSolicitudes(request):
 
     return render_to_response('listaSolicitudes.html', {'datos': listaSolicitudes}, context_instance=RequestContext(request))
 
+@login_required(login_url='/ingresar')
 def puedeVotar(id_usuario,id_solicitud):
+
+    """
+    Permite controlar que el usuario que intenta votar puede o no hacerlo, dependiendo si es miembro del comite o si ya habia votado
+    \nRecibe como @param el id_usuario y id_solicitud
+    \nRetorna @return True aun no voto el usuario en cuestion y false en caso contrario
+    """
+
     solicitud= SolicitudCambio.objects.get(id=id_solicitud)
     proyecto= SolicitudCambio.objects.filter(proyecto= solicitud.proyecto)
-    #comite= Comite.objects.filter(proyecto= proyecto)
     autorizado= SolicitudCambio.objects.filter(usuario=id_usuario)
     if len(autorizado)==0:
-        return HttpResponseRedirect('/voto')
+            b=0
+            return render_to_response('accesoDenegado.html',{'usuario':autorizado, 'b':b}, context_instance=RequestContext())
     voto=Voto.objects.filter(usuario=id_usuario, solicitud=solicitud)
     if len(voto)!=0:
         return False
     else:
         return True
 
-@login_required
+@login_required(login_url='/ingresar')
 def votar(request, id_solicitud):
+    """
+    Vista que permite visualizar el formulario para iniciar la votación para una solicitud especifica
+    \nRecibe como @param request que es la peticion de la opercion y el id_solicitud en cuestion
+    \nRetorna @return la intefaz de votacion exitosa o no dependiendo del caso
+    """
+
+
     if puedeVotar(request.user.id, id_solicitud)== False:
-        return HttpResponseRedirect('/voto')
+        b=1
+        return render_to_response('accesoDenegado.html',{'usuario':request.user, 'b':b}, context_instance=RequestContext(request))
     solicitud= SolicitudCambio.objects.get(id=id_solicitud)
     item=solicitud.item
     voto=Voto(solicitud=solicitud,usuario=request.user)
@@ -1003,13 +1026,26 @@ def votar(request, id_solicitud):
         formulario=VotoForm(instance= voto)
     return render_to_response('votarSolicitud.html',{'formulario':formulario,'solicitud':solicitud}, context_instance=RequestContext(request))
 
+@login_required(login_url='/ingresar')
 def voto(request):
+    """
+    Vista para el acceso denegado en caso de que un usuario que no es miembro del comite desee votar o ya haya votado
+    \nRecibe como @param request que es la peticion de la operacion
+    \nRetorna @return a la interfaz según sea el caso
+    """
+
     usuario= request.user
-    #parte= Comite.objects.filter(usuario=usuario.id)
     return render_to_response('accesoDenegado.html',{'usuario':usuario}, context_instance=RequestContext(request))
 
-
+@login_required(login_url='/ingresar')
 def votacionCerrada(solicitud):
+    """
+    Vista que permite controlar que todos los miembros del comite de cambio hayan votado para poder cerrar la votacion
+    \nRecibe como @param la solicitud en cuestion
+    \nRetorna @return True si la cantidad de votos coinciden con la cantidad de integrantes del comite, esto es si todos
+    votaron y False en caso contrario
+    """
+
     proyecto = SolicitudCambio.objects.filter(proyecto=solicitud.proyecto.id)
     voto=[]
     cant=0
@@ -1025,12 +1061,20 @@ def votacionCerrada(solicitud):
     else:
         return False
 
+@login_required(login_url='/ingresar')
 def resultado(solicitud):
+    """
+    Vista que controla el resultado de las votaciones para saber si la solicitud fue aprobada o rechazada
+    \nRecibe como @param la solicitud en cuestion, guarda el estdo de la misma según el caso
+    \nRetorna @retun a la funcion votar el resultado
+
+    """
+
     votos = Voto.objects.filter(solicitud=solicitud.id)
     favor=0
     contra=0
     for voto in votos:
-        if voto.voto=='RECHAZAR':
+        if voto.voto=='RECHAZADO':
             contra+=1
         else:
             favor+=1
@@ -1041,20 +1085,22 @@ def resultado(solicitud):
         solicitud.estado='APROBADA'
     solicitud.save()
 
+@login_required(login_url='/ingresar')
 def consultarSolicitud(request,id_solicitud):
-    solicitud= SolicitudCambio.objects.get(id=id_solicitud)
-    #id_usuario=request.user.id
-    #lista_proyectos=Proyecto.objects.filter(comite__id=id_usuario, id=solicitud.proyecto.id)
-    #if len(lista_proyectos)==0:
-     #   return HttpResponseRedirect('/denegado')
 
+    """
+    Vista que permite vizualizar los detalles de la solicitud de cambio especifico
+    \nRecibe como @param request, que es la peticion de la operacion y el id_solicitud en cuestion
+    \nRetorna @return a la interfaz que permite ver los detalles de la consulta
+    """
+    solicitud= SolicitudCambio.objects.get(id=id_solicitud)
     votos = Voto.objects.filter(solicitud_id=solicitud.id)
     favor=0
     contra=0
     usuarios=[]
     for voto in votos:
         usuarios.append(voto.usuario)
-        if voto.voto=='RECHAZAR':
+        if voto.voto=='RECHAZADO':
             contra+=1
         else:
             favor+=1

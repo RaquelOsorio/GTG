@@ -11,7 +11,6 @@
 	<table class='table table-hover' width="80%" border="2">
         <theader>
 	        <tr>
-	            {% comment %}<th scope="col"> </th> {% endcomment %}
 	            <th style="text-align:center">Nombre</th>
 	            <th style="text-align:center">Proyecto</th>
                 <th style="text-align:center">Item</th>
@@ -24,7 +23,6 @@
 	    {% for dato in datos  %}
 
 			<tr border="2">
-				{% comment %}<td><input name="select" type="hidden" value="{{ dato.pk }}" /></td> {% endcomment %}
 				<td>{{ dato.nombre }}</td>
 				<td>{{ dato.proyecto.nombre }}</td>
                 <td>{{ dato.item.nombre }}</td>
