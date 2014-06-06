@@ -91,11 +91,11 @@ class GTGTestCase(TestCase):
 
         print ('Test listar items en estado terminado en una fase inexistente')
 
-        resp = c.get('/lb/listaItemsTer/2/')
+        resp = c.get('/lb/listaItemsTer/1/')
         self.assertTrue(resp.status_code, 200)
         print ('Test listar items en estado terminado en una fase existente')
 
-        resp = c.post('/listaItemsTer/relacionarItemLb/2',{})
+        resp = c.post('/listaItemsTer/relacionarItemLb/1',{})
         self.assertTrue(resp.status_code,200)
         print ('Relaciona el item a la linea base\n')
 

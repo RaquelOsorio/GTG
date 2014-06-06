@@ -1,0 +1,68 @@
+{% extends 'index2.html' %}
+{% block encabezado %}
+
+{% endblock %}
+{% block contenido %}
+
+    <p></p><center><h3>Modificar Items validados</h3></center>
+
+ <br>
+    <center>
+	<table class='table table-hover' width="80%" border="2">
+        <theader>
+	        <tr>
+	            <th style="text-align:center">Nombre</th>
+	            <th style="text-align:center">Proyecto</th>
+                <th style="text-align:center">Fase</th>
+	            <th style="text-align:center">Estado</th>
+	            <th colspan="1" style="text-align:center">Opciones</th>
+
+            </tr>
+        </theader>
+
+	    {% for dato in datos  %}
+
+			<tr border="2">
+				<td>{{ dato.nombre }}</td>
+				<td>{{ dato.fase.proyectos.nombre }}</td>
+                <td>{{ dato.fase.nombre }}</td>
+                <td>{{ dato.estado }}</td>
+
+
+
+
+		                <td>
+                            <center>
+                {% if dato.estado == 'REDAC' %}
+                     <a class="button" href='/modificarItemVal/{{ dato.id }}'><i class="icon-check"></i>Modificar</a>
+                {% else %}
+                    {% if dato.estado == 'REV' %}
+                        <a class="button" href='/modificarItemVal/{{ dato.id }}'><i class="icon-check"></i>Revisar</a>
+                    {% endif %}
+                {% endif %}
+                <a class="button" href='/consultarItem/{{ dato.id }}'><i class="icon-eye-open"></i> Consultar</a>
+
+
+</center>
+                </td>
+			</tr>
+            {% empty %}
+                <li>No tiene solicitudes de cambio en espera</li>
+
+{% endfor %}
+	</table>
+    </center>
+
+</form>
+
+       <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+               <p></p> <a class="button" href="/listaLbRota"><i class="icon-arrow-left"></i> Regresar</a>
+            </ul>
+       </div>
+
+	<br>
+
+{% endblock %}
+
+

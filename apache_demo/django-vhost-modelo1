@@ -1,18 +1,18 @@
 <VirtualHost *:80>
 	ServerName django
 
-    WSGIScriptAlias / /home/viviana/Escritorio/nuevo/gestograma/gestograma/gestograma/wsgi.py
+    WSGIScriptAlias / /home/sonia/GTG/GTG/gestograma/wsgi.py
 
-    Alias /static/ /home/viviana/Escritorio/nuevo/gestograma/gestograma/gestograma/static/
+    Alias /static/ /home/sonia/GTG/GTG/gestograma/static/
 
-    <Directory /home/viviana/Escritorio/nuevo/gestograma/gestograma>
+    <Directory /home/sonia/GTG/GTG/gestograma/>
     <Files wsgi.py>
     Order deny,allow
     Allow from all
     </Files>
     </Directory>
 
-    <Directory /home/viviana/Escritorio/nuevo/gestograma/gestograma/gestograma/static/>
+    <Directory /home/sonia/GTG/GTG/gestograma/static/>
     Order deny,allow
     Allow from all
     </Directory>

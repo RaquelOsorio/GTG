@@ -47,7 +47,11 @@
                                         <td>{{items.tipoItem.tipoAtributo }}</td>
 
                                 {% if items.estado == 'REDAC' or items.estado == 'TER'%}
+                                    {% if items.lb.estado != 'ROTA' %}
                                      <td><a href='/item/modificarItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>
+                                     {% else %}
+                                        <td>Inhabilitado</td>
+                                     {% endif %}
                                      <td><a href='/item/eliminarItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Eliminar'/></a></td>
                                      <td><a href='/item/relacionarItem/{{ items.id}}/{{fase.proyectos.id }}' class="button btn-small btn-danger"><input type='submit' value='Relacionar'/></a></td>
                                      <td><a href='/item/reversionarItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Reversionar'/></a></td>

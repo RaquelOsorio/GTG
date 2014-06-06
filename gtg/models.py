@@ -78,6 +78,7 @@ class Fases1(models.Model):
     fechaMod= models.DateField(auto_now=True)
     nombre=models.CharField(max_length=32, unique=True)
     descripcion=models.TextField(max_length=100)
+    orden = models.SmallIntegerField(verbose_name='Orden')
     estado = models.CharField(max_length=20,
                               choices=ESTADO_CHOICES,
                               default='INA')
@@ -184,6 +185,12 @@ class Item(models.Model):
 
         #class Meta:
         #    permissions=(("asociarRol","puede asociar roles a usuarios"),)
+
+
+class Archivo(models.Model):
+    archivo=models.FileField(upload_to='archivos')
+    item=models.ForeignKey(Item, null=True)
+    nombre=models.CharField(max_length=100, null=True)
 
 
 

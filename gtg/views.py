@@ -4,6 +4,9 @@ from django.template import RequestContext
 from django.contrib.auth.forms import User, UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+import pydot
+from django.db.models import Q
+from datetime import datetime
 from gtg.models import Usuario
 from gtg.models import Rol
 from gtg.models import Usuario
@@ -11,7 +14,7 @@ from gtg.forms import usuarioForm
 from gtg.forms import rolForm
 from gtg.forms import importarFaseForm
 from gtg.forms import finalizarFaseForm
-
+from gtg.forms import ItemFormVal
 from django.shortcuts import render, render_to_response, redirect
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
@@ -44,8 +47,9 @@ from gtg.forms import EliminarItemForm
 from gtg.models import lineaBase
 from gtg.forms import lbForm
 from gtg.forms import ItemLbForm
+from gtg.forms import CambioEstadoLbForm
 from django.core.urlresolvers import reverse
-
+from datetime import datetime
 from gtg.forms import ComiteForm
 from gtg.forms import EliminarRelacionItemForm
 from gtg.models import SolicitudCambio
@@ -53,7 +57,7 @@ from gtg.forms import SolicitudCambioForm
 from gtg.models import Voto
 from gtg.forms import VotoForm
 from gtg.forms import ComiteForm
-
+from gtg.models import Archivo
 def ingresar(request):
     """controla si el usuario se encuentra registrado, permite iniciar sesion
     \n@param request:
@@ -239,6 +243,24 @@ def registrarProyecto(request):
     elif request.user.is_active:
         return render_to_response('extiende.html',context_instance=RequestContext(request))
 
+
+def buscarProyecto(request):
+    '''
+    vista para buscar los proyectos del sistema
+    '''
+    permisos= RolUsuario.objects.all()
+    query = request.GET.get('q', '')
+    if query:
+        qset = (
+            Q(nombre=query)
+        )
+        resultados = Proyectos.objects.filter(qset).distinct()
+
+    else:
+        resultados = []
+
+
+    return render_to_response('gestionProyecto.html', {'proyectos': resultados,'permisos':permisos}, context_instance=RequestContext(request))
 
 
 @login_required(login_url='/ingresar')
@@ -596,6 +618,7 @@ def item(request, codigoProyecto):
     registrados en el sistema. Recibe un :param request, peticion de operacion y :return la lista"""
     indice=0
     proyecto=Proyectos.objects.get(pk=codigoProyecto)
+    #nombre=dibujarProyecto(proyecto)
     items=Item.objects.all().order_by('nombre') #[:10]
     priori= Item.objects.all()
     for i in priori:
@@ -620,9 +643,14 @@ def registrarItem(request,codigo):
                          'El item "' + item.nombre + '" ha sido creado con exito')
 
         #return HttpResponseRedirect('/item')
+        #guardar archivo
+        if request.FILES.get('file')!=None:
+            archivo=Archivo(archivo=request.FILES['file'],nombre='', item=codigo)
+            archivo.save()
+
         return render_to_response('gestionItem.html',{'items':items,'proyecto':fase.proyectos},context_instance=RequestContext(request))
     else:
-        return render(request, 'item_form.html', {'formulario': formulario,'proyecto':fase.proyectos})
+        return render(request, 'item_form.html', {'formulario': formulario,'fase':fase})
 
 def modificarItem(request, codigo):
     """Permita modificar item registrados en el sistema, controla que el item en cuestion este en un estado para
@@ -889,15 +917,6 @@ def finalizarFase(request, codigo):
 
 
 
-@login_required(login_url='/ingresar')
-def comite(request,codigoProyecto):
-
-    proyectoa= Proyectos.objects.get(pk=codigoProyecto)
-    comit=Comite.objects.get_or_create(proyecto=proyectoa)
-    usuarios=User.objects.all()
-    usuario=Usuario.objects.all()
-
-    return render_to_response('comite.html', {'comite':comit,'proyecto':proyectoa,'usuarios': usuarios, 'usuario': usuario }, context_instance=RequestContext(request))
 
 
 
@@ -920,11 +939,10 @@ def incluir_al_Comite(request,codigoProyecto):
 def crearSolicitudCambio(request,codigo):
     """
     Vista para la creacion de una solicitud de cambio para un item especificado
-     \nRecibe como @param el request que es la peticion de la operacion y el id_item en cuestion
-     \nRetorna @return al formulario para completar los datos de la solicitud para luego remitirlos
-     a la lista de espera
+    \nRecibe como @param el request que es la peticion de la operacion y el id_item en cuestion
+    \nRetorna @return al formulario para completar los datos de la solicitud para luego remitirlos
+    a la lista de espera
     """
-
     item= Item.objects.get(pk= codigo)
     solicitud= SolicitudCambio(proyecto= item.fase.proyectos, item= item, costo= 0, usuario= request.user)
     if request.method=='POST':
@@ -946,15 +964,15 @@ def listaSolicitudes(request):
     Vista para listar las solicitudes asignadas a un item expecifico
     \nRecibe como @param request, que es la peticion de la operacion
     \nRetorna @return la lista de todas las solicitudes de cambio de
-     un item existenes dentro del proyecto
+    un item existenes dentro del proyecto
     """
 
 
-
-    listaProyectos=Proyectos.objects.filter(lider=request.user.id)
+    #comite=
+    listaProyectos=Proyectos.objects.filter(comite=request.user.id)
     listaSolicitudes=[]
     if len(listaProyectos)==0:
-        return HttpResponseRedirect('/')
+        return render_to_response('listaSolicitudes.html', {'datos': listaSolicitudes}, context_instance=RequestContext(request))
 
     for proyecto in listaProyectos:
         lista= SolicitudCambio.objects.filter(proyecto=proyecto,estado= 'EN_ESPERA')
@@ -964,40 +982,57 @@ def listaSolicitudes(request):
 
     return render_to_response('listaSolicitudes.html', {'datos': listaSolicitudes}, context_instance=RequestContext(request))
 
-@login_required(login_url='/ingresar')
-def puedeVotar(id_usuario,id_solicitud):
-
+def puedeVotar(id_usuario,codigo):
     """
     Permite controlar que el usuario que intenta votar puede o no hacerlo, dependiendo si es miembro del comite o si ya habia votado
-    \nRecibe como @param el id_usuario y id_solicitud
-    \nRetorna @return True aun no voto el usuario en cuestion y false en caso contrario
+    \n Recibe como @param el id_usuario y id_solicitud
+    \n Retorna @return True si aun no voto el usuario en cuestion y false en caso contrario
     """
 
-    solicitud= SolicitudCambio.objects.get(id=id_solicitud)
+
+    solicitud= SolicitudCambio.objects.get(id=codigo)
     proyecto= SolicitudCambio.objects.filter(proyecto= solicitud.proyecto)
-    autorizado= SolicitudCambio.objects.filter(usuario=id_usuario)
-    if len(autorizado)==0:
-            b=0
-            return render_to_response('accesoDenegado.html',{'usuario':autorizado, 'b':b}, context_instance=RequestContext())
     voto=Voto.objects.filter(usuario=id_usuario, solicitud=solicitud)
     if len(voto)!=0:
         return False
     else:
         return True
 
-@login_required(login_url='/ingresar')
-def votar(request, id_solicitud):
+
+def getMaxIdItemEnLista(lista):
+    '''
+    Funcion para hallar el id maximo de los items de una lista
+    '''
+    max=0
+    for item in lista:
+        if item.id>max:
+            max=item.id
+    return max
+
+def itemsProyecto(proyecto):
+    '''
+    Funcion que recibe como parametro un proyecto y retorna todos los items del mismo
+    '''
+    fases = Fases1.objects.filter(proyectos=proyecto)
+    items=[]
+    for fase in fases:
+        item=Item.objects.filter(fase=fase)
+        for i in item:
+            if i.estado!='DESAC':
+                items.append(i)
+    return items
+
+
+def votar(request, codigo):
     """
-    Vista que permite visualizar el formulario para iniciar la votación para una solicitud especifica
+    Vista que permite visualizar el formulario para iniciar la votacion para una solicitud especifica
     \nRecibe como @param request que es la peticion de la opercion y el id_solicitud en cuestion
     \nRetorna @return la intefaz de votacion exitosa o no dependiendo del caso
     """
+    if puedeVotar(request.user.id, codigo)== False:
+        return HttpResponseRedirect('/voto')
 
-
-    if puedeVotar(request.user.id, id_solicitud)== False:
-        b=1
-        return render_to_response('accesoDenegado.html',{'usuario':request.user, 'b':b}, context_instance=RequestContext(request))
-    solicitud= SolicitudCambio.objects.get(id=id_solicitud)
+    solicitud= SolicitudCambio.objects.get(id=codigo)
     item=solicitud.item
     voto=Voto(solicitud=solicitud,usuario=request.user)
 
@@ -1011,8 +1046,16 @@ def votar(request, id_solicitud):
                 resultado(solicitud)
                 if solicitud.estado=='APROBADA':
                     aprobada=1
+                    #item.estado='REDAC'
+                    #item.save()
+                    listaitems =itemsProyecto(solicitud.proyecto)
+                    maxiditem = getMaxIdItemEnLista(listaitems)
+                    global nodos_visitados
+                    nodos_visitados = [0]*(maxiditem+1)
+                    estadoDependientes(item.id)
                     item.estado='REDAC'
                     item.save()
+
                     lb=item.lb
                     lb.estado='ROTA'
                     lb.save()
@@ -1026,18 +1069,17 @@ def votar(request, id_solicitud):
         formulario=VotoForm(instance= voto)
     return render_to_response('votarSolicitud.html',{'formulario':formulario,'solicitud':solicitud}, context_instance=RequestContext(request))
 
-@login_required(login_url='/ingresar')
+
 def voto(request):
     """
     Vista para el acceso denegado en caso de que un usuario que no es miembro del comite desee votar o ya haya votado
     \nRecibe como @param request que es la peticion de la operacion
-    \nRetorna @return a la interfaz según sea el caso
+    \nRetorna @return a la interfaz segun sea el caso
     """
 
     usuario= request.user
     return render_to_response('accesoDenegado.html',{'usuario':usuario}, context_instance=RequestContext(request))
 
-@login_required(login_url='/ingresar')
 def votacionCerrada(solicitud):
     """
     Vista que permite controlar que todos los miembros del comite de cambio hayan votado para poder cerrar la votacion
@@ -1061,14 +1103,10 @@ def votacionCerrada(solicitud):
     else:
         return False
 
-@login_required(login_url='/ingresar')
 def resultado(solicitud):
-    """
-    Vista que controla el resultado de las votaciones para saber si la solicitud fue aprobada o rechazada
-    \nRecibe como @param la solicitud en cuestion, guarda el estdo de la misma según el caso
-    \nRetorna @retun a la funcion votar el resultado
-
-    """
+    """Vista que controla el resultado de las votaciones para saber si la solicitud fue aprobada o rechazado.
+    \n Recibe como @param solicitud en cuestion,guarda el estado de la misma segun el caso.
+    \n Retorna @return a la funcion votar"""
 
     votos = Voto.objects.filter(solicitud=solicitud.id)
     favor=0
@@ -1085,14 +1123,33 @@ def resultado(solicitud):
         solicitud.estado='APROBADA'
     solicitud.save()
 
+def estadoDependientes(id_item):
+    '''
+    Funcion para recorrer el grafo de items del proyecto en profundidad
+    Sumando el costo y el tiempo de cada uno
+    '''
+    global nodos_visitados
+    print id_item
+    nodos_visitados[id_item]=1
+
+    item=Item.objects.get(id=id_item)
+    print item.estado
+    if not(item.estado=='REDAC' or item.estado=='TER' or item.estado=='DESAC'):
+        item.estado='REV'
+        item.save()
+        relaciones = Item.objects.filter(antecesorVertical=id_item)
+        for relacion in relaciones:
+            if(nodos_visitados[relacion.id]==0):
+                estadoDependientes(relacion.id)
+
+
+
 @login_required(login_url='/ingresar')
 def consultarSolicitud(request,id_solicitud):
+    """Vista que permite vizualizar los detalles de la solicitud de cambio especifico.
+    \n Recibe como @param request, que es la peticion de la operacion y el id_solicitud en cuestion.
+    \n Retorna @return a la interfaz que permite ver los detalles de la consulta"""
 
-    """
-    Vista que permite vizualizar los detalles de la solicitud de cambio especifico
-    \nRecibe como @param request, que es la peticion de la operacion y el id_solicitud en cuestion
-    \nRetorna @return a la interfaz que permite ver los detalles de la consulta
-    """
     solicitud= SolicitudCambio.objects.get(id=id_solicitud)
     votos = Voto.objects.filter(solicitud_id=solicitud.id)
     favor=0
@@ -1106,8 +1163,151 @@ def consultarSolicitud(request,id_solicitud):
             favor+=1
     return render_to_response('consultarSolicitud.html',{'usuarios':usuarios,'solicitud':solicitud, 'favor':favor, 'contra':contra}, context_instance=RequestContext(request))
 
+def cambioEstadoLb(request, codigo):
+
+    lBase= lineaBase.objects.get(pk=codigo)
+    if request.method == 'POST':
+        formulario= CambioEstadoLbForm (request.POST, instance= lBase)
+        if formulario.is_valid():
+            formulario.save()
+            #return HttpResponseRedirect('/')
+            return render_to_response('gestionFase1.html',{'lb':lBase }, context_instance=RequestContext(request))
+
+    else:
+        formulario= CambioEstadoLbForm(instance= lBase)
+	return render(request,'cambioEstadoLb.html', {'formulario': formulario,'lb':lBase})
 
 
 
+def listaLbRota(request):
+
+    listaLbRota= lineaBase.objects.filter(estado='ROTA')
+    return render_to_response('listaLbRota.html', {'datos': listaLbRota}, context_instance=RequestContext(request))
 
 
+def listaItemRev(request, codigo):
+
+    listaItems= Item.objects.filter(lb=codigo)
+    return render_to_response('listaItemLbRota.html', {'datos': listaItems}, context_instance=RequestContext(request))
+
+def historialCambio(request, codigo):
+
+    listaItems= Item.objects.filter(lb=codigo)
+    return render_to_response('historialCambio.html', {'datos': listaItems}, context_instance=RequestContext(request))
+
+
+def modificarItemVal(request, codigo):
+    """Permita modificar item registrados en el sistema, controla que el item en cuestion este en un estado para
+    ser modificado: REDAC o TER. Recibe :param request, que es la peticion de la operacion y el codigo del item
+    a modificar. \nRetorna :return a la interfaz de confirmacion de la operacion, esto es,despliega el
+     formulario con todos los campos del item a modificar. Al aceptar la operacion vuelve a la interfaz del listado
+      items de existenes en el sistema"""
+    items=Item.objects.all()
+    item=Item.objects.get(pk=codigo)
+    item.estado='VAL'
+    if request.method == "POST":
+        formulario = ItemFormVal(request.POST, request.FILES, instance = item)
+        if formulario.is_valid():
+            formulario.save()
+                    #guardar archivo
+            if request.FILES.get('file')!=None:
+                archivo=Archivo(archivo=request.FILES['file'],nombre='', item=codigo)
+                archivo.save()
+
+            return render_to_response('gestionItem.html',{'items':items,'proyecto':item.fase.proyectos},context_instance=RequestContext(request))
+    else:
+        formulario=ItemFormVal(instance = item)
+    return render(request,'modificarItemVal.html', {'formulario': formulario,'proyecto':item.fase.proyectos})
+
+
+def consultarItem(request, codigo):
+
+    item= Item.objects.get(pk=codigo)
+    return render_to_response('consultarItem.html', {'item': item}, context_instance=RequestContext(request))
+
+"""
+def dibujarProyecto(proyecto):
+    '''
+    Funcion que grafica los items con sus relaciones de un proyecto dado
+    '''
+    #inicializar estructuras
+    grafo = pydot.Dot(graph_type='digraph',fontname="Verdana",rankdir="LR")
+    fases = Fases1.objects.filter(proyectos=proyecto).order_by('orden')
+    clusters = []
+    clusters.append(None)
+    for fase in fases:
+        if(fase.estado=='INA'):
+            cluster = pydot.Cluster(str(fase.orden),
+                                    label=str(fase.orden)+") "+fase.nombre,
+                                    style="filled",
+                                    fillcolor="gray")
+        else:
+            cluster = pydot.Cluster(str(fase.orden),
+                                    label=str(fase.orden)+") "+fase.nombre)
+        clusters.append(cluster)
+
+    for cluster in clusters:
+        if(cluster!=None):
+            grafo.add_subgraph(cluster)
+
+
+    lista=itemsProyecto(proyecto)
+    items=[]
+    for item in lista:
+        if item.estado!="DESAC":
+            items.append(item)
+    #agregar nodos
+    for item in items:
+
+        if item.estado=="REDAC":
+            clusters[item.fase.orden].add_node(pydot.Node(str(item.id),
+                                                                 label=item.nombre,
+                                                                 style="filled",
+                                                                 fillcolor="yellow",
+                                                                 fontcolor="white"))
+        elif item.estado=="VAL":
+            clusters[item.fase.orden].add_node(pydot.Node(str(item.id),
+                                                                 label=item.nombre,
+                                                                 style="filled",
+                                                                 fillcolor="blue",
+                                                                 fontcolor="white"))
+        elif item.estado=="TER":
+            clusters[item.fase.orden].add_node(pydot.Node(str(item.id),
+                                                                 label=item.nombre,
+                                                                 style="filled",
+                                                                 fillcolor="green",
+                                                                 fontcolor="white"))
+        elif item.estado=="REV":
+            clusters[item.fase.orden].add_node(pydot.Node(str(item.id),
+                                                                 label=item.nombre,
+                                                                 style="filled",
+                                                                 fillcolor="red",
+                                                                 fontcolor="white"))
+        elif item.estado=="DESAC":
+            clusters[item.fase.orden].add_node(pydot.Node(str(item.id),
+                                                                 label=item.nombre,
+                                                                 style="filled",
+                                                                 fillcolor="magenta",
+                                                                 fontcolor="white"))
+    #agregar arcos
+    for item in items:
+        relaciones = Item.objects.filter(antecesorVertical=item).exclude(estado='DESAC')
+        if relaciones!=None:
+            for relacion in relaciones:
+                grafo.add_edge(pydot.Edge(str(item.id),str(relacion.id),label='costo='+str(item.prioridad) ))
+
+    date=datetime.now()
+
+    name=str(date)+'grafico.jpg'
+    grafo.write_jpg(str(settings.RUTA_PROYECTO)+'/static/imagenes/'+str(name))
+    return name
+"""
+
+
+def fecha():
+    today = datetime.now() #fecha actual
+    dateFormat = today.strftime("%Y/%m/%d") # fecha con formato
+
+#convert string to datetime
+    dt = datetime.strptime("21/11/06 16:30", "%d/%m/%y %H:%M")
+    print (dt)

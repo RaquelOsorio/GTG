@@ -9,7 +9,7 @@
         {% block contenido %}
         <div class="container">
             {% if b != 0 %}
-                <p></p><h3>El usuario {{usuario.username}} ya ha votado!!! <span class="glyphicon glyphicon-ok"></span></h3>
+                <p></p><h3>El usuario {{user.username}} ya ha votado!!! <span class="glyphicon glyphicon-ok"></span></h3>
             {% else %}
                 <p></p><h3>El usuario {{usuario.username}} no puede votar porque no forma parte del comite!!! <span class="glyphicon glyphicon-ok"></span></h3>
             {% endif %}
