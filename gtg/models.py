@@ -77,6 +77,7 @@ class Fases1(models.Model):
     fechaFin=models.DateField(auto_now=False)
     fechaMod= models.DateField(auto_now=True)
     nombre=models.CharField(max_length=32, unique=True)
+    cantidadItem=models.IntegerField(max_length=32)
     descripcion=models.TextField(max_length=100)
     orden = models.SmallIntegerField(verbose_name='Orden')
     estado = models.CharField(max_length=20,
@@ -89,10 +90,6 @@ class Fases1(models.Model):
 
 
 class TipoAtributo(models.Model):
-     nombre = models.CharField(max_length=32, unique=True)
-     descripcion=models.TextField(max_length=100)
-     def __unicode__(self):
-         return self.nombre
      TIPO_CHOICES=(
         ('Entero', models.IntegerField),
         ('Cadena', models.CharField),

@@ -16,19 +16,10 @@
         </nav><p></p>
     <div class="row" >
                 <div class="span10">
-                         <ul>
-
-                            <p></p><center><h3>Listado de Proyectos </h3></center>
-
-
-
-
-                        </ul>
-
 
                         <body>
   <h3>Buscar Proyectos</h3>
-    <form action=''>
+    <form href='/buscarProyecto'>
 
     <label for="q">Nombre: </label>
     <input type="text" name="q" value="{{ query|escape }}">
@@ -97,7 +88,7 @@
                                 {% endif %}
                                 {% for comite in p.comite.all %}
                                     {% if comite == user and comite != p.lider%}
-                                         <a class="button" href="/listaSolicitudes"> Selec>> </a>
+                                         <a class="button" href="/administrar/{{p.id}}"> Selec>> </a>
                                     {% endif %}
                                  {% endfor %}
 

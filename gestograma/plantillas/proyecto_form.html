@@ -2,11 +2,16 @@
 <section class='contenido'>
 {% block contenido %}
  <div id="body">
-        <h3>Crear un nuevo Proyecto </h3>
+ <p></p>
+        {% if b == 1 %}
+            <h3>Crear un nuevo Proyecto </h3>
+        {% else %}
+            <h3>Importar Proyecto </h3>
+        {% endif %}
 		<form id='formulario' method='post' action=''>{% csrf_token %}
 		<table>{{formulario}}</table>
         <p>
-            <input name="Guardar" style="margin-left: 150px;" class="formbutton" value="Guardar" type="submit" />
+            <input name="Guardar"  class="formbutton" value="Guardar" type="submit" />
         </p>
 	</form>
  </div>

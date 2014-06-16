@@ -58,6 +58,7 @@ from gtg.models import Voto
 from gtg.forms import VotoForm
 from gtg.forms import ComiteForm
 from gtg.models import Archivo
+from gtg.forms import ProyectoImportForm
 def ingresar(request):
     """controla si el usuario se encuentra registrado, permite iniciar sesion
     \n@param request:
@@ -231,6 +232,7 @@ def registrarProyecto(request):
     """Permite registrar un nuevo proyecto en el sistema. \nRecibe como @param un request que habilita
     el formulario para completar los datos del proyecto, una vez completado todos los campos obligatorios
     se crea el proyecto \ny @return a la interfaz proyecto, donde ya se visualiza en la lista el nuevo registro """
+    b=1
     if request.user.is_superuser:
         if request.method == "POST":
 		    formulario = ProyectoForm(request.POST, request.FILES)
@@ -239,7 +241,7 @@ def registrarProyecto(request):
 			    return HttpResponseRedirect('/proyectoAdmin')
     	else:
             formulario=ProyectoForm()
-        return render(request, 'proyecto_form.html', {'formulario': formulario,})
+        return render(request, 'proyecto_form.html', {'formulario': formulario,'b':b})
     elif request.user.is_active:
         return render_to_response('extiende.html',context_instance=RequestContext(request))
 
@@ -260,7 +262,29 @@ def buscarProyecto(request):
         resultados = []
 
 
-    return render_to_response('gestionProyecto.html', {'proyectos': resultados,'permisos':permisos}, context_instance=RequestContext(request))
+    return render_to_response('buscarProyecto.html', {'proyectos': resultados}, context_instance=RequestContext(request))
+
+def importarProyecto(request, codigo):
+    project = Proyectos.objects.get(pk=codigo)
+    #print 'proyecto',project.nombre
+    b=0
+#    proyectos=Proyectos.objects.all()
+ #   proyectoImport= Proyectos(fechaInicio = proyecto.fechaInicio,fechaFin= proyecto.fechaFin,fechaMod= proyecto.fechaMod,nombre = proyecto.nombre,complejidad= proyecto.complejidad,estado = proyecto.estado,lider= proyecto.lider)
+    #proyectoImport= Proyectos('fechaInicio':proyecto.fechaInicio,'fechaFin': proyecto.fechaFin,'fechaMod': proyecto.fechaMod,'nombre': proyecto.nombre,'complejidad': proyecto.complejidad,'estado': proyecto.estado,'lider' proyecto.lider)
+
+#    faseI=Fases1(fechaInicio=fase.fechaInicio,fechaFin=fase.fechaFin,nombre=fase.nombre,descripcion=fase.descripcion,estado=fase.estado)
+    formulario = ProyectoForm(request.POST, initial={'fechaInicio':project.fechaInicio,'fechaFin': project.fechaFin,'complejidad': project.complejidad,'lider': project.lider} )
+    #formulario = ProyectoForm(request.POST, instance=proyectoImport)
+    if formulario.is_valid():
+        formulario.save()
+        HttpResponseRedirect('/proyecto')
+        #return render_to_response('gestionFase1.html',{'fases': fases, 'proyecto':fase.proyectos}, context_instance=RequestContext(request))
+    else:
+        formulario = ProyectoForm(initial={'fechaInicio':project.fechaInicio,'fechaFin': project.fechaFin,'complejidad': project.complejidad,'lider': project.lider} )
+
+        return render(request, 'proyecto_form.html', {'formulario': formulario,'b':b})
+
+
 
 
 @login_required(login_url='/ingresar')
@@ -547,13 +571,15 @@ def modificar_tipoAtributo(request, codigo):
      relacion o no con el tipo de item. Al aceptar la operacion vuelve a la interfaz del listado de tipos de
      atributos existenes en el sistema"""
 
+    ta= TipoAtributo.objects.get(pk=codigo)
     tipoItem= TipoItem.objects.all()
     for t in tipoItem:
-        if t.tipoAtributo.id == codigo:
+        if t.tipoAtributo.id == ta.id:
             b=1
             return render_to_response('modTipoAtributo.html',{'t':t}, context_instance=RequestContext(request))
 
     tAtributo=TipoAtributo.objects.get(pk=codigo)
+
     if request.method == "POST":
         formulario = TipoAtributoForm(request.POST, request.FILES, instance = tAtributo)
         if formulario.is_valid():
@@ -569,9 +595,10 @@ def eliminar_tipoAtributo(request, codigo):
     de atributo a eliminar. \nRetorna @return a la interfaz de confirmacion de la operacion o de operacion denegada
     dependiendo de la relacion o no con el tipo de item. Al aceptar la operacion vuelve a la interfaz del listado
     de tipo de atributos existenes en el sistema"""
+    ta=TipoAtributo.objects.get(pk=codigo)
     tipoitem=TipoItem.objects.all()
     for ti in tipoitem:
-        if ti.tipoAtributo.id == codigo:
+        if ti.tipoAtributo.id == ta.id:
             return render_to_response('eliTipoAtributo.html',{'ti':ti}, context_instance=RequestContext(request))
     return render_to_response('eliTipoAtributo1.html',{'codigo':codigo}, context_instance=RequestContext(request))
 
@@ -635,7 +662,7 @@ def registrarItem(request,codigo):
     y vuelve a la interfaz donde se despliega la lista de items registrados en el sistema"""
     fase= Fases1.objects.get(pk=codigo)
     item= Item(fase=fase)
-    items=Item.objects.all()
+    items=Item.objects.filter(fase=fase)
     formulario = ItemForm(request.POST, instance=item)
     if formulario.is_valid():
         formulario.save()
@@ -648,7 +675,7 @@ def registrarItem(request,codigo):
             archivo=Archivo(archivo=request.FILES['file'],nombre='', item=codigo)
             archivo.save()
 
-        return render_to_response('gestionItem.html',{'items':items,'proyecto':fase.proyectos},context_instance=RequestContext(request))
+        return render_to_response('gestionItem1.html',{'items':items,'proyecto':fase.proyectos},context_instance=RequestContext(request))
     else:
         return render(request, 'item_form.html', {'formulario': formulario,'fase':fase})
 
@@ -719,7 +746,7 @@ def relacItem(request, codigo,codigop):
     es la peticion de la operacion.Retorna \n@return el formulario con los campos a completar, se acepta la operacion
     y vuelve a la interfaz donde se despliega la lista de items registrados en el sistema"""
     item=Item.objects.get(pk=codigo)
-    items=Item.objects.all()
+    items=Item.objects.filter(fase=item.fase)
     itemRelacionado=Item.objects.get(pk=codigop)
     if (item.fase.id == itemRelacionado.fase.id):
         item.antecesorVertical=itemRelacionado
@@ -735,7 +762,7 @@ def relacItem(request, codigo,codigop):
         #formulario.fields['antecesorHorizontal'].queryset=Item.objects.filter(nombre='item1')
         if formulario.is_valid():
             formulario.save()
-            return render_to_response('gestionItem.html',{'items':items,'proyecto':item.fase.proyectos},context_instance=RequestContext(request))
+            return render_to_response('gestionItem1.html',{'items':items,'proyecto':item.fase.proyectos},context_instance=RequestContext(request))
     else:
         formulario=relacionarForm(instance = item)
     return render(request,'relacionarItems.html', {'formulario': formulario,'proyecto':item.fase.proyectos})
@@ -754,7 +781,10 @@ def itemFase(request, codigo):
     del proyecto, con el cual se filtra todas las fases pertenecientes al mismo. \n@return la lista de fases"""
     items=Item.objects.filter(fase=codigo)
     fase=Fases1.objects.get(pk=codigo)
-    return render_to_response('gestionItem1.html',{'items': items, 'fase':fase,'proyecto':fase.proyectos }, context_instance=RequestContext(request))
+    cantidad= 0
+    for i in items:
+        cantidad= cantidad +1
+    return render_to_response('gestionItem1.html',{'items': items, 'fase':fase,'proyecto':fase.proyectos,'cantidad':cantidad }, context_instance=RequestContext(request))
 
 def itemTipoItem(request, codigo):
     """permite acceder a la interfaz de opciones de administracion para tipos de items donde se despliega la lista de fases
@@ -881,18 +911,28 @@ def relacionarItemLb(request, codigo, codigo1):
     lb = lineaBase.objects.get(id=codigo)
     item.estado='VAL'
     item.lb=lineaBase.objects.get(id=codigo)
+
     #item = Item( lb=lb, estado='VAL')
+
     formulario = ItemLbForm(request.POST, instance= item)
     if formulario.is_valid():
-		formulario.save()
-		return HttpResponseRedirect('/')
+        formulario.save()
+        cantItem= Item.objects.filter(lb=lb)
+        cantidad=0
+        for ci in cantItem:
+            cantidad= cantidad + 1
+
+        if cantidad == item.fase.cantidadItem:
+            lb.estado= 'CERRADA'
+            lb.save()
+        return HttpResponseRedirect('/')
     formulario= ItemLbForm(instance=item)
     return render(request,'ItemLb_form.html', {'formulario': formulario,})
 
 def importarFase(request, codigo):
     fase = Fases1.objects.get(pk=codigo)
     fases=Fases1.objects.all()
-    faseI=Fases1(fechaInicio=fase.fechaInicio,fechaFin=fase.fechaFin,nombre=fase.nombre,descripcion=fase.descripcion,estado=fase.estado)
+    faseI=Fases1(fechaInicio=fase.fechaInicio,fechaFin=fase.fechaFin,nombre=fase.nombre,descripcion=fase.descripcion,estado=fase.estado,cantidadItem=fase.cantidadItem, orden=fase.orden)
     formulario = importarFaseForm(request.POST, instance=faseI)
     if formulario.is_valid():
         formulario.save()
@@ -925,14 +965,44 @@ def incluir_al_Comite(request,codigoProyecto):
     if request.method == "POST":
         formulario = ComiteForm(request.POST, request.FILES, instance = proyecto)
         if formulario.is_valid():
-            print "====================================="
-            print formulario.cleaned_data['comite']
-            print"========================================"
+            print ("=====================================")
+            print (formulario.cleaned_data['comite'])
+            print("========================================")
             formulario.save()
             return HttpResponseRedirect('/proyecto')
     else:
 	    formulario=ComiteForm(instance = proyecto)
     return render(request,'comite.html', {'formulario': formulario})
+
+def recorridoProfundidad(item):
+    """
+    Funcion que llama a recorrer items en profundidad. \n recibe como @param el item en cuestion
+    y\n retorna la suma del costo total del item.
+    """
+    fase=item.fase
+    proyecto=fase.proyectos
+    listaitems =itemsProyecto(proyecto)
+    maxiditem = getMaxIdItemEnLista(listaitems)
+    global sumaCosto, visitados
+    visitados = [0]*(maxiditem+1)
+    sumaCosto=0
+    recorrer(item.id)
+    return sumaCosto
+
+def recorrer(id_item):
+    """
+    Funcion para recorrer el grafo de items del proyecto en profundidad
+    Sumando el costo de cada uno
+    """
+    global sumaCosto, sumaTiempo, visitados
+    visitados[id_item]=1
+    item=Item.objects.get(id=id_item)
+    sumaCosto = sumaCosto + item.prioridad
+    relaciones = Item.objects.filter(antecesorVertical=item.id)
+    for relacion in relaciones:
+        if(visitados[relacion.id]==0):
+            recorrer(relacion.id)
+
 
 
 @login_required(login_url='/ingresar')
@@ -944,13 +1014,17 @@ def crearSolicitudCambio(request,codigo):
     a la lista de espera
     """
     item= Item.objects.get(pk= codigo)
-    solicitud= SolicitudCambio(proyecto= item.fase.proyectos, item= item, costo= 0, usuario= request.user)
+    costototal= recorridoProfundidad(item)
+    solicitud= SolicitudCambio(proyecto= item.fase.proyectos, item= item, costo= costototal, usuario= request.user)
     if request.method=='POST':
         formulario= SolicitudCambioForm(request.POST, instance= solicitud)
         if formulario.is_valid():
             solicitud.save()
             item.estado='REV'
+            lb= item.lb
+            lb.estado= 'REVISION'
             item.save()
+            lb.save()
             return render_to_response('creacion_correcta.html',{'id_fase':item.fase.id}, context_instance=RequestContext(request))
     else:
         formulario=SolicitudCambioForm(instance= solicitud)
@@ -968,7 +1042,6 @@ def listaSolicitudes(request):
     """
 
 
-    #comite=
     listaProyectos=Proyectos.objects.filter(comite=request.user.id)
     listaSolicitudes=[]
     if len(listaProyectos)==0:
@@ -1000,9 +1073,9 @@ def puedeVotar(id_usuario,codigo):
 
 
 def getMaxIdItemEnLista(lista):
-    '''
+    """
     Funcion para hallar el id maximo de los items de una lista
-    '''
+    """
     max=0
     for item in lista:
         if item.id>max:
@@ -1010,9 +1083,9 @@ def getMaxIdItemEnLista(lista):
     return max
 
 def itemsProyecto(proyecto):
-    '''
-    Funcion que recibe como parametro un proyecto y retorna todos los items del mismo
-    '''
+    """
+    Funcion que recibe como @param un proyecto \ny retorna todos los items del mismo
+    """
     fases = Fases1.objects.filter(proyectos=proyecto)
     items=[]
     for fase in fases:
@@ -1062,6 +1135,9 @@ def votar(request, codigo):
                 else:
                     item.estado='VAL'
                     item.save()
+                    lb= item.lb
+                    lb.estado='CERRADA'
+                    lb.save()
                     aprobada=0
 
             return render_to_response('votacionSatisfactoria.html',{'aprobada':aprobada}, context_instance=RequestContext(request))
@@ -1121,19 +1197,20 @@ def resultado(solicitud):
         solicitud.estado='RECHAZADA'
     else:
         solicitud.estado='APROBADA'
+        solicitud.fecha= datetime.now()
     solicitud.save()
 
 def estadoDependientes(id_item):
-    '''
+    """
     Funcion para recorrer el grafo de items del proyecto en profundidad
     Sumando el costo y el tiempo de cada uno
-    '''
+    """
     global nodos_visitados
-    print id_item
+    #print id_item
     nodos_visitados[id_item]=1
 
     item=Item.objects.get(id=id_item)
-    print item.estado
+    #print item.estado
     if not(item.estado=='REDAC' or item.estado=='TER' or item.estado=='DESAC'):
         item.estado='REV'
         item.save()
@@ -1154,6 +1231,7 @@ def consultarSolicitud(request,id_solicitud):
     votos = Voto.objects.filter(solicitud_id=solicitud.id)
     favor=0
     contra=0
+    resultado=0
     usuarios=[]
     for voto in votos:
         usuarios.append(voto.usuario)
@@ -1161,37 +1239,43 @@ def consultarSolicitud(request,id_solicitud):
             contra+=1
         else:
             favor+=1
-    return render_to_response('consultarSolicitud.html',{'usuarios':usuarios,'solicitud':solicitud, 'favor':favor, 'contra':contra}, context_instance=RequestContext(request))
+    if solicitud.estado == 'APROBADA':
+        cant= solicitud.fecha - datetime.now()
+        if cant+1 > 2:
+            resultado=1
+
+    return render_to_response('consultarSolicitud.html',{'usuarios':usuarios,'solicitud':solicitud, 'favor':favor, 'contra':contra, 'res':resultado}, context_instance=RequestContext(request))
 
 def cambioEstadoLb(request, codigo):
 
     lBase= lineaBase.objects.get(pk=codigo)
-    if request.method == 'POST':
-        formulario= CambioEstadoLbForm (request.POST, instance= lBase)
-        if formulario.is_valid():
-            formulario.save()
-            #return HttpResponseRedirect('/')
-            return render_to_response('gestionFase1.html',{'lb':lBase }, context_instance=RequestContext(request))
-
-    else:
-        formulario= CambioEstadoLbForm(instance= lBase)
-	return render(request,'cambioEstadoLb.html', {'formulario': formulario,'lb':lBase})
+    items= Item.objects.filter(lb=lBase)
+    return render(request,'cambioEstadoLb.html', {'items': items,'lb':lBase})
 
 
 
 def listaLbRota(request):
-
+    """
+    funcion que lista todas la lineas bases en estado rota.\nrecibe como @param request que es la peticion de la operacion
+    \nreturn a la interfaz que lista dichas lineas bases
+    """
     listaLbRota= lineaBase.objects.filter(estado='ROTA')
     return render_to_response('listaLbRota.html', {'datos': listaLbRota}, context_instance=RequestContext(request))
 
 
 def listaItemRev(request, codigo):
-
+    """
+    funcion que lista los items que se encuentran en estado de revision \nrecibe como @param request que es la peticon de la operacion
+    y el codigo de la linea base en cuestion\n @return la intefaz que lista dichos items
+    """
     listaItems= Item.objects.filter(lb=codigo)
     return render_to_response('listaItemLbRota.html', {'datos': listaItems}, context_instance=RequestContext(request))
 
 def historialCambio(request, codigo):
-
+    """
+    funcion que lista los items que se encuentran en cierta linea base.\n recibe como @param un requesr que es la peticion de la operacion
+    y el codigo de la linea base en cuestion.\n @return la interfaz que lista dichos items
+    """
     listaItems= Item.objects.filter(lb=codigo)
     return render_to_response('historialCambio.html', {'datos': listaItems}, context_instance=RequestContext(request))
 
@@ -1205,6 +1289,9 @@ def modificarItemVal(request, codigo):
     items=Item.objects.all()
     item=Item.objects.get(pk=codigo)
     item.estado='VAL'
+    lb= item.lb
+    lb.estado= 'CERRADA'
+    lb.save()
     if request.method == "POST":
         formulario = ItemFormVal(request.POST, request.FILES, instance = item)
         if formulario.is_valid():
@@ -1221,9 +1308,31 @@ def modificarItemVal(request, codigo):
 
 
 def consultarItem(request, codigo):
-
+    """
+    funcion que permite visualizar los detalles del item en cuestion.\n recibe como @param el request y el codigo del item
+    \n @return la intefaz con los detalles del mismo
+    """
     item= Item.objects.get(pk=codigo)
     return render_to_response('consultarItem.html', {'item': item}, context_instance=RequestContext(request))
+
+def listaItemsProyecto(request, codigo):
+    """
+    funcion que lista los items pertenecientes a un proyecto en cuestion.\n recibe como @param el request y el codigo del proyecto
+    \n@return la interfaz que lista dichos items
+    """
+    pro= Proyectos.objects.get(pk=codigo)
+
+    items= itemsProyecto(pro)
+    return render_to_response('listaItemsProyecto.html', {'items': items, 'proyecto': pro}, context_instance=RequestContext(request))
+
+def calcularImpacto(request, codigo):
+    """
+    funcion que calcula el impacto de un item en cuestion.\nrecibe como @param el request y el codigo del item.\n@return
+    la interfaz con los detalles del impacto del item.
+    """
+    item= Item.objects.get(id=codigo)
+    impacto= recorridoProfundidad(item)
+    return render_to_response('calcularImpacto.html', {'item': item, 'impacto': impacto}, context_instance=RequestContext(request))
 
 """
 def dibujarProyecto(proyecto):
@@ -1302,12 +1411,3 @@ def dibujarProyecto(proyecto):
     grafo.write_jpg(str(settings.RUTA_PROYECTO)+'/static/imagenes/'+str(name))
     return name
 """
-
-
-def fecha():
-    today = datetime.now() #fecha actual
-    dateFormat = today.strftime("%Y/%m/%d") # fecha con formato
-
-#convert string to datetime
-    dt = datetime.strptime("21/11/06 16:30", "%d/%m/%y %H:%M")
-    print (dt)

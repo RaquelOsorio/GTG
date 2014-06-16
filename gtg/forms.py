@@ -29,6 +29,11 @@ class ProyectoForm(forms.ModelForm):
         model= Proyectos
         fields = ("fechaInicio","fechaFin","nombre","complejidad","lider")
 
+class ProyectoImportForm(forms.ModelForm):
+    class Meta:
+        model= Proyectos
+        fields = ("nombre","complejidad","lider")
+
 class Fases1Form(forms.ModelForm):
     class Meta:
         model=Fases1
@@ -37,6 +42,7 @@ class Fases1Form(forms.ModelForm):
             "fechaFin",
             "nombre",
             "descripcion",
+            "cantidadItem",
             "orden",
             #"proyecto",
 

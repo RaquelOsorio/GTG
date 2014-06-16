@@ -20,7 +20,6 @@
                                         <th>Nombre</th>
                                         <th>Version</th>
                                         <th>Estado</th>
-                                        <th>Estado Relacion</th>
                                         <th>Antecesor</th>
                                         <th><center>Presione para asociar el ítem a la LB</center></th>
 
@@ -36,7 +35,6 @@
                                             <td>{{i.nombre}}</td>
                                             <td>{{i.version}}</td>
                                             <td>{{i.estado}}</td>
-                                            <td>{{ i.relacion }}</td>
                                             <td>{{ i.antecesorVertical }}</td>
                                             {% if i.antecesorVertical == None %}
                                                 <td><center><a href='/listaItemsTer/relaionarItemLb/{{ lb.id }}/{{i.id}}' class="button btn-small btn-danger"><input type='submit' value='Asociar'/></a></center></td>
@@ -44,7 +42,7 @@
                                                 {% if i.antecesorVertical.estado == 'VAL' or i.relacion == 'DEL' %}
                                                     <td><center><a href='/listaItemsTer/relaionarItemLb/{{ lb.id }}/{{i.id}}' class="button btn-small btn-danger"><input type='submit' value='Asociar'/></a></center></td>
                                                 {% else %}
-                                                    {% if i.relacion == 'ACT' %}
+                                                    {% if i.antecesorVertical.estado != 'VAL' or i.relacion == 'ACT' %}
                                                     <td><center>Antecesor aún validado</center></td>
                                                     {% endif %}
                                                 {% endif %}
@@ -57,22 +55,33 @@
                                                 <td>{{i.nombre}}</td>
                                                 <td>{{i.version}}</td>
                                                 <td>{{i.estado}}</td>
-                                                {% if i.antecesorHorizontal.estado == 'VAL' or i.antecesorVertical == 'VAL' or i.antecesorVertical.relacion == 'DEL' or i.antecesorHorizontal.relacion == 'DEL' or i.relacion == 'None' %}
+                                                {% if i.antecesorHorizontal.estado == None and i.antecesorVertical == None %}
+                                                    <td>{{ i.antecesorVertical }} </td>
                                                     <td><center><a href='/listaItemsTer/relaionarItemLb/{{ lb.id }}/{{i.id}}' class="button btn-small btn-danger"><input type='submit' value='Asociar'/></a></center></td>
                                                 {% else %}
-                                                    {% if i.antecesorVertical.relacion == 'ACT' and i.antecesorVertical == 'VAL'%}
-                                                        <td><center><a href='/listaItemsTer/relaionarItemLb/{{ lb.id }}/{{i.id}}' class="button btn-small btn-danger"><input type='submit' value='Asociar'/></a></center></td>
+                                                    {% if i.antecesorHorizontal.estado == None and i.antecesorVertical != None %}
+                                                        {% if i.antecesorVertical.estado == 'VAL' %}
+                                                            <td>{{ i.antecesorVertical }} </td>
+                                                            <td><center><a href='/listaItemsTer/relaionarItemLb/{{ lb.id }}/{{i.id}}' class="button btn-small btn-danger"><input type='submit' value='Asociar'/></a></center></td>
+                                                        {% else %}
+                                                            <td>{{ i.antecesorVertical }} </td>
+                                                            <td><center>Antecesor aun validado</center></td>
+                                                        {% endif %}
                                                     {% else %}
-                                                        <td><center>Antecesor aún validado</center></td>
+                                                        {% if i.antecesorHorizontal.estado != None and i.antecesorVertical == None %}
+                                                            {% if i.antecesorHorizontal.estado == 'VAL' %}
+                                                                <td>{{ i.antecesorHorizontal }} </td>
+                                                                <td><center><a href='/listaItemsTer/relaionarItemLb/{{ lb.id }}/{{i.id}}' class="button btn-small btn-danger"><input type='submit' value='Asociar'/></a></center></td>
+                                                            {% else %}
+                                                                <td>{{ i.antecesorHorizontal }} </td>
+                                                                <td><center>Antecesor aun validado</center></td>
+                                                            {% endif %}
+                                                        {% endif %}
                                                     {% endif %}
                                                 {% endif %}
-                                            </tr>
-                                     {% endif %}
-
+                                    {% endif %}
                                 {% endif %}
-
                              {% empty %}
-
                                 <tr>
                                         No hay items en estado "Terminado"<p></p>
                                 </tr>

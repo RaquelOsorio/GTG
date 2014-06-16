@@ -1,0 +1,59 @@
+{% extends 'index2.html' %}
+{% block encabezado %}
+
+{% endblock %}
+{% block contenido %}
+
+    <p></p><center><h3>Lista de ítems del proyecto "{{ proyecto.nombre }}"</h3></center>
+
+ <br>
+    <center>
+	<table class='table table-hover' width="80%" border="2">
+        <theader>
+	        <tr>
+	            <th style="text-align:center">Nombre</th>
+	            <th style="text-align:center">Fase</th>
+                <th style="text-align:center">Prioridad</th>
+
+	            <th colspan="1" style="text-align:center">Opciones</th>
+
+            </tr>
+        </theader>
+
+	    {% for dato in items  %}
+
+			<tr border="2">
+				<td>{{ dato.nombre }}</td>
+				<td>{{ dato.fase.nombre }}</td>
+				<td>{{ dato.prioridad }}</td>
+
+
+
+
+		                <td>
+                            <center>
+                     <a class="button" href='/listaItemsProyecto/calcularImpacto/{{ dato.id }}'><i class="icon-check"></i> Impacto</a>
+
+</center>
+                </td>
+			</tr>
+            {% empty %}
+                <li>No tiene solicitudes de cambio en espera</li>
+
+{% endfor %}
+	</table>
+    </center>
+
+</form>
+
+       <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+               <p></p> <a class="button" href="/"><i class="icon-arrow-left"></i> Regresar</a>
+            </ul>
+       </div>
+
+	<br>
+
+{% endblock %}
+
+

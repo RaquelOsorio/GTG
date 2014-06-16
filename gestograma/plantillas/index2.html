@@ -29,6 +29,7 @@
                     <li><a href='/rolPermiso'>Gestión de Roles y Permisos</a></li>
                 </ul>
             {% else %}
+                {% if user == proyecto.lider %}
                 <ul>
                     <li><a href='/rolPermiso'>Gestión de Roles y Permisos</a></li>
                     <li><a href='/fase1/{{ proyecto.id }}'>Gestión de Fases</a></li>
@@ -39,7 +40,7 @@
                  <li><a href='#'>Módulo de Desarrollo</a>
                 <ul>
                     <li><a href='/item/{{ proyecto.id }}'>Gestión de Ítems</a></li>
-                    <li><a href=”#”>Cálculo de Impacto</a></li>
+                    <li><a href='/listaItemsProyecto/{{ proyecto.id }}'>Cálculo de Impacto</a></li>
                 </ul>
                 </li>
                     <li><a href='#'>Módulo de Gestión de Configuración</a>
@@ -49,6 +50,7 @@
 
                 </ul>
                 </li>
+               {% endif %}
             {% endif %}
                 <li><a href='/cerrar'>Cerrar</a></li>
                 <li><a href="#contact">Usuario: {{ user.username}}</a></li>

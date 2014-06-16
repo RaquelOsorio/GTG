@@ -1,0 +1,21 @@
+{% extends "index2.html" %}
+{% block busqueda %} {% endblock %}
+    <head>
+       {% block titulo %} <title>Solicitud de Cambio registrada correctamente</title>{% endblock %}
+
+
+    </head>
+    <body>
+        {% block contenido %}
+        <div class="container">
+            <p></p><h3>Cálculo de impacto  <span class="glyphicon glyphicon-ok"></span></h3>
+            <p>El impacto obtenido para el {{ item.nombre }} según su costo</p>
+            <p>y el costo de los ítems relacionados al mismo es de: {{ impacto }}</p>
+
+        </div>
+            <a class="button" href="/listaItemsProyecto/{{ item.fase.proyectos.id }}"><i class="icon-arrow-left"></i> Regresar al listado</a>
+
+        {% endblock %}
+
+    </body>
+</html>

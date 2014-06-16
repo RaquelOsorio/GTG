@@ -37,9 +37,13 @@
 
                                                 <td>{{lb.id}}</td>
                                                 <td>{{lb.estado}}</td>
-                                                <td><center><a href='/lb/listaItemsTer/{{ lb.id }}' class="button btn-small btn-danger"><input type='submit' value='Relacionar'/></a></center></td>
-                                                <td><center><a href='/lb/cambioEstadoLb/{{ lb.id }}' class="button btn-small btn-danger"><input type='submit' value='Cambiar Estado'/></a></center></td>
-
+                                                {% if lb.estado == 'ABIERTA' %}
+                                                    <td><center><a href='/lb/listaItemsTer/{{ lb.id }}' class="button btn-small btn-danger"><input type='submit' value='Relacionar'/></a></center></td>
+                                                    <td><center><a href='/lb/cambioEstadoLb/{{ lb.id }}' class="button btn-small btn-danger"><input type='submit' value='Consultar'/></a></center></td>
+                                                {% else %}
+                                                    <td><center>Inhabilitado</center></td>
+                                                    <td><center><a href='/lb/cambioEstadoLb/{{ lb.id }}' class="button btn-small btn-danger"><input type='submit' value='Consultar'/></a></center></td>
+                                                {% endif %}
 
 
                                             </tr>

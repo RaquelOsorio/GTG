@@ -11,17 +11,21 @@
 
                                 <p><center><h3>{{ fase.proyectos }} - {{  fase.nombre }} </h3></center></p>
 
-                            <li><a href="/item/registrarItem/{{fase.id}}"><i class="icon-chevron-right"></i> Crear Item</a></li>
+                            {% if cantidad == fase.cantidadItem %}
+                                <td>Se ha llegado a la cantidad maxima de items</td>
 
+                            {% else %}
+
+                                <li><a href="/item/registrarItem/{{fase.id}}"><i class="icon-chevron-right"></i> Crear Item</a></li>
+                            {% endif %}
                         </ul>
 
                         <table class="table table-striped table-bordered">
                                 <tr>
                                         <th>Nombre</th>
                                         <th>Estado</th>
-                                        <th>Version</th>
-                                        <th>Tipo Item</th>
-                                        <th>Tipo Atributo</th>
+                                        <th>Antecesor Horizontal</th>
+                                        <th>Antecesor Vertical</th>
 
                                         <th>Presione para editar el item</th>
                                         <th>Presione para eliminar el item</th>
@@ -42,9 +46,18 @@
                                 <tr>
                                         <td>{{items.nombre}}</td>
                                         <td>{{items.estado }}</td>
-                                        <td>{{items.version}}</td>
-                                        <td>{{items.tipoItem}}</td>
-                                        <td>{{items.tipoItem.tipoAtributo }}</td>
+                                        {% if  items.antecesorHorizontal == None or items.antecesorHorizontal.relacion == 'DEL '%}
+                                            <td>Ninguno</td>
+                                        {% else %}
+                                            {% if items.antecesorHorizontal.estado == 'VAL' %}
+                                                <td>{{ items.antecesorHorizontal}} </td>
+                                            {% endif %}
+                                        {% endif %}
+                                        {% if  items.antecesorVertical == None or items.antecesorVertical.relacion == 'DEL'%}
+                                            <td>Ninguno</td>
+                                        {% else %}
+                                            <td>{{ items.antecesorVertical}} </td>
+                                        {% endif %}
 
                                 {% if items.estado == 'REDAC' or items.estado == 'TER'%}
                                     {% if items.lb.estado != 'ROTA' %}
@@ -69,7 +82,7 @@
                                         <td>Inhabilitado</td>
 
                                     {%endif%}
-                                    {% if items.estado == 'VAL' %}
+                                    {% if items.estado == 'VAL' and items.lb.estado == 'CERRADA' %}
                                         <td><a href='/itemFase/crearSolicitudCambio/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Cambio'/></a></td>
                                     {% else %}
                                         <td>Inhabilitado</td>

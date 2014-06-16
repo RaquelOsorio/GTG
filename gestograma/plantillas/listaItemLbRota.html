@@ -36,7 +36,7 @@
                 {% if dato.estado == 'REDAC' %}
                      <a class="button" href='/modificarItemVal/{{ dato.id }}'><i class="icon-check"></i>Modificar</a>
                 {% else %}
-                    {% if dato.estado == 'REV' %}
+                    {% if dato.estado == 'REVi' %}
                         <a class="button" href='/modificarItemVal/{{ dato.id }}'><i class="icon-check"></i>Revisar</a>
                     {% endif %}
                 {% endif %}
