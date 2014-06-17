@@ -43,7 +43,7 @@
                     <li><a href='/listaItemsProyecto/{{ proyecto.id }}'>Cálculo de Impacto</a></li>
                 </ul>
                 </li>
-                    <li><a href='#'>Módulo de Gestión de Configuración</a>
+                    <li><a href='#'>Módulo de Configuración</a>
                 <ul>
                     <li><a href='/listaLbRota'>Gestión de Línea Base</a></li>
                     <li><a href='/listaSolicitudes'>Gestión de Solicitudes de Cambio</a></li>
@@ -52,8 +52,29 @@
                 </li>
                {% endif %}
             {% endif %}
+
+                <li><a href='#'>Reporte</a>
+
+                {% if user.is_superuser %}
+                <ul>
+                    <li><a href='/reporte/usuario'>Usuarios</a></li>
+                    <li><a href='/reporte/proyecto'>Proyectos</a></li>
+                    <li><a href='/reporte/rol'>Roles</a></li>
+                </ul>
+                {% else %}
+
+                    {% if user == proyecto.lider %}
+                    <ul>
+                        <li><a href='/reporte/proyecto/lineasBase/{{ proyecto.id }}'>Linea Base</a></li>
+                        <li><a href='/reporte/proyecto/items/{{ proyecto.id }}'>Items</a></li>
+                        <li><a href='/reporte/proyecto/solicitudesCambio/{{ proyecto.id }}'>Solicitudes</a></li>
+
+                    </ul>
+                </li>
+                 {% endif %}
+            {% endif %}
                 <li><a href='/cerrar'>Cerrar</a></li>
-                <li><a href="#contact">Usuario: {{ user.username}}</a></li>
+                <li><a href="#contact">User:{{ user.username}}</a></li>
 
             </ul>
         </nav>

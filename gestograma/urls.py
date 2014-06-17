@@ -123,6 +123,17 @@ urlpatterns = patterns('',
     url(r'^listaItemsProyecto/(?P<codigo>\d+)/$', 'gtg.views.listaItemsProyecto'),
     url(r'^listaItemsProyecto/calcularImpacto/(?P<codigo>\d+)/$', 'gtg.views.calcularImpacto'),
 
+    url(r'^reporte/usuario/$','gtg.views.descargar_reporteUsuarios'),
+    url(r'^reporte/rol/$','gtg.views.descargar_reporteRoles'),
+
+    url(r'^reporte/proyecto/$','gtg.views.descargar_reporteProyectos'),
+    url(r'^reporte/proyecto/lineasBase/(?P<codigo>\d+)$','gtg.views.descargar_reporteLB'),
+    url(r'^reporte/proyecto/solicitudesCambio/(?P<codigo>\d+)$','gtg.views.descargar_reporteSolicitudes'),
+    url(r'^reporte/proyecto/items/(?P<codigo>\d+)$','gtg.views.descargar_reporteItems'),
+
+
+
+
 #relaciones
    # url(r'^relacion/crear/(?P<idproyecto>\d+)$', CreaRelacionView.as_view(), name="relacion_crear"),
     #url(r'^relaciones/listar/(?P<idproyecto>\d+)$', ListaRelacionesView.as_view(), name="relacion_listar"),
