@@ -658,15 +658,23 @@ def item(request, codigoProyecto):
     registrados en el sistema. Recibe un :param request, peticion de operacion y :return la lista"""
     indice=0
     proyecto=Proyectos.objects.get(pk=codigoProyecto)
-    #nombre=dibujarProyecto(proyecto)
-    items=Item.objects.all().order_by('nombre') #[:10]
+    fases= Fases1.objects.filter(proyectos=proyecto)
+
+    its=[]
+    for f in fases:
+        items1=Item.objects.filter(fase=f).order_by('nombre') #[:10]
+        for i in items1:
+            its.append(i)
+
+    nombre=dibujarProyecto(proyecto)
+    items= Item.objects.all()
     priori= Item.objects.all()
     for i in priori:
         for it in items:
             if(it.nombre==i.nombre ):
                 it=i
     p=1
-    return render_to_response('gestionItem.html',{'items':items,'p':p,'proyecto':proyecto},context_instance=RequestContext(request))
+    return render_to_response('gestionItem.html',{'items':its,'p':p,'proyecto':proyecto, 'name':nombre},context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar')
 def registrarItem(request,codigo):
@@ -1376,7 +1384,7 @@ def calcularImpacto(request, codigo):
     item= Item.objects.get(id=codigo)
     impacto= recorridoProfundidad(item)
     return render_to_response('calcularImpacto.html', {'item': item, 'impacto': impacto}, context_instance=RequestContext(request))
-"""
+
 def dibujarProyecto(proyecto):
     '''
     Funcion que grafica los items con sus relaciones de un proyecto dado
@@ -1388,13 +1396,13 @@ def dibujarProyecto(proyecto):
     clusters.append(None)
     for fase in fases:
         if(fase.estado=='INA'):
-            cluster = pydot.Cluster(str(fase.orden),
-                                    label=str(fase.orden)+") "+fase.nombre,
+            cluster = pydot.Cluster(str(fase.id),
+                                    label=str(fase.id)+") "+fase.nombre,
                                     style="filled",
                                     fillcolor="gray")
         else:
-            cluster = pydot.Cluster(str(fase.orden),
-                                    label=str(fase.orden)+") "+fase.nombre)
+            cluster = pydot.Cluster(str(fase.id),
+                                    label=str(fase.id)+") "+fase.nombre)
         clusters.append(cluster)
 
     for cluster in clusters:
@@ -1411,31 +1419,31 @@ def dibujarProyecto(proyecto):
     for item in items:
 
         if item.estado=="REDAC":
-            clusters[item.fase.orden].add_node(pydot.Node(str(item.id),
+            clusters[item.fase.id].add_node(pydot.Node(str(item.id),
                                                                  label=item.nombre,
                                                                  style="filled",
                                                                  fillcolor="yellow",
                                                                  fontcolor="white"))
         elif item.estado=="VAL":
-            clusters[item.fase.orden].add_node(pydot.Node(str(item.id),
+            clusters[item.fase.id].add_node(pydot.Node(str(item.id),
                                                                  label=item.nombre,
                                                                  style="filled",
                                                                  fillcolor="blue",
                                                                  fontcolor="white"))
         elif item.estado=="TER":
-            clusters[item.fase.orden].add_node(pydot.Node(str(item.id),
+            clusters[item.fase.id].add_node(pydot.Node(str(item.id),
                                                                  label=item.nombre,
                                                                  style="filled",
                                                                  fillcolor="green",
                                                                  fontcolor="white"))
         elif item.estado=="REV":
-            clusters[item.fase.orden].add_node(pydot.Node(str(item.id),
+            clusters[item.fase.id].add_node(pydot.Node(str(item.id),
                                                                  label=item.nombre,
                                                                  style="filled",
                                                                  fillcolor="red",
                                                                  fontcolor="white"))
         elif item.estado=="DESAC":
-            clusters[item.fase.orden].add_node(pydot.Node(str(item.id),
+            clusters[item.fase.id].add_node(pydot.Node(str(item.id),
                                                                  label=item.nombre,
                                                                  style="filled",
                                                                  fillcolor="magenta",
@@ -1450,10 +1458,10 @@ def dibujarProyecto(proyecto):
     date=datetime.now()
 
     name=str(date)+'grafico.jpg'
-    grafo.write_jpg(str(settings.BASE_DIR)+'/gestograma/static/'+str(name))
+    grafo.write_jpg(str(settings.BASE_DIR)+'/gestograma/static/imagenes/'+str(name))
     return name
 
-"""
+
 
 @login_required(login_url='/ingresar')
 
