@@ -5,7 +5,7 @@
       <paths name="produccion">
         <serverdata>
           <mappings>
-            <mapping deploy="GTG" local="$PROJECT_DIR$/gestograma" web="GTG" />
+            <mapping deploy="GTG" local="$PROJECT_DIR$" web="/GTG" />
           </mappings>
         </serverdata>
       </paths>

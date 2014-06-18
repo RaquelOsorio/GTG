@@ -221,7 +221,7 @@ class EliminarRelacionItemForm(forms.ModelForm):
 class SolicitudCambioForm(forms.ModelForm):
     class Meta:
         model= SolicitudCambio
-        fields=('nombre', 'descripcion',)
+        fields=('nombre', 'descripcion','cantidadDias',)
 
 
 class VotoForm(forms.ModelForm):
