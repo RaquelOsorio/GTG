@@ -15,9 +15,9 @@
                     <ul>
 
                              <p><center><h3>{{ proyecto.nombre }} </h3></center></p>
-
-                    <li><a href="/fase1/registrarFase/{{ proyecto.id }}"><i class="addlink"></i> Crear Fase</a></li>
-
+                    {% if user == proyecto.lider %}
+                        <li><a href="/fase1/registrarFase/{{ proyecto.id }}"><i class="addlink"></i> Crear Fase</a></li>
+                    {% endif %}
                         </ul>
                     <ul>
 

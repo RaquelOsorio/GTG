@@ -51,7 +51,7 @@
                                         <th>Presione Visualizar para consultar un Proyecto</th>
 
                                         <th>Ingresar al Proyecto</th>
-
+                                         <th>Finalizar Proyecto</th>
 
 
 
@@ -94,12 +94,22 @@
                                 <td>
                                 {%if user.id == p.lider.id %}
                                    <a class="button" href="/administrar/{{p.id}}"> Selec>> </a>
+                                    <td><a class="button" href="/finalizarProyecto/{{p.id}}"> Selec>> </a></td>
                                 {% endif %}
+
                                 {% for comite in p.comite.all %}
                                     {% if comite == user and comite != p.lider%}
                                          <a class="button" href="/listaSolicitudes"> Selec>> </a>
                                     {% endif %}
                                  {% endfor %}
+                                {% for permisos in permisos %}
+                                    {% if permisos.usuario == user and permisos.usuario != p.lider and permisos.proyecto == p %}
+                                         <a class="button" href="/administrar/{{p.id}}"> Selec>> </a>
+
+                                    {% endif %}
+
+                                 {% endfor %}
+
 
                                     </td>
                                 </tr>

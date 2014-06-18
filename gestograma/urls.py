@@ -130,6 +130,7 @@ urlpatterns = patterns('',
     url(r'^reporte/proyecto/lineasBase/(?P<codigo>\d+)$','gtg.views.descargar_reporteLB'),
     url(r'^reporte/proyecto/solicitudesCambio/(?P<codigo>\d+)$','gtg.views.descargar_reporteSolicitudes'),
     url(r'^reporte/proyecto/items/(?P<codigo>\d+)$','gtg.views.descargar_reporteItems'),
+    url(r'^finalizarProyecto/(?P<codigo>\d+)/$','gtg.views.finalizarProyecto'),
 
 
 

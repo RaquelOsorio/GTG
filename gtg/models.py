@@ -20,17 +20,16 @@ class Usuario_rol(models.Model):
 class Rol(models.Model):
     nombre = models.CharField(max_length=30)
     descripcion = models.TextField()
-    controlTotal=models.BooleanField()
+
     creacionLB=models.BooleanField()
-    rupturaLB=models.BooleanField()
-    consultaLB=models.BooleanField()
+    crearTipoItem=models.BooleanField()
     crearItem=models.BooleanField()
     modificarItem=models.BooleanField()
     eliminarItem=models.BooleanField()
     reversionarItem=models.BooleanField()
+    relacionarItem=models.BooleanField()
+    revivirItem=models.BooleanField()
     aprobarItem=models.BooleanField()
-    desaprobarItem=models.BooleanField()
-    consultaItem=models.BooleanField()
     impactoItem=models.BooleanField()
     class Meta:
         permissions=(("asociar","puede asociar permisos"),)
@@ -115,8 +114,8 @@ class TipoItem(models.Model):
 
 
 class RolUsuario(models.Model):
-    rol= models.ForeignKey(Rol, unique=True)
-    usuario=models.ForeignKey(User, unique=True)
+    rol= models.ForeignKey(Rol)
+    usuario=models.ForeignKey(User)
     proyecto=models.ForeignKey(Proyectos)
 
     class Meta:
@@ -170,6 +169,8 @@ class Item(models.Model):
     tipoItem=models.ForeignKey(TipoItem)
     fase=models.ForeignKey(Fases1, related_name='fase')
     lb= models.ForeignKey(lineaBase, null=True, blank= True)
+    solicitudAprobada=models.BooleanField(default=0)
+    revocar=models.DateField(null=True, blank= True)
 
     antecesorHorizontal= models.ForeignKey('self',related_name='RantecesorHorizontal',null=True, blank= True)
     sucesorHorizontal= models.ForeignKey('self',related_name='RsucesorHorizontal',null=True, blank= True)
@@ -209,6 +210,7 @@ class SolicitudCambio(models.Model):
     costo=models.PositiveIntegerField(verbose_name='Costo')
     usuario=models.ForeignKey(User)
     estado=models.CharField(max_length=10, verbose_name='Estado',choices=ESTADOS, default=E_ESPERA)
+    cantidadDias=models.IntegerField()
 
 class Voto(models.Model):
     V_APROBADO= 'APROBADO'

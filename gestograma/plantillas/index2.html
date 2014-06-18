@@ -29,12 +29,14 @@
                     <li><a href='/rolPermiso'>Gestión de Roles y Permisos</a></li>
                 </ul>
             {% else %}
-                {% if user == proyecto.lider %}
+                {% if user != user.is_superuser %}
                 <ul>
-                    <li><a href='/rolPermiso'>Gestión de Roles y Permisos</a></li>
+
                     <li><a href='/fase1/{{ proyecto.id }}'>Gestión de Fases</a></li>
                     <li><a href='/tipoItem/{{ proyecto.id }}'>Gestión de Tipo de Ítems</a></li>
-                    <li><a href='/incluir_al_Comite/{{ proyecto.id }}'>Comité de Cambios</a>></li>
+                    {% if user == proyecto.lider %}
+                        <li><a href='/incluir_al_Comite/{{ proyecto.id }}'>Comité de Cambios</a>></li>
+                    {% endif %}
                 </ul>
                 </li>
                  <li><a href='#'>Módulo de Desarrollo</a>

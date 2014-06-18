@@ -68,6 +68,11 @@ from reportlab.pdfgen import canvas
 
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Image, Spacer, Indenter
 
+from dateutil.relativedelta import *
+from dateutil.easter import *
+from dateutil.rrule import *
+from dateutil.parser import *
+from datetime import *
 
 
 def ingresar(request):
@@ -165,6 +170,7 @@ def proyecto(request):
     peticion para realizar cierta operacion. \n@return retorna la lista de proyectos existentes en el sistema"""
     proyectos=Proyectos.objects.all()
     permisos= RolUsuario.objects.all()
+
     return render_to_response('gestionProyecto.html',{'proyectos': proyectos, 'permisos': permisos}, context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar')
@@ -288,12 +294,46 @@ def importarProyecto(request, codigo):
     #formulario = ProyectoForm(request.POST, instance=proyectoImport)
     if formulario.is_valid():
         formulario.save()
-        HttpResponseRedirect('/proyecto')
+        HttpResponseRedirect('/')
         #return render_to_response('gestionFase1.html',{'fases': fases, 'proyecto':fase.proyectos}, context_instance=RequestContext(request))
     else:
         formulario = ProyectoForm(initial={'fechaInicio':project.fechaInicio,'fechaFin': project.fechaFin,'complejidad': project.complejidad,'lider': project.lider} )
 
         return render(request, 'proyecto_form.html', {'formulario': formulario,'b':b})
+
+def finalizarProyecto(request, codigo):
+    proyecto = Proyectos.objects.get(pk=codigo)
+    proyectos=Proyectos.objects.all()
+    fases= Fases1.objects.filter(proyectos=proyecto)
+    band=0
+    for f in fases:
+        if (f.estado!= 'FIN'):
+            band=1
+            return render(request, 'faseNofinalizada.html', {'proyecto':proyecto,'indicador':1})
+    if(band==0):
+        proyecto.estado= 'FIN'
+        proyecto.save()
+    return render_to_response('gestionProyecto.html',{'proyectos': proyectos}, context_instance=RequestContext(request))
+
+def revocar(codigo):
+    """
+    Vista que permite visualizar el formulario para iniciar la votacion para una solicitud especifica
+    \nRecibe como @param request que es la peticion de la opercion y el id_solicitud en cuestion
+    \nRetorna @return la intefaz de votacion exitosa o no dependiendo del caso
+    """
+
+    #lista
+    # s =itemsProyecto(solicitud.proyecto)
+    #maxiditem = getMaxIdItemEnLista(listaitems)
+ #   global nodos_visitados
+#    nodos_visitados = [0]*(maxiditem+1)
+  #  estadoDependientes(item.id)
+    item= Item.objects.get(pk=codigo)
+    item.estado='VAL'
+    item.save()
+    #lb=item.lb
+###    lb.estado='CERRADA'
+   # lb.save()
 
 
 
@@ -390,27 +430,38 @@ def lista_usuarios(request):
 
 @login_required(login_url='/ingresar')
 def editarFase(request, codigo):
-        """Permite editar fases registradas en el sistema"""
-	fases=Fases1.objects.all()
-	fase=Fases1.objects.get(pk=codigo)
+    """ Permite editar las fases de un determinado proyecto """
+    fases= Fases1.objects.all()
+    fase=Fases1.objects.get(pk=codigo)
+    pr=fase.proyectos.id
+    proy=Proyectos.objects.get(pk=pr)
+    formulario = Fases1Form(request.POST, request.FILES, instance = fase)
+    formulario=Fases1Form(instance = fase)
+    if request.method == "POST":
+        formulario = Fases1Form(request.POST, request.FILES, instance = fase)
+        if(formulario.is_valid()):
+            formulario.save()
+            return render_to_response('gestionFase1.html',{'fases': fases, 'proyecto':fase.proyectos }, context_instance=RequestContext(request))
+        else:
+            formulario=Fases1Form(instance = fase)
+    if(proy.lider == request.user):
+        return render(request,'modificarFase.html', {'formulario': formulario,'proyecto':fase.proyectos})
+    else:
+        return render_to_response('extiende.html',{'usuario':usuario}, context_instance=RequestContext(request))
 
-	if request.method == "POST":
-		formulario = Fases1Form(request.POST, request.FILES, instance = fase)
-		if formulario.is_valid():
-			formulario.save()
-			return render_to_response('gestionFase1.html',{'fases': fases, 'proyecto':fase.proyectos }, context_instance=RequestContext(request))
 
-
-	else:
-		formulario=Fases1Form(instance = fase)
-
-	return render(request,'modificarFase.html', {'formulario': formulario,'proyecto':fase.proyectos})
 
 @login_required(login_url='/ingresar')
 def eliminar_fase(request, codigo):
     """"""
     fase=Fases1.objects.get(pk=codigo) # request.GET.get('codigo')
-    return render_to_response('eliFase.html',{'fase':fase,'proyecto':fase.proyectos}, context_instance=RequestContext(request))
+    pr=fase.proyectos.id
+    proy=Proyectos.objects.get(pk=pr)
+    if(proy.lider == request.user):
+        return render_to_response('eliFase.html',{'fase':fase,'proyecto':fase.proyectos}, context_instance=RequestContext(request))
+    else:
+        return render_to_response('extiende.html',{'usuario':usuario}, context_instance=RequestContext(request))
+
 
 def eliFase(request, codigo):
     fase= Fases1.objects.get(pk=codigo)
@@ -669,12 +720,17 @@ def item(request, codigoProyecto):
     nombre=dibujarProyecto(proyecto)
     items= Item.objects.all()
     priori= Item.objects.all()
+    for itm in priori:
+        if(itm.revocar==date.today()):
+            revocar(itm.id)
+
     for i in priori:
         for it in items:
             if(it.nombre==i.nombre ):
                 it=i
     p=1
-    return render_to_response('gestionItem.html',{'items':its,'p':p,'proyecto':proyecto, 'name':nombre},context_instance=RequestContext(request))
+    return render_to_response('gestionItem.html',{'items':its,'p':p,'proyecto':proyecto},context_instance=RequestContext(request))
+    # return render_to_response('gestionItem.html',{'items':its,'p':p,'proyecto':proyecto, 'name':nombre},context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar')
 def registrarItem(request,codigo):
@@ -687,6 +743,12 @@ def registrarItem(request,codigo):
     item= Item(fase=fase)
     items=Item.objects.filter(fase=fase)
     formulario = ItemForm(request.POST, instance=item)
+    #para los permisos
+    fasep= fase.proyectos.id
+    proyectoc= Proyectos.objects.get(pk=fasep)
+    permisos= RolUsuario.objects.all()
+    band=0
+
     if formulario.is_valid():
         formulario.save()
         messages.success(request,
@@ -699,8 +761,16 @@ def registrarItem(request,codigo):
             archivo.save()
 
         return render_to_response('gestionItem1.html',{'items':items,'proyecto':fase.proyectos},context_instance=RequestContext(request))
-    else:
-        return render(request, 'item_form.html', {'formulario': formulario,'fase':fase})
+    else: #verificar permisos
+        for p in permisos:
+            if (p.proyecto == proyectoc and p.usuario == request.user and p.rol.crearItem == True):
+                band=1
+
+        if (band == 1 or proyectoc.lider == request.user):
+            return render(request, 'item_form.html', {'formulario': formulario,'fase':fase})
+        else :
+            return render_to_response('extiende.html',{'usuario':usuario}, context_instance=RequestContext(request))
+
 @login_required(login_url='/ingresar')
 def modificarItem(request, codigo):
     """Permita modificar item registrados en el sistema, controla que el item en cuestion este en un estado para
@@ -710,6 +780,13 @@ def modificarItem(request, codigo):
       items de existenes en el sistema"""
     items=Item.objects.all()
     item=Item.objects.get(pk=codigo)
+    #permisos
+    fase= item.fase.proyectos.id
+    proyectoc= Proyectos.objects.get(pk=fase)
+    permisos= RolUsuario.objects.all()
+    band=0
+
+
     if request.method == "POST":
         formulario = ItemForm1(request.POST, request.FILES, instance = item)
         if formulario.is_valid():
@@ -717,7 +794,15 @@ def modificarItem(request, codigo):
             return render_to_response('gestionItem.html',{'items':items,'proyecto':item.fase.proyectos},context_instance=RequestContext(request))
     else:
         formulario=ItemForm1(instance = item)
-    return render(request,'modificarItem.html', {'formulario': formulario,'proyecto':item.fase.proyectos})
+    for p in permisos:
+        if (p.proyecto == proyectoc and p.usuario == request.user and p.rol.modificarItem == True):
+            band=1
+
+    if (band == 1 or proyectoc.lider == request.user):
+        return render(request,'modificarItem.html', {'formulario': formulario,'proyecto':item.fase.proyectos})
+    else :
+        return render_to_response('extiende.html',{'usuario':usuario}, context_instance=RequestContext(request))
+
 
 @login_required(login_url='/ingresar')
 def reversionarItem(request,codigo):
@@ -727,6 +812,13 @@ def reversionarItem(request,codigo):
     ultima_version=0
     priori=0
     relacionado=0
+    # para verificar permisos
+    fase= item.fase.proyectos.id
+    proyectoc= Proyectos.objects.get(pk=fase)
+    permisos= RolUsuario.objects.all()
+    band=0
+
+
     for itm in it:
         if(itm.nombre==item.nombre and itm.version >= ultima_version):
             ultima_version=itm.version
@@ -745,7 +837,16 @@ def reversionarItem(request,codigo):
             return render_to_response('gestionItem.html',{'items':items,'proyecto':item.fase.proyectos},context_instance=RequestContext(request))
     else:
         formulario=ItemReversionar(request.POST, instance=itemR)
-    return render(request,'item_form1.html', {'formulario': formulario,'item':item,'proyecto':item.fase.proyectos})
+
+    for p in permisos:
+        if (p.proyecto == proyectoc and p.usuario == request.user and p.rol.reversionarItem == True):
+            band=1
+
+    if (band == 1 or proyectoc.lider == request.user):
+        return render(request,'item_form1.html', {'formulario': formulario,'item':item,'proyecto':item.fase.proyectos})
+    else :
+        return render_to_response('extiende.html',{'usuario':usuario}, context_instance=RequestContext(request))
+
 
 
 @login_required(login_url='/ingresar')
@@ -760,7 +861,22 @@ def relacionarItem(request, codigo,codigop):
     proyecto=Proyectos.objects.get(pk=codigop)
     fases=Fases1.objects.filter(proyectos=proyecto)
     items=Item.objects.all()
-    return render(request,'listaRelacion.html', {'item': item,'items':items,'proyecto':proyecto,'fases':fases})
+        #para verficar permisos
+    fase= item.fase.proyectos.id
+    proyectoc= Proyectos.objects.get(pk=fase)
+    permisos= RolUsuario.objects.all()
+    band=0
+
+    for p in permisos:
+        if (p.proyecto == proyectoc and p.usuario == request.user and p.rol.relacionarItem == True):
+            band=1
+
+    if (band == 1 or proyectoc.lider == request.user):
+        return render(request,'listaRelacion.html', {'item': item,'items':items,'proyecto':proyecto,'fases':fases})
+    else :
+        return render_to_response('extiende.html',{'usuario':usuario}, context_instance=RequestContext(request))
+
+
 
 @login_required(login_url='/ingresar')
 def relacItem(request, codigo,codigop):
@@ -771,6 +887,7 @@ def relacItem(request, codigo,codigop):
     item=Item.objects.get(pk=codigo)
     items=Item.objects.filter(fase=item.fase)
     itemRelacionado=Item.objects.get(pk=codigop)
+
     if (item.fase.id == itemRelacionado.fase.id):
         item.antecesorVertical=itemRelacionado
         item.antecesorVertical.relacon= 'ACT'
@@ -806,6 +923,10 @@ def itemFase(request, codigo):
     items=Item.objects.filter(fase=codigo)
     fase=Fases1.objects.get(pk=codigo)
     cantidad= 0
+    for itm in items:
+        if(itm.revocar==date.today()):
+                revocar(itm.id)
+
     for i in items:
         cantidad= cantidad +1
     return render_to_response('gestionItem1.html',{'items': items, 'fase':fase,'proyecto':fase.proyectos,'cantidad':cantidad }, context_instance=RequestContext(request))
@@ -829,12 +950,27 @@ def registrarTipoItem(request,codigoProyecto):
     y vuelve a la interfaz donde se despliega la lista de tipos de items registrados en el sistema"""
     proyecto = Proyectos.objects.get(pk=codigoProyecto)
     tItem=TipoItem.objects.all()
+        #para verficar permisos
+    fase= proyecto.id
+    proyectoc= Proyectos.objects.get(pk=fase)
+    permisos= RolUsuario.objects.all()
+    band=0
+
+
     formulario = TipoItemForm(request.POST, request.FILES)
     if formulario.is_valid():
         formulario.save()
         return render_to_response('gestionTipoItem.html',{'proyecto':proyecto,'tItem':tItem }, context_instance=RequestContext(request))
     else:
-        return render(request, 'tipoItem_form.html', {'formulario': formulario,'proyecto':proyecto})
+            for p in permisos:
+                if (p.proyecto == proyectoc and p.usuario == request.user and p.rol.crearTipoItem == True):
+                    band=1
+
+            if (band == 1 or proyectoc.lider == request.user):
+                return render(request, 'tipoItem_form.html', {'formulario': formulario,'proyecto':proyecto})
+            else :
+                return render_to_response('extiende.html',{'usuario':usuario}, context_instance=RequestContext(request))
+
 
 @login_required(login_url='/ingresar')
 def eliminarItem(request, codigo):
@@ -842,7 +978,20 @@ def eliminarItem(request, codigo):
     peticion de operacion, y el codigo del tipo de atributo a eliminar. Elimina el mismo y\n @return a la interfaz
     donde se despliega la lista de tipos de atributos existentes en el sistema."""
     item= Item.objects.get(pk=codigo) # request.GET.get('codigo')
-    return render_to_response('eliminarItem.html',{'item':item,'proyecto':item.fase.proyectos}, context_instance=RequestContext(request))
+    #permisos
+    fase= item.fase.proyectos.id
+    proyectoc= Proyectos.objects.get(pk=fase)
+    permisos= RolUsuario.objects.all()
+    band=0
+
+    for p in permisos:
+        if (p.proyecto == proyectoc and p.usuario == request.user and p.rol.eliminarItem == True):
+            band=1
+
+    if (band == 1 or proyectoc.lider == request.user):
+        return render_to_response('eliminarItem.html',{'item':item,'proyecto':item.fase.proyectos}, context_instance=RequestContext(request))
+    else :
+        return render_to_response('extiende.html',{'usuario':usuario}, context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar')
 def eliItem(request, codigo):
@@ -879,6 +1028,13 @@ def revivirItem(request, codigo):
     donde se despliega la lista de items existentes en el sistema."""
     item=Item.objects.get(pk=codigo)
     items=Item.objects.all()
+       #para verficar permisos
+    fase= item.fase.proyectos.id
+    proyectoc= Proyectos.objects.get(pk=fase)
+    permisos= RolUsuario.objects.all()
+    band=0
+
+
     for i in items:
         if i.antecesorVertical == item:
             i.antecesorVertical.relacion= 'ACT'
@@ -897,8 +1053,14 @@ def revivirItem(request, codigo):
             return render_to_response('gestionItem.html',{'items':items,'proyecto':item.fase.proyectos},context_instance=RequestContext(request))
     else:
         formulario=EliminarItemForm(instance = item)
-    return render(request,'revivirItem.html', {'formulario': formulario})
+    for p in permisos:
+        if (p.proyecto == proyectoc and p.usuario == request.user and p.rol.revivirItem == True):
+            band=1
 
+    if (band == 1 or proyectoc.lider == request.user):
+        return render(request,'revivirItem.html', {'formulario': formulario})
+    else :
+        return render_to_response('extiende.html',{'usuario':usuario}, context_instance=RequestContext(request))
 
 
     ################falta#######################################
@@ -943,6 +1105,13 @@ def relacionarItemLb(request, codigo, codigo1):
     fase.save()
     item.estado='VAL'
     item.lb=lineaBase.objects.get(id=codigo)
+   #para verficar permisos
+    fase= item.fase.proyectos.id
+    proyectoc= Proyectos.objects.get(pk=fase)
+    permisos= RolUsuario.objects.all()
+    band=0
+
+
 
     #item = Item( lb=lb, estado='VAL')
 
@@ -959,7 +1128,14 @@ def relacionarItemLb(request, codigo, codigo1):
             lb.save()
         return HttpResponseRedirect('/')
     formulario= ItemLbForm(instance=item)
-    return render(request,'ItemLb_form.html', {'formulario': formulario,})
+    for p in permisos:
+        if (p.proyecto == proyectoc and p.usuario == request.user and p.rol.aprobarItem == True):
+            band=1
+    if (band == 1 or proyectoc.lider == request.user):
+        return render(request,'ItemLb_form.html', {'formulario': formulario,})
+    else :
+        return render_to_response('extiende.html',{'usuario':usuario}, context_instance=RequestContext(request))
+
 
 @login_required(login_url='/ingresar')
 
@@ -967,12 +1143,19 @@ def importarFase(request, codigo):
     fase = Fases1.objects.get(pk=codigo)
     fases=Fases1.objects.all()
     faseI=Fases1(fechaInicio=fase.fechaInicio,fechaFin=fase.fechaFin,nombre=fase.nombre,descripcion=fase.descripcion,estado=fase.estado,cantidadItem=fase.cantidadItem, orden=fase.orden)
+    pr=fase.proyectos.id
+    proy=Proyectos.objects.get(pk=pr)
+
     formulario = importarFaseForm(request.POST, instance=faseI)
     if formulario.is_valid():
         formulario.save()
         return render_to_response('gestionFase1.html',{'fases': fases, 'proyecto':fase.proyectos}, context_instance=RequestContext(request))
     else:
-        return render(request, 'faseImport.html', {'formulario': formulario,'proyecto':fase.proyectos})
+        if(proy.lider == request.user):
+            return render(request, 'faseImport.html', {'formulario': formulario,'proyecto':fase.proyectos})
+        else:
+            return render_to_response('extiende.html',{'usuario':usuario}, context_instance=RequestContext(request))
+
 
 @login_required(login_url='/ingresar')
 
@@ -983,12 +1166,13 @@ def finalizarFase(request, codigo):
     item= Item.objects.all()
     for i in item:
         if (i.fase== fase and i.estado!= 'VAL'):
-            return render(request, 'faseNofinalizada.html', {'fase':codigo,'proyecto':fase.proyectos})
+            return render(request, 'faseNofinalizada.html', {'indicador':0,'fase':codigo,'proyecto':fase.proyectos})
     fase.estado= 'FIN'
     if formulario.is_valid():
         formulario.save()
         return render_to_response('gestionFase1.html',{'fases': fases, 'proyecto':fase.proyectos }, context_instance=RequestContext(request))
     else:
+
         return render(request, 'faseImport.html', {'formulario': formulario,'fase':codigo,'proyecto':fase.proyectos})
 
 
@@ -1169,6 +1353,8 @@ def votar(request, codigo):
                     nodos_visitados = [0]*(maxiditem+1)
                     estadoDependientes(item.id)
                     item.estado='REDAC'
+                    item.solicitudAprobada=1
+                    item.revocar=date.today() + timedelta(days=solicitud.cantidadDias)
                     item.save()
 
                     lb=item.lb
@@ -1383,7 +1569,21 @@ def calcularImpacto(request, codigo):
     """
     item= Item.objects.get(id=codigo)
     impacto= recorridoProfundidad(item)
-    return render_to_response('calcularImpacto.html', {'item': item, 'impacto': impacto}, context_instance=RequestContext(request))
+    #para verficar permisos
+    fase= item.fase.proyectos.id
+    proyectoc= Proyectos.objects.get(pk=fase)
+    permisos= RolUsuario.objects.all()
+    band=0
+
+    for p in permisos:
+        if (p.proyecto == proyectoc and p.usuario == request.user and p.rol.impactoItem == True):
+            band=1
+
+    if (band == 1 or proyectoc.lider == request.user):
+        return render_to_response('calcularImpacto.html', {'item': item, 'impacto': impacto}, context_instance=RequestContext(request))
+    else :
+        return render_to_response('extiende.html',{'usuario':usuario}, context_instance=RequestContext(request))
+
 
 def dibujarProyecto(proyecto):
     '''
@@ -1476,7 +1676,7 @@ def reporte_usuarios():
                             topMargin=30,bottomMargin=18)
 
     Story=[]
-    #logo = str(settings.BASE_DIR)+"/static/icono.png"
+    logo = str(settings.BASE_DIR)+"/gestograma/static/logo.png"
     styles=getSampleStyleSheet()
     styles.add(ParagraphStyle(name='Principal',alignment=1,spaceAfter=20, fontSize=24))
     styles.add(ParagraphStyle(name='Justify',fontName='Courier-Oblique', alignment=TA_JUSTIFY, fontSize=14,spaceAfter=5))
@@ -1486,8 +1686,8 @@ def reporte_usuarios():
     styles.add(ParagraphStyle(name='Items',fontName='Helvetica',fontSize=12,spaceAfter=10, spaceBefore=10))
     styles.add(ParagraphStyle(name='Subtitulos',fontSize=12,spaceAfter=3))
     styles.add(ParagraphStyle(name='Encabezado',fontSize=10,spaceAfter=10, left=1, bottom=1))
-    #im = Image(logo, width=100,height=50)
-    #Story.append(im)
+    im = Image(logo, width=100,height=50)
+    Story.append(im)
     contador_act=1
     titulo="<b>Usuarios del Sistema<br/>"
     Story.append(Paragraph(titulo,styles['Principal']))
@@ -1501,7 +1701,7 @@ def reporte_usuarios():
     usuarios_activos=User.objects.filter(is_active=True)
     cantidad_act=len(usuarios_activos)
     contador=-1
-    titulo = Paragraph('<b>Usuarios Activos <\b>', styles['Titulo'])
+    titulo = Paragraph('<b>Usuarios Activos </b>', styles['Titulo'])
     Story.append(Spacer(1, 12))
     Story.append(titulo)
     Story.append(Indenter(25))
@@ -1512,7 +1712,7 @@ def reporte_usuarios():
     for usuario in usuarios:
             contador+=1
             if contador==cantidad_act:
-                titulo = Paragraph('<b>Usuarios Inactivos <\b>', styles['Titulo'])
+                titulo = Paragraph('<b>Usuarios Inactivos </b>', styles['Titulo'])
                 Story.append(Spacer(1, 12))
                 Story.append(titulo)
                 contador_act=1
@@ -1534,7 +1734,6 @@ def reporte_usuarios():
             text ="<strong>Roles: </strong> <br>"
             Story.append(Paragraph(text, styles["Items"]))
             Story.append(Indenter(-25))
-            #roles=Group.objects.filter(user__id=usuario.id)
             roles= Rol.objects.all()
             role= RolUsuario.objects.filter(usuario=usuario)
             for r in role:
@@ -1561,7 +1760,7 @@ def descargar_reporteUsuarios(request):
     Vista para descargar el reporte de lineas base de un proyecto especifico
     '''
     if request.user.is_superuser!=True:
-        return HttpResponseRedirect('/denegado')
+        return render_to_response('extiende.html',context_instance=RequestContext(request))
     a=file(reporte_usuarios())
 
     return StreamingHttpResponse(a,content_type='application/pdf')
@@ -1579,7 +1778,7 @@ def reporte_roles():
                             topMargin=30,bottomMargin=18)
 
     Story=[]
-#    logo = str(settings.BASE_DIR)+"/static/icono.png"
+    logo = str(settings.BASE_DIR)+"/gestograma/static/logo.png"
     styles=getSampleStyleSheet()
     styles.add(ParagraphStyle(name='Principal',alignment=1,spaceAfter=20, fontSize=24))
     styles.add(ParagraphStyle(name='Justify',fontName='Courier-Oblique', alignment=TA_JUSTIFY, fontSize=14,spaceAfter=5))
@@ -1589,8 +1788,8 @@ def reporte_roles():
     styles.add(ParagraphStyle(name='Items',fontName='Helvetica',fontSize=12,spaceAfter=10, spaceBefore=10))
     styles.add(ParagraphStyle(name='Subtitulos',fontSize=12,spaceAfter=3))
     styles.add(ParagraphStyle(name='Encabezado',fontSize=10,spaceAfter=10, left=1, bottom=1))
- #   im = Image(logo, width=100,height=50)
-  #  Story.append(im)
+    im = Image(logo, width=100,height=50)
+    Story.append(im)
     contador_act=1
     titulo="<b>Roles del Sistema<br/>"
     Story.append(Paragraph(titulo,styles['Principal']))
@@ -1720,7 +1919,7 @@ def descargar_reporteRoles(request):
     Vista para descargar el reporte de lineas base de un proyecto especifico
     '''
     if request.user.is_superuser!=True:
-        return HttpResponseRedirect('/denegado')
+        return render_to_response('extiende.html',context_instance=RequestContext(request))
     a=file(reporte_roles())
 
     return StreamingHttpResponse(a,content_type='application/pdf')
@@ -1739,7 +1938,7 @@ def reporte_proyectos():
 
 
     Story=[]
-#    logo = str(settings.BASE_DIR)+"/static/icono.png"
+    logo = str(settings.BASE_DIR)+"/gestograma/static/logo.png"
     styles=getSampleStyleSheet()
     styles.add(ParagraphStyle(name='Principal',alignment=1,spaceAfter=20, fontSize=24))
     styles.add(ParagraphStyle(name='Justify',fontName='Courier-Oblique', alignment=TA_JUSTIFY, fontSize=14,spaceAfter=5))
@@ -1751,8 +1950,8 @@ def reporte_proyectos():
     styles.add(ParagraphStyle(name='Items',fontName='Helvetica',fontSize=14,spaceAfter=10, spaceBefore=10))
     styles.add(ParagraphStyle(name='Subtitulos',fontSize=12,spaceAfter=3))
     styles.add(ParagraphStyle(name='Encabezado',fontSize=10,spaceAfter=10, left=1, bottom=1))
- #   im = Image(logo, width=100,height=50)
-  #  Story.append(im)
+    im = Image(logo, width=100,height=50)
+    Story.append(im)
     contador_act=1
     titulo="<b>Proyectos del Sistema<br/>"
     Story.append(Paragraph(titulo,styles['Principal']))
@@ -1909,7 +2108,7 @@ def reporte_lineas_base(codigo):
                             topMargin=30,bottomMargin=18)
 
     Story=[]
-#    logo = str(settings.BASE_DIR)+"/static/icono.png"
+    logo = str(settings.BASE_DIR)+"/gestograma/static/logo.png"
     styles=getSampleStyleSheet()
     styles.add(ParagraphStyle(name='Principal',alignment=1,spaceAfter=20, fontSize=24))
     styles.add(ParagraphStyle(name='Justify',fontName='Courier-Oblique', alignment=TA_JUSTIFY, fontSize=14,spaceAfter=5))
@@ -1918,8 +2117,8 @@ def reporte_lineas_base(codigo):
     styles.add(ParagraphStyle(name='Items',fontName='Helvetica',fontSize=10,spaceAfter=3))
     styles.add(ParagraphStyle(name='Subtitulos',fontSize=12,spaceAfter=3))
     styles.add(ParagraphStyle(name='Encabezado',fontSize=10,spaceAfter=10, left=1, bottom=1))
- #   im = Image(logo, width=100,height=50)
-  #  Story.append(im)
+    im = Image(logo, width=100,height=50)
+    Story.append(im)
     titulo="<b>Lineas Base proyecto </b>"
     Story.append(Paragraph(titulo,styles['Principal']))
 
@@ -1990,7 +2189,7 @@ def reporte_items(codigo):
 
 
     Story=[]
-#    logo = str(settings.BASE_DIR)+"/static/icono.png"
+    logo = str(settings.BASE_DIR)+"/gestograma/static/logo.png"
     styles=getSampleStyleSheet()
     styles.add(ParagraphStyle(name='Principal',alignment=1,spaceAfter=20, fontSize=24))
     styles.add(ParagraphStyle(name='Justify',fontName='Courier-Oblique', alignment=TA_JUSTIFY, fontSize=14,spaceAfter=5))
@@ -2002,8 +2201,8 @@ def reporte_items(codigo):
     styles.add(ParagraphStyle(name='Items',fontName='Helvetica',fontSize=14,spaceAfter=5, spaceBefore=5))
     styles.add(ParagraphStyle(name='Subtitulos',fontSize=12,spaceAfter=3))
     styles.add(ParagraphStyle(name='Encabezado',fontSize=10,spaceAfter=10, left=1, bottom=1))
- #   im = Image(logo, width=100,height=50)
-  #  Story.append(im)
+    im = Image(logo, width=100,height=50)
+    Story.append(im)
     contador_act=1
     titulo="<b>Items del Proyecto </b>"
     Story.append(Paragraph(titulo,styles['Principal']))
@@ -2103,7 +2302,7 @@ def reporte_solicitudes(codigo):
                             topMargin=30,bottomMargin=18)
 
     Story=[]
-#    logo = str(settings.BASE_DIR)+"/static/icono.png"
+    logo = str(settings.BASE_DIR)+"/gestograma/static/logo.png"
     styles=getSampleStyleSheet()
     styles.add(ParagraphStyle(name='Principal',alignment=1,spaceAfter=20, fontSize=24))
     styles.add(ParagraphStyle(name='Justify',fontName='Courier-Oblique', alignment=TA_JUSTIFY, fontSize=14,spaceAfter=5))
@@ -2113,8 +2312,8 @@ def reporte_solicitudes(codigo):
     styles.add(ParagraphStyle(name='Items',fontName='Helvetica',fontSize=12,spaceAfter=10, spaceBefore=10))
     styles.add(ParagraphStyle(name='Subtitulos',fontSize=12,spaceAfter=3))
     styles.add(ParagraphStyle(name='Encabezado',fontSize=10,spaceAfter=10, left=1, bottom=1))
- #   im = Image(logo, width=100,height=50)
-  #  Story.append(im)
+    im = Image(logo, width=100,height=50)
+    Story.append(im)
     contador_act=1
     titulo="<b>Solicitudes del proyecto </b>"
     Story.append(Paragraph(titulo,styles['Principal']))
