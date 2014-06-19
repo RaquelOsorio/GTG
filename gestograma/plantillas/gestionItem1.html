@@ -85,7 +85,11 @@
                                     {% if items.estado == 'VAL' and items.lb.estado == 'CERRADA' %}
                                         <td><a href='/itemFase/crearSolicitudCambio/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Cambio'/></a></td>
                                     {% else %}
-                                        <td>Inhabilitado</td>
+                                        {% if items.estado == 'REV' %}
+                                            <td><a href='/itemFase/crearSolicitudCambio/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Cambio'/></a></td>
+                                        {% else %}
+                                            <td>Inhabilitado</td>
+                                        {% endif %}
                                     {% endif %}
 
 

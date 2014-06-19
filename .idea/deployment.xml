@@ -5,11 +5,9 @@
       <paths name="produccion">
         <serverdata>
           <mappings>
-<<<<<<< HEAD
             <mapping deploy="GTG" local="$PROJECT_DIR$" web="GTG" />
-=======
             <mapping deploy="GTG" local="$PROJECT_DIR$" web="/GTG" />
->>>>>>> 7b57254c888c6540129d2e176611db886b9ce19b
+            <mapping deploy="GTG" local="$PROJECT_DIR$" web="GTG" />
           </mappings>
         </serverdata>
       </paths>
