@@ -2,34 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="282267d5-2d50-4f35-abe0-4606380d9cb6" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gestograma/static/imagenes/2014-06-18 19:31:51.716831grafico.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gestograma/static/imagenes/2014-06-18 19:32:47.033095grafico.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gestograma/static/imagenes/2014-06-18 19:42:59.157390grafico.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gestograma/static/imagenes/2014-06-18 19:44:02.353902grafico.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gestograma/static/imagenes/2014-06-18 23:20:01.321332grafico.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reporte_itemsgestograma.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reporte_lineasBasegestograma.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reporte_solicitudesgestograma.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reporte_itemslpm.pdf" afterPath="$PROJECT_DIR$/reporte_itemslpm.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reporte_proyectos.pdf" afterPath="$PROJECT_DIR$/reporte_proyectos.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reporte_roles.pdf" afterPath="$PROJECT_DIR$/reporte_roles.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reporte_solicitudeslpm.pdf" afterPath="$PROJECT_DIR$/reporte_solicitudeslpm.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reporte_usuarios.pdf" afterPath="$PROJECT_DIR$/reporte_usuarios.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/altaUsuario.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/altaUsuario.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apache_demo/apache2.conf" afterPath="$PROJECT_DIR$/apache_demo/apache2.conf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/deployment.xml" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/forms.py" afterPath="$PROJECT_DIR$/gtg/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionItem1.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionItem1.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionProyecto.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionProyecto.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionProyectoAdmin.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionProyectoAdmin.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gestograma.iml" afterPath="$PROJECT_DIR$/.idea/gestograma.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apache_demo/leeme" afterPath="$PROJECT_DIR$/apache_demo/leeme" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/models.py" afterPath="$PROJECT_DIR$/gtg/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/modificarProyecto.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/modificarProyecto.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/settings.py" afterPath="$PROJECT_DIR$/gestograma/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/views.py" afterPath="$PROJECT_DIR$/gtg/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="GTG.iws" />
@@ -420,10 +392,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-3" y="0" width="1030" height="577" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.329718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.329718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
