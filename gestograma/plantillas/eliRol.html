@@ -1,0 +1,11 @@
+{% extends 'index2.html' %}
+
+ <section class='contenido'>
+{% block contenido %}
+    <div id="body">
+        <p>Esta seguro que desea eliminar el Rol: "{{ rol.nombre }}"</p>
+        <a class="button" href="/eliRol/{{ rol.id }}"><i class="button"></i> SI </a>
+        <a class="button" href="/rolPermiso"><i class="button"></i> NO </a>
+    </div>
+{% endblock %}
+</section>

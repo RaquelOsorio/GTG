@@ -47,6 +47,8 @@ urlpatterns = patterns('',
     url(r'^rolPermiso/registrarRol/$','gtg.views.registrarRol'),
     url(r'^rolPermiso/lista_roles/$','gtg.views.lista_roles'),
     url(r'^rolPermiso/eliminar_rol/(?P<codigo>\d+)/$', 'gtg.views.eliminar_rol'),
+    url(r'^eliRol/(?P<codigo>\d+)/$', 'gtg.views.eliRol'),
+
     url(r'^proyecto/registrarProyecto/$','gtg.views.registrarProyecto'),
    url(r'^fase/lista_proyecto/$','gtg.views.lista_proyectos'),
    #url(r'^fase/registrarFase/$','gtg.views.registrarFase'),

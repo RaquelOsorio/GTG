@@ -2,30 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9579c520-1012-483b-987a-4091fb639101" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gestograma/static/imagenes/2014-06-18 19:31:51.716831grafico.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gestograma/static/imagenes/2014-06-18 19:32:47.033095grafico.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gestograma/static/imagenes/2014-06-18 19:42:59.157390grafico.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gestograma/static/imagenes/2014-06-18 19:44:02.353902grafico.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gestograma/static/imagenes/2014-06-18 23:20:01.321332grafico.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reporte_itemsgestograma.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reporte_lineasBasegestograma.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reporte_solicitudesgestograma.pdf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reporte_itemslpm.pdf" afterPath="$PROJECT_DIR$/reporte_itemslpm.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reporte_proyectos.pdf" afterPath="$PROJECT_DIR$/reporte_proyectos.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reporte_lineasBaselpm.pdf" afterPath="$PROJECT_DIR$/reporte_lineasBaselpm.pdf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reporte_roles.pdf" afterPath="$PROJECT_DIR$/reporte_roles.pdf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reporte_solicitudeslpm.pdf" afterPath="$PROJECT_DIR$/reporte_solicitudeslpm.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reporte_usuarios.pdf" afterPath="$PROJECT_DIR$/reporte_usuarios.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/altaUsuario.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/altaUsuario.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/deployment.xml" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/cambioEstadoLb.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/cambioEstadoLb.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/forms.py" afterPath="$PROJECT_DIR$/gtg/forms.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionItem1.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionItem1.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionProyecto.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionProyecto.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionProyectoAdmin.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionProyectoAdmin.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apache_demo/leeme" afterPath="$PROJECT_DIR$/apache_demo/leeme" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/models.py" afterPath="$PROJECT_DIR$/gtg/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/modificarProyecto.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/modificarProyecto.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/settings.py" afterPath="$PROJECT_DIR$/gestograma/settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionLB.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionLB.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/reversionarItem.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/reversionarItem.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/urls.py" afterPath="$PROJECT_DIR$/gestograma/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/views.py" afterPath="$PROJECT_DIR$/gtg/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -54,97 +40,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gtg/views.py">
+      <file leaf-file-name="leeme" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/apache_demo/leeme">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1967" column="12" selection-start="85861" selection-end="85861" vertical-scroll-proportion="-10.176471" vertical-offset="29159" max-vertical-offset="37605">
-              <folding>
-                <element signature="e#1#82#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="apache2.conf" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apache_demo/apache2.conf">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="253" column="0" selection-start="8617" selection-end="8792" vertical-scroll-proportion="0.0" vertical-offset="3510" max-vertical-offset="4125">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="httpd.conf" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apache_demo/httpd.conf">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="180">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="forms.py" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/gtg/forms.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="18" selection-start="1322" selection-end="1322" vertical-scroll-proportion="0.67866325" vertical-offset="501" max-vertical-offset="3660">
-              <folding>
-                <element signature="e#25#49#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="hosts" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apache_demo/hosts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="135">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="django-vhost-modelo2" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apache_demo/django-vhost-modelo2">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="4" selection-start="193" selection-end="193" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="495">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gtg/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="66" column="12" selection-start="2000" selection-end="2006" vertical-scroll-proportion="-3.6764705" vertical-offset="865" max-vertical-offset="3495">
-              <folding>
-                <element signature="e#16#44#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="settings.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gestograma/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="30" selection-start="1059" selection-end="1059" vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="2745">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="deployment.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.idea/deployment.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="0" selection-start="39" selection-end="39" vertical-scroll-proportion="-0.0" vertical-offset="15" max-vertical-offset="345">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="workspace.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="141" column="0" selection-start="9835" selection-end="9835" vertical-scroll-proportion="-13.833333" vertical-offset="1783" max-vertical-offset="14820">
+            <state line="25" column="0" selection-start="1195" selection-end="1195" vertical-scroll-proportion="0.8640553" vertical-offset="0" max-vertical-offset="600">
               <folding />
             </state>
           </provider>
@@ -163,8 +62,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/gestograma/plantillas/creacion_correcta.html" />
-        <option value="$PROJECT_DIR$/apache_demo/django-vhost-modelo1" />
         <option value="$PROJECT_DIR$/apache_demo/django-vhost-modelo2" />
         <option value="$PROJECT_DIR$/apache_demo/httpd.conf" />
         <option value="$PROJECT_DIR$/apache_demo/apache2.conf" />
@@ -189,15 +86,12 @@
         <option value="$PROJECT_DIR$/cargardb.py" />
         <option value="$PROJECT_DIR$/base.py" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/listaItemTer.html" />
-        <option value="$PROJECT_DIR$/gestograma/plantillas/cambioEstadoLb.html" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/gestionProyectoAdmin.html" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/proyecto_form.html" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/modificarFase.html" />
-        <option value="$PROJECT_DIR$/gestograma/plantillas/gestionLB.html" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/calcularImpacto.html" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/buscarProyecto.html" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/listaItemsProyecto.html" />
-        <option value="$PROJECT_DIR$/gestograma/plantillas/gestionItem1.html" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/modTipoAtributo1.html" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/rol_form.html" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/usuarioRol.html" />
@@ -205,15 +99,20 @@
         <option value="$PROJECT_DIR$/gestograma/plantillas/gestionItem.html" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/faseNofinalizada.html" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/gestionProyecto.html" />
-        <option value="$PROJECT_DIR$/gestograma/urls.py" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/consultarSolicitud.html" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/relacionarItems.html" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/listaItemLbRota.html" />
         <option value="$PROJECT_DIR$/.idea/deployment.xml" />
-        <option value="$PROJECT_DIR$/gtg/models.py" />
         <option value="$PROJECT_DIR$/gestograma/settings.py" />
-        <option value="$PROJECT_DIR$/gtg/views.py" />
+        <option value="$PROJECT_DIR$/gtg/models.py" />
         <option value="$PROJECT_DIR$/gtg/forms.py" />
+        <option value="$PROJECT_DIR$/gestograma/plantillas/gestionItem1.html" />
+        <option value="$PROJECT_DIR$/gestograma/plantillas/gestionLB.html" />
+        <option value="$PROJECT_DIR$/gestograma/plantillas/reversionarItem.html" />
+        <option value="$PROJECT_DIR$/gestograma/plantillas/cambioEstadoLb.html" />
+        <option value="$PROJECT_DIR$/gestograma/plantillas/eliRol.html" />
+        <option value="$PROJECT_DIR$/gestograma/urls.py" />
+        <option value="$PROJECT_DIR$/gtg/views.py" />
       </list>
     </option>
   </component>
@@ -313,60 +212,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GTG" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GTG" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gestograma" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imagenes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GTG" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GTG" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gestograma" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="plantillas" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GTG" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GTG" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apache_demo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -387,8 +232,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/gestograma/static" />
       <recent name="$PROJECT_DIR$/gestograma/plantillas" />
+      <recent name="$PROJECT_DIR$/gestograma/static" />
       <recent name="$PROJECT_DIR$/gtg/testing" />
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -632,14 +477,14 @@
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32973805" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26656395" sideWeight="0.33545816" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26656395" sideWeight="0.3697211" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32973805" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988048" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33944222" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3498008" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3266564" sideWeight="0.57131475" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26656395" sideWeight="0.6302789" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23574731" sideWeight="0.42868525" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32819724" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -656,18 +501,18 @@
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32819724" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32973805" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26656395" sideWeight="0.33545816" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26656395" sideWeight="0.3697211" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32903227" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988048" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3266564" sideWeight="0.57131475" order="11" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26656395" sideWeight="0.6302789" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32973805" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32828686" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3450199" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23574731" sideWeight="0.42868525" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -692,139 +537,9 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/gestionRolesPermisos.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="51" selection-end="51" vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="720" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/roles.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="585" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/rol_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="33" selection-start="274" selection-end="274" vertical-scroll-proportion="-5.0" vertical-offset="0" max-vertical-offset="285" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/usuarioRol.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="12" selection-start="440" selection-end="440" vertical-scroll-proportion="-6.25" vertical-offset="0" max-vertical-offset="315" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/rol_permiso.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="407" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/static/bootstrap/img/glyphicons-halflings-white.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/static/bootstrap/img/glyphicons-halflings.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/static/css/images/imagen.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/static/css/images/image1.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/static/css/images/image.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/static/imagenes/flecha_intra.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/static/imagenes/flecha_extra.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/calcularImpacto.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="41" selection-start="303" selection-end="303" vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="405" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/static/imagenes/2014-06-17 09:16:12.326348grafico.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/static/imagenes/2014-06-17 09:21:12.262829grafico.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/static/imagenes/2014-06-17 09:24:31.133229grafico.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/static/imagenes/2014-06-17 09:29:37.653859grafico.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/static/imagenes/2014-06-17 09:31:39.894554grafico.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/gestionItem.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="87" column="28" selection-start="4384" selection-end="4384" vertical-scroll-proportion="-12.333333" vertical-offset="1009" max-vertical-offset="1455" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/static/logo.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/nousuario.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="423" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/modificarProyecto.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="423" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/extiende.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="410" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/index2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="25" selection-start="2912" selection-end="2912" vertical-scroll-proportion="0.0" vertical-offset="709" max-vertical-offset="1635" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/faseNofinalizada.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="0" selection-start="676" selection-end="676" vertical-scroll-proportion="0.0" vertical-offset="21" max-vertical-offset="420" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gestograma/plantillas/gestionProyecto.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="53" column="68" selection-start="1615" selection-end="1615" vertical-scroll-proportion="0.0" vertical-offset="765" max-vertical-offset="1860" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="133" column="0" selection-start="8058" selection-end="8058" vertical-scroll-proportion="0.0" vertical-offset="1588" max-vertical-offset="2175" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gestograma/plantillas/consultarSolicitud.html">
@@ -847,23 +562,6 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="423" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/listaRelacion.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="494" max-vertical-offset="990" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/lista_relaciones.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="735" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/relacionarItem.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="399">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gestograma/static/imagenes/2014-06-20 20:38:42.137340grafico.jpg">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -884,67 +582,34 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/relacionarItems.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="37" selection-start="314" selection-end="314" vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="375">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gestograma/plantillas/historialCambio.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="555">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/listaItemLbRota.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="45" selection-start="1114" selection-end="1114" vertical-scroll-proportion="0.0" vertical-offset="343" max-vertical-offset="1110">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apache_demo/apache2.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="253" column="0" selection-start="8617" selection-end="8792" vertical-scroll-proportion="0.0" vertical-offset="3510" max-vertical-offset="4125">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="555" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apache_demo/httpd.conf">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="399">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="399" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apache_demo/hosts">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="399">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="399" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apache_demo/django-vhost-modelo2">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="4" selection-start="193" selection-end="193" vertical-scroll-proportion="0.0" vertical-offset="36" max-vertical-offset="495">
-          <folding />
-        </state>
+        <state line="7" column="4" selection-start="193" selection-end="193" vertical-scroll-proportion="0.0" vertical-offset="36" max-vertical-offset="495" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/deployment.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="39" selection-end="39" vertical-scroll-proportion="-0.0" vertical-offset="15" max-vertical-offset="345">
-          <folding />
-        </state>
+        <state line="1" column="0" selection-start="39" selection-end="39" vertical-scroll-proportion="-0.0" vertical-offset="15" max-vertical-offset="345" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="141" column="0" selection-start="9835" selection-end="9835" vertical-scroll-proportion="-13.833333" vertical-offset="1783" max-vertical-offset="14820">
-          <folding />
-        </state>
+        <state line="144" column="0" selection-start="9204" selection-end="9204" vertical-scroll-proportion="-13.833333" vertical-offset="1828" max-vertical-offset="15360" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gestograma/settings.py">
@@ -954,30 +619,182 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/gtg/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="91" column="73" selection-start="2273" selection-end="2273" vertical-scroll-proportion="0.0" vertical-offset="1191" max-vertical-offset="3660" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/gtg/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="12" selection-start="2000" selection-end="2006" vertical-scroll-proportion="-3.6764705" vertical-offset="865" max-vertical-offset="3495">
-          <folding>
-            <element signature="e#16#44#0" expanded="true" />
-          </folding>
-        </state>
+        <state line="182" column="16" selection-start="6156" selection-end="6156" vertical-scroll-proportion="0.0" vertical-offset="2384" max-vertical-offset="3495" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/lbForm.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="423" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/ItemLb_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="423" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/gestionItem.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="0" selection-start="2819" selection-end="2819" vertical-scroll-proportion="0.0" vertical-offset="870" max-vertical-offset="1455" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/gestionTipoItem1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="0" selection-start="631" selection-end="631" vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="735" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/gestionItem1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="108" column="68" selection-start="6010" selection-end="6010" vertical-scroll-proportion="-11.333333" vertical-offset="1348" max-vertical-offset="1770" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/relacionarItem.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="399" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/relacionarItems.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="37" selection-start="314" selection-end="314" vertical-scroll-proportion="-6.875" vertical-offset="0" max-vertical-offset="375" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/reversionarItem.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="8" selection-start="225" selection-end="225" vertical-scroll-proportion="-4.375" vertical-offset="0" max-vertical-offset="345" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/revivirItem.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="399" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/listaLbRota.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="990" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/listaItemLbRota.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="45" selection-start="1114" selection-end="1114" vertical-scroll-proportion="-12.833333" vertical-offset="262" max-vertical-offset="1110" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/lista_relaciones.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="735" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/listaRelacion.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="0" selection-start="288" selection-end="288" vertical-scroll-proportion="-0.625" vertical-offset="210" max-vertical-offset="990" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/listaItemTer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="33" selection-start="218" selection-end="218" vertical-scroll-proportion="1.6206896" vertical-offset="259" max-vertical-offset="1500" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/gestionLB.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="57" column="66" selection-start="2449" selection-end="2449" vertical-scroll-proportion="-18.25" vertical-offset="417" max-vertical-offset="1020" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/cambioEstadoLb.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="44" selection-start="1078" selection-end="1078" vertical-scroll-proportion="-11.875" vertical-offset="255" max-vertical-offset="690" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/eliFase.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="0" selection-start="0" selection-end="761" vertical-scroll-proportion="-10.0" vertical-offset="0" max-vertical-offset="330" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/eliRol.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="46" selection-start="219" selection-end="219" vertical-scroll-proportion="-3.75" vertical-offset="0" max-vertical-offset="255" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="55" selection-start="2340" selection-end="2340" vertical-scroll-proportion="-3.8823528" vertical-offset="558" max-vertical-offset="2205" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gtg/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1967" column="12" selection-start="85861" selection-end="85861" vertical-scroll-proportion="-10.176471" vertical-offset="29159" max-vertical-offset="37605">
-          <folding>
-            <element signature="e#1#82#0" expanded="true" />
-          </folding>
+        <state line="2541" column="0" selection-start="112170" selection-end="112170" vertical-scroll-proportion="-9.470589" vertical-offset="37793" max-vertical-offset="38205" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/static/imagenes/2014-06-20 23:03:23.640181grafico.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/static/imagenes/2014-06-20 21:51:16.088545grafico.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/static/imagenes/2014-06-17 09:16:12.326348grafico.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/static/imagenes/2014-06-17 09:24:31.133229grafico.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/static/imagenes/2014-06-17 09:29:37.653859grafico.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/static/imagenes/2014-06-17 09:31:39.894554grafico.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/static/imagenes/2014-06-17 09:37:17.242339grafico.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/static/imagenes/2014-06-17 09:39:34.035865grafico.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/static/logo.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/static/imagenes/2014-06-17 09:53:54.481248grafico.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/static/imagenes/2014-06-20 22:53:26.697498grafico.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apache_demo/apache2.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="252" column="12" selection-start="8791" selection-end="8791" vertical-scroll-proportion="0.63981044" vertical-offset="3510" max-vertical-offset="4125">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gtg/forms.py">
+    <entry file="file://$PROJECT_DIR$/apache_demo/leeme">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="18" selection-start="1322" selection-end="1322" vertical-scroll-proportion="0.67866325" vertical-offset="501" max-vertical-offset="3660">
-          <folding>
-            <element signature="e#25#49#0" expanded="true" />
-          </folding>
+        <state line="25" column="0" selection-start="1195" selection-end="1195" vertical-scroll-proportion="0.8640553" vertical-offset="0" max-vertical-offset="600">
+          <folding />
         </state>
       </provider>
     </entry>

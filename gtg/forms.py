@@ -89,7 +89,7 @@ class TipoItemForm(forms.ModelForm):
 class ItemForm(forms.ModelForm):
     class Meta:
         model= Item
-        fields=("id","nombre","prioridad","descripcion","tipoItem")
+        fields=("id","nombre","prioridad","descripcion","tipoItem","costo")
     def clean(self):
 
     # get bitcoin address from form

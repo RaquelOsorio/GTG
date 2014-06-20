@@ -56,7 +56,11 @@
                                         {% if  items.antecesorVertical == None or items.antecesorVertical.relacion == 'DEL'%}
                                             <td>Ninguno</td>
                                         {% else %}
+                                            {% if items.antecesorVertical.estado != 'DESAC' %}
                                             <td>{{ items.antecesorVertical}} </td>
+                                            {% else %}
+                                                <td>Ninguno</td>
+                                            {% endif %}
                                         {% endif %}
 
                                 {% if items.estado == 'REDAC' or items.estado == 'TER'%}
@@ -102,7 +106,7 @@
                                 </tr>
                              {% endfor %}
         </table>
-                 <a class="button" href="/fase1/{{ fase.id }}"><i class="icon-arrow-left"></i> Atras</a>
+                 <a class="button" href="/fase1/{{ fase.proyectos.id }}"><i class="icon-arrow-left"></i> Atras</a>
     </div>
     </div>
 {% endblock %}

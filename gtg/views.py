@@ -152,6 +152,10 @@ def usuario(request):
 
 @login_required(login_url='/ingresar')
 def consultarUsuario(request, codigo):
+    """
+    funcion que permite visualizar los detalles de un usuario, junto con sus roles asociados.\n recibe como @param el codigo del usuario
+    \n@return a la interfaz de visualizacion
+    """
     usuario= User.objects.get(pk= codigo)
     rol=RolUsuario.objects.all()
     return render(request, 'consultarUsuario.html', {'usuario': usuario , 'rol':rol})
@@ -191,9 +195,10 @@ def rolPermiso(request, mesagge= ""):
 def lb(request, codigo):
     """permite acceder a la interfaz de opciones de administracion para linea base,\n recibe un @param request que es la
     peticion para realizar cierta operacion. \n@return retorna la lista de lineas base existentes en el proyecto"""
+    indicador=0
     linea=lineaBase.objects.filter(id=codigo)
     fa= Fases1.objects.get(pk=codigo)
-    return render_to_response('gestionLB.html',{'lb': linea , 'fa': fa,'proyecto':fa.proyectos}, context_instance=RequestContext(request))
+    return render_to_response('gestionLB.html',{'lb': linea , 'fa': fa,'proyecto':fa.proyectos,'indicador':indicador}, context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar')
 def cambio(request,codigoProyecto):
@@ -224,6 +229,18 @@ def lista_roles(request, mesagge= ""):
 
 @login_required(login_url='/ingresar')
 def eliminar_rol(request, codigo):
+    """
+    funcione que permite la confirmacion de eliminacion de un rol por parte del usuario.
+    \nrecibe como @param el codigo del rol. \n @return la interfaz con las opciones
+    """
+    rol=Rol.objects.get(pk=codigo) # request.GET.get('codigo')
+    return render_to_response('eliRol.html',{'rol':rol}, context_instance=RequestContext(request))
+
+def eliRol(reques,codigo):
+    """
+    funcion que elimina un rol.\n recibe como @param el codigo del rol en cuestion.\n @return a la interfaz que lista los roles existentes
+    en el sistema
+    """
     rol=Rol.objects.get(pk=codigo) # request.GET.get('codigo')
     rol.delete()
     return HttpResponseRedirect('/rolPermiso')
@@ -375,8 +392,11 @@ def editar(request, codigo):
 
 @login_required(login_url='/ingresar')
 def lista_proyectos(request):
-	proyectos= Proyectos.objects.all()
-	return render(request, 'lista_proyecto.html', {'proyectos': proyectos,})
+    """
+    funcion que lista todos los proyectos existentes en el sistema
+    """
+    proyectos= Proyectos.objects.all()
+    return render(request, 'lista_proyecto.html', {'proyectos': proyectos,})
 
 
 ######Vista de la lista de fases pertenecientes al proyecto selecionado##########
@@ -760,7 +780,9 @@ def item(request, codigoProyecto):
     priori= Item.objects.all()
     ahora = datetime.now()
     for itm in priori:
-        if(itm.revocar.day == ahora.day):
+        date= itm.revocar
+        print 'que imprime',ahora.day
+        if(date == ahora.day):
                 revocar(itm.id)
 
     for i in priori:
@@ -866,7 +888,7 @@ def reversionarItem(request,codigo):
 
     itemR = Item( antecesorHorizontal=item.antecesorHorizontal,sucesorHorizontal=item.sucesorHorizontal,sucesorVertical=item.sucesorVertical,
             antecesorVertical=item.antecesorVertical,tipoItem=item.tipoItem,fase=item.fase,version=ultima_version+1, nombre=item.nombre, estado=item.estado,
-            prioridad=priori+1)
+            prioridad=priori+1,costo=item.costo)
 
     formulario = ItemReversionar(request.POST, instance=itemR)
     if request.method == "POST":
@@ -965,8 +987,8 @@ def itemFase(request, codigo):
     ahora = datetime.now()
     for itm in items:
         print("ahora",ahora.day)
-        print("revocar",itm.revocar.day)
-        if(itm.revocar.day == ahora.day):
+        print("revocar",itm.revocar)
+        if(itm.revocar == ahora.day):
                 revocar(itm.id)
 
     for i in items:
@@ -1041,7 +1063,12 @@ def eliItem(request, codigo):
     peticion de operacion, y el codigo del tipo de atributo a eliminar. Elimina el mismo y\n @return a la interfaz
     donde se despliega la lista de tipos de atributos existentes en el sistema."""
     item=Item.objects.get(pk=codigo)
-    items=Item.objects.all()
+    itf= item.fase
+    items=Item.objects.filter(fase=itf)
+    cantidad=0
+    for i in items:
+        cantidad= cantidad +1
+
     for i in items:
         if i.antecesorVertical == item:
             i.antecesorVertical.relacion= 'DEL'
@@ -1056,7 +1083,7 @@ def eliItem(request, codigo):
         formulario = EliminarItemForm(request.POST, request.FILES, instance = item)
         if formulario.is_valid():
             formulario.save()
-            return render_to_response('gestionItem.html',{'items':items,'proyecto':item.fase.proyectos},context_instance=RequestContext(request))
+            return render_to_response('gestionItem1.html',{'items':items,'fase':item.fase,'proyecto':item.fase.proyectos,'cantidad':cantidad },context_instance=RequestContext(request))
     else:
         formulario=EliminarItemForm(instance = item)
     return render(request,'eliminarItem1.html', {'formulario': formulario,'proyecto':item.fase.proyectos})
@@ -1069,12 +1096,15 @@ def revivirItem(request, codigo):
     peticion de operacion, y el codigo del item a revivir. Revive el mismo y\n @return a la interfaz
     donde se despliega la lista de items existentes en el sistema."""
     item=Item.objects.get(pk=codigo)
-    items=Item.objects.all()
+    items=Item.objects.filter(fase=item.fase)
        #para verficar permisos
     fase= item.fase.proyectos.id
     proyectoc= Proyectos.objects.get(pk=fase)
     permisos= RolUsuario.objects.all()
     band=0
+    cantidad=0
+    for i in items:
+        cantidad= cantidad +1
 
 
     for i in items:
@@ -1092,7 +1122,7 @@ def revivirItem(request, codigo):
         formulario = EliminarItemForm(request.POST, request.FILES, instance = item)
         if formulario.is_valid():
             formulario.save()
-            return render_to_response('gestionItem.html',{'items':items,'proyecto':item.fase.proyectos},context_instance=RequestContext(request))
+            return render_to_response('gestionItem1.html',{'items':items,'fase':item.fase,'proyecto':item.fase.proyectos,'cantidad':cantidad },context_instance=RequestContext(request))
     else:
         formulario=EliminarItemForm(instance = item)
     for p in permisos:
@@ -1112,16 +1142,16 @@ def generarlb(request, codigo):
     es la peticion de la operacion.\nRetorna @return el formulario con los campos a completar, se acepta la operacion
     y vuelve a la interfaz donde se despliega la lista de tipos de items registrados en el sistema"""
     fase= Fases1.objects.get(pk=codigo)
-
+    indicador=1
     lineaB= lineaBase(fase=fase)
     formulario = lbForm(request.POST, request.FILES, instance=lineaB)
     if formulario.is_valid():
         formulario.save()
-        return HttpResponseRedirect('/')
+        lb=lineaBase.objects.filter(fase=fase)
+        return render_to_response('gestionLB.html',{'lb': lb , 'fa': fase,'proyecto':fase.proyectos,'indicador':indicador}, context_instance=RequestContext(request))
     else:
         formulario=lbForm(instance=lineaB)
-
-	return render(request, 'lbForm.html', {'formulario': formulario, 'proyecto':fase.proyectos})
+    return render(request, 'lbForm.html', {'formulario': formulario, 'proyecto':fase.proyectos})
 
 @login_required(login_url='/ingresar')
 def listaItemsTer(request,codigo):
@@ -1147,6 +1177,7 @@ def relacionarItemLb(request, codigo, codigo1):
     fase.save()
     item.estado='VAL'
     item.lb=lineaBase.objects.get(id=codigo)
+    items= Item.objects.filter(fase=lb.fase)
    #para verficar permisos
     fase= item.fase.proyectos.id
     proyectoc= Proyectos.objects.get(pk=fase)
@@ -1168,7 +1199,7 @@ def relacionarItemLb(request, codigo, codigo1):
         if cantidad == item.fase.cantidadItem:
             lb.estado= 'CERRADA'
             lb.save()
-        return HttpResponseRedirect('/')
+        return render_to_response('gestionItem1.html',{'items': items, 'fase':lb.fase,'proyecto':lb.fase.proyectos,'cantidad':cantidad }, context_instance=RequestContext(request))
     formulario= ItemLbForm(instance=item)
     for p in permisos:
         if (p.proyecto == proyectoc and p.usuario == request.user and p.rol.aprobarItem == True):
@@ -1262,7 +1293,7 @@ def recorrer(id_item):
     global sumaCosto, sumaTiempo, visitados
     visitados[id_item]=1
     item=Item.objects.get(id=id_item)
-    sumaCosto = sumaCosto + item.prioridad
+    sumaCosto = sumaCosto + item.costo
     relaciones = Item.objects.filter(antecesorVertical=item.id)
     for relacion in relaciones:
         if(visitados[relacion.id]==0):
@@ -1522,10 +1553,14 @@ def consultarSolicitud(request,id_solicitud):
     return render_to_response('consultarSolicitud.html',{'usuarios':usuarios,'solicitud':solicitud, 'favor':favor, 'contra':contra, 'res':resultado}, context_instance=RequestContext(request))
 
 def cambioEstadoLb(request, codigo):
-
+    """
+    Funcion que lista todos los item que pertenecen a cierta linea base.\nrecibe como @param request, que es la peticion de la opercion
+    y el codigo de la linea base en cuestion.\n @return a la interfaz del listado de dichos items
+    """
     lBase= lineaBase.objects.get(pk=codigo)
     items= Item.objects.filter(lb=lBase)
-    return render(request,'cambioEstadoLb.html', {'items': items,'lb':lBase})
+
+    return render(request,'cambioEstadoLb.html', {'items': items,'lb':lBase,'fase':lBase.fase})
 
 
 @login_required(login_url='/ingresar')
@@ -1710,14 +1745,14 @@ def dibujarProyecto(proyecto):
         relaciones = Item.objects.filter(antecesorVertical=item).exclude(estado='DESAC')
         if relaciones!=None:
             for relacion in relaciones:
-                grafo.add_edge(pydot.Edge(str(item.id),str(relacion.id),label='costo='+str(item.prioridad) ))
+                grafo.add_edge(pydot.Edge(str(item.id),str(relacion.id),label='costo='+str(item.costo) ))
 
     #agregar arcos antecesor horizontal
     for item in items:
         relaciones = Item.objects.filter(antecesorHorizontal=item).exclude(estado='DESAC')
         if relaciones!=None:
             for relacion in relaciones:
-                grafo.add_edge(pydot.Edge(str(item.id),str(relacion.id),label='costo='+str(item.prioridad) ))
+                grafo.add_edge(pydot.Edge(str(item.id),str(relacion.id),label='costo='+str(item.costo) ))
 
 
     date=datetime.now()
@@ -1902,56 +1937,56 @@ def reporte_roles():
                 text = ''
                 Story.append(Indenter(42))
                 Story.append(Spacer(1, 10))
-                text ="- controlTotal " + str(rol.crearTipoItem) +"<br>"
+                text ="- crearTipoItem ""<br>"
                 Story.append(Paragraph(text, styles["SubItems"]))
                 Story.append(Indenter(-42))
             if rol.aprobarItem == True:
                 text = ''
                 Story.append(Indenter(42))
                 Story.append(Spacer(1, 10))
-                text ="- aprobarItem " + str(rol.aprobarItem) +"<br>"
+                text ="- aprobarItem ""<br>"
                 Story.append(Paragraph(text, styles["SubItems"]))
                 Story.append(Indenter(-42))
             if rol.creacionLB == True:
                 text = ''
                 Story.append(Indenter(42))
                 Story.append(Spacer(1, 10))
-                text ="- creacionLB " + str(rol.creacionLB) +"<br>"
+                text ="- creacionLB " "<br>"
                 Story.append(Paragraph(text, styles["SubItems"]))
                 Story.append(Indenter(-42))
             if rol.crearItem == True:
                 text = ''
                 Story.append(Indenter(42))
                 Story.append(Spacer(1, 10))
-                text ="- crearItem " + str(rol.crearItem) +"<br>"
+                text ="- crearItem " "<br>"
                 Story.append(Paragraph(text, styles["SubItems"]))
                 Story.append(Indenter(-42))
             if rol.eliminarItem == True:
                 text = ''
                 Story.append(Indenter(42))
                 Story.append(Spacer(1, 10))
-                text ="- eliminarItem " + str(rol.eliminarItem) +"<br>"
+                text ="- eliminarItem " "<br>"
                 Story.append(Paragraph(text, styles["SubItems"]))
                 Story.append(Indenter(-42))
             if rol.impactoItem == True:
                 text = ''
                 Story.append(Indenter(42))
                 Story.append(Spacer(1, 10))
-                text ="- impactoItem" + str(rol.impactoItem) +"<br>"
+                text ="- impactoItem" "<br>"
                 Story.append(Paragraph(text, styles["SubItems"]))
                 Story.append(Indenter(-42))
             if rol.modificarItem == True:
                 text = ''
                 Story.append(Indenter(42))
                 Story.append(Spacer(1, 10))
-                text ="- modificarItem " + str(rol.modificarItem) +"<br>"
+                text ="- modificarItem " "<br>"
                 Story.append(Paragraph(text, styles["SubItems"]))
                 Story.append(Indenter(-42))
             if rol.reversionarItem == True:
                 text = ''
                 Story.append(Indenter(42))
                 Story.append(Spacer(1, 10))
-                text ="- reversionarItem " + str(rol.reversionarItem) +"<br>"
+                text ="- reversionarItem " "<br>"
                 Story.append(Paragraph(text, styles["SubItems"]))
                 Story.append(Indenter(-42))
 
@@ -2313,7 +2348,7 @@ def reporte_items(codigo):
 
                 text ="<strong>Descripcion: </strong>"+i.descripcion+" <br>"
                 Story.append(Paragraph(text, styles["SubsubItems"]))
-                text ="<strong>Costo: </strong>"+str(i.prioridad)+" <br>"
+                text ="<strong>Costo: </strong>"+str(i.costo)+" <br>"
                 Story.append(Paragraph(text, styles["SubsubItems"]))
                 text ="<strong>Estado: </strong>"+i.estado+" <br>"
                 Story.append(Paragraph(text, styles["SubsubItems"]))
@@ -2326,11 +2361,11 @@ def reporte_items(codigo):
                        #rel=get_object_or_404(Item,id=it.relacion_id)
                     text ="<strong>Relacion Vertical: </strong> "+i.antecesorVertical.nombre+"<br>"
                 else:
-                    text ="<strong>Relacion Horizontal: </strong> No tiene antecesor vertical<br>"
+                    text ="<strong>Relacion Vertical: </strong> No tiene antecesor vertical<br>"
                 Story.append(Paragraph(text, styles["SubsubItems"]))
                 if i.antecesorHorizontal!=None:
                        #rel=get_object_or_404(Item,id=it.relacion_id)
-                    text ="<strong>Relacion Vertical: </strong> "+i.antecesorHorizontal.nombre+"<br>"
+                    text ="<strong>Relacion Horizontal: </strong> "+i.antecesorHorizontal.nombre+"<br>"
                 else:
                     text ="<strong>Relacion Horizontal: </strong> No tiene antecesor horizontal<br>"
                 Story.append(Paragraph(text, styles["SubsubItems"]))
@@ -2476,8 +2511,13 @@ def reporte_solicitudes(codigo):
             text ="<strong>Votos en contra: </strong>" + str(contra) +"<br>"
             Story.append(Paragraph(text, styles["Items"]))
             votos= Voto.objects.filter(solicitud=solicitud)
+            b=0
             for v in votos:
                 text ="<strong>Usuarios que votaron: </strong>" + v.usuario.username +"<br>"
+                Story.append(Paragraph(text, styles["Items"]))
+                b=1
+            if b == 0:
+                text ="<strong>Usuarios que votaron: </strong>" "Ninguno" "<br>"
                 Story.append(Paragraph(text, styles["Items"]))
 
             Story.append(Spacer(1, 12))

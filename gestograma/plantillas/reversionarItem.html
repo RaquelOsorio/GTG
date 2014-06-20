@@ -5,8 +5,7 @@
         <h3>Modificar Item </h3>
 	<form id='formulario' method='post' action=''>{% csrf_token %}
 		{{formulario.as_p}}
-        {{formulario.as_p}}
-		<p><a href='/item' input name="Aceptar" style="margin-left: 150px;" class="formbutton" value="Aceptar" type="submit" />
+        <p><a href='/item' input name="Aceptar" style="margin-left: 150px;" class="formbutton" value="Aceptar" type="submit" />
         <a href='/item' input name="Cancelar" style="margin-left: 150px;" class="formbutton" value="Cancelar" type="submit" />
         </p>
 	</form>
