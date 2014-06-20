@@ -2,12 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9579c520-1012-483b-987a-4091fb639101" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gestograma/plantillas/historialReversiones.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reporte_itemslpm.pdf" afterPath="$PROJECT_DIR$/reporte_itemslpm.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reporte_lineasBaselpm.pdf" afterPath="$PROJECT_DIR$/reporte_lineasBaselpm.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reporte_solicitudeslpm.pdf" afterPath="$PROJECT_DIR$/reporte_solicitudeslpm.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/eliFase.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/eliFase.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/forms.py" afterPath="$PROJECT_DIR$/gtg/forms.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/gestionItem1.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/gestionItem1.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/item_form1.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/item_form1.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apache_demo/leeme" afterPath="$PROJECT_DIR$/apache_demo/leeme" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/urls.py" afterPath="$PROJECT_DIR$/gestograma/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gestograma/plantillas/historialReversiones.html" afterPath="$PROJECT_DIR$/gestograma/plantillas/historialReversiones.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtg/views.py" afterPath="$PROJECT_DIR$/gtg/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -36,19 +37,45 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/gtg/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="908" column="0" selection-start="40254" selection-end="40254" vertical-scroll-proportion="0.0" vertical-offset="12990" max-vertical-offset="38745">
+            <state line="1832" column="72" selection-start="79481" selection-end="79488" vertical-scroll-proportion="0.3314121" vertical-offset="27365" max-vertical-offset="39540">
+              <folding>
+                <element signature="e#1#82#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ItemLb_form.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gestograma/plantillas/ItemLb_form.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="315">
+              <folding>
+                <marker date="1400185308000" expanded="true" signature="54:503" placeholder="..." />
+                <marker date="1400185308000" expanded="true" signature="93:477" placeholder="..." />
+                <marker date="1400185308000" expanded="true" signature="203:469" placeholder="..." />
+                <marker date="1400185308000" expanded="true" signature="263:276" placeholder="..." />
+                <marker date="1400185308000" expanded="false" signature="374:393" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="eliFase.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gestograma/plantillas/eliFase.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="11" selection-start="145" selection-end="145" vertical-scroll-proportion="-3.75" vertical-offset="0" max-vertical-offset="375">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gestionItem1.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="gestionItem1.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gestograma/plantillas/gestionItem1.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="84" column="61" selection-start="4866" selection-end="4866" vertical-scroll-proportion="0.58513933" vertical-offset="1071" max-vertical-offset="1905">
+            <state line="13" column="44" selection-start="338" selection-end="338" vertical-scroll-proportion="-3.362069" vertical-offset="0" max-vertical-offset="1905">
               <folding />
             </state>
           </provider>
@@ -58,7 +85,13 @@
         <entry file="file://$PROJECT_DIR$/gestograma/plantillas/item_form1.html">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="345">
-              <folding />
+              <folding>
+                <marker date="1403457983939" expanded="true" signature="54:511" placeholder="..." />
+                <marker date="1403457983939" expanded="true" signature="93:485" placeholder="..." />
+                <marker date="1403457983939" expanded="true" signature="199:477" placeholder="..." />
+                <marker date="1403457983939" expanded="true" signature="341:468" placeholder="..." />
+                <marker date="1403457983939" expanded="false" signature="384:403" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -66,56 +99,7 @@
       <file leaf-file-name="historialReversiones.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gestograma/plantillas/historialReversiones.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="1530">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="rol_permiso.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gestograma/plantillas/rol_permiso.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
-              <folding>
-                <marker date="1399816198000" expanded="true" signature="54:410" placeholder="..." />
-                <marker date="1399816198000" expanded="true" signature="93:384" placeholder="..." />
-                <marker date="1399816198000" expanded="true" signature="180:376" placeholder="..." />
-                <marker date="1399816198000" expanded="true" signature="240:367" placeholder="..." />
-                <marker date="1399816198000" expanded="false" signature="283:302" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="gestionRolesPermisos.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gestograma/plantillas/gestionRolesPermisos.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="0" selection-start="1393" selection-end="1393" vertical-scroll-proportion="0.0" vertical-offset="465" max-vertical-offset="720">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="roles.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gestograma/plantillas/roles.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="14" selection-start="215" selection-end="215" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="585">
-              <folding>
-                <marker date="1399816198000" expanded="true" signature="5:118" placeholder="..." />
-                <marker date="1399816198000" expanded="true" signature="242:746" placeholder="..." />
-                <marker date="1399816198000" expanded="true" signature="279:650" placeholder="..." />
-                <marker date="1399816198000" expanded="false" signature="424:440" placeholder="..." />
-                <marker date="1399816198000" expanded="true" signature="441:458" placeholder="..." />
-                <marker date="1399816198000" expanded="true" signature="674:723" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="rolesModificar.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gestograma/plantillas/rolesModificar.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="0" selection-start="625" selection-end="625" vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="585">
+            <state line="74" column="191" selection-start="3088" selection-end="3088" vertical-scroll-proportion="-10.208333" vertical-offset="865" max-vertical-offset="1515">
               <folding />
             </state>
           </provider>
@@ -130,11 +114,37 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gtg/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="64" column="26" selection-start="1992" selection-end="1992" vertical-scroll-proportion="-2.6470587" vertical-offset="825" max-vertical-offset="3450">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="forms.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gtg/forms.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="91" column="63" selection-start="2242" selection-end="2242" vertical-scroll-proportion="-4.852941" vertical-offset="1020" max-vertical-offset="3480">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="workspace.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="0" selection-start="100" selection-end="100" vertical-scroll-proportion="-1.875" vertical-offset="0" max-vertical-offset="14025">
-              <folding />
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="14220">
+              <folding>
+                <marker date="1403466852571" expanded="true" signature="59:57651" placeholder="..." />
+                <marker date="1403466852571" expanded="true" signature="98:254" placeholder="..." />
+                <marker date="1403466852571" expanded="true" signature="192:254" placeholder="..." />
+                <marker date="1403466852571" expanded="true" signature="57577:57640" placeholder="..." />
+                <marker date="1403466852571" expanded="true" signature="57577:57625" placeholder="..." />
+                <marker date="1403466852571" expanded="true" signature="57577:57612" placeholder="..." />
+                <marker date="1403466852571" expanded="true" signature="57577:57594" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -152,8 +162,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/apache_demo/httpd.conf" />
-        <option value="$PROJECT_DIR$/apache_demo/apache2.conf" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/accesoDenegado.html" />
         <option value="$PROJECT_DIR$/gtg/testing/test_lb.py" />
         <option value="$PROJECT_DIR$/gtg/fixtures/items_testmaker.json" />
@@ -191,7 +199,6 @@
         <option value="$PROJECT_DIR$/gestograma/plantillas/relacionarItems.html" />
         <option value="$PROJECT_DIR$/.idea/deployment.xml" />
         <option value="$PROJECT_DIR$/gtg/models.py" />
-        <option value="$PROJECT_DIR$/gtg/forms.py" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/gestionLB.html" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/reversionarItem.html" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/cambioEstadoLb.html" />
@@ -201,8 +208,11 @@
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/listaItemLbRota.html" />
         <option value="$PROJECT_DIR$/gestograma/settings.py" />
-        <option value="$PROJECT_DIR$/gtg/views.py" />
+        <option value="$PROJECT_DIR$/gestograma/plantillas/historialReversiones.html" />
+        <option value="$PROJECT_DIR$/gtg/forms.py" />
         <option value="$PROJECT_DIR$/gestograma/plantillas/gestionItem1.html" />
+        <option value="$PROJECT_DIR$/gestograma/plantillas/eliFase.html" />
+        <option value="$PROJECT_DIR$/gtg/views.py" />
       </list>
     </option>
   </component>
@@ -253,6 +263,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="GTG" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GTG" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GTG" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gtg" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -617,11 +641,6 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="423" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/ItemLb_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="423" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gestograma/plantillas/gestionItem.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="58" column="0" selection-start="2819" selection-end="2819" vertical-scroll-proportion="0.0" vertical-offset="870" max-vertical-offset="1455" />
@@ -680,11 +699,6 @@
     <entry file="file://$PROJECT_DIR$/gestograma/plantillas/cambioEstadoLb.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="36" column="44" selection-start="1078" selection-end="1078" vertical-scroll-proportion="-11.875" vertical-offset="255" max-vertical-offset="690" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/eliFase.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="0" selection-start="0" selection-end="761" vertical-scroll-proportion="-10.0" vertical-offset="0" max-vertical-offset="330" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gestograma/plantillas/eliRol.html">
@@ -778,20 +792,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gtg/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="121" column="35" selection-start="3801" selection-end="3804" vertical-scroll-proportion="0.0" vertical-offset="1815" max-vertical-offset="3495">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gtg/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="193" column="17" selection-start="5126" selection-end="5129" vertical-scroll-proportion="0.0" vertical-offset="2766" max-vertical-offset="3660">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gestograma/plantillas/rol_form.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="423">
@@ -815,12 +815,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="14" selection-start="215" selection-end="215" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="585">
           <folding>
-            <marker date="1399816198000" expanded="true" signature="5:118" placeholder="..." />
-            <marker date="1399816198000" expanded="true" signature="242:746" placeholder="..." />
-            <marker date="1399816198000" expanded="true" signature="279:650" placeholder="..." />
-            <marker date="1399816198000" expanded="false" signature="424:440" placeholder="..." />
-            <marker date="1399816198000" expanded="true" signature="441:458" placeholder="..." />
-            <marker date="1399816198000" expanded="true" signature="674:723" placeholder="..." />
+            <marker date="1399816198000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1399816198000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1399816198000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1399816198000" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1399816198000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1399816198000" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -829,11 +829,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="423">
           <folding>
-            <marker date="1399816198000" expanded="true" signature="54:410" placeholder="..." />
-            <marker date="1399816198000" expanded="true" signature="93:384" placeholder="..." />
-            <marker date="1399816198000" expanded="true" signature="180:376" placeholder="..." />
-            <marker date="1399816198000" expanded="true" signature="240:367" placeholder="..." />
-            <marker date="1399816198000" expanded="false" signature="283:302" placeholder="..." />
+            <marker date="1399816198000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1399816198000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1399816198000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1399816198000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1399816198000" expanded="false" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -854,36 +854,86 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="100" selection-end="100" vertical-scroll-proportion="-1.875" vertical-offset="0" max-vertical-offset="13305">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gtg/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="908" column="0" selection-start="40254" selection-end="40254" vertical-scroll-proportion="0.0" vertical-offset="12990" max-vertical-offset="38745">
-          <folding />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="13365">
+          <folding>
+            <marker date="1403466852571" expanded="true" signature="59:57651" placeholder="..." />
+            <marker date="1403466852571" expanded="true" signature="98:254" placeholder="..." />
+            <marker date="1403466852571" expanded="true" signature="192:254" placeholder="..." />
+            <marker date="1403466852571" expanded="true" signature="57577:57640" placeholder="..." />
+            <marker date="1403466852571" expanded="true" signature="57577:57625" placeholder="..." />
+            <marker date="1403466852571" expanded="true" signature="57577:57612" placeholder="..." />
+            <marker date="1403466852571" expanded="true" signature="57577:57594" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gestograma/plantillas/item_form1.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="394">
-          <folding />
+          <folding>
+            <marker date="1403457983939" expanded="true" signature="54:511" placeholder="..." />
+            <marker date="1403457983939" expanded="true" signature="93:485" placeholder="..." />
+            <marker date="1403457983939" expanded="true" signature="199:477" placeholder="..." />
+            <marker date="1403457983939" expanded="true" signature="341:468" placeholder="..." />
+            <marker date="1403457983939" expanded="false" signature="384:403" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gestograma/plantillas/historialReversiones.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1530">
+        <state line="74" column="191" selection-start="3088" selection-end="3088" vertical-scroll-proportion="-10.208333" vertical-offset="865" max-vertical-offset="1515">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gtg/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="91" column="63" selection-start="2242" selection-end="2242" vertical-scroll-proportion="-4.852941" vertical-offset="1020" max-vertical-offset="3480">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gestograma/plantillas/gestionItem1.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="61" selection-start="4866" selection-end="4866" vertical-scroll-proportion="0.58513933" vertical-offset="1071" max-vertical-offset="1905">
+        <state line="13" column="44" selection-start="338" selection-end="338" vertical-scroll-proportion="-3.362069" vertical-offset="0" max-vertical-offset="1905">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gtg/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="26" selection-start="1992" selection-end="1992" vertical-scroll-proportion="-2.6470587" vertical-offset="825" max-vertical-offset="3450">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/eliFase.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="11" selection-start="145" selection-end="145" vertical-scroll-proportion="-3.75" vertical-offset="0" max-vertical-offset="375">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gestograma/plantillas/ItemLb_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="370">
+          <folding>
+            <marker date="1400185308000" expanded="true" signature="54:503" placeholder="..." />
+            <marker date="1400185308000" expanded="true" signature="93:477" placeholder="..." />
+            <marker date="1400185308000" expanded="true" signature="203:469" placeholder="..." />
+            <marker date="1400185308000" expanded="true" signature="263:276" placeholder="..." />
+            <marker date="1400185308000" expanded="false" signature="374:393" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gtg/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1832" column="72" selection-start="79481" selection-end="79488" vertical-scroll-proportion="0.3314121" vertical-offset="27365" max-vertical-offset="39540">
+          <folding>
+            <element signature="e#1#82#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

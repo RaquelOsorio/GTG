@@ -497,8 +497,9 @@ def lista_usuarios(request):
 def editarFase(request, codigo):
 
     """ Permite editar las fases de un determinado proyecto """
-    fases= Fases1.objects.all()
+
     fase=Fases1.objects.get(pk=codigo)
+    fases= Fases1.objects.filter(proyectos=fase.proyectos)
     pr=fase.proyectos.id
     proy=Proyectos.objects.get(pk=pr)
     formulario = Fases1Form(request.POST, request.FILES, instance = fase)
@@ -806,11 +807,11 @@ def item(request, codigoProyecto):
 
     its=[]
     for f in fases:
-        items1=Item.objects.filter(fase=f).order_by('nombre') #[:10]
+        items1=Item.objects.filter(fase=f).order_by('nombre').exclude(prioridad=0) #[:10]
         for i in items1:
             its.append(i)
 
-    nombre=dibujarProyecto(proyecto)
+    nombre=0 #dibujarProyecto(proyecto)
     items= Item.objects.all()
     priori= Item.objects.all()
     ahora = datetime.now()
@@ -837,7 +838,7 @@ def registrarItem(request,codigo):
     fase= Fases1.objects.get(pk=codigo)
     fase.estado='PEN'
     fase.save()
-    item= Item(fase=fase)
+    item= Item(fase=fase,prioridad=1)
     items=Item.objects.filter(fase=fase)
     formulario = ItemForm(request.POST, instance=item)
     #para los permisos
@@ -848,6 +849,7 @@ def registrarItem(request,codigo):
 
     if formulario.is_valid():
         formulario.save()
+        canItems= Item.objects.filter(fase=fase)
         messages.success(request,
                          'El item "' + item.nombre + '" ha sido creado con exito')
 
@@ -856,8 +858,11 @@ def registrarItem(request,codigo):
         if request.FILES.get('file')!=None:
             archivo=Archivo(archivo=request.FILES['file'],nombre='', item=codigo)
             archivo.save()
+        cantidad=0
 
-        return render_to_response('gestionItem1.html',{'items':items,'proyecto':fase.proyectos},context_instance=RequestContext(request))
+        for i in canItems:
+            cantidad= cantidad + 1
+        return render_to_response('gestionItem1.html',{'items':items,'proyecto':fase.proyectos,'cantidad':cantidad},context_instance=RequestContext(request))
     else: #verificar permisos
         for p in permisos:
             if (p.proyecto == proyectoc and p.usuario == request.user and p.rol.crearItem == True):
@@ -875,10 +880,14 @@ def modificarItem(request, codigo):
     a modificar. \nRetorna :return a la interfaz de confirmacion de la operacion, esto es,despliega el
      formulario con todos los campos del item a modificar. Al aceptar la operacion vuelve a la interfaz del listado
       items de existenes en el sistema"""
-    items=Item.objects.all()
+
     item=Item.objects.get(pk=codigo)
     #permisos
     fase= item.fase.proyectos.id
+    items=Item.objects.filter(fase=fase)
+    cantidad=0
+    for i in items:
+        cantidad= cantidad + 1
     proyectoc= Proyectos.objects.get(pk=fase)
     permisos= RolUsuario.objects.all()
     band=0
@@ -888,7 +897,7 @@ def modificarItem(request, codigo):
         formulario = ItemForm1(request.POST, request.FILES, instance = item)
         if formulario.is_valid():
             formulario.save()
-            return render_to_response('gestionItem.html',{'items':items,'proyecto':item.fase.proyectos},context_instance=RequestContext(request))
+            return render_to_response('gestionItem1.html',{'items':items,'proyecto':item.fase.proyectos,'cantidad':cantidad},context_instance=RequestContext(request))
     else:
         formulario=ItemForm1(instance = item)
     for p in permisos:
@@ -926,7 +935,7 @@ def reversionarItem(request,codigo):
 
     itemR = Item( descripcion=item.descripcion,revocar=item.revocar,costo=item.costo,antecesorHorizontal=item.antecesorHorizontal,sucesorHorizontal=item.sucesorHorizontal,sucesorVertical=item.sucesorVertical,
             antecesorVertical=item.antecesorVertical,tipoItem=item.tipoItem,fase=item.fase,version=ultima_version+1, nombre=item.nombre, estado=item.estado,
-            prioridad=1)
+            lb=item.lb,prioridad=1)
 
     if request.method == "POST":
         formulario = ItemReversionar(request.POST,request.FILES,instance = itemR)
@@ -1001,6 +1010,9 @@ def relacItem(request, codigo,codigop):
     y vuelve a la interfaz donde se despliega la lista de items registrados en el sistema"""
     item=Item.objects.get(pk=codigo)
     items=Item.objects.filter(fase=item.fase)
+    cantidad=0
+    for i in items:
+        cantidad= cantidad + 1
     itemRelacionado=Item.objects.get(pk=codigop)
 
     if (item.fase.id == itemRelacionado.fase.id):
@@ -1017,7 +1029,7 @@ def relacItem(request, codigo,codigop):
         #formulario.fields['antecesorHorizontal'].queryset=Item.objects.filter(nombre='item1')
         if formulario.is_valid():
             formulario.save()
-            return render_to_response('gestionItem1.html',{'items':items,'proyecto':item.fase.proyectos},context_instance=RequestContext(request))
+            return render_to_response('gestionItem1.html',{'items':items,'proyecto':item.fase.proyectos,'cantidad':cantidad},context_instance=RequestContext(request))
     else:
         formulario=relacionarForm(instance = item)
     return render(request,'relacionarItems.html', {'formulario': formulario,'proyecto':item.fase.proyectos})
@@ -1288,7 +1300,7 @@ def importarFase(request, codigo):
                 items=Item.objects.all()
                 itemR = Item(lb=item.lb, antecesorHorizontal=item.antecesorHorizontal,sucesorHorizontal=item.sucesorHorizontal,sucesorVertical=item.sucesorVertical,
                 antecesorVertical=item.antecesorVertical,tipoItem=item.tipoItem,fase=cod,version=item.version, nombre=item.nombre, estado=item.estado,
-                prioridad=item.prioridad,descripcion=item.descripcion,revocar=item.revocar)
+                costo=item.costo,prioridad=item.prioridad,descripcion=item.descripcion,revocar=item.revocar)
                 itemR.save()
 
         libase= lineaBase.objects.all()
@@ -2335,9 +2347,9 @@ def reporte_lineas_base(codigo):
 
             Story.append(Indenter(-15))
             if lb.estado=='CERRADA':
-                items=Item.objects.filter(lb=lb)
+                items=Item.objects.filter(lb=lb).exclude(prioridad=0)
             else:
-                items=Item.objects.filter(lb=lb)
+                items=Item.objects.filter(lb=lb).exclude(prioridad=0)
             ptext=''
 
             for item in items:

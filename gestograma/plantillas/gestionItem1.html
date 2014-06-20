@@ -11,7 +11,7 @@
 
                                 <p><center><h3>{{ fase.proyectos }} - {{  fase.nombre }} </h3></center></p>
 
-                            {% if cantidad == fase.cantidadItem %}
+                            {% if cantidad >= fase.cantidadItem %}
                                 <td>Se ha llegado a la cantidad maxima de items</td>
 
                             {% else %}
