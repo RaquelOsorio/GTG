@@ -197,6 +197,8 @@ def lb(request, codigo):
     peticion para realizar cierta operacion. \n@return retorna la lista de lineas base existentes en el proyecto"""
     indicador=0
     linea=lineaBase.objects.filter(id=codigo)
+    fase=Fases1.objects.get(id=codigo)
+    linea=lineaBase.objects.filter(fase=fase)
     fa= Fases1.objects.get(pk=codigo)
     return render_to_response('gestionLB.html',{'lb': linea , 'fa': fa,'proyecto':fa.proyectos,'indicador':indicador}, context_instance=RequestContext(request))
 
@@ -300,23 +302,56 @@ def buscarProyecto(request):
 
 def importarProyecto(request, codigo):
     project = Proyectos.objects.get(pk=codigo)
-    #print 'proyecto',project.nombre
+    proyectoI= Proyectos(estado=project.estado,fechaInicio=project.fechaInicio,
+                         fechaFin=project.fechaFin,complejidad= project.complejidad,
+                         lider=project.lider)
     b=0
-#    proyectos=Proyectos.objects.all()
- #   proyectoImport= Proyectos(fechaInicio = proyecto.fechaInicio,fechaFin= proyecto.fechaFin,fechaMod= proyecto.fechaMod,nombre = proyecto.nombre,complejidad= proyecto.complejidad,estado = proyecto.estado,lider= proyecto.lider)
-    #proyectoImport= Proyectos('fechaInicio':proyecto.fechaInicio,'fechaFin': proyecto.fechaFin,'fechaMod': proyecto.fechaMod,'nombre': proyecto.nombre,'complejidad': proyecto.complejidad,'estado': proyecto.estado,'lider' proyecto.lider)
-
-#    faseI=Fases1(fechaInicio=fase.fechaInicio,fechaFin=fase.fechaFin,nombre=fase.nombre,descripcion=fase.descripcion,estado=fase.estado)
-    formulario = ProyectoForm(request.POST, initial={'fechaInicio':project.fechaInicio,'fechaFin': project.fechaFin,'complejidad': project.complejidad,'lider': project.lider} )
-    #formulario = ProyectoForm(request.POST, instance=proyectoImport)
+    proyectos=Proyectos.objects.all()
+    formulario = ProyectoImportForm(request.POST, instance=proyectoI)
     if formulario.is_valid():
         formulario.save()
-        HttpResponseRedirect('/')
-        #return render_to_response('gestionFase1.html',{'fases': fases, 'proyecto':fase.proyectos}, context_instance=RequestContext(request))
-    else:
-        formulario = ProyectoForm(initial={'fechaInicio':project.fechaInicio,'fechaFin': project.fechaFin,'complejidad': project.complejidad,'lider': project.lider} )
+        for pr in proyectos:
+            codpr=pr
+        faset=Fases1.objects.all()
+        for fasea in faset:
+            if(fasea.proyectos == project):
 
-        return render(request, 'proyecto_form.html', {'formulario': formulario,'b':b})
+                faseI=Fases1(nombre=fasea.nombre,proyectos= codpr,
+                fechaInicio=fasea.fechaInicio,fechaFin=fasea.fechaFin,
+                descripcion=fasea.descripcion,estado=fasea.estado,
+                cantidadItem=fasea.cantidadItem, orden=fasea.orden)
+                pr=fasea.proyectos.id
+                proy=Proyectos.objects.get(pk=pr)
+                faseI.save()
+                items=Item.objects.all()
+                fasett=Fases1.objects.all()
+                for fa in fasett:
+                    cod=fa
+                print("cod",cod.id)
+                for it in items:
+                    if it.fase == fasea:
+                        #it=Item.objects.all()
+                        #item = Item.objects.get(pk=codigo)
+                        #items=Item.objects.all()
+                        itemR = Item(costo=it.costo,lb=it.lb, antecesorHorizontal=it.antecesorHorizontal,sucesorHorizontal=it.sucesorHorizontal,sucesorVertical=it.sucesorVertical,
+                        antecesorVertical=it.antecesorVertical,tipoItem=it.tipoItem,fase=cod,version=it.version, nombre=it.nombre, estado=it.estado,
+                        prioridad=it.prioridad,descripcion=it.descripcion,revocar=it.revocar)
+                        itemR.save()
+
+                libase= lineaBase.objects.all()
+                for li in libase:
+                    if li.fase == fasea:
+                        nuevalb=lineaBase(estado=li.estado,fase=cod)
+                        nuevalb.save()
+                        print("nuevos",nuevalb.fase.id)
+        return HttpResponseRedirect('/proyectoAdmin')
+
+    else:
+        if( request.user.is_superuser):
+            return render(request, 'proyecto_form.html', {'formulario': formulario,'b':b})
+        else:
+            return render_to_response('extiende.html',{'usuario':usuario}, context_instance=RequestContext(request))
+
 
 def finalizarProyecto(request, codigo):
     proyecto = Proyectos.objects.get(pk=codigo)
@@ -775,14 +810,15 @@ def item(request, codigoProyecto):
         for i in items1:
             its.append(i)
 
-    #nombre=dibujarProyecto(proyecto)
+    nombre=dibujarProyecto(proyecto)
     items= Item.objects.all()
     priori= Item.objects.all()
     ahora = datetime.now()
+    print("ahora",ahora)
     for itm in priori:
         date= itm.revocar
         print 'que imprime',ahora.day
-        if(date == ahora.day):
+        if(itm.revocar.day == ahora.day and itm.revocar.month == ahora.month and itm.revocar.year == ahora.year): #.day
                 revocar(itm.id)
 
     for i in priori:
@@ -790,8 +826,8 @@ def item(request, codigoProyecto):
             if(it.nombre==i.nombre ):
                 it=i
     p=1
-    return render_to_response('gestionItem.html',{'items':its,'p':p,'proyecto':proyecto},context_instance=RequestContext(request))
-    # return render_to_response('gestionItem.html',{'items':its,'p':p,'proyecto':proyecto, 'name':nombre},context_instance=RequestContext(request))
+    #return render_to_response('gestionItem.html',{'items':its,'p':p,'proyecto':proyecto},context_instance=RequestContext(request))
+    return render_to_response('gestionItem.html',{'items':its,'p':p,'proyecto':proyecto, 'name':nombre},context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar')
 def registrarItem(request,codigo):
@@ -867,6 +903,8 @@ def modificarItem(request, codigo):
 
 @login_required(login_url='/ingresar')
 def reversionarItem(request,codigo):
+
+    """ Crea una nueva version de item """
     it=Item.objects.all()
     item = Item.objects.get(pk=codigo)
     items=Item.objects.all()
@@ -985,10 +1023,11 @@ def itemFase(request, codigo):
     fase=Fases1.objects.get(pk=codigo)
     cantidad= 0
     ahora = datetime.now()
+    print("ahoraa",ahora)
     for itm in items:
         print("ahora",ahora.day)
         print("revocar",itm.revocar)
-        if(itm.revocar == ahora.day):
+        if(itm.revocar.day == ahora.day and itm.revocar.month == ahora.month and itm.revocar.year == ahora.year): #itm.revocar.day ahora.day
                 revocar(itm.id)
 
     for i in items:
@@ -1215,13 +1254,34 @@ def relacionarItemLb(request, codigo, codigo1):
 def importarFase(request, codigo):
     fase = Fases1.objects.get(pk=codigo)
     fases=Fases1.objects.all()
-    faseI=Fases1(fechaInicio=fase.fechaInicio,fechaFin=fase.fechaFin,nombre=fase.nombre,descripcion=fase.descripcion,estado=fase.estado,cantidadItem=fase.cantidadItem, orden=fase.orden)
+    faseI=Fases1(fechaInicio=fase.fechaInicio,fechaFin=fase.fechaFin,nombre=fase.nombre,
+                 descripcion=fase.descripcion,estado=fase.estado,cantidadItem=fase.cantidadItem, orden=fase.orden)
     pr=fase.proyectos.id
     proy=Proyectos.objects.get(pk=pr)
 
     formulario = importarFaseForm(request.POST, instance=faseI)
     if formulario.is_valid():
         formulario.save()
+        items= Item.objects.all()
+        for fa in fases:
+            cod=fa
+        for it in items:
+            if it.fase == fase:
+                it=Item.objects.all()
+                item = Item.objects.get(pk=codigo)
+                items=Item.objects.all()
+                itemR = Item(lb=item.lb, antecesorHorizontal=item.antecesorHorizontal,sucesorHorizontal=item.sucesorHorizontal,sucesorVertical=item.sucesorVertical,
+                antecesorVertical=item.antecesorVertical,tipoItem=item.tipoItem,fase=cod,version=item.version, nombre=item.nombre, estado=item.estado,
+                prioridad=item.prioridad,descripcion=item.descripcion,revocar=item.revocar)
+                itemR.save()
+
+        libase= lineaBase.objects.all()
+        for li in libase:
+            if li.fase == fase:
+                nuevalb=lineaBase(estado=li.estado,fase=cod)
+                nuevalb.save()
+                print(nuevalb.fase)
+
         return render_to_response('gestionFase1.html',{'fases': fases, 'proyecto':fase.proyectos}, context_instance=RequestContext(request))
     else:
         if(proy.lider == request.user):
@@ -1851,9 +1911,10 @@ def reporte_usuarios():
                     text = ''
                     Story.append(Indenter(42))
                     Story.append(Spacer(1, 10))
-                    text ="- lider " "<br>"
+                    text ="- lider - Prpyecto " + pl.nombre +"<br>"
                     Story.append(Paragraph(text, styles["SubItems"]))
                     Story.append(Indenter(-42))
+
 
             for r in role:
                 rol= Rol.objects.get(pk=r.rol.id)

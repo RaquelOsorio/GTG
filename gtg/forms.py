@@ -38,7 +38,7 @@ class ProyectoModForm(forms.ModelForm):
 class ProyectoImportForm(forms.ModelForm):
     class Meta:
         model= Proyectos
-        fields = ("nombre","complejidad","lider")
+        fields = ("nombre",)
 
 class Fases1Form(forms.ModelForm):
     class Meta:
