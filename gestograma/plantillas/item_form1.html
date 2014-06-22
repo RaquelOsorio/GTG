@@ -6,6 +6,9 @@
 
 		<form id='formulario' method='post' action=''>{% csrf_token %}
 		<table>{{formulario}}</table>
+        <br>
+            <input type="file" name="file" id="id_file" />
+	    <br>
         <p>
             <input name="Guardar" style="margin-left: 150px;" class="formbutton" value="Guardar" type="submit" />
         </p>

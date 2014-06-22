@@ -1,0 +1,96 @@
+{% extends 'index2.html' %}
+{% block encabezado %}
+
+{% endblock %}
+{% block contenido %}
+
+        <div class="row" >
+                <div class="span10">
+            <p></p>
+        	<div class="container">
+       	    <h3> {{item}}</h3>
+            <hr>
+       	    <table>
+       	    <tr>
+	            <td>
+	        	    <strong>Versión: </strong>{{item.version}}
+	            </td>
+                <td>
+	        	    <strong>Costo: </strong>{{item.costo}}
+	            </td>
+                <td>
+	        	    <strong>Estado: </strong>{{item.estado}}
+	            </td>
+            </tr>
+            <tr>
+	            <td >
+	        	    <strong>Descripción: </strong>{{item.descripcion}}
+	            </td>
+                <td>
+	        	    <strong>Fecha Modificación: </strong>{{item.fechaModi}}
+	            </td>
+                <td>
+	        	    <strong>Tipo de Item: </strong>{{item.tipoItem}}
+	            </td>
+            </tr>
+
+            </table>
+        </div>
+    </div>
+    <p></p><p></p>
+        <h3> Versiones Anteriores </h3>
+      <table class="table table-striped table-bordered">
+                                <tr>
+                                        <th>Versión</th>
+                                        <th>Estado</th>
+                                        <th>Antecesor Horizontal</th>
+                                        <th>Antecesor Vertical</th>
+                                        <th>Presione para reversionar un item</th>
+
+                                </tr>
+
+
+                        {% for items in items %}
+                             {% if items.prioridad != 1 and items.nombre == item.nombre  %}
+
+
+                                    <tr>
+                                            <td>{{items.nombre}}</td>
+                                            <td>{{items.estado }}</td>
+                                            <td>{{items.version }}</td>
+                                            {% if  items.antecesorHorizontal == None or items.antecesorHorizontal.relacion == 'DEL '%}
+                                                <td>Ninguno</td>
+                                            {% else %}
+                                                {% if items.antecesorHorizontal.estado == 'VAL' %}
+                                                    <td>{{ items.antecesorHorizontal}} </td>
+                                                {% endif %}
+                                            {% endif %}
+                                            {% if  items.antecesorVertical == None or items.antecesorVertical.relacion == 'DEL'%}
+                                                <td>Ninguno</td>
+                                            {% else %}
+                                                <td>{{ items.antecesorVertical}} </td>
+                                            {% endif %}
+
+                                    {% if items.estado == 'REDAC' or items.estado == 'TER'%}
+
+                                        <td><a href='/item/reversionarItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Reversionar'/></a></td>
+
+                                    {% else %}
+
+                                        <td>Inhabilitado</td>
+                                        
+
+                                    {% endif %}
+                                    </tr>
+                            {% endif %}
+                                {% empty %}
+
+                                    <tr>
+                                        No hay Items registrados
+                                </tr>
+                             {% endfor %}
+        </table>
+                 <a class="button" href="/fase1/{{ fase.id }}"><i class="icon-arrow-left"></i> Atras</a>
+    </div>
+    </div>
+{% endblock %}
