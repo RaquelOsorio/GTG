@@ -75,7 +75,7 @@ class Fases1(models.Model):
     fechaInicio=models.DateField(null=True)
     fechaFin=models.DateField(auto_now=False)
     fechaMod= models.DateField(auto_now=True)
-    nombre=models.CharField(max_length=32, unique=True)
+    nombre=models.CharField(max_length=32, unique=False)
     cantidadItem=models.IntegerField(max_length=32)
     descripcion=models.TextField(max_length=100)
     orden = models.SmallIntegerField(verbose_name='Orden')
@@ -170,7 +170,7 @@ class Item(models.Model):
     fase=models.ForeignKey(Fases1, related_name='fase')
     lb= models.ForeignKey(lineaBase, null=True, blank= True)
     solicitudAprobada=models.BooleanField(default=0)
-    revocar=models.DateField(null=True, blank= True)
+    revocar=models.DateField(null=True, blank= True, default='1000-01-01')
 
     antecesorHorizontal= models.ForeignKey('self',related_name='RantecesorHorizontal',null=True, blank= True)
     sucesorHorizontal= models.ForeignKey('self',related_name='RsucesorHorizontal',null=True, blank= True)
