@@ -3,12 +3,16 @@
 
 # Identificando la ruta del proyecto
 import os
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
 RUTA_PROYECTO = os.path.dirname(os.path.realpath(__file__))
 
 #Está linea se debe dejar en False cuando se pasa a producción
 #DEBUG = False,
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+
+ALLOWED_HOSTS = []
 
 ADMINS = (
 		('Viviana Osorio', 'raquelosorio92@gmail.com'),
@@ -25,8 +29,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'sqlite3', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'gestograma',          # Or path to database file if using sqlite3.
-        'USER': 'sonia',                      # Not used with sqlite3.
-        'PASSWORD': 'sonia2014',                  # Not used with sqlite3.
+        'USER': 'viviana',                      # Not used with sqlite3.
+        'PASSWORD': 'orlandoybar',                  # Not used with sqlite3.
         'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '5432',                      # Set to empty string for default. Not used with sqlite3.
     }

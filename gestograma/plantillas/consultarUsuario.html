@@ -19,23 +19,16 @@
                         <table class="table table-striped table-bordered">
                                 <tr>
                                         <th>Nombre</th>
-
-
                                 </tr>
-
-
                                 <tr>
-
-
                                         <td>{{usuario.username}}</td>
-
-                                    <tr><th>Rol</th><tr>
+                                    <tr><th>Rol</th><th>Para el proyecto</th><tr>
                                     {% for rol in rol %}
                                             <tr>{% if usuario == rol.usuario %}
                                                 <td>{{ rol.rol }} </td>
+                                                <td>{{ rol.proyecto }} </td>
                                             {% endif %}</tr>
-                                        {% endfor %}
-
+                                     {% endfor %}
                                 </tr>
 
         </table>

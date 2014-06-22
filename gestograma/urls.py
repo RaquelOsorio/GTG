@@ -2,6 +2,7 @@
 from django.conf.urls import patterns, include, url
 import settings
 from django.contrib import admin
+from gtg import views
 admin.autodiscover()
 
 #from gtg.views import CreaRelacionView, ListaRelacionesView
@@ -27,6 +28,8 @@ urlpatterns = patterns('',
     url(r'^usuario/$','gtg.views.usuario'),
     url(r'^proyecto/$','gtg.views.proyecto'),
     url(r'^proyectoAdmin/$','gtg.views.proyectoAdmin'),
+    url(r'^proyecto/buscar/$','views.buscarProyecto'),
+
     url(r'^fase1/(?P<codigoProyecto>\d+)/$','gtg.views.fase1'),
     url(r'^fase1/registrarFase/(?P<codigo>\d+)/$','gtg.views.registrarFase'),
     #url(r'^fase/$','gtg.views.fase'),
@@ -36,6 +39,8 @@ urlpatterns = patterns('',
     url(r'^item/(?P<codigoProyecto>\d+)/$','gtg.views.item'),
     url(r'^lb/(?P<codigo>\d+)/$','gtg.views.lb'),
     url(r'^lb/generarlb/(?P<codigo>\d+)/$','gtg.views.generarlb'),
+    url(r'^lb/cambioEstadoLb/(?P<codigo>\d+)/$','gtg.views.cambioEstadoLb'),
+    url(r'^proyecto/importarProyecto/(?P<codigo>\d+)/$','gtg.views.importarProyecto'),
     url(r'^cambio/(?P<codigoProyecto>\d+)/$','gtg.views.cambio'),
     url(r'^usuario/nuevo_usuario/$','gtg.views.nuevo_usuario'),
     url(r'^usuario/nuevo_rolusuario/$','gtg.views.nuevo_rolusuario'),
@@ -103,13 +108,32 @@ urlpatterns = patterns('',
     url(r'^item/revivirItem/(?P<codigo>\d+)/$', 'gtg.views.revivirItem'),
     url(r'^lb/listaItemsTer/(?P<codigo>\d+)/$', 'gtg.views.listaItemsTer'),
     url(r'^listaItemsTer/relaionarItemLb/(?P<codigo>\d+)/(?P<codigo1>\d+)/$', 'gtg.views.relacionarItemLb'),
-    url(r'^comite/(?P<codigoProyecto>\d+)/$','gtg.views.comite'),
+    #url(r'^comite/(?P<codigoProyecto>\d+)/$','gtg.views.comite'),
     url(r'^incluir_al_Comite/(?P<codigoProyecto>\d+)/(?P<codigoUsuario>\d+)/$','gtg.views.incluir_al_Comite'),
     url(r'^listaSolicitudes/$', 'gtg.views.listaSolicitudes'),
     url(r'^itemFase/crearSolicitudCambio/(?P<codigo>\d+)/$', 'gtg.views.crearSolicitudCambio'),
     url(r'^listaSolicitudes/consultarSolicitud/(?P<id_solicitud>\d+)/$', 'gtg.views.consultarSolicitud'),
-    url(r'^listaSolicitudes/votar/(?P<id_solicitud>\d+)/$', 'gtg.views.votar'),
+    url(r'^listaSolicitudes/votar/(?P<codigo>\d+)/$', 'gtg.views.votar'),
     url(r'^voto/$', 'gtg.views.voto'),
+    url(r'^listaLbRota/$', 'gtg.views.listaLbRota'),
+    url(r'^listalbRota/listaItemLbRota/(?P<codigo>\d+)/$', 'gtg.views.listaItemRev'),
+    url(r'^listalbRota/historialCambio/(?P<codigo>\d+)/$', 'gtg.views.historialCambio'),
+     url(r'^modificarItemVal/(?P<codigo>\d+)/$', 'gtg.views.modificarItemVal'),
+    url(r'^consultarItem/(?P<codigo>\d+)/$', 'gtg.views.consultarItem'),
+    url(r'^listaItemsProyecto/(?P<codigo>\d+)/$', 'gtg.views.listaItemsProyecto'),
+    url(r'^listaItemsProyecto/calcularImpacto/(?P<codigo>\d+)/$', 'gtg.views.calcularImpacto'),
+
+    url(r'^reporte/usuario/$','gtg.views.descargar_reporteUsuarios'),
+    url(r'^reporte/rol/$','gtg.views.descargar_reporteRoles'),
+
+    url(r'^reporte/proyecto/$','gtg.views.descargar_reporteProyectos'),
+    url(r'^reporte/proyecto/lineasBase/(?P<codigo>\d+)$','gtg.views.descargar_reporteLB'),
+    url(r'^reporte/proyecto/solicitudesCambio/(?P<codigo>\d+)$','gtg.views.descargar_reporteSolicitudes'),
+    url(r'^reporte/proyecto/items/(?P<codigo>\d+)$','gtg.views.descargar_reporteItems'),
+    url(r'^finalizarProyecto/(?P<codigo>\d+)/$','gtg.views.finalizarProyecto'),
+
+
+
 
 #relaciones
    # url(r'^relacion/crear/(?P<idproyecto>\d+)$', CreaRelacionView.as_view(), name="relacion_crear"),

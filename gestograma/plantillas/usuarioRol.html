@@ -2,11 +2,12 @@
 <section class='contenido'>
 {% block contenido %}
     <div id="body">
-        <h3>Asignar Rol a Usuario </h3>
+        <p>        <h3>Asignar Rol a Usuario </h3></p>
         <form id='formulario' method='post' action=''>{% csrf_token %}
-		{{formulario}}
-		<p><input name="Aceptar" style="margin-left: 150px;" class="formbutton" value="Aceptar" type="submit" />
-        <input name="Cancelar" style="margin-left: 150px;" class="formbutton" value="Cancelar" type="submit" />
+		<p>{{formulario}}</p>
+            <p>
+		<p><input name="Aceptar"  class="formbutton" value="Aceptar" type="submit" />
+        <input name="Cancelar" class="formbutton" value="Cancelar" type="submit" />
         </p>
 
 	</form>

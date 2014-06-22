@@ -601,3 +601,6 @@ background-color: #4076AB;
 #menu1 li:hover > ul{
 display: block;
 }
+.icon-pencil {
+  background-position: 0 -72px;
+}

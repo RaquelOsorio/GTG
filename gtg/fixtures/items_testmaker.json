@@ -1,5 +1,22 @@
 [
-
+{
+    "pk": 1, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "sonia", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": true, 
+        "is_staff": true, 
+        "last_login": "2014-05-23T18:09:49.656Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$12000$z1vzQUkStpjT$mCNRx08Q0ryTadjfhLJcSCsYyLziXddE0J3A76mNBJQ=", 
+        "email": "", 
+        "date_joined": "2014-05-23T00:16:31.559Z"
+    }
+},
 {
     "pk": 2, 
     "model": "auth.user", 
@@ -10,20 +27,46 @@
         "is_active": true, 
         "is_superuser": false, 
         "is_staff": false, 
-        "last_login": "2014-05-16T15:19:14.040Z", 
+        "last_login": "2014-05-24T00:31:57.335Z", 
         "groups": [], 
         "user_permissions": [], 
-        "password": "pbkdf2_sha256$12000$8jv5YD9fnD2w$yALvJqjm6TYN5fxve0HILNjOyj1Rh7L/QBQQwopsVa8=", 
+        "password": "pbkdf2_sha256$12000$OBLPWC1Ha6Ll$5zj0D1V/4pPVZLIqocDUEU9Tduy3Akl8+D4QnWIQ8UE=", 
         "email": "", 
-        "date_joined": "2014-05-16T15:17:57.921Z"
+        "date_joined": "2014-05-23T23:44:39.075Z"
     }
 },
 {
-    "pk": "49f740y3gh0mqchebzguhnv1vipxy7ay", 
+    "pk": 3, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "pepe", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2014-05-23T23:45:00.715Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$12000$oTOApoITNyo2$cqnklOG1PBYqSdSFNaJBYX0Ex/FmGEg4FcuHNDnhdcw=", 
+        "email": "", 
+        "date_joined": "2014-05-23T23:45:00.715Z"
+    }
+},
+{
+    "pk": "g2qp7a6lcnjm4d5vcup6i2k14uu1y91m", 
     "model": "sessions.session", 
     "fields": {
-        "expire_date": "2014-05-30T16:05:37.115Z", 
-        "session_data": "YjQ1OTk1NGQ3YzdiMzhiZTliYmIyZmU2ZGVjNTg3Nzg5ZjQ5NmI1OTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0="
+        "expire_date": "2014-06-07T00:31:57.346Z", 
+        "session_data": "M2QyOWUyZDA2MjVhNTUzMGNiOTRiYWFiODk0YTUzNzc5ZWUyYWQ2NDp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6Mn0="
+    }
+},
+{
+    "pk": "pmvw9iih38gi9al8on16tmjc867w84z1", 
+    "model": "sessions.session", 
+    "fields": {
+        "expire_date": "2014-06-06T23:45:40.664Z", 
+        "session_data": "M2QyOWUyZDA2MjVhNTUzMGNiOTRiYWFiODk0YTUzNzc5ZWUyYWQ2NDp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6Mn0="
     }
 },
 {
@@ -38,11 +81,28 @@
     "pk": 1, 
     "model": "gtg.proyectos", 
     "fields": {
-        "fechaMod": "2014-05-16", 
+        "fechaMod": "2014-05-23", 
+        "fechaInicio": "2014-05-07", 
+        "lider": 1, 
+        "complejidad": 1, 
+        "nombre": "lpm", 
+        "comite": [], 
+        "estado": "PEN", 
+        "fechaFin": "2015-05-07"
+    }
+},
+{
+    "pk": 2, 
+    "model": "gtg.proyectos", 
+    "fields": {
+        "fechaMod": "2014-05-23", 
         "fechaInicio": "2014-05-07", 
         "lider": 2, 
         "complejidad": 1, 
         "nombre": "gtg", 
+        "comite": [
+            2
+        ], 
         "estado": "PEN", 
         "fechaFin": "2015-05-07"
     }
@@ -51,24 +111,11 @@
     "pk": 1, 
     "model": "gtg.fases1", 
     "fields": {
-        "fechaMod": "2014-05-16", 
-        "proyectos": 1, 
+        "fechaMod": "2014-05-23", 
+        "proyectos": 2, 
         "fechaInicio": "2014-05-07", 
-        "descripcion": "KKKK", 
+        "descripcion": "asasas", 
         "nombre": "fase1", 
-        "estado": "INA", 
-        "fechaFin": "2015-05-07"
-    }
-},
-{
-    "pk": 2, 
-    "model": "gtg.fases1", 
-    "fields": {
-        "fechaMod": "2014-05-16", 
-        "proyectos": 1, 
-        "fechaInicio": "2014-05-07", 
-        "descripcion": "dsds", 
-        "nombre": "fase3", 
         "estado": "INA", 
         "fechaFin": "2015-05-07"
     }
@@ -77,7 +124,7 @@
     "pk": 1, 
     "model": "gtg.tipoatributo", 
     "fields": {
-        "descripcion": "kll", 
+        "descripcion": "asas", 
         "nombre": "Atributo1", 
         "tipo": "Entero"
     }
@@ -86,9 +133,17 @@
     "pk": 1, 
     "model": "gtg.tipoitem", 
     "fields": {
-        "descripcion": "dsds", 
+        "descripcion": "asasas", 
         "nombre": "tipo1", 
         "tipoAtributo": 1
+    }
+},
+{
+    "pk": 1, 
+    "model": "gtg.lineabase", 
+    "fields": {
+        "estado": "ROTA", 
+        "fase": 1
     }
 },
 {
@@ -97,14 +152,16 @@
     "fields": {
         "antecesorVertical": 2, 
         "sucesorHorizontal": null, 
+        "lb": 1, 
         "antecesorHorizontal": null, 
         "sucesorVertical": null, 
         "tipoItem": 1, 
+        "relacion": null, 
         "version": 1, 
-        "descripcion": "jkjk", 
+        "descripcion": "asasas", 
         "nombre": "Item1", 
-        "fechaModi": "2014-05-16", 
-        "estado": "VAL", 
+        "fechaModi": "2014-05-23", 
+        "estado": "TER", 
         "prioridad": 1, 
         "fase": 1
     }
@@ -113,15 +170,17 @@
     "pk": 2, 
     "model": "gtg.item", 
     "fields": {
-        "antecesorVertical": 1, 
+        "antecesorVertical": 3, 
         "sucesorHorizontal": null, 
+        "lb": 1, 
         "antecesorHorizontal": null, 
         "sucesorVertical": null, 
         "tipoItem": 1, 
+        "relacion": null, 
         "version": 1, 
-        "descripcion": "dsdsd", 
+        "descripcion": "asasa", 
         "nombre": "Item2", 
-        "fechaModi": "2014-05-16", 
+        "fechaModi": "2014-05-23", 
         "estado": "VAL", 
         "prioridad": 1, 
         "fase": 1
@@ -133,14 +192,16 @@
     "fields": {
         "antecesorVertical": null, 
         "sucesorHorizontal": null, 
+        "lb": 1, 
         "antecesorHorizontal": null, 
         "sucesorVertical": null, 
         "tipoItem": 1, 
+        "relacion": null, 
         "version": 1, 
-        "descripcion": "sdd", 
+        "descripcion": "asasa", 
         "nombre": "Item3", 
-        "fechaModi": "2014-05-16", 
-        "estado": "TER", 
+        "fechaModi": "2014-05-23", 
+        "estado": "REV", 
         "prioridad": 1, 
         "fase": 1
     }
@@ -149,72 +210,80 @@
     "pk": 4, 
     "model": "gtg.item", 
     "fields": {
-        "antecesorVertical": 5, 
+        "antecesorVertical": null, 
         "sucesorHorizontal": null, 
+        "lb": null, 
         "antecesorHorizontal": null, 
         "sucesorVertical": null, 
         "tipoItem": 1, 
-        "version": 1, 
-        "descripcion": "jjjj", 
-        "nombre": "Item5", 
-        "fechaModi": "2014-05-16", 
-        "estado": "TER", 
-        "prioridad": 1, 
-        "fase": 2
-    }
-},
-{
-    "pk": 5, 
-    "model": "gtg.item", 
-    "fields": {
-        "antecesorVertical": null, 
-        "sucesorHorizontal": null, 
-        "antecesorHorizontal": 3, 
-        "sucesorVertical": null, 
-        "tipoItem": 1, 
-        "version": 1, 
-        "descripcion": "dsd", 
-        "nombre": "Item6", 
-        "fechaModi": "2014-05-16", 
-        "estado": "TER", 
-        "prioridad": 1, 
-        "fase": 2
-    }
-},
-{
-    "pk": 6, 
-    "model": "gtg.item", 
-    "fields": {
-        "antecesorVertical": null, 
-        "sucesorHorizontal": null, 
-        "antecesorHorizontal": null, 
-        "sucesorVertical": null, 
-        "tipoItem": 1, 
-        "version": 1, 
-        "descripcion": "jkjk", 
-        "nombre": "item7", 
-        "fechaModi": "2014-05-16", 
+        "relacion": null, 
+        "version": 2, 
+        "descripcion": "reversiona el item", 
+        "nombre": "Item1", 
+        "fechaModi": "2014-05-23", 
         "estado": "REDAC", 
-        "prioridad": 1, 
+        "prioridad": 2, 
         "fase": 1
     }
 },
 {
     "pk": 1, 
-    "model": "gtg.lineabase", 
+    "model": "gtg.solicitudcambio", 
     "fields": {
-        "itemsAsociados": null, 
-        "estado": "ABIERTA", 
-        "fase": 1
+        "usuario": 2, 
+        "fecha": "2014-05-23", 
+        "costo": 0, 
+        "item": 1, 
+        "proyecto": 2, 
+        "descripcion": "modifica el item validado", 
+        "nombre": "solicitud1", 
+        "estado": "APROBADA"
     }
 },
 {
     "pk": 2, 
-    "model": "gtg.lineabase", 
+    "model": "gtg.solicitudcambio", 
     "fields": {
-        "itemsAsociados": null, 
-        "estado": "ABIERTA", 
-        "fase": 2
+        "usuario": 2, 
+        "fecha": "2014-05-23", 
+        "costo": 0, 
+        "item": 2, 
+        "proyecto": 2, 
+        "descripcion": "sasasas", 
+        "nombre": "solicitud2", 
+        "estado": "RECHAZADA"
+    }
+},
+{
+    "pk": 3, 
+    "model": "gtg.solicitudcambio", 
+    "fields": {
+        "usuario": 2, 
+        "fecha": "2014-05-23", 
+        "costo": 0, 
+        "item": 3, 
+        "proyecto": 2, 
+        "descripcion": "asasas", 
+        "nombre": "solicitud3", 
+        "estado": "EN_ESPERA"
+    }
+},
+{
+    "pk": 1, 
+    "model": "gtg.voto", 
+    "fields": {
+        "voto": "APROBADO", 
+        "usuario": 2, 
+        "solicitud": 1
+    }
+},
+{
+    "pk": 2, 
+    "model": "gtg.voto", 
+    "fields": {
+        "voto": "RECHAZADO", 
+        "usuario": 2, 
+        "solicitud": 2
     }
 }
 ]

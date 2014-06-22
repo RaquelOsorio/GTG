@@ -17,3 +17,9 @@ epydoc --html --parse-only --docformat plaintext gestograma
 pydoc -p 1234
 
 ir a http://localhost:1234/gtg.views.html
+
+Generar datos cargados en la base de datos para las prueba unitarias
+python manage.py dumpdata  --indent=4 --all -e contenttypes -e auth.permission -e auth.group_permissions -e admin >gtg/fixtures/items_testmaker.json
+
+Ejecutar test
+python manage.py test GTG.gtg.testing

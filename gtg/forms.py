@@ -29,6 +29,11 @@ class ProyectoForm(forms.ModelForm):
         model= Proyectos
         fields = ("fechaInicio","fechaFin","nombre","complejidad","lider")
 
+class ProyectoImportForm(forms.ModelForm):
+    class Meta:
+        model= Proyectos
+        fields = ("nombre","complejidad","lider")
+
 class Fases1Form(forms.ModelForm):
     class Meta:
         model=Fases1
@@ -37,6 +42,8 @@ class Fases1Form(forms.ModelForm):
             "fechaFin",
             "nombre",
             "descripcion",
+            "cantidadItem",
+            "orden",
             #"proyecto",
 
         )
@@ -96,7 +103,10 @@ class ItemForm1(forms.ModelForm):
         model= Item
         fields=("estado","nombre","prioridad")
 
-
+class ItemFormVal(forms.ModelForm):
+    class Meta:
+        model= Item
+        fields=("nombre","prioridad","tipoItem","descripcion")
 
 class ItemReversionar(forms.ModelForm):
     class Meta:
@@ -183,6 +193,11 @@ class lbForm(forms.ModelForm):
         model= lineaBase
         fields=()
 
+class CambioEstadoLbForm(forms.ModelForm):
+    class Meta:
+        model= lineaBase
+        fields=("estado",)
+
 class ItemLbForm(forms.ModelForm):
     class Meta:
         model= Item
@@ -206,7 +221,7 @@ class EliminarRelacionItemForm(forms.ModelForm):
 class SolicitudCambioForm(forms.ModelForm):
     class Meta:
         model= SolicitudCambio
-        fields=('nombre', 'descripcion',)
+        fields=('nombre', 'descripcion','cantidadDias',)
 
 
 class VotoForm(forms.ModelForm):

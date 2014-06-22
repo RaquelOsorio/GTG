@@ -20,14 +20,16 @@
             <td><strong>Votos a favor: </strong>{{ favor }}</td>
             <td><strong>Votos en contra: </strong>{{ contra }}</td>
             <td><strong>Mimbros que ya votaron: </strong>
-
-        {% for miembro in usuarios %}
-            <i>Nombre: </i>{{ miembro }}</td>
+                {% for miembro in usuarios %}
+                    <td><i>Nombre: </i>{{ miembro }}</td>
+                    </td>
 
         {% empty %}
             Ningun miembro ha emitido su voto
         </tr>
         {% endfor %}
+        <tr><td><strong>Dias Solicitados: {{ solicitud.cantidadDias }}</strong></tr>
+
     </table>
     <p></p><a class="button" href="/listaSolicitudes/"><i class="icon-backward"></i> Regresar</a>
 {% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'index2.html' %}
+{% block contenido %}
+	<p></p><h3><center>Historial de cambio linea base</center></h3>
+
+    <hr>
+    <table>
+    {% for item in datos %}
+        <tr>
+        <td>{{ item.id }}</td>
+            <td><strong>Nombre: </strong>{{ item.nombre}}</td>
+            <td><strong>Proyecto: </strong>{{ item.fase.proyectos.nombre }}</td>
+            <td><strong>Motivo: </strong>{{ item.descripcion }}</td>
+
+
+        </tr>
+        <tr>
+        <td></td>
+            <td><strong>Fase: </strong>{{ item.fase.nombre }}</td>
+            <td><strong>Fecha Modificacion: </strong>{{ item.fechaModi }}</td>
+            <td><strong>Costo total de la modificacion: </strong>{{ item.prioridad }}</td>
+
+        </tr>
+
+    {% empty %}
+        <tr>
+            Ningun item modificado
+        </tr>
+    {% endfor %}
+    </table>
+    <p></p><a class="button" href="/listaLbRota/"><i class="icon-backward"></i> Regresar</a>
+{% endblock %}

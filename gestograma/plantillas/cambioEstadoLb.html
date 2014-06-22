@@ -1,0 +1,40 @@
+{% extends 'index2.html' %}
+{% block encabezado %}
+
+{% endblock %}
+{% block contenido %}
+
+        <div class="row" >
+                <div class="span10">
+
+                        <ul>
+
+                                <p><center><h3>{{ fase.proyectos }} - {{  fase.nombre }} </h3></center></p>
+
+                        </ul>
+
+                        <table class="table table-striped table-bordered">
+                                <tr>
+                                        <th>Nombre</th>
+                                        <th>Estado</th>
+                                        <th>Version</th>
+
+                                </tr>
+
+
+                        {% for items in items %}
+
+
+
+                                <tr>
+                                        <td>{{items.nombre}}</td>
+                                        <td>{{items.estado }}</td>
+                                        <td>{{items.version}}</td>
+
+                                </tr>
+                             {% endfor %}
+        </table>
+                 <a class="button" href="/fase1/{{ fase.id }}"><i class="icon-arrow-left"></i> Atras</a>
+    </div>
+    </div>
+{% endblock %}

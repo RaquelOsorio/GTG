@@ -1,0 +1,34 @@
+{% extends 'index2.html' %}
+{% block contenido %}
+	<p></p><h3><center>Detalle del Item: {{ item.nombre }}</center></h3>
+
+    <hr>
+    <table>
+        <tr>
+            <td><strong>Id: </strong>{{ item.id}}</td>
+            <td><strong>Nombre: </strong>{{ item.nombre}}</td>
+            <td><strong>Proyecto: </strong>{{ item.fase.proyectos.nombre }}</td>
+            <td><strong>Motivo: </strong>{{ item.descripcion }}</td>
+
+
+        </tr>
+        <tr>
+            <td><strong>Fase: </strong>{{ item.fase.nombre }}</td>
+            <td><strong>Tipo Item: </strong>{{ item.tipoItem }}</td>
+
+            <td><strong>Fecha Modificacion: </strong>{{ item.fechaModi }}</td>
+            <td><strong>Prioridad: </strong>{{ item.prioridad }}</td>
+
+        </tr>
+
+    <tr>
+            <td><strong>Version: </strong>{{ item.version }}</td>
+            <td><strong>Antecesor vertical: </strong>{{ item.antecesorVertical.nombre }}</td>
+
+            <td><strong>Antecesor horizontal: </strong>{{ item.antecesorHorizontal }}</td>
+            <td><strong>Estado: </strong>{{ item.estado }}</td>
+
+        </tr>
+    </table>
+    <p></p><a class="button" href="/listalbRota/listaItemLbRota/{{ item.lb.id }}"><i class="icon-backward"></i> Regresar</a>
+{% endblock %}

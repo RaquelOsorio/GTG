@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="produccion">
+    <serverData>
+      <paths name="produccion">
+        <serverdata>
+          <mappings>
+<<<<<<< HEAD
+            <mapping deploy="GTG" local="$PROJECT_DIR$" web="GTG" />
+=======
+            <mapping deploy="GTG" local="$PROJECT_DIR$" web="/GTG" />
+>>>>>>> 7b57254c888c6540129d2e176611db886b9ce19b
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
+

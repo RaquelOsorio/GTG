@@ -24,6 +24,7 @@
 
                                         <th>Presione Modificar para editar un Proyecto</th>
                                         <th>Presione Visualizar para consultar un Proyecto</th>
+                                        <th>Importar Proyecto</th>
 
                                         <th>Ingresar al Proyecto</th>
 
@@ -65,6 +66,7 @@
 
                                 <td><a href='/proyecto/editarProyecto/{{ p.id }}' class="button btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>
                                 <td><a href='/proyecto/verProyecto/{{ p.id }}' class="button btn-small btn-danger"><input type='submit' value='Visualizar'/></a></td>
+                                <td><a href='/proyecto/importarProyecto/{{ p.id }}' class="button btn-small btn-danger"><input type='submit' value='Importar'/></a></td>
 
                                 <td>
                                 {%if user.id == p.lider.id%}
