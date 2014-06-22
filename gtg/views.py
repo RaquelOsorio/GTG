@@ -912,7 +912,7 @@ def incluir_al_Comite(request,codigoProyecto):
             formulario.save()
             return HttpResponseRedirect('/proyecto')
     else:
-	    formulario=ComiteForm(instance = proyecto)
+	    formulario= ComiteForm(instance = proyecto)
     return render(request,'comite.html', {'formulario': formulario})
 
 
