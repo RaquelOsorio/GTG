@@ -24,6 +24,7 @@
                                 <tr>
                                         <th>Nombre</th>
                                         <th>Estado</th>
+                                        <th>version</th>
                                         <th>Antecesor Horizontal</th>
                                         <th>Antecesor Vertical</th>
 
@@ -31,6 +32,7 @@
                                         <th>Presione para eliminar el item</th>
                                         <th>Presione para relacionar a un item</th>
                                         <th>Presione para reversionar un item</th>
+                                        <th>Ver historial del item</th>
                                         <th>Presione para revivir al item</th>
                                         <th>Solicitud de cambio</th>
 
@@ -40,64 +42,68 @@
 
 
                         {% for items in items %}
+                             {% if items.prioridad == 1 %}
 
 
-
-                                <tr>
-                                        <td>{{items.nombre}}</td>
-                                        <td>{{items.estado }}</td>
-                                        {% if  items.antecesorHorizontal == None or items.antecesorHorizontal.relacion == 'DEL '%}
-                                            <td>Ninguno</td>
-                                        {% else %}
-                                            {% if items.antecesorHorizontal.estado == 'VAL' %}
-                                                <td>{{ items.antecesorHorizontal}} </td>
+                                    <tr>
+                                            <td>{{items.nombre}}</td>
+                                            <td>{{items.estado }}</td>
+                                            <td>{{items.version }}</td>
+                                            {% if  items.antecesorHorizontal == None or items.antecesorHorizontal.relacion == 'DEL '%}
+                                                <td>Ninguno</td>
+                                            {% else %}
+                                                {% if items.antecesorHorizontal.estado == 'VAL' %}
+                                                    <td>{{ items.antecesorHorizontal}} </td>
+                                                {% endif %}
                                             {% endif %}
-                                        {% endif %}
-                                        {% if  items.antecesorVertical == None or items.antecesorVertical.relacion == 'DEL'%}
-                                            <td>Ninguno</td>
-                                        {% else %}
-                                            <td>{{ items.antecesorVertical}} </td>
-                                        {% endif %}
+                                            {% if  items.antecesorVertical == None or items.antecesorVertical.relacion == 'DEL'%}
+                                                <td>Ninguno</td>
+                                            {% else %}
+                                                <td>{{ items.antecesorVertical}} </td>
+                                            {% endif %}
 
-                                {% if items.estado == 'REDAC' or items.estado == 'TER'%}
-                                    {% if items.lb.estado != 'ROTA' %}
-                                     <td><a href='/item/modificarItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>
-                                     {% else %}
-                                        <td>Inhabilitado</td>
-                                     {% endif %}
-                                     <td><a href='/item/eliminarItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Eliminar'/></a></td>
-                                     <td><a href='/item/relacionarItem/{{ items.id}}/{{fase.proyectos.id }}' class="button btn-small btn-danger"><input type='submit' value='Relacionar'/></a></td>
-                                     <td><a href='/item/reversionarItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Reversionar'/></a></td>
-                                     <td>--------------------</td>
-                                     <td>--------------------</td>
-                                {% else %}
-                                    <td>Inhabilitado</td>
-                                    <td>Inhabilitado</td>
-                                    <td>Inhabilitado</td>
-
-                                    <td>Inhabilitado</td>
-                                    {% if items.estado == 'DESAC' %}
-                                        <td><a href='/item/revivirItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Revivir'/></a></td>
-                                    {% else %}
-                                        <td>Inhabilitado</td>
-
-                                    {%endif%}
-                                    {% if items.estado == 'VAL' and items.lb.estado == 'CERRADA' %}
-                                        <td><a href='/itemFase/crearSolicitudCambio/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Cambio'/></a></td>
-                                    {% else %}
-                                        {% if items.estado == 'REV' %}
-                                            <td><a href='/itemFase/crearSolicitudCambio/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Cambio'/></a></td>
+                                    {% if items.estado == 'REDAC' or items.estado == 'TER'%}
+                                        {% if items.lb.estado != 'ROTA' %}
+                                            <td><a href='/item/modificarItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Modificar'/></a></td>
                                         {% else %}
                                             <td>Inhabilitado</td>
                                         {% endif %}
+                                        <td><a href='/item/eliminarItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Eliminar'/></a></td>
+                                        <td><a href='/item/relacionarItem/{{ items.id}}/{{fase.proyectos.id }}' class="button btn-small btn-danger"><input type='submit' value='Relacionar'/></a></td>
+                                        <td><a href='/item/reversionarItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Reversionar'/></a></td>
+                                        <td><a href='/item/historialItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='historial'/></a></td>
+
+                                        <td>--------------------</td>
+                                        <td>--------------------</td>
+                                    {% else %}
+                                        <td>Inhabilitado</td>
+                                        <td>Inhabilitado</td>
+                                        <td>Inhabilitado</td>
+
+                                        <td>Inhabilitado</td>
+                                        {% if items.estado == 'DESAC' %}
+                                            <td><a href='/item/revivirItem/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Revivir'/></a></td>
+                                        {% else %}
+                                            <td>Inhabilitado</td>
+
+                                        {%endif%}
+                                        {% if items.estado == 'VAL' and items.lb.estado == 'CERRADA' %}
+                                            <td><a href='/itemFase/crearSolicitudCambio/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Cambio'/></a></td>
+                                        {% else %}
+                                            {% if items.estado == 'REV' %}
+                                                <td><a href='/itemFase/crearSolicitudCambio/{{ items.id }}' class="button btn-small btn-danger"><input type='submit' value='Cambio'/></a></td>
+                                            {% else %}
+                                                <td>Inhabilitado</td>
+                                            {% endif %}
+                                        {% endif %}
+
+
                                     {% endif %}
+                                    </tr>
+                            {% endif %}
+                                {% empty %}
 
-
-                                 {% endif %}
-                                </tr>
-                             {% empty %}
-
-                                <tr>
+                                    <tr>
                                         No hay Items registrados
                                 </tr>
                              {% endfor %}

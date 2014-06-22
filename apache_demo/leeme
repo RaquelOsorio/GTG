@@ -32,3 +32,39 @@ Scripts de poblacion de datos
     createdb gestograma
 
 3)  pg_restore -U postgres -d gestograma carga.sql
+
+
+
+
+#<VirtualHost *:80>
+WSGIScriptAlias / /home/viviana/GTG.wsgi/
+
+WSGIPythonPath /var/www/GTG/:/home/viviana//usr/local/lib/python2.7/site-packages
+
+ServerName GTG.com
+Alias /static /var/www/GTG/gestograma/static/
+
+<Directory /home/viviana/Escritorio/GTG/gestograma/static>
+#Order allow,deny
+Require all granted
+</Directory>
+#</VirtualHost>
+
+<Directory /home/viviana>
+<Files GTG.wsgi>
+#PARA APACHE 2.2 USAR Allow from all
+#PARA APACHE 2.4 USAR Require all granted
+Require all granted
+</Files>
+</Directory>
+
+
+<Directory /var/www/GTG/gestograma/>
+Order allow,deny
+Require all granted
+</Directory>
+
+
+
+
+#</VirtualHost>

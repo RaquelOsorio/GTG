@@ -289,7 +289,7 @@ def importarProyecto(request, codigo):
                          lider=project.lider)
     b=0
     proyectos=Proyectos.objects.all()
-    formulario = ProyectoImportForm(request.POST, instance=proyectoI)
+    formulario = ProyectoImportForm(request.POST,instance = proyectoI)
     if formulario.is_valid():
         formulario.save()
         for pr in proyectos:
@@ -792,7 +792,7 @@ def item(request, codigoProyecto):
     #nombre=dibujarProyecto(proyecto)
     items= Item.objects.all()
     priori= Item.objects.all()
-    ahora = datetime.date()
+    ahora = datetime.now()
     print("ahora",ahora)
     for itm in priori:
         if(itm.revocar.day == ahora.day and itm.revocar.month == ahora.month and itm.revocar.year == ahora.year): #.day
@@ -894,25 +894,33 @@ def reversionarItem(request,codigo):
     permisos= RolUsuario.objects.all()
     band=0
 
-
     for itm in it:
         if(itm.nombre==item.nombre and itm.version >= ultima_version):
             ultima_version=itm.version
-        if(itm.nombre==item.nombre and itm.prioridad>= priori):
-            priori=itm.prioridad
+        #if(itm.nombre==item.nombre):
+         #   itm.prioridad=0
+          #  itm.save()
 
-    itemR = Item( antecesorHorizontal=item.antecesorHorizontal,sucesorHorizontal=item.sucesorHorizontal,sucesorVertical=item.sucesorVertical,
+    itemR = Item( descripcion=item.descripcion,revocar=item.revocar,costo=item.costo,antecesorHorizontal=item.antecesorHorizontal,sucesorHorizontal=item.sucesorHorizontal,sucesorVertical=item.sucesorVertical,
             antecesorVertical=item.antecesorVertical,tipoItem=item.tipoItem,fase=item.fase,version=ultima_version+1, nombre=item.nombre, estado=item.estado,
-            prioridad=priori+1)
+            prioridad=1)
 
-    formulario = ItemReversionar(request.POST, instance=itemR)
     if request.method == "POST":
-        formulario = ItemReversionar(request.POST, instance=itemR)
+        formulario = ItemReversionar(request.POST,request.FILES,instance = itemR)
         if formulario.is_valid():
             formulario.save()
+            itms=Item.objects.all()
+            for itms in itms:
+                if(itm.nombre==item.nombre):
+                    itm.prioridad=0
+                    itm.save()
+            if request.FILES.get('file')!=None:
+                archivo=Archivo(archivo=request.FILES['file'],nombre='', item=codigo)
+                archivo.save()
+
             return render_to_response('gestionItem.html',{'items':items,'proyecto':item.fase.proyectos},context_instance=RequestContext(request))
     else:
-        formulario=ItemReversionar(request.POST, instance=itemR)
+        formulario=ItemReversionar(instance=itemR)
 
     for p in permisos:
         if (p.proyecto == proyectoc and p.usuario == request.user and p.rol.reversionarItem == True):
@@ -922,6 +930,14 @@ def reversionarItem(request,codigo):
         return render(request,'item_form1.html', {'formulario': formulario,'item':item,'proyecto':item.fase.proyectos})
     else :
         return render_to_response('extiende.html',{'usuario':usuario}, context_instance=RequestContext(request))
+
+@login_required(login_url='/ingresar')
+def historialItem(request,codigo):
+
+    """ Muestra todas las versiones de un determinado item y los atributos del mismo """
+    item = Item.objects.get(pk=codigo)
+    items=Item.objects.all()
+    return render_to_response('historialReversiones.html',{'items':items,'item':item},context_instance=RequestContext(request))
 
 
 

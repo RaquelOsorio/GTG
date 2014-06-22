@@ -117,7 +117,7 @@ class ItemFormVal(forms.ModelForm):
 class ItemReversionar(forms.ModelForm):
     class Meta:
         model= Item
-        fields=("descripcion","prioridad")
+        fields=("descripcion","costo","estado","tipoItem")
 
 class ComiteForm(forms.ModelForm):
     class Meta:

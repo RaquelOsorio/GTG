@@ -75,6 +75,7 @@ urlpatterns = patterns('',
     url(r'^item/registrarItem/(?P<codigo>\d+)/$','gtg.views.registrarItem'),
     url(r'^item/modificarItem/(?P<codigo>\d+)/$', 'gtg.views.modificarItem'),
     url(r'^item/reversionarItem/(?P<codigo>\d+)/$', 'gtg.views.reversionarItem'),
+    url(r'^item/historialItem/(?P<codigo>\d+)/$', 'gtg.views.historialItem'),
    # url(r'^item/relacionarItem/(?P<codigo>\d+)/$', 'gtg.views.relacionarItem'),
 
     url(r'^item/relacionarItem/(?P<codigo>\d+)/(?P<codigop>\d+)/$', 'gtg.views.relacionarItem'),
