@@ -74,7 +74,7 @@
                                                 <td><a href='/proyecto/verProyecto/{{ p.id }}' class="button btn-small btn-danger"><input type='submit' value='Visualizar'/></a></td>
 
                                                 <td>
-                                                {%if user.id == p.lider.id%}
+                                                {%if user.id == p.lider.id %}
                                                     <a class="button" href="/fase1/{{p.id}}"> Selec>> </a>
                                                 {% endif %}
                                                 </td>
@@ -92,7 +92,7 @@
                                 <td><a href='/proyecto/verProyecto/{{ p.id }}' class="button btn-small btn-danger"><input type='submit' value='Visualizar'/></a></td>
 
                                 <td>
-                                {%if user.id == p.lider.id %}
+                                {%if user.id == p.lider.id and p.estado == 'ACT' %}
                                    <a class="button" href="/administrar/{{p.id}}"> Selec>> </a>
                                     <td><a class="button" href="/finalizarProyecto/{{p.id}}"> Selec>> </a></td>
                                 {% endif %}

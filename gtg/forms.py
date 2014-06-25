@@ -29,6 +29,12 @@ class ProyectoForm(forms.ModelForm):
         model= Proyectos
         fields = ("fechaInicio","fechaFin","nombre","complejidad","lider")
 
+class ProyectoModForm(forms.ModelForm):
+    class Meta:
+        model= Proyectos
+        fields = ("fechaInicio","fechaFin","nombre","complejidad","lider","estado")
+
+
 class ProyectoImportForm(forms.ModelForm):
     class Meta:
         model= Proyectos
@@ -83,7 +89,7 @@ class TipoItemForm(forms.ModelForm):
 class ItemForm(forms.ModelForm):
     class Meta:
         model= Item
-        fields=("id","nombre","prioridad","descripcion","tipoItem")
+        fields=("id","nombre","prioridad","descripcion","tipoItem","costo")
     def clean(self):
 
     # get bitcoin address from form

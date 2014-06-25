@@ -20,6 +20,7 @@ from django.shortcuts import render, render_to_response, redirect
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 import os
+from gtg.forms import ProyectoModForm
 from os.path import join,realpath
 from django.conf import settings
 from gtg.forms import rolusuarioForm
@@ -314,7 +315,7 @@ def importarProyecto(request, codigo):
                         #it=Item.objects.all()
                         #item = Item.objects.get(pk=codigo)
                         #items=Item.objects.all()
-                        itemR = Item(lb=it.lb, antecesorHorizontal=it.antecesorHorizontal,sucesorHorizontal=it.sucesorHorizontal,sucesorVertical=it.sucesorVertical,
+                        itemR = Item(costo=it.costo,lb=it.lb, antecesorHorizontal=it.antecesorHorizontal,sucesorHorizontal=it.sucesorHorizontal,sucesorVertical=it.sucesorVertical,
                         antecesorVertical=it.antecesorVertical,tipoItem=it.tipoItem,fase=cod,version=it.version, nombre=it.nombre, estado=it.estado,
                         prioridad=it.prioridad,descripcion=it.descripcion,revocar=it.revocar)
                         itemR.save()
@@ -547,12 +548,12 @@ def editarProyecto(request, codigo):
     if request.user.is_superuser:
         proyecto=Proyectos.objects.get(pk=codigo)
         if request.method == "POST":
-		    formulario = ProyectoForm(request.POST, request.FILES, instance = proyecto)
+		    formulario = ProyectoModForm(request.POST, request.FILES, instance = proyecto)
 		    if formulario.is_valid():
 			    formulario.save()
 			    return HttpResponseRedirect('/proyecto')
         else:
-		    formulario=ProyectoForm(instance = proyecto)
+		    formulario= ProyectoModForm(instance = proyecto)
         return render(request,'modificarProyecto.html', {'formulario': formulario})
     elif request.user.is_active:
         return render_to_response('extiende.html',context_instance=RequestContext(request))
@@ -659,12 +660,12 @@ def editarProyecto(request, codigo):
     if request.user.is_superuser:
         proyecto=Proyectos.objects.get(pk=codigo)
         if request.method == "POST":
-		    formulario = ProyectoForm(request.POST, request.FILES, instance = proyecto)
+		    formulario = ProyectoModForm(request.POST, request.FILES, instance = proyecto)
 		    if formulario.is_valid():
 			    formulario.save()
 			    return HttpResponseRedirect('/proyecto')
         else:
-		    formulario=ProyectoForm(instance = proyecto)
+		    formulario=ProyectoModForm(instance = proyecto)
         return render(request,'modificarProyecto.html', {'formulario': formulario})
     elif request.user.is_active:
         return render_to_response('extiende.html',context_instance=RequestContext(request))
@@ -794,7 +795,7 @@ def item(request, codigoProyecto):
     ahora = datetime.date()
     print("ahora",ahora)
     for itm in priori:
-        if(itm.revocar.day == ahora.day): #.day
+        if(itm.revocar.day == ahora.day and itm.revocar.month == ahora.month and itm.revocar.year == ahora.year): #.day
                 revocar(itm.id)
 
     for i in priori:
@@ -1002,7 +1003,7 @@ def itemFase(request, codigo):
     print("ahoraa",ahora)
     for itm in items:
 
-        if(itm.revocar.day == ahora.day): #itm.revocar.day ahora.day
+        if(itm.revocar.day == ahora.day and itm.revocar.month == ahora.month and itm.revocar.year == ahora.year): #itm.revocar.day ahora.day
                 revocar(itm.id)
 
     for i in items:
@@ -1291,7 +1292,7 @@ def incluir_al_Comite(request,codigoProyecto):
             formulario.save()
             return HttpResponseRedirect('/proyecto')
     else:
-	    formulario=ComiteForm(instance = proyecto)
+	    formulario= ComiteForm(instance = proyecto)
     return render(request,'comite.html', {'formulario': formulario})
 
 #@login_required(login_url='/ingresar')
@@ -1705,7 +1706,7 @@ def dibujarProyecto(proyecto):
     '''
     #inicializar estructuras
     grafo = pydot.Dot(graph_type='digraph',fontname="Verdana",rankdir="LR")
-    fases = Fases1.objects.filter(proyectos=proyecto).order_by('orden')
+    fases = Fases1.objects.filter(proyectos=proyecto)
     clusters = []
     clusters.append(None)
     for fase in fases:
@@ -1785,7 +1786,7 @@ def dibujarProyecto(proyecto):
 
 
 
-@login_required(login_url='/ingresar')
+#@login_required(login_url='/ingresar')
 
 def reporte_usuarios():
     '''
@@ -1858,6 +1859,25 @@ def reporte_usuarios():
             Story.append(Indenter(-25))
             roles= Rol.objects.all()
             role= RolUsuario.objects.filter(usuario=usuario)
+            proyectosLider= Proyectos.objects.filter(lider=usuario)
+            b=0
+            if usuario.is_superuser == True:
+                text = ''
+                Story.append(Indenter(42))
+                Story.append(Spacer(1, 10))
+                text ="- Administrador " "<br>"
+                Story.append(Paragraph(text, styles["SubItems"]))
+                Story.append(Indenter(-42))
+
+            for pl in proyectosLider:
+                if b == 0:
+                    text = ''
+                    Story.append(Indenter(42))
+                    Story.append(Spacer(1, 10))
+                    text ="- lider " "<br>"
+                    Story.append(Paragraph(text, styles["SubItems"]))
+                    Story.append(Indenter(-42))
+
             for r in role:
                 rol= Rol.objects.get(pk=r.rol.id)
                 text = ''
@@ -1936,11 +1956,11 @@ def reporte_roles():
             Story.append(Paragraph(text, styles["Items"]))
             text ="<strong>Permisos <br></strong>"
             Story.append(Paragraph(text, styles["Items"]))
-            if rol.controlTotal == True:
+            if rol.crearTipoItem == True:
                 text = ''
                 Story.append(Indenter(42))
                 Story.append(Spacer(1, 10))
-                text ="- controlTotal " + str(rol.controlTotal) +"<br>"
+                text ="- controlTotal " + str(rol.crearTipoItem) +"<br>"
                 Story.append(Paragraph(text, styles["SubItems"]))
                 Story.append(Indenter(-42))
             if rol.aprobarItem == True:
@@ -1948,20 +1968,6 @@ def reporte_roles():
                 Story.append(Indenter(42))
                 Story.append(Spacer(1, 10))
                 text ="- aprobarItem " + str(rol.aprobarItem) +"<br>"
-                Story.append(Paragraph(text, styles["SubItems"]))
-                Story.append(Indenter(-42))
-            if rol.consultaItem == True:
-                text = ''
-                Story.append(Indenter(42))
-                Story.append(Spacer(1, 10))
-                text ="- consultaItem " + str(rol.consultaItem) +"<br>"
-                Story.append(Paragraph(text, styles["SubItems"]))
-                Story.append(Indenter(-42))
-            if rol.consultaLB == True:
-                text = ''
-                Story.append(Indenter(42))
-                Story.append(Spacer(1, 10))
-                text ="- consultarLB " + str(rol.consultaLB) +"<br>"
                 Story.append(Paragraph(text, styles["SubItems"]))
                 Story.append(Indenter(-42))
             if rol.creacionLB == True:
@@ -2191,7 +2197,7 @@ def reporte_proyectos():
                         Story.append(Indenter(70))
                         text ="- " + atributo.tipoAtributo.nombre + ", Tipo "+ atributo.tipoAtributo.tipo + "<br>"
                         Story.append(Paragraph(text, styles["SubsubsubItems"]))
-                        Story.append(Indenter(-70))
+                        Story.append(Indenter(-90))
 
 
 
@@ -2355,11 +2361,14 @@ def reporte_items(codigo):
             for i in items:
                 text = ''
                 Story.append(Indenter(50))
+                text ="<strong>Id: </strong>"+str(i.id)+" <br>"
+                Story.append(Paragraph(text, styles["SubsubItems"]))
 
                 text ="<strong>Nombre: </strong>" + i.nombre +"<br>"
                 Story.append(Paragraph(text, styles["SubsubItems"]))
                 Story.append(Indenter(-60))
                 Story.append(Indenter(60))
+
                 text ="<strong>Descripcion: </strong>"+i.descripcion+" <br>"
                 Story.append(Paragraph(text, styles["SubsubItems"]))
                 text ="<strong>Costo: </strong>"+str(i.prioridad)+" <br>"
@@ -2373,13 +2382,13 @@ def reporte_items(codigo):
 
                 if i.antecesorVertical!=None:
                        #rel=get_object_or_404(Item,id=it.relacion_id)
-                    text ="<strong>Relacion Vertical: </strong> "+i.nombre+" de "+i.antecesorVertical.nombre+"<br>"
+                    text ="<strong>Relacion Vertical: </strong> "+i.antecesorVertical.nombre+"<br>"
                 else:
                     text ="<strong>Relacion Horizontal: </strong> No tiene antecesor vertical<br>"
                 Story.append(Paragraph(text, styles["SubsubItems"]))
                 if i.antecesorHorizontal!=None:
                        #rel=get_object_or_404(Item,id=it.relacion_id)
-                    text ="<strong>Relacion Vertical: </strong> "+i.nombre+" de "+i.antecesorHorizontal.nombre+"<br>"
+                    text ="<strong>Relacion Vertical: </strong> "+i.antecesorHorizontal.nombre+"<br>"
                 else:
                     text ="<strong>Relacion Horizontal: </strong> No tiene antecesor horizontal<br>"
                 Story.append(Paragraph(text, styles["SubsubItems"]))
@@ -2503,6 +2512,11 @@ def reporte_solicitudes(codigo):
             it= Item.objects.get(pk=solicitud.item.id)
             text ="<strong>Item: </strong>" + it.nombre +"<br>"
             Story.append(Paragraph(text, styles["Items"]))
+
+            lb= lineaBase.objects.get(pk=solicitud.item.lb.id)
+            text ="<strong>Linea Base Afectada: </strong>" "linea base_id-"+ str(lb.id) +"<br>"
+            Story.append(Paragraph(text, styles["Items"]))
+
             dateFormat = solicitud.fecha.strftime("%d-%m-%Y")
             text ="<strong>Fecha de creacion: </strong>" + str(dateFormat) +"<br>"
             Story.append(Paragraph(text, styles["Items"]))
@@ -2519,6 +2533,11 @@ def reporte_solicitudes(codigo):
             Story.append(Paragraph(text, styles["Items"]))
             text ="<strong>Votos en contra: </strong>" + str(contra) +"<br>"
             Story.append(Paragraph(text, styles["Items"]))
+            votos= Voto.objects.filter(solicitud=solicitud)
+            for v in votos:
+                text ="<strong>Usuarios que votaron: </strong>" + v.usuario.username +"<br>"
+                Story.append(Paragraph(text, styles["Items"]))
+
             Story.append(Spacer(1, 12))
             text ="__________________________________________________________<br>"
             Story.append(Paragraph(text, styles["Items"]))
@@ -2529,7 +2548,7 @@ def reporte_solicitudes(codigo):
     doc.build(Story)
     return str(settings.BASE_DIR)+"/reporte_solicitudes"+proyecto.nombre+".pdf"
 
-@login_required(login_url='/ingresar')
+#@login_required(login_url='/ingresar')
 
 def descargar_reporteSolicitudes(request, codigo):
     '''

@@ -23,3 +23,12 @@ python manage.py dumpdata  --indent=4 --all -e contenttypes -e auth.permission -
 
 Ejecutar test
 python manage.py test GTG.gtg.testing
+
+Scripts de poblacion de datos
+
+1)  pg_dump -Fc gestograma -U postgres > cargadb.sql
+
+2)  dropdb gestograma
+    createdb gestograma
+
+3)  pg_restore -U postgres -d gestograma carga.sql

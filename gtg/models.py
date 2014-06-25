@@ -163,6 +163,7 @@ class Item(models.Model):
     nombre=models.CharField(max_length=32, unique=False)
     version=models.IntegerField(max_length=32, default=1)
     prioridad=models.IntegerField(max_length=32)
+    costo= models.IntegerField(max_length=32)
     estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default=E_REDACCION, null=False,blank= False)
     descripcion=models.TextField(max_length=100)
     fechaModi=models.DateField(auto_now=True)
