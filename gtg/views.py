@@ -74,7 +74,6 @@ from dateutil.rrule import *
 from dateutil.parser import *
 from datetime import *
 
-
 def ingresar(request):
     """controla si el usuario se encuentra registrado, permite iniciar sesion
     \n@param request:
@@ -322,12 +321,12 @@ def revocar(codigo):
     \nRetorna @return la intefaz de votacion exitosa o no dependiendo del caso
     """
 
-<<<<<<< HEAD
+
     #lista
     # s =itemsProyecto(solicitud.proyecto)
-=======
+
     #listaitems =itemsProyecto(solicitud.proyecto)
->>>>>>> 7b57254c888c6540129d2e176611db886b9ce19b
+
     #maxiditem = getMaxIdItemEnLista(listaitems)
  #   global nodos_visitados
 #    nodos_visitados = [0]*(maxiditem+1)
@@ -335,15 +334,15 @@ def revocar(codigo):
     item= Item.objects.get(pk=codigo)
     item.estado='VAL'
     item.save()
-<<<<<<< HEAD
+
     #lb=item.lb
 ###    lb.estado='CERRADA'
    # lb.save()
-=======
+
     lb=item.lb
     lb.estado='CERRADA'
     lb.save()
->>>>>>> 7b57254c888c6540129d2e176611db886b9ce19b
+
 
 
 
@@ -440,7 +439,7 @@ def lista_usuarios(request):
 
 @login_required(login_url='/ingresar')
 def editarFase(request, codigo):
-<<<<<<< HEAD
+
     """ Permite editar las fases de un determinado proyecto """
     fases= Fases1.objects.all()
     fase=Fases1.objects.get(pk=codigo)
@@ -460,7 +459,7 @@ def editarFase(request, codigo):
     else:
         return render_to_response('extiende.html',{'usuario':usuario}, context_instance=RequestContext(request))
 
-=======
+
     """Permite editar fases registradas en el sistema"""
     fases=Fases1.objects.all()
     fase=Fases1.objects.get(pk=codigo)
@@ -486,7 +485,7 @@ def editarFase(request, codigo):
             return render_to_response('gestionFase1.html',{'fases': fases, 'proyecto':fase.proyectos }, context_instance=RequestContext(request))
     else:
         formulario=Fases1Form(instance = fase)
->>>>>>> 7b57254c888c6540129d2e176611db886b9ce19b
+
 
 
 @login_required(login_url='/ingresar')
@@ -755,12 +754,13 @@ def item(request, codigoProyecto):
         for i in items1:
             its.append(i)
 
-    nombre=dibujarProyecto(proyecto)
+    #nombre=dibujarProyecto(proyecto)
     items= Item.objects.all()
     priori= Item.objects.all()
+    ahora = datetime.now()
     for itm in priori:
-        if(itm.revocar==date.today()):
-            revocar(itm.id)
+        if(itm.revocar.day == ahora.day):
+                revocar(itm.id)
 
     for i in priori:
         for it in items:
@@ -961,8 +961,11 @@ def itemFase(request, codigo):
     items=Item.objects.filter(fase=codigo)
     fase=Fases1.objects.get(pk=codigo)
     cantidad= 0
+    ahora = datetime.now()
     for itm in items:
-        if(itm.revocar==date.today()):
+        print("ahora",ahora.day)
+        print("revocar",itm.revocar.day)
+        if(itm.revocar.day == ahora.day):
                 revocar(itm.id)
 
     for i in items:
@@ -1392,7 +1395,9 @@ def votar(request, codigo):
                     estadoDependientes(item.id)
                     item.estado='REDAC'
                     item.solicitudAprobada=1
-                    item.revocar=date.today() + timedelta(days=solicitud.cantidadDias)
+                    item.revocar=datetime.now() + timedelta(days=solicitud.cantidadDias)
+
+                    print("Al aprobar",item.revocar)
                     item.save()
 
                     lb=item.lb
